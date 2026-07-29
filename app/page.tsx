@@ -1,65 +1,277 @@
+/*
+DIRECTION CONTRACT — "The Surveyor's Mark"
+THESIS: Two brothers who read the land properly. Refuses the category default
+(hero photo of a skyline + metric strip + testimonial carousel).
+OWN-WORLD: Architectural materials — lime plaster ground, limestone, paper,
+smoked stone, concrete — with ink Caslon display, bronze chips and tabs,
+Fragment Mono annotations, ruler-drawn cartography, and a living daylight
+wash that follows the cursor. Recognisable with all content removed.
+STORY: Visitor lands on the name, reads one honest manifesto, watches the
+territory get surveyed, opens the ledger of strategies, meets the brothers,
+sees only real proof, and leaves through one of three doors.
+FIRST VIEWPORT: The hero film — user-supplied cinematic footage of a
+limestone courtyard carrying its own baked-in typography ("BUILT ON
+RELATIONSHIPS."). The real nav bar replaces the filmed menu strip; a real
+link hotspot sits over the filmed CTA; scroll pins briefly while the film
+settles from 1.02 to 1.00 and brightens, then releases.
+FORM: Pinned by user references and the user's video-hero brief. Signature
+stagings: the hero film; the survey map.
+*/
+
 import Image from "next/image";
+import Link from "next/link";
+import { Rise, Line, Lift, ScrubWords } from "@/components/reveal";
+import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
+import SurveyMap from "@/components/survey-map";
+import StrategyLedger from "@/components/strategy-ledger";
+import { photoPath } from "@/lib/photos";
 
 export default function Home() {
+  const brothersPhoto = photoPath("brothers.jpg");
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main id="main">
+      {/* 01 — THE HERO FILM (scroll-expansion) */}
+      <ScrollExpandMedia
+        mediaType="video"
+        mediaSrc="/hero.mp4"
+        posterSrc="/hero-poster.jpg"
+        title="BUILT ON RELATIONSHIPS."
+        date="Sam n Harv — Property Investment"
+        scrollToExpand="Scroll to step inside"
+      >
+        <div className="mx-auto max-w-xl text-center">
+          <p className="text-lg leading-relaxed md:text-xl">
+            Property investment, serviced accommodation and long-term
+            operating partnerships.
+          </p>
+          <Link
+            href="/services"
+            className="annot mt-6 inline-flex min-h-11 items-center gap-3 text-ink"
+          >
+            Explore our work <span aria-hidden="true">→</span>
+          </Link>
+        </div>
+      </ScrollExpandMedia>
+
+      {/* 01.5 — MANIFESTO */}
+      <section className="px-5 py-28 md:px-10 md:py-40">
+        <div className="mx-auto max-w-4xl">
+          <p className="annot muted mb-8">01 — The position</p>
+          <ScrubWords
+            className="display text-3xl leading-tight md:text-5xl"
+            text="Most sourcing companies sell you a deal and disappear. We buy, refurbish and operate property with our own money first — so when we bring you something, it has already survived the only test that matters: would we do it ourselves."
+          />
+        </div>
+      </section>
+
+      {/* 02 — THE TERRITORY (pinned map) */}
+      <SurveyMap />
+
+      {/* 03 — THE LEDGER (natural limestone) */}
+      <section className="m-limestone px-5 py-24 md:px-10 md:py-36">
+        <div className="mx-auto max-w-6xl">
+          <p className="annot muted">03 — The ledger</p>
+          <Rise as="h2" className="display mt-3 text-4xl md:text-6xl">
+            <Line>Six ways we</Line>
+            <Line>
+              put money to <span className="display-it">work.</span>
+            </Line>
+          </Rise>
+          <div className="mt-12">
+            <StrategyLedger />
+          </div>
+        </div>
+      </section>
+
+      {/* 04 — THE BROTHERS */}
+      <section className="on-stone px-5 py-24 md:px-10 md:py-36">
+        <div className="mx-auto max-w-6xl">
+          <p className="annot muted">04 — The people</p>
+          <Rise as="h2" className="display mt-3 text-4xl md:text-6xl">
+            <Line>Two names.</Line>
+            <Line>
+              Not a <span className="display-it">call centre.</span>
+            </Line>
+          </Rise>
+
+          {brothersPhoto && (
+            <Lift className="shadow-daylight relative mt-14 aspect-[16/9] overflow-clip md:aspect-[21/9]">
+              <Image
+                src={brothersPhoto}
+                alt="Samuel and Harvey together"
+                fill
+                sizes="(min-width: 1152px) 1152px, 100vw"
+                className="object-cover object-[50%_25%]"
+              />
+              <p className="annot absolute bottom-3 left-3 bg-smoked px-2 py-1 text-bronze-bright">
+                The two of us
+              </p>
+            </Lift>
+          )}
+
+          <div className="mt-14 grid gap-px bg-[var(--line-light)] md:grid-cols-2">
+            {[
+              {
+                name: "Samuel",
+                role: "Deals & investor relations",
+                wa: "https://wa.me/447444551241",
+                tel: "07444 551241",
+              },
+              {
+                name: "Harvey",
+                role: "Operations & delivery",
+                wa: "https://wa.me/447753600183",
+                tel: "07753 600183",
+              },
+            ].map((p) => (
+              <Lift key={p.name} className="bg-smoked p-8 md:p-12">
+                <p className="annot text-bronze-bright">{p.role}</p>
+                <p className="display mt-3 text-5xl md:text-6xl">{p.name}</p>
+                <p className="muted mt-4 max-w-sm leading-relaxed">
+                  Message him directly — the person who answers is the person
+                  who does the work.
+                </p>
+                <a href={p.wa} className="btn btn-ghost mt-8" rel="noopener">
+                  WhatsApp {p.name} · {p.tel}
+                </a>
+              </Lift>
+            ))}
+          </div>
+
+          <p className="muted mt-10 max-w-2xl leading-relaxed">
+            Brothers, not business partners who met at a networking event. One
+            of us finds and structures the deals; the other makes sure the
+            works, the tenants and the numbers behave. You always know who
+            you&rsquo;re dealing with.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* 05 — PROOF (handmade paper — the records) */}
+      <section className="m-paper px-5 py-24 md:px-10 md:py-36">
+        <div className="mx-auto max-w-6xl">
+          <p className="annot muted">05 — On the record</p>
+          <Rise as="h2" className="display mt-3 max-w-3xl text-4xl md:text-6xl">
+            <Line>We&rsquo;d rather show</Line>
+            <Line>
+              less and <span className="display-it">mean it.</span>
+            </Line>
+          </Rise>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            <Lift className="border hairline p-7 md:p-9">
+              <p className="annot muted">★★★★★ — Google review</p>
+              <blockquote className="mt-5">
+                <p className="display text-xl leading-snug md:text-2xl">
+                  &ldquo;Through his expertise, we&rsquo;ve secured some
+                  fantastic deals that have directly contributed to the growth
+                  of our business, adding six figures in revenue. His
+                  knowledge, integrity, attention to detail, and ability to
+                  create opportunities have been invaluable.&rdquo;
+                </p>
+                <footer className="annot muted mt-5">
+                  Stephen McLaughlin — director, serviced accommodation
+                  company
+                </footer>
+              </blockquote>
+            </Lift>
+
+            <Lift className="border hairline p-7 md:p-9">
+              <p className="annot muted">★★★★★ — Google review</p>
+              <blockquote className="mt-5">
+                <p className="display text-xl leading-snug md:text-2xl">
+                  &ldquo;I have dealt with Sam on a professional basis for
+                  over a year now. I have found him very professional, genuine
+                  and very hard working. I would highly recommend him and his
+                  company.&rdquo;
+                </p>
+                <footer className="annot muted mt-5">
+                  Jonathan Thompson — landlord on two of our rent-to-rent
+                  houses
+                </footer>
+              </blockquote>
+            </Lift>
+          </div>
+
+          <div className="mt-6 grid gap-6 md:grid-cols-3">
+            <Lift className="border hairline p-7">
+              <p className="annot muted">Councils</p>
+              <p className="mt-4 leading-relaxed">
+                We work with local councils on housing placements — young
+                people and staff — the demand behind our buy-to-SA deals.
+              </p>
+            </Lift>
+            <Lift className="border hairline p-7">
+              <p className="annot muted">Operating proof</p>
+              <p className="mt-4 leading-relaxed">
+                Two serviced accommodation units, live and trading, run by us
+                day to day.
+              </p>
+              <Link href="/stays" className="btn btn-ghost mt-5">
+                See the stays
+              </Link>
+            </Lift>
+            <Lift className="border hairline p-7">
+              <p className="annot muted">On the record</p>
+              <p className="mt-4 leading-relaxed">
+                Our reviews live on Google, where we can&rsquo;t edit them.
+              </p>
+              <a
+                href="https://share.google/lsd2TlaWo3OpRFqhO"
+                className="btn btn-ghost mt-5"
+                rel="noopener"
+              >
+                Read them all
+              </a>
+            </Lift>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* 06 — THE DOORS */}
+      <section className="px-5 pb-28 md:px-10 md:pb-40">
+        <div className="mx-auto max-w-6xl border-t hairline pt-16">
+          <Rise as="h2" className="display max-w-3xl text-4xl md:text-6xl">
+            <Line>Three doors.</Line>
+            <Line>
+              All of them <span className="display-it">open.</span>
+            </Line>
+          </Rise>
+          <div className="mt-12 grid gap-px bg-[var(--line)] md:grid-cols-3">
+            <a
+              href="https://wa.me/447444551241"
+              rel="noopener"
+              className="group bg-plaster p-7 transition-colors hover:bg-smoked hover:text-plaster"
+            >
+              <p className="annot muted group-hover:text-bronze-bright">Fastest</p>
+              <p className="display mt-3 text-2xl">WhatsApp the brothers</p>
+              <p className="muted mt-2 text-sm group-hover:text-stone-dark">
+                Straight to Samuel · 07444 551241
+              </p>
+            </a>
+            <Link
+              href="/contact#investor-list"
+              className="group bg-plaster p-7 transition-colors hover:bg-smoked hover:text-plaster"
+            >
+              <p className="annot muted group-hover:text-bronze-bright">For investors</p>
+              <p className="display mt-3 text-2xl">Join the deal list</p>
+              <p className="muted mt-2 text-sm group-hover:text-stone-dark">
+                Hear about opportunities as they land
+              </p>
+            </Link>
+            <a
+              href="mailto:contact@samnharv.com"
+              className="group bg-plaster p-7 transition-colors hover:bg-smoked hover:text-plaster"
+            >
+              <p className="annot muted group-hover:text-bronze-bright">On paper</p>
+              <p className="display mt-3 text-2xl">Email the office</p>
+              <p className="muted mt-2 text-sm group-hover:text-stone-dark">
+                contact@samnharv.com
+              </p>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
