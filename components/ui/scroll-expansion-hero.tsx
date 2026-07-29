@@ -9,7 +9,6 @@ import {
   WheelEvent,
 } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 
 /**
  * Scroll-expansion hero (adapted from the user's supplied component).
@@ -35,6 +34,8 @@ interface ScrollExpandMediaProps {
   title?: string;
   date?: string;
   scrollToExpand?: string;
+  /** difference-blended light type — for dark background imagery */
+  textBlend?: boolean;
   children?: ReactNode;
 }
 
@@ -48,6 +49,7 @@ const ScrollExpandMedia = ({
   title,
   date,
   scrollToExpand,
+  textBlend,
   children,
 }: ScrollExpandMediaProps) => {
   const [scrollProgress, setScrollProgress] = useState<number>(0);
@@ -131,8 +133,10 @@ const ScrollExpandMedia = ({
      buttery); only true rewinds seek. */
   useEffect(() => {
     const v = videoRef.current;
-    if (!v) return;
+    const section = sectionRef.current;
+    if (!v || !section) return;
     let raf = 0;
+    let running = false;
     const chase = () => {
       raf = requestAnimationFrame(chase);
       const dur = durationRef.current;
@@ -149,8 +153,22 @@ const ScrollExpandMedia = ({
         v.pause();
       }
     };
-    raf = requestAnimationFrame(chase);
-    return () => cancelAnimationFrame(raf);
+    // the loop only runs while the hero is actually on screen
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !running) {
+        running = true;
+        raf = requestAnimationFrame(chase);
+      } else if (!entry.isIntersecting && running) {
+        running = false;
+        cancelAnimationFrame(raf);
+        if (!v.paused) v.pause();
+      }
+    });
+    io.observe(section);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+    };
   }, []);
 
   useEffect(() => {
@@ -345,11 +363,9 @@ const ScrollExpandMedia = ({
       <section className="relative flex min-h-[100dvh] flex-col items-center justify-start">
         <div className="relative flex min-h-[100dvh] w-full flex-col items-center">
           {/* ground: a material surface (or image) that recedes as the film grows */}
-          <motion.div
+          <div
             className="absolute inset-0 z-0 h-full"
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 1 - scrollProgress }}
-            transition={{ duration: 0.1 }}
+            style={{ opacity: 1 - scrollProgress }}
           >
             {bgImageSrc ? (
               <Image
@@ -363,7 +379,7 @@ const ScrollExpandMedia = ({
             ) : (
               <div className="m-limestone h-full w-full" />
             )}
-          </motion.div>
+          </div>
 
           <div className="container relative z-10 mx-auto flex flex-col items-center justify-start">
             <div
@@ -396,11 +412,9 @@ const ScrollExpandMedia = ({
                       disableRemotePlayback
                     />
                     {/* warm veil that lifts as the film takes the frame */}
-                    <motion.div
+                    <div
                       className="absolute inset-0 bg-[#252421]"
-                      initial={{ opacity: 0.35 }}
-                      animate={{ opacity: 0.3 - scrollProgress * 0.3 }}
-                      transition={{ duration: 0.2 }}
+                      style={{ opacity: Math.max(0, 0.3 - scrollProgress * 0.3) }}
                     />
                     <div className="hero-veil absolute inset-0" />
                   </div>
@@ -413,11 +427,9 @@ const ScrollExpandMedia = ({
                       height={720}
                       className="h-full w-full object-cover"
                     />
-                    <motion.div
+                    <div
                       className="absolute inset-0 bg-[#252421]"
-                      initial={{ opacity: 0.35 }}
-                      animate={{ opacity: 0.3 - scrollProgress * 0.3 }}
-                      transition={{ duration: 0.2 }}
+                      style={{ opacity: Math.max(0, 0.3 - scrollProgress * 0.3) }}
                     />
                   </div>
                 )}
@@ -425,7 +437,7 @@ const ScrollExpandMedia = ({
                 <div className="relative z-10 mt-5 flex flex-col items-center text-center transition-none">
                   {date && (
                     <p
-                      className="annot muted"
+                      className={`annot ${textBlend ? "text-stone-dark" : "muted"}`}
                       style={{ transform: `translateX(-${textTranslateX}vw)` }}
                     >
                       {date}
@@ -433,7 +445,7 @@ const ScrollExpandMedia = ({
                   )}
                   {scrollToExpand && (
                     <p
-                      className="annot mt-1.5 text-bronze"
+                      className={`annot mt-1.5 ${textBlend ? "text-bronze-bright" : "text-bronze"}`}
                       style={{ transform: `translateX(${textTranslateX}vw)` }}
                     >
                       {scrollToExpand}
@@ -444,30 +456,32 @@ const ScrollExpandMedia = ({
 
               {title && (
                 <h1 className="relative z-10 flex w-full flex-col items-center justify-center gap-2 text-center transition-none md:gap-4">
-                  <motion.span
-                    className="display block text-[10vw] text-ink transition-none md:text-7xl lg:text-8xl"
+                  <span
+                    className={`display block text-[10vw] transition-none md:text-7xl lg:text-8xl ${
+                      textBlend ? "text-plaster mix-blend-difference" : "text-ink"
+                    }`}
                     style={{ transform: `translateX(-${textTranslateX}vw)` }}
                   >
                     {firstWord}
-                  </motion.span>
-                  <motion.span
-                    className="display block text-center text-5xl text-ink transition-none md:text-7xl lg:text-8xl"
+                  </span>
+                  <span
+                    className={`display block text-center text-[10vw] transition-none md:text-7xl lg:text-8xl ${
+                      textBlend ? "text-plaster mix-blend-difference" : "text-ink"
+                    }`}
                     style={{ transform: `translateX(${textTranslateX}vw)` }}
                   >
                     {restOfTitle}
-                  </motion.span>
+                  </span>
                 </h1>
               )}
             </div>
 
-            <motion.section
-              className="flex w-full flex-col px-8 py-10 md:px-16 lg:py-20"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: showContent ? 1 : 0 }}
-              transition={{ duration: 0.7 }}
+            <section
+              className="flex w-full flex-col px-8 py-10 transition-opacity duration-700 ease-out md:px-16 lg:py-20"
+              style={{ opacity: showContent ? 1 : 0 }}
             >
               {children}
-            </motion.section>
+            </section>
           </div>
         </div>
       </section>

@@ -4,7 +4,7 @@ import { Rise, Line, Lift } from "@/components/reveal";
 import StrategyLedger from "@/components/strategy-ledger";
 
 export const metadata: Metadata = {
-  title: "What we do — Sam n Harv",
+  title: "What we do",
   description:
     "BRRR, rent to rent, flips, blocks, land and serviced accommodation. How Sam n Harv find, buy and operate property deals across the UK.",
 };

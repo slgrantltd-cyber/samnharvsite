@@ -4,7 +4,7 @@ import { Rise, Line } from "@/components/reveal";
 import FaqLedger, { type Faq } from "@/components/faq-ledger";
 
 export const metadata: Metadata = {
-  title: "FAQs — Sam n Harv",
+  title: "FAQs",
   description:
     "Straight answers for investors, landlords and guests — how deal sourcing, rent to rent, and our serviced accommodation stays work.",
 };

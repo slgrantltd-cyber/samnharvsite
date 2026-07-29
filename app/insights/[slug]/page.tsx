@@ -16,7 +16,7 @@ export async function generateMetadata({
   const post = getInsight((await params).slug);
   if (!post) return {};
   return {
-    title: `${post.title} — Sam n Harv`,
+    title: post.title,
     description: post.standfirst,
   };
 }

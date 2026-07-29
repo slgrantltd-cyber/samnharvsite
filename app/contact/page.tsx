@@ -4,7 +4,7 @@ import { Rise, Line, Lift } from "@/components/reveal";
 import DealListForm from "@/components/deal-list-form";
 
 export const metadata: Metadata = {
-  title: "Contact — Sam n Harv",
+  title: "Contact",
   description:
     "Talk to Samuel or Harvey directly on WhatsApp, join the investor deal list, or email the office at contact@samnharv.com.",
 };

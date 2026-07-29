@@ -35,9 +35,11 @@ export default function Home() {
         mediaType="video"
         mediaSrc="/hero.mp4"
         posterSrc="/hero-poster.jpg"
+        bgImageSrc="/hero-background.jpg"
         title="BUILT ON RELATIONSHIPS."
         date="Sam n Harv — Property Investment"
         scrollToExpand="Scroll to step inside"
+        textBlend
       >
         <div className="mx-auto max-w-xl text-center">
           <p className="text-lg leading-relaxed md:text-xl">

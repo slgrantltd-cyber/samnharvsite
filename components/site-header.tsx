@@ -28,7 +28,7 @@ export default function SiteHeader() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div className="flex items-center justify-between border-b hairline bg-plaster/85 px-5 py-3 backdrop-blur-md md:px-10">
+      <div className="flex items-center justify-between border-b hairline bg-plaster/90 px-5 py-3 backdrop-blur-sm md:px-10">
         <Link
           href="/"
           aria-label="Sam n Harv — home"

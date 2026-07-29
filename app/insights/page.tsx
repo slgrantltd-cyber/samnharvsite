@@ -4,7 +4,7 @@ import { Rise, Line, Lift } from "@/components/reveal";
 import { INSIGHTS } from "@/lib/insights";
 
 export const metadata: Metadata = {
-  title: "Insights — Sam n Harv",
+  title: "Insights",
   description:
     "Plain-English property education for investors and landlords — BRRR, rent to rent, serviced accommodation and what actually makes deals work.",
 };

@@ -6,7 +6,7 @@ import BenchmarkMark from "@/components/benchmark-mark";
 import { photoPath } from "@/lib/photos";
 
 export const metadata: Metadata = {
-  title: "The brothers — Sam n Harv",
+  title: "The brothers",
   description:
     "Samuel and Harvey — two brothers investing in property and sourcing deals from the UK South West. Who we are and how we work.",
 };
