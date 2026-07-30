@@ -107,18 +107,23 @@ const ScrollExpandMedia = ({
 
   useEffect(() => () => cancelAnimationFrame(animRaf.current), []);
 
-  /* fade the film in over its poster once it can play through —
-     readyState is checked directly so a cached load can't outrun us */
+  /* fade the film in over its poster the moment real frames are rendering.
+     Never gate on canplaythrough: on a normal connection a large file can
+     take tens of seconds to buffer fully, and the film would play invisibly
+     behind the poster the whole time. readyState is also checked directly
+     so a cached load can't outrun the listeners. */
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
     const markReady = () => setVideoReady(true);
-    if (v.readyState >= 3) {
+    if (v.readyState >= 2) {
       markReady();
-    } else {
-      v.addEventListener("canplaythrough", markReady, { once: true });
+      return;
     }
-    return () => v.removeEventListener("canplaythrough", markReady);
+    const events = ["playing", "canplay", "loadeddata"] as const;
+    events.forEach((e) => v.addEventListener(e, markReady, { once: true }));
+    return () =>
+      events.forEach((e) => v.removeEventListener(e, markReady));
   }, []);
 
   /* the film runs continuously (autoplay + loop); it only pauses when the
