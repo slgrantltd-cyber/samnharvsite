@@ -122,8 +122,30 @@ const ScrollExpandMedia = ({
     }
     const events = ["playing", "canplay", "loadeddata"] as const;
     events.forEach((e) => v.addEventListener(e, markReady, { once: true }));
-    return () =>
+    // whatever happens, never hold the poster veil forever
+    const safety = window.setTimeout(markReady, 3500);
+    return () => {
       events.forEach((e) => v.removeEventListener(e, markReady));
+      window.clearTimeout(safety);
+    };
+  }, []);
+
+  /* browsers can refuse the initial autoplay outright (iOS Low Power Mode,
+     Safari's "Never Auto-Play", data-saver). A muted play() retried on the
+     first real gesture is always permitted — without this the hero would
+     sit frozen on its poster. */
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const events = ["pointerdown", "touchstart", "keydown", "wheel"] as const;
+    const retry = () => {
+      events.forEach((e) => window.removeEventListener(e, retry));
+      if (v.paused && !reducedRef.current) v.play().catch(() => {});
+    };
+    events.forEach((e) =>
+      window.addEventListener(e, retry, { passive: true, once: true }),
+    );
+    return () => events.forEach((e) => window.removeEventListener(e, retry));
   }, []);
 
   /* the film runs continuously (autoplay + loop); it only pauses when the
