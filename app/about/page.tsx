@@ -8,7 +8,8 @@ import { photoPath } from "@/lib/photos";
 export const metadata: Metadata = {
   title: "The brothers",
   description:
-    "Samuel and Harvey — two brothers investing in property and sourcing deals from the UK South West. Who we are and how we work.",
+    "Samuel and Harvey Grant — the two brothers behind the property investment company, sourcing investment property deals from the UK South West. Who we are and how we work.",
+  alternates: { canonical: "/about" },
 };
 
 const PRINCIPLES = [

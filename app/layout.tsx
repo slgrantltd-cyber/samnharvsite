@@ -42,7 +42,8 @@ export const metadata: Metadata = {
     template: "%s — Sam n Harv",
   },
   description:
-    "Two brothers investing in property and sourcing deals across the UK — BRRR, rent to rent, flips, blocks, land and serviced accommodation. Based in the South West, working the whole map.",
+    "Two brothers investing in property and sourcing investment property deals across the UK — BRRR, rent to rent, flips, HMOs, blocks, land and serviced accommodation. Based in the South West, working the whole map.",
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: "Sam n Harv",
@@ -51,7 +52,7 @@ export const metadata: Metadata = {
     title: "Sam n Harv — Property Investment & Deal Sourcing",
     description:
       "Two brothers investing in property and sourcing deals across the UK. Based in the South West, working the whole map.",
-    images: [{ url: "/hero-poster.jpg", width: 1280, height: 720 }],
+    images: [{ url: "/hero-poster.jpg", width: 1600, height: 900 }],
   },
   twitter: {
     card: "summary_large_image",
@@ -65,16 +66,51 @@ export const metadata: Metadata = {
 
 const orgJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Sam n Harv",
-  legalName: "S L Grants Ltd",
-  url: "https://samnharv.com",
-  email: "contact@samnharv.com",
-  telephone: "+447444551241",
-  areaServed: "GB",
-  description:
-    "Property investment and deal sourcing — BRRR, rent to rent, flips, blocks, land and serviced accommodation. Based in the UK South West, working nationwide.",
-  sameAs: ["https://share.google/lsd2TlaWo3OpRFqhO"],
+  "@graph": [
+    {
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": "https://samnharv.com/#org",
+      name: "Sam n Harv",
+      legalName: "S L Grants Ltd",
+      url: "https://samnharv.com",
+      logo: "https://samnharv.com/apple-icon.png",
+      image: "https://samnharv.com/hero-poster.jpg",
+      email: "contact@samnharv.com",
+      telephone: "+447444551241",
+      priceRange: "££",
+      address: {
+        "@type": "PostalAddress",
+        addressRegion: "South West England",
+        addressCountry: "GB",
+      },
+      areaServed: { "@type": "Country", name: "United Kingdom" },
+      founder: [
+        { "@type": "Person", name: "Samuel Grant" },
+        { "@type": "Person", name: "Harvey Grant" },
+      ],
+      knowsAbout: [
+        "Property deal sourcing",
+        "Below market value property",
+        "BRRR investment",
+        "Buy to let investment",
+        "HMO investment",
+        "Rent to rent",
+        "Serviced accommodation",
+        "Property deal packaging",
+      ],
+      description:
+        "Property investment company and deal sourcing service — BRRR deals, rent to rent, flips, HMOs, blocks, land and serviced accommodation for UK property investors. Based in the UK South West, working nationwide.",
+      sameAs: ["https://share.google/lsd2TlaWo3OpRFqhO"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://samnharv.com/#website",
+      url: "https://samnharv.com",
+      name: "Sam n Harv",
+      publisher: { "@id": "https://samnharv.com/#org" },
+      inLanguage: "en-GB",
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -88,6 +124,12 @@ export default function RootLayout({
       className={`${caslon.variable} ${caslonItalic.variable} ${hanken.variable} ${fragment.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-[var(--concrete)] focus:px-4 focus:py-3 focus:text-[var(--plaster)]"
+        >
+          Skip to content
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}

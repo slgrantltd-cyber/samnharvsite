@@ -5,9 +5,10 @@ import { Rise, Line, Lift } from "@/components/reveal";
 import BookingCalendar from "@/components/booking-calendar";
 
 export const metadata: Metadata = {
-  title: "Stays",
+  title: "Stays — Serviced Accommodation",
   description:
-    "The Barrows and Cheddar — two serviced accommodation places operated day-to-day by Sam n Harv. Pick your dates and enquire directly.",
+    "The Barrows and Cheddar — two serviced accommodation stays operated day-to-day by Sam n Harv, the proof behind our serviced accommodation investment strategy. Pick your dates and enquire directly.",
+  alternates: { canonical: "/stays" },
 };
 
 const PLACES = [

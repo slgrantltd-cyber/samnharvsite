@@ -4,9 +4,10 @@ import { Rise, Line, Lift } from "@/components/reveal";
 import StrategyLedger from "@/components/strategy-ledger";
 
 export const metadata: Metadata = {
-  title: "What we do",
+  title: "What we do — Property Deal Sourcing & Investment",
   description:
-    "BRRR, rent to rent, flips, blocks, land and serviced accommodation. How Sam n Harv find, buy and operate property deals across the UK.",
+    "Property deal sourcing across the UK: BRRR deals, rent to rent, flips, HMO investment, blocks, land and serviced accommodation. How Sam n Harv find, package and operate investment property deals.",
+  alternates: { canonical: "/services" },
 };
 
 const PROCESS = [
@@ -28,8 +29,37 @@ const PROCESS = [
   },
 ];
 
+const servicesJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Property Deal Sourcing",
+  serviceType: "Property investment deal sourcing and packaging",
+  provider: { "@id": "https://samnharv.com/#org" },
+  areaServed: { "@type": "Country", name: "United Kingdom" },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Investment strategies",
+    itemListElement: [
+      "BRRR investments",
+      "Rent to rent",
+      "Flips",
+      "Blocks",
+      "Land deals",
+      "Serviced accommodation",
+    ].map((name) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name },
+    })),
+  },
+};
+
 export default function ServicesPage() {
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }}
+      />
     <main id="main" className="pt-24 md:pt-28">
       <section className="px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto max-w-6xl">
@@ -85,5 +115,6 @@ export default function ServicesPage() {
         </div>
       </section>
     </main>
+    </>
   );
 }

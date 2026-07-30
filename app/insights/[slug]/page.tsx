@@ -18,6 +18,7 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.standfirst,
+    alternates: { canonical: `/insights/${post.slug}` },
   };
 }
 
@@ -36,8 +37,36 @@ export default async function InsightPage({
   const post = getInsight((await params).slug);
   if (!post) notFound();
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        headline: post.title,
+        description: post.standfirst,
+        datePublished: post.date,
+        inLanguage: "en-GB",
+        author: { "@id": "https://samnharv.com/#org" },
+        publisher: { "@id": "https://samnharv.com/#org" },
+        mainEntityOfPage: `https://samnharv.com/insights/${post.slug}`,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://samnharv.com" },
+          { "@type": "ListItem", position: 2, name: "Insights", item: "https://samnharv.com/insights" },
+          { "@type": "ListItem", position: 3, name: post.title, item: `https://samnharv.com/insights/${post.slug}` },
+        ],
+      },
+    ],
+  };
+
   return (
     <main id="main" className="m-paper pt-24 md:pt-28">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <article className="px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto max-w-3xl">
           <p className="annot muted">

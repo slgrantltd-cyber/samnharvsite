@@ -5,7 +5,8 @@ import DealAnalyzer from "@/components/deal-analyzer";
 export const metadata: Metadata = {
   title: "Deal Intelligence — Investment Deal Analyzer",
   description:
-    "Analyse any property investment strategy in seconds: BRRR, buy to let, rent to rent, HMO, lease options and flips. Live cash flow, ROI and our honest verdict on the deal.",
+    "Free investment deal analyzer for UK property investors: BRRR deals, buy to let investments, rent to rent, HMO investment, lease options and flips. Live cash flow, ROI and our honest verdict.",
+  alternates: { canonical: "/deal-intelligence" },
 };
 
 export default function DealIntelligencePage() {

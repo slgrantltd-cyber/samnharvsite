@@ -6,7 +6,8 @@ import FaqLedger, { type Faq } from "@/components/faq-ledger";
 export const metadata: Metadata = {
   title: "FAQs",
   description:
-    "Straight answers for investors, landlords and guests — how deal sourcing, rent to rent, and our serviced accommodation stays work.",
+    "Straight answers for property investors, landlords and guests — how property deal sourcing works, what it costs, rent to rent agreements and our serviced accommodation stays.",
+  alternates: { canonical: "/faq" },
 };
 
 const INVESTOR_FAQS: Faq[] = [
@@ -62,8 +63,23 @@ const STAY_FAQS: Faq[] = [
   },
 ];
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [...INVESTOR_FAQS, ...LANDLORD_FAQS, ...STAY_FAQS].map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
 export default function FaqPage() {
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
     <main id="main" className="pt-24 md:pt-28">
       <section className="px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto max-w-6xl">
@@ -109,5 +125,6 @@ export default function FaqPage() {
         </div>
       </section>
     </main>
+    </>
   );
 }

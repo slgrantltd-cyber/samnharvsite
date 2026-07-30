@@ -4,9 +4,10 @@ import { Rise, Line, Lift } from "@/components/reveal";
 import { INSIGHTS } from "@/lib/insights";
 
 export const metadata: Metadata = {
-  title: "Insights",
+  title: "Insights — Property Investment Education",
   description:
-    "Plain-English property education for investors and landlords — BRRR, rent to rent, serviced accommodation and what actually makes deals work.",
+    "Plain-English property education for UK property investors and landlords — BRRR deals, rent to rent, below market value buying, serviced accommodation and what actually makes investment property deals work.",
+  alternates: { canonical: "/insights" },
 };
 
 const formatDate = (iso: string) =>

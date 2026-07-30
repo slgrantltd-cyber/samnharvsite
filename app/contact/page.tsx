@@ -6,7 +6,8 @@ import DealListForm from "@/components/deal-list-form";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Talk to Samuel or Harvey directly on WhatsApp, join the investor deal list, or email the office at contact@samnharv.com.",
+    "Talk to Samuel or Harvey directly on WhatsApp, register as an investor on the deal list for off market property deals, or email the office at contact@samnharv.com.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

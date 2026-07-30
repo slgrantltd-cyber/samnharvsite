@@ -4,7 +4,16 @@ import { INSIGHTS } from "@/lib/insights";
 const BASE = "https://samnharv.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/services", "/about", "/stays", "/insights", "/faq", "/contact"].map(
+  const routes = [
+    "",
+    "/services",
+    "/about",
+    "/stays",
+    "/deal-intelligence",
+    "/insights",
+    "/faq",
+    "/contact",
+  ].map(
     (path) => ({
       url: `${BASE}${path}`,
       lastModified: new Date(),
