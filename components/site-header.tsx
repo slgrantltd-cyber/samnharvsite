@@ -78,16 +78,20 @@ export default function SiteHeader() {
       </div>
 
       {/* mobile menu */}
+      {/* scrollable (data-lenis-prevent keeps the smooth-scroller's hands
+          off it); mt-auto on the nav keeps the bottom-anchored composition
+          on screens tall enough to not need scrolling */}
       <div
         id="site-menu"
         inert={!open}
-        className={`on-stone fixed inset-0 -z-10 flex flex-col justify-end px-5 pb-10 pt-24 transition-[clip-path] duration-500 ease-out lg:hidden ${
+        data-lenis-prevent
+        className={`on-stone fixed inset-0 -z-10 flex flex-col overflow-y-auto overscroll-contain px-5 pb-10 pt-24 transition-[clip-path] duration-500 ease-out lg:hidden ${
           open
             ? "[clip-path:inset(0_0_0%_0)]"
             : "pointer-events-none [clip-path:inset(0_0_100%_0)]"
         }`}
       >
-        <nav aria-label="Mobile" className="flex flex-col gap-1">
+        <nav aria-label="Mobile" className="mt-auto flex flex-col gap-1">
           {NAV.map((item, i) => (
             <Link
               key={item.href}
