@@ -26,10 +26,6 @@
   --line: rgba(26, 26, 26, 0.12);
   --line-light: rgba(242, 239, 232, 0.16);
 
-  /* living light position (lerped by MaterialLight) */
-  --lx: 32%;
-  --ly: 22%;
-
   /* ---- grain plates: fractal turbulence, monochrome, near-invisible ----
      dark plates sit on light materials; light plates on dark materials */
   --grain-fine: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch' seed='7'/><feColorMatrix type='matrix' values='0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
@@ -410,30 +406,42 @@ button,
 }
 
 /* ---- the living light ----
-   A fixed veil of warm daylight whose centre follows the cursor. Soft-light
-   blend at low alpha: most visitors will never name it, only feel it. */
-/* One plain-alpha layer, no blend modes: blend groups over a full viewport
-   force whole-page re-compositing every scrolled frame (the source of
-   site-wide scroll lag). A warm glow at the light position plus a faint
-   plain shade toward the edges reads the same and costs almost nothing. */
-.material-light {
+   A fixed veil of warm daylight whose centre follows the cursor. The glow
+   layer is painted once at an oversized fixed size and MOVED with a
+   composited transform — repositioning a viewport gradient by CSS variable
+   repaints the whole screen every frame. The edge shade is static. */
+.material-light-frame {
   position: fixed;
   inset: 0;
   z-index: 40;
   pointer-events: none;
-  background:
-    radial-gradient(
-      42rem circle at var(--lx) var(--ly),
-      rgba(255, 246, 230, 0.09),
-      rgba(255, 246, 230, 0.03) 45%,
-      transparent 70%
-    ),
-    radial-gradient(
-      60rem circle at var(--lx) var(--ly),
-      rgba(31, 30, 28, 0) 45%,
-      rgba(31, 30, 28, 0.035) 80%,
-      rgba(31, 30, 28, 0.055) 100%
-    );
+  overflow: clip;
+}
+
+.material-light-glow {
+  position: absolute;
+  left: -42rem;
+  top: -42rem;
+  width: 84rem;
+  height: 84rem;
+  background: radial-gradient(
+    closest-side,
+    rgba(255, 246, 230, 0.09),
+    rgba(255, 246, 230, 0.03) 45%,
+    transparent 72%
+  );
+  will-change: transform;
+}
+
+.material-light-shade {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    125% 125% at 50% 42%,
+    rgba(31, 30, 28, 0) 55%,
+    rgba(31, 30, 28, 0.035) 82%,
+    rgba(31, 30, 28, 0.055) 100%
+  );
 }
 }
 

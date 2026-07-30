@@ -52,11 +52,9 @@ const ScrollExpandMedia = ({
   textBlend,
   children,
 }: ScrollExpandMediaProps) => {
-  const [scrollProgress, setScrollProgress] = useState<number>(0);
   const [showContent, setShowContent] = useState<boolean>(false);
   const [mediaFullyExpanded, setMediaFullyExpanded] = useState<boolean>(false);
   const [touchStartY, setTouchStartY] = useState<number>(0);
-  const [isMobileState, setIsMobileState] = useState<boolean>(false);
   const [reducedState, setReducedState] = useState<boolean>(false);
   const [videoReady, setVideoReady] = useState<boolean>(false);
   const reducedRef = useRef(false);
@@ -65,24 +63,63 @@ const ScrollExpandMedia = ({
   const stageRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
+  /* animated nodes are driven imperatively: a setState per frame would
+     re-render the whole hero — children included — at 60fps, which is
+     exactly the scroll jank it caused. React state only flips at the
+     expansion thresholds. */
+  const bgRef = useRef<HTMLDivElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const veilRef = useRef<HTMLDivElement | null>(null);
+  const dateRef = useRef<HTMLParagraphElement | null>(null);
+  const cueRef = useRef<HTMLParagraphElement | null>(null);
+  const w1Ref = useRef<HTMLSpanElement | null>(null);
+  const w2Ref = useRef<HTMLSpanElement | null>(null);
+  const isMobileRef = useRef(false);
+  const expandedRef = useRef(false);
+  const contentRef = useRef(false);
+
   /* smoothed progress: input nudges a target; a rAF loop lerps the
-     displayed progress toward it so expansion and scrub move with weight */
+     displayed progress toward it so expansion moves with weight */
   const targetRef = useRef(0);
   const displayRef = useRef(0);
   const animRaf = useRef(0);
   const animating = useRef(false);
+
+  const applyFrame = (p: number) => {
+    const mobile = isMobileRef.current;
+    if (bgRef.current) bgRef.current.style.opacity = String(1 - p);
+    if (panelRef.current) {
+      panelRef.current.style.width = `${300 + p * (mobile ? 650 : 1250)}px`;
+      panelRef.current.style.height = `${400 + p * (mobile ? 200 : 400)}px`;
+    }
+    if (veilRef.current) {
+      veilRef.current.style.opacity = String(Math.max(0, 0.3 - p * 0.3));
+    }
+    const t = p * (mobile ? 180 : 150);
+    if (dateRef.current) dateRef.current.style.transform = `translateX(-${t}vw)`;
+    if (cueRef.current) cueRef.current.style.transform = `translateX(${t}vw)`;
+    if (w1Ref.current) w1Ref.current.style.transform = `translateX(-${t}vw)`;
+    if (w2Ref.current) w2Ref.current.style.transform = `translateX(${t}vw)`;
+  };
 
   const tickSmooth = () => {
     const target = targetRef.current;
     let next = displayRef.current + (target - displayRef.current) * 0.16;
     if (Math.abs(target - next) < 0.001) next = target;
     displayRef.current = next;
-    setScrollProgress(next);
+    applyFrame(next);
 
     if (next >= 0.998 && target >= 1) {
-      setMediaFullyExpanded(true);
-      setShowContent(true);
-    } else if (next < 0.75) {
+      if (!expandedRef.current) {
+        expandedRef.current = true;
+        setMediaFullyExpanded(true);
+      }
+      if (!contentRef.current) {
+        contentRef.current = true;
+        setShowContent(true);
+      }
+    } else if (next < 0.75 && contentRef.current) {
+      contentRef.current = false;
       setShowContent(false);
     }
 
@@ -181,8 +218,9 @@ const ScrollExpandMedia = ({
     const id = requestAnimationFrame(() => {
       targetRef.current = 1;
       displayRef.current = 1;
+      expandedRef.current = true;
+      contentRef.current = true;
       setReducedState(true);
-      setScrollProgress(1);
       setMediaFullyExpanded(true);
       setShowContent(true);
     });
@@ -206,6 +244,7 @@ const ScrollExpandMedia = ({
 
     const handleWheel = (e: WheelEvent) => {
       if (mediaFullyExpanded && e.deltaY < 0 && window.scrollY <= 5) {
+        expandedRef.current = false;
         setMediaFullyExpanded(false);
         e.preventDefault();
       } else if (!mediaFullyExpanded) {
@@ -225,6 +264,7 @@ const ScrollExpandMedia = ({
       const deltaY = touchStartY - touchY;
 
       if (mediaFullyExpanded && deltaY < -20 && window.scrollY <= 5) {
+        expandedRef.current = false;
         setMediaFullyExpanded(false);
         e.preventDefault();
       } else if (!mediaFullyExpanded) {
@@ -309,7 +349,8 @@ const ScrollExpandMedia = ({
 
   useEffect(() => {
     const checkIfMobile = (): void => {
-      setIsMobileState(window.innerWidth < 768);
+      isMobileRef.current = window.innerWidth < 768;
+      applyFrame(displayRef.current);
     };
 
     checkIfMobile();
@@ -317,10 +358,6 @@ const ScrollExpandMedia = ({
 
     return () => window.removeEventListener("resize", checkIfMobile);
   }, []);
-
-  const mediaWidth = 300 + scrollProgress * (isMobileState ? 650 : 1250);
-  const mediaHeight = 400 + scrollProgress * (isMobileState ? 200 : 400);
-  const textTranslateX = scrollProgress * (isMobileState ? 180 : 150);
 
   const firstWord = title ? title.split(" ")[0] : "";
   const restOfTitle = title ? title.split(" ").slice(1).join(" ") : "";
@@ -366,10 +403,7 @@ const ScrollExpandMedia = ({
       <section className="relative flex min-h-[100dvh] flex-col items-center justify-start">
         <div className="relative flex min-h-[100dvh] w-full flex-col items-center">
           {/* ground: a material surface (or image) that recedes as the film grows */}
-          <div
-            className="absolute inset-0 z-0 h-full"
-            style={{ opacity: 1 - scrollProgress }}
-          >
+          <div ref={bgRef} className="absolute inset-0 z-0 h-full">
             {bgImageSrc ? (
               <Image
                 src={bgImageSrc}
@@ -390,10 +424,11 @@ const ScrollExpandMedia = ({
               className="relative flex h-[100dvh] w-full flex-col items-center justify-center"
             >
               <div
+                ref={panelRef}
                 className="shadow-daylight absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 transition-none"
                 style={{
-                  width: `${mediaWidth}px`,
-                  height: `${mediaHeight}px`,
+                  width: "300px",
+                  height: "400px",
                   maxWidth: "95vw",
                   maxHeight: "85vh",
                 }}
@@ -429,8 +464,9 @@ const ScrollExpandMedia = ({
                     />
                     {/* warm veil that lifts as the film takes the frame */}
                     <div
+                      ref={veilRef}
                       className="absolute inset-0 bg-[#252421]"
-                      style={{ opacity: Math.max(0, 0.3 - scrollProgress * 0.3) }}
+                      style={{ opacity: 0.3 }}
                     />
                     {/* cinematic vignette — quiet edges, open centre */}
                     <div className="hero-vignette absolute inset-0" />
@@ -447,7 +483,7 @@ const ScrollExpandMedia = ({
                     />
                     <div
                       className="absolute inset-0 bg-[#252421]"
-                      style={{ opacity: Math.max(0, 0.3 - scrollProgress * 0.3) }}
+                      style={{ opacity: 0.3 }}
                     />
                   </div>
                 )}
@@ -455,16 +491,16 @@ const ScrollExpandMedia = ({
                 <div className="relative z-10 mt-5 flex flex-col items-center text-center transition-none">
                   {date && (
                     <p
+                      ref={dateRef}
                       className={`annot ${textBlend ? "text-stone-dark" : "muted"}`}
-                      style={{ transform: `translateX(-${textTranslateX}vw)` }}
                     >
                       {date}
                     </p>
                   )}
                   {scrollToExpand && (
                     <p
+                      ref={cueRef}
                       className={`annot mt-1.5 ${textBlend ? "text-bronze-bright" : "text-bronze"}`}
-                      style={{ transform: `translateX(${textTranslateX}vw)` }}
                     >
                       {scrollToExpand}
                     </p>
@@ -474,19 +510,25 @@ const ScrollExpandMedia = ({
 
               {title && (
                 <h1 className="relative z-10 flex w-full flex-col items-center justify-center gap-2 text-center transition-none md:gap-4">
+                  {/* plaster type with a soft cast shadow: a blend mode here
+                      would force whole-frame compositing over playing video */}
                   <span
+                    ref={w1Ref}
                     className={`display block text-[10vw] transition-none md:text-7xl lg:text-8xl ${
-                      textBlend ? "text-plaster mix-blend-difference" : "text-ink"
+                      textBlend
+                        ? "text-plaster [text-shadow:0_2px_28px_rgba(20,19,17,0.55)]"
+                        : "text-ink"
                     }`}
-                    style={{ transform: `translateX(-${textTranslateX}vw)` }}
                   >
                     {firstWord}
                   </span>
                   <span
+                    ref={w2Ref}
                     className={`display block text-center text-[10vw] transition-none md:text-7xl lg:text-8xl ${
-                      textBlend ? "text-plaster mix-blend-difference" : "text-ink"
+                      textBlend
+                        ? "text-plaster [text-shadow:0_2px_28px_rgba(20,19,17,0.55)]"
+                        : "text-ink"
                     }`}
-                    style={{ transform: `translateX(${textTranslateX}vw)` }}
                   >
                     {restOfTitle}
                   </span>
