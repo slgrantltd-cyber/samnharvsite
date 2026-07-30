@@ -16,6 +16,8 @@ export async function POST(req: NextRequest) {
   const name = (body.name || "").trim().slice(0, 80);
   const email = (body.email || "").trim().slice(0, 120);
   const message = (body.message || "").trim().slice(0, 2000);
+  const tag = (body.tag || "enquiry").trim().slice(0, 30);
+  const subject = (body.subject || `Enquiry from ${(body.name || "").trim().slice(0, 80)}`).trim().slice(0, 120);
   if (!name || !message || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
     return NextResponse.json({ error: "bad-input" }, { status: 400 });
   }
@@ -30,7 +32,7 @@ export async function POST(req: NextRequest) {
           from: `"Website enquiry" <${user}>`,
           to: user,
           replyTo: `"${name}" <${email}>`,
-          subject: `Enquiry from ${name}`,
+          subject,
           text: `From: ${name} <${email}>\n\n${message}`,
         });
     } catch {
@@ -53,7 +55,7 @@ export async function POST(req: NextRequest) {
           name,
           type: "Other",
           status: "New",
-          tags: "enquiry",
+          tags: tag,
           phone: "",
           email,
           notes: message.slice(0, 300),

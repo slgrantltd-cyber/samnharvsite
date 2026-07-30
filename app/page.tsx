@@ -58,6 +58,59 @@ export default function Home() {
         </div>
       </ScrollExpandMedia>
 
+      {/* 01.25 — THE THREE DOORS */}
+      <section className="px-5 pt-6 pb-16 md:px-10 md:pb-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-3">
+            {[
+              {
+                who: "For investors",
+                head: "Deals we'd do ourselves.",
+                body: "Analysed opportunities with our own money in first — hear about them before anyone else.",
+                href: "/join",
+                cta: "Join the deal list",
+              },
+              {
+                who: "For landlords",
+                head: "Your rent, guaranteed.",
+                body: "A fixed monthly rent in writing, paid occupied or not — tenants, upkeep and compliance all handled.",
+                href: "/landlords",
+                cta: "Get your answer",
+              },
+              {
+                who: "For councils",
+                head: "Placements done properly.",
+                body: "Safe supported accommodation for young people — over a year of placements with our local authority.",
+                href: "/councils",
+                cta: "Request a placement",
+              },
+            ].map((d) => (
+              <Link
+                key={d.href}
+                href={d.href}
+                className="group bg-[var(--plaster)] p-6 transition-colors duration-300 hover:bg-[var(--limestone)] md:p-8"
+              >
+                <span className="annot muted group-hover:text-[var(--bronze)]">
+                  {d.who}
+                </span>
+                <span className="display mt-2 block text-2xl">{d.head}</span>
+                <span className="mt-3 block text-[0.9375rem] leading-relaxed muted">
+                  {d.body}
+                </span>
+                <span className="annot mt-5 inline-flex items-center gap-2 text-ink">
+                  {d.cta} <span aria-hidden="true">→</span>
+                </span>
+              </Link>
+            ))}
+          </div>
+          <p className="annot mt-6 flex flex-wrap gap-x-8 gap-y-2 muted">
+            <span>We operate our own properties</span>
+            <span>★★★★★ on Google</span>
+            <span>Two names on everything</span>
+          </p>
+        </div>
+      </section>
+
       {/* 01.5 — MANIFESTO */}
       <section className="px-5 py-28 md:px-10 md:py-40">
         <div className="mx-auto max-w-4xl">
