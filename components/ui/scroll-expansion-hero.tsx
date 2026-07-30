@@ -60,13 +60,14 @@ const ScrollExpandMedia = ({
   const [touchStartY, setTouchStartY] = useState<number>(0);
   const [reducedState, setReducedState] = useState<boolean>(false);
   const [videoReady, setVideoReady] = useState<boolean>(false);
-  const [src, setSrc] = useState<string>(mediaSrc);
+  /* the film gets NO src until the device has chosen one: shipping the
+     full-rate file in the HTML made phones start a 12MB download before
+     hydration could swap it, starving every other asset on the page.
+     The poster layer covers the beat until the right file streams in. */
+  const [src, setSrc] = useState<string | undefined>(undefined);
   const reducedRef = useRef(false);
 
-  /* a film that stalls to buffer reads as broken: small screens and slow
-     connections get the lighter encode instead of the full-rate one */
   useEffect(() => {
-    if (!lowSrc) return;
     type NetInfo = {
       downlink?: number;
       effectiveType?: string;
@@ -79,8 +80,8 @@ const ScrollExpandMedia = ({
         (conn.downlink !== undefined && conn.downlink < 4) ||
         /2g|3g/.test(conn.effectiveType ?? ""));
     const small = window.matchMedia("(max-width: 767px)").matches;
-    if (slow || small) setSrc(lowSrc);
-  }, [lowSrc]);
+    setSrc((slow || small) && lowSrc ? lowSrc : mediaSrc);
+  }, [lowSrc, mediaSrc]);
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
