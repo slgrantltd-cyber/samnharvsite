@@ -1,0 +1,58 @@
+<!doctype html>
+<html><head><meta charset='utf-8'>
+<link href='https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital@1&family=Fragment+Mono&display=block' rel='stylesheet'>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root { --ivory:#f5f2eb; --ink:#1a1a1a; --stone:#5c5952; --bronze:#8c7b65; --line:rgba(26,26,26,0.14); }
+html,body { width:1080px; height:1350px; overflow:hidden; }
+body { background:var(--ivory); color:var(--ink); position:relative; font-family:'Libre Caslon Display',Georgia,serif; }
+.marble,.sheen,.grain { position:absolute; inset:0; }
+.marble svg { width:100%; height:100%; display:block; }
+.sheen { background:
+  linear-gradient(112deg, rgba(255,253,247,0) 26%, rgba(255,253,247,0.78) 39%, rgba(255,253,247,0.16) 46%, rgba(255,253,247,0) 54%), linear-gradient(112deg, rgba(255,253,247,0) 60%, rgba(255,253,247,0.5) 68%, rgba(255,253,247,0) 75%),
+  radial-gradient(130% 120% at 18% -10%, rgba(255,253,247,0.55), rgba(255,253,247,0) 58%),
+  radial-gradient(130% 170% at 106% 125%, rgba(31,30,28,0.09), rgba(31,30,28,0) 55%); }
+.grain { background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch' seed='7'/><feColorMatrix type='matrix' values='0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>"); }
+.inner { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0; }
+.wordmark { display:flex; align-items:center; gap:16px; }
+.mark { width:32px; height:32px; color:var(--bronze); }
+.wordmark span { font-size:30px; letter-spacing:0.06em; }
+.wordmark i { font-family:'Libre Caslon Text',Georgia,serif; font-style:italic; color:var(--bronze); }
+.tile { margin-top:64px; width:640px; height:640px; background:#faf8f2; border:1px solid var(--line); box-shadow:0 34px 68px -26px rgba(31,30,28,0.35); display:flex; align-items:center; justify-content:center; position:relative; }
+.tile img { width:520px; height:520px; image-rendering:pixelated; }
+.centre { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:104px; height:104px; background:#faf8f2; display:flex; align-items:center; justify-content:center; }
+.centre svg { width:64px; height:64px; color:var(--ink); }
+h1 { margin-top:64px; font-weight:400; font-size:54px; letter-spacing:-0.02em; }
+h1 i { font-family:'Libre Caslon Text',Georgia,serif; font-style:italic; }
+.annot { margin-top:26px; font-family:'Fragment Mono',monospace; font-size:17px; letter-spacing:0.14em; color:var(--stone); }
+.rule { position:absolute; left:190px; right:190px; bottom:84px; height:9px; border-bottom:1px solid var(--line);
+  background-image:repeating-linear-gradient(to right, rgba(26,26,26,0.15) 0 1px, transparent 1px 50px); }
+.rule::before { content:''; position:absolute; left:0; bottom:-2px; width:51px; height:3px; background:var(--bronze); }
+</style></head><body>
+<div class='marble'><svg viewBox='0 0 1080 1350' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'>
+<defs>
+<filter id='vein' x='-20%' y='-20%' width='140%' height='140%'>
+<feTurbulence type='fractalNoise' baseFrequency='0.005 0.006' numOctaves='4' seed='14' result='n'/>
+<feDisplacementMap in='SourceGraphic' in2='n' scale='110' xChannelSelector='R' yChannelSelector='G'/>
+</filter>
+<filter id='cloud'><feTurbulence type='fractalNoise' baseFrequency='0.004 0.004' numOctaves='3' seed='4'/><feColorMatrix type='matrix' values='0 0 0 0 0.62  0 0 0 0 0.58  0 0 0 0 0.51  0 0 0 0.10 0'/></filter>
+<filter id='cloud2'><feTurbulence type='fractalNoise' baseFrequency='0.011 0.011' numOctaves='3' seed='27'/><feColorMatrix type='matrix' values='0 0 0 0 0.86  0 0 0 0 0.83  0 0 0 0 0.77  0 0 0 0.14 0'/></filter>
+</defs>
+<rect width='1080' height='1350' filter='url(#cloud)'/>
+<rect width='1080' height='1350' filter='url(#cloud2)'/>
+<g filter='url(#vein)' fill='none' stroke-linecap='round'>
+<path d='M -60 1080 C 260 980 480 1120 760 1000 C 950 920 1050 990 1140 930' stroke='rgba(125,116,102,0.34)' stroke-width='2.4'/>
+<path d='M -60 240 C 240 300 520 170 800 260 C 990 320 1080 250 1140 290' stroke='rgba(140,131,116,0.26)' stroke-width='1.8'/>
+<path d='M 260 -60 C 380 300 300 700 430 1410' stroke='rgba(150,141,125,0.2)' stroke-width='1.4'/>
+<path d='M 820 -60 C 930 350 840 800 960 1410' stroke='rgba(125,116,102,0.22)' stroke-width='1.6'/>
+<path d='M -60 620 C 340 600 640 680 1140 590' stroke='rgba(168,148,120,0.20)' stroke-width='1.4'/>
+</g></svg></div>
+<div class='sheen'></div><div class='grain'></div>
+<div class='inner'>
+<div class='wordmark'><svg class='mark' viewBox='0 0 32 32' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='square'><line x1='4' y1='7' x2='28' y2='7'/><line x1='16' y1='7' x2='16' y2='14'/><path d='M16 14 L7 27 M16 14 L25 27 M16 14 L16 27'/></svg><span>SAM <i>n</i> HARV</span></div>
+<div class='tile'><img src='deal-qr.svg'><div class='centre'><svg viewBox='0 0 32 32' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='square'><line x1='4' y1='7' x2='28' y2='7'/><line x1='16' y1='7' x2='16' y2='14'/><path d='M16 14 L7 27 M16 14 L25 27 M16 14 L16 27'/></svg></div></div>
+<h1>Analyse your <i>deal.</i></h1>
+<p class='annot'>SAMNHARV.COM</p>
+</div>
+<div class='rule'></div>
+</body></html>

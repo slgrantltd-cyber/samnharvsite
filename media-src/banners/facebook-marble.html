@@ -25,18 +25,24 @@
   .sheen {
     background:
       linear-gradient(112deg,
-        rgba(255,253,247,0) 30%,
-        rgba(255,253,247,0.5) 46%,
-        rgba(255,253,247,0) 62%),
-      radial-gradient(130% 120% at 18% -10%, rgba(255,253,247,0.55), rgba(255,253,247,0) 58%),
-      radial-gradient(130% 170% at 106% 125%, rgba(31,30,28,0.09), rgba(31,30,28,0) 55%);
+        rgba(255,253,247,0) 26%,
+        rgba(255,253,247,0.78) 39%,
+        rgba(255,253,247,0.16) 46%,
+        rgba(255,253,247,0) 54%),
+      linear-gradient(112deg,
+        rgba(255,253,247,0) 60%,
+        rgba(255,253,247,0.5) 68%,
+        rgba(255,253,247,0) 75%),
+      radial-gradient(130% 120% at 18% -10%, rgba(255,253,247,0.6), rgba(255,253,247,0) 58%),
+      radial-gradient(130% 170% at 106% 125%, rgba(31,30,28,0.15), rgba(31,30,28,0) 55%),
+      radial-gradient(120% 150% at -8% 120%, rgba(31,30,28,0.08), rgba(31,30,28,0) 45%);
   }
   .grain {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch' seed='7'/><feColorMatrix type='matrix' values='0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch' seed='7'/><feColorMatrix type='matrix' values='0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0.035 0'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
   }
   .ghost {
     position: absolute;
-    right: 44px; top: 50%;
+    left: 44px; top: 50%;
     transform: translateY(-45%);
     width: 230px; height: 230px;
     color: rgba(26,26,26,0.07);
@@ -50,10 +56,12 @@
   }
   .content {
     position: absolute;
-    left: 48px; top: 0; bottom: 0;
+    right: 48px; top: 0; bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: flex-end;
+    text-align: right;
   }
   .wordmark { display: flex; align-items: center; gap: 11px; }
   .mark { width: 23px; height: 23px; color: var(--bronze); }
@@ -81,7 +89,7 @@
   }
   .rule {
     position: absolute;
-    left: 48px; right: 48px; bottom: 26px;
+    left: 340px; right: 48px; bottom: 26px;
     height: 7px;
     border-bottom: 1px solid var(--line);
     background-image: repeating-linear-gradient(
@@ -90,10 +98,10 @@
       transparent 1px 45px
     );
   }
-  .rule::before {
+  .rule::after {
     content: "";
     position: absolute;
-    left: 0; bottom: -1.5px;
+    right: 0; bottom: -1.5px;
     width: 46px; height: 3px;
     background: var(--bronze);
   }
@@ -119,13 +127,13 @@
       <rect width="820" height="312" filter="url(#cloud)"/>
       <rect width="820" height="312" filter="url(#cloud2)"/>
       <g filter="url(#vein)" fill="none" stroke-linecap="round">
-        <path d="M -40 250 C 160 210 280 260 440 200 C 590 145 700 195 860 125" stroke="rgba(125,116,102,0.34)" stroke-width="1.8"/>
-        <path d="M -40 235 C 180 205 300 255 470 190 C 610 140 720 185 860 115" stroke="rgba(163,154,138,0.22)" stroke-width="0.9"/>
-        <path d="M -50 70 C 140 110 320 35 500 85 C 650 125 750 75 860 100" stroke="rgba(140,131,116,0.26)" stroke-width="1.3"/>
-        <path d="M 110 -30 C 180 90 140 200 220 340" stroke="rgba(150,141,125,0.2)" stroke-width="1"/>
-        <path d="M 545 -40 C 600 90 555 200 630 350" stroke="rgba(125,116,102,0.24)" stroke-width="1.2"/>
-        <path d="M -40 155 C 210 148 360 180 520 140 C 660 105 760 145 860 130" stroke="rgba(168,148,120,0.20)" stroke-width="1.1"/>
-        <path d="M 735 -30 C 770 90 730 190 790 340" stroke="rgba(140,131,116,0.18)" stroke-width="0.9"/>
+        <path d="M -40 250 C 160 210 280 260 440 200 C 590 145 700 195 860 125" stroke="rgba(125,116,102,0.38)" stroke-width="1.8"/>
+        <path d="M -40 235 C 180 205 300 255 470 190 C 610 140 720 185 860 115" stroke="rgba(163,154,138,0.24)" stroke-width="0.9"/>
+        <path d="M -50 70 C 140 110 320 35 500 85 C 650 125 750 75 860 100" stroke="rgba(140,131,116,0.3)" stroke-width="1.3"/>
+        <path d="M 110 -30 C 180 90 140 200 220 340" stroke="rgba(150,141,125,0.22)" stroke-width="1"/>
+        <path d="M 545 -40 C 600 90 555 200 630 350" stroke="rgba(125,116,102,0.26)" stroke-width="1.2"/>
+        <path d="M -40 155 C 210 148 360 180 520 140 C 660 105 760 145 860 130" stroke="rgba(168,148,120,0.22)" stroke-width="1.1"/>
+        <path d="M 735 -30 C 770 90 730 190 790 340" stroke="rgba(140,131,116,0.2)" stroke-width="0.9"/>
       </g>
     </svg>
   </div>
