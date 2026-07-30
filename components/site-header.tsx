@@ -41,7 +41,9 @@ export default function SiteHeader() {
           </span>
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
+        {/* eight destinations need real room: full nav from lg, tighter
+            tracking until xl; below lg the menu button carries everything */}
+        <nav aria-label="Primary" className="hidden items-center gap-5 lg:flex xl:gap-8">
           {NAV.slice(1).map((item) => (
             <Link
               key={item.href}
@@ -59,7 +61,7 @@ export default function SiteHeader() {
           </Link>
         </nav>
 
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-2 lg:hidden">
           <Link href="/contact" className="btn btn-ink px-4">
             Enquire
           </Link>
@@ -79,7 +81,7 @@ export default function SiteHeader() {
       <div
         id="site-menu"
         inert={!open}
-        className={`on-stone fixed inset-0 -z-10 flex flex-col justify-end px-5 pb-10 pt-24 transition-[clip-path] duration-500 ease-out md:hidden ${
+        className={`on-stone fixed inset-0 -z-10 flex flex-col justify-end px-5 pb-10 pt-24 transition-[clip-path] duration-500 ease-out lg:hidden ${
           open
             ? "[clip-path:inset(0_0_0%_0)]"
             : "pointer-events-none [clip-path:inset(0_0_100%_0)]"
