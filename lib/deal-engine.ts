@@ -54,6 +54,17 @@ export interface CashflowAnatomy {
   costs: { label: string; amount: number }[];
 }
 
+export interface ScoreAxis {
+  label: string;
+  rating: Rating;
+  value: number;
+}
+
+export interface Score {
+  overall: number;
+  axes: ScoreAxis[];
+}
+
 export interface Verdict {
   stamp: "strong deal" | "solid deal" | "marginal deal" | "walk away";
   rating: Rating;
@@ -72,6 +83,7 @@ export interface Analysis {
   waterfall?: WaterfallStep[];
   waterfallTitle?: string;
   verdict: Verdict;
+  score: Score;
 }
 
 export interface Strategy {
@@ -129,6 +141,27 @@ const stampFor = (r: Rating): Verdict["stamp"] =>
       : r === "average"
         ? "marginal deal"
         : "walk away";
+
+/* the Sam & Harv Score: five graded axes per deal — the measured ones
+   from this appraisal, plus the strategy's inherent qualities */
+const AXIS_VALUE: Record<Rating, number> = {
+  excellent: 92,
+  good: 76,
+  average: 56,
+  poor: 32,
+};
+
+const buildScore = (entries: [string, Rating][]): Score => {
+  const axes = entries.map(([label, rating]) => ({
+    label,
+    rating,
+    value: AXIS_VALUE[rating],
+  }));
+  return {
+    overall: Math.round(axes.reduce((a, x) => a + x.value, 0) / axes.length),
+    axes,
+  };
+};
 
 /* ---------- strategies ---------- */
 
@@ -210,6 +243,13 @@ export const STRATEGIES: Strategy[] = [
             { label: "Other costs", amount: v.bills },
           ],
         },
+        score: buildScore([
+          ["Cash flow", rCash],
+          ["Return on cash", rRoc],
+          ["Yield", rYield],
+          ["Liquidity", "excellent"],
+          ["Management load", "good"],
+        ]),
         verdict: { stamp: stampFor(overall), rating: overall, paragraphs },
       };
     },
@@ -308,6 +348,13 @@ export const STRATEGIES: Strategy[] = [
             { label: "Other costs", amount: v.bills },
           ],
         },
+        score: buildScore([
+          ["Cash recycling", allOut ? "excellent" : grade((recycled / Math.max(totalIn, 1)) * 100, [95, 80, 60])],
+          ["Equity created", rUplift],
+          ["Cash flow", rCash],
+          ["Exit flexibility", "good"],
+          ["Execution risk", "average"],
+        ]),
         verdict: { stamp: stampFor(overall), rating: overall, paragraphs },
       };
     },
@@ -389,6 +436,13 @@ export const STRATEGIES: Strategy[] = [
             { label: "Maintenance", amount: v.maint },
           ],
         },
+        score: buildScore([
+          ["Cash flow", rCash],
+          ["Return on cash", rRoc],
+          ["Break-even headroom", rBe],
+          ["Capital at risk", "excellent"],
+          ["Contract dependency", "average"],
+        ]),
         verdict: { stamp: stampFor(overall), rating: overall, paragraphs },
       };
     },
@@ -472,6 +526,13 @@ export const STRATEGIES: Strategy[] = [
             { label: "Licence", amount: v.licence / 12 },
           ],
         },
+        score: buildScore([
+          ["Cash flow", rCash],
+          ["Yield", rYield],
+          ["Break-even headroom", rBe],
+          ["Rental demand", "good"],
+          ["Liquidity", "average"],
+        ]),
         verdict: { stamp: stampFor(overall), rating: overall, paragraphs },
       };
     },
@@ -539,6 +600,13 @@ export const STRATEGIES: Strategy[] = [
           { label: "Expected equity", amount: v.equity },
           { label: "Cash in", amount: -capital },
         ],
+        score: buildScore([
+          ["Cash flow", rCash],
+          ["Return on cash", rRoc],
+          ["Locked-in discount", rEquity],
+          ["Capital at risk", "excellent"],
+          ["Legal complexity", "average"],
+        ]),
         verdict: { stamp: stampFor(overall), rating: overall, paragraphs },
       };
     },
@@ -613,6 +681,13 @@ export const STRATEGIES: Strategy[] = [
           { label: "Cost of sale", amount: -(agent + v.selling) },
           { label: "Profit", amount: profit },
         ],
+        score: buildScore([
+          ["Profit margin", rMargin],
+          ["Margin on GDV", rGdv],
+          ["Speed of capital return", "excellent"],
+          ["Market timing risk", "average"],
+          ["Liquidity", "good"],
+        ]),
         verdict: { stamp: stampFor(overall), rating: overall, paragraphs },
       };
     },

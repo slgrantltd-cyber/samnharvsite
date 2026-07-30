@@ -610,6 +610,56 @@ export default function DealAnalyzer() {
                   />
                 </div>
               )}
+
+              {/* the Sam & Harv Score: the deal graded the way we grade our own */}
+              <div className="bg-[var(--smoked)] p-6 md:col-span-2 md:p-8">
+                <div className="flex flex-wrap items-baseline justify-between gap-3">
+                  <p className="annot text-[var(--stone-dark)]">
+                    The Sam &amp; Harv Score
+                  </p>
+                  <p className="annot text-[var(--stone-dark)]">
+                    Five axes, no mercy
+                  </p>
+                </div>
+                <div className="mt-6 flex flex-wrap items-start gap-x-12 gap-y-6">
+                  <div className="shrink-0">
+                    <span className="font-mono text-6xl tabular-nums">
+                      <Counter
+                        value={analysis.score.overall}
+                        format={(n) => String(Math.round(n))}
+                      />
+                    </span>
+                    <span className="font-mono text-xl text-[var(--stone-dark)]">
+                      /100
+                    </span>
+                  </div>
+                  <ul className="min-w-64 flex-1 space-y-3">
+                    {analysis.score.axes.map((a) => (
+                      <li
+                        key={a.label}
+                        className="grid grid-cols-[8.5rem_1fr_5rem] items-center gap-3 md:grid-cols-[11rem_1fr_6rem]"
+                      >
+                        <span className="truncate text-sm text-[var(--stone-dark)]">
+                          {a.label}
+                        </span>
+                        <span className="relative h-2 overflow-clip bg-[rgba(242,239,232,0.1)]">
+                          <span
+                            className={`absolute inset-y-0 left-0 bg-current v-${a.rating}`}
+                            style={{
+                              width: `${a.value}%`,
+                              transition:
+                                "width 0.55s cubic-bezier(0.22, 1, 0.36, 1)",
+                            }}
+                          />
+                        </span>
+                        <span className={`annot text-right v-${a.rating}`}>
+                          {RATING_WORD[a.rating]}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
 

@@ -30,6 +30,15 @@ export default function SiteFooter() {
             <a className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="https://wa.me/447753600183">
               WhatsApp Harvey
             </a>
+            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/toolkit">
+              Toolkit
+            </Link>
+            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/resources">
+              Resources
+            </Link>
+            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/learn">
+              Learning Centre
+            </Link>
             <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/stays">
               Stays
             </Link>

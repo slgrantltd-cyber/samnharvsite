@@ -8,11 +8,11 @@ import BenchmarkMark from "@/components/benchmark-mark";
 const NAV = [
   { href: "/", label: "Home" },
   { href: "/services", label: "What we do" },
-  { href: "/about", label: "The brothers" },
+  { href: "/toolkit", label: "Toolkit" },
+  { href: "/resources", label: "Resources" },
+  { href: "/learn", label: "Learn" },
   { href: "/stays", label: "Stays" },
-  { href: "/deal-intelligence", label: "Deal Intelligence" },
-  { href: "/insights", label: "Insights" },
-  { href: "/faq", label: "FAQs" },
+  { href: "/about", label: "The brothers" },
   { href: "/contact", label: "Contact" },
 ];
 
