@@ -383,8 +383,17 @@ const ScrollExpandMedia = ({
     return () => window.removeEventListener("resize", checkIfMobile);
   }, []);
 
-  const firstWord = title ? title.split(" ")[0] : "";
-  const restOfTitle = title ? title.split(" ").slice(1).join(" ") : "";
+  /* "|" in the title marks the line break; otherwise break after word one */
+  const firstWord = title
+    ? title.includes("|")
+      ? title.split("|")[0].trim()
+      : title.split(" ")[0]
+    : "";
+  const restOfTitle = title
+    ? title.includes("|")
+      ? title.split("|").slice(1).join(" ").trim()
+      : title.split(" ").slice(1).join(" ")
+    : "";
 
   // Reduced motion: no scroll capture, no sliding type — a composed static
   // hero instead: headline, the film's poster frame, then the content.

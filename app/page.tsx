@@ -37,15 +37,17 @@ export default function Home() {
         lowSrc="/hero-low.mp4"
         posterSrc="/hero-poster.jpg"
         bgImageSrc="/hero-background.jpg"
-        title="BUILT ON RELATIONSHIPS."
+        title="THE BEST OPPORTUNITIES|RARELY ARRIVE BY ACCIDENT."
         date="Sam n Harv — Property Investment"
         scrollToExpand="Scroll to step inside"
         textBlend
       >
         <div className="mx-auto max-w-xl text-center">
           <p className="text-lg leading-relaxed md:text-xl">
-            Property investment, serviced accommodation and long-term
-            operating partnerships.
+            We partner with landlords, investors and organisations to unlock
+            the full potential of property — through guaranteed rent,
+            investment sourcing, serviced accommodation, management and
+            bespoke property solutions.
           </p>
           <Link
             href="/services"
