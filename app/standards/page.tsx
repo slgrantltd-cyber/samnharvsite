@@ -39,7 +39,7 @@ export default function StandardsPage() {
               Everything below is stated exactly as it stands. What we hold is
               marked as held. What we&rsquo;ve completed is marked as completed.
               And what we&rsquo;re still earning carries a{" "}
-              <span className="text-bronze">working towards</span> mark until
+              <span className="text-bronze">working towards</span>{" "}mark until
               the day it&rsquo;s done — no borrowed badges, no implied
               memberships. Certificates are available to view as they&rsquo;re
               added, and on request at any time.
