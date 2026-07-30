@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital@1&family=Fragment+Mono&display=block" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ivory: #f5f2eb;
+    --ink: #1a1a1a;
+    --stone: #5c5952;
+    --bronze: #8c7b65;
+    --line: rgba(26,26,26,0.14);
+  }
+  html, body { width: 820px; height: 312px; overflow: hidden; }
+  body {
+    background-color: var(--ivory);
+    color: var(--ink);
+    position: relative;
+    font-family: "Libre Caslon Display", Georgia, serif;
+  }
+  .marble, .sheen, .grain { position: absolute; inset: 0; }
+  .marble svg { width: 100%; height: 100%; display: block; }
+  .sheen {
+    background:
+      linear-gradient(112deg,
+        rgba(255,253,247,0) 30%,
+        rgba(255,253,247,0.5) 46%,
+        rgba(255,253,247,0) 62%),
+      radial-gradient(130% 120% at 18% -10%, rgba(255,253,247,0.55), rgba(255,253,247,0) 58%),
+      radial-gradient(130% 170% at 106% 125%, rgba(31,30,28,0.09), rgba(31,30,28,0) 55%);
+  }
+  .grain {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch' seed='7'/><feColorMatrix type='matrix' values='0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+  }
+  .ghost {
+    position: absolute;
+    right: 44px; top: 50%;
+    transform: translateY(-45%);
+    width: 230px; height: 230px;
+    color: rgba(26,26,26,0.07);
+  }
+  .ghost svg { width: 100%; height: 100%; }
+  .datum {
+    position: absolute;
+    left: 0; right: 0; top: 92px;
+    height: 1px;
+    background: rgba(26,26,26,0.06);
+  }
+  .content {
+    position: absolute;
+    left: 48px; top: 0; bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .wordmark { display: flex; align-items: center; gap: 11px; }
+  .mark { width: 23px; height: 23px; color: var(--bronze); }
+  .wordmark span { font-size: 20px; letter-spacing: 0.06em; }
+  .wordmark i {
+    font-family: "Libre Caslon Text", Georgia, serif;
+    font-style: italic;
+    color: var(--bronze);
+  }
+  h1 {
+    margin-top: 17px;
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    max-width: 560px;
+  }
+  h1 i { font-family: "Libre Caslon Text", Georgia, serif; font-style: italic; }
+  .annot {
+    margin-top: 19px;
+    font-family: "Fragment Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.13em;
+    color: var(--stone);
+  }
+  .rule {
+    position: absolute;
+    left: 48px; right: 48px; bottom: 26px;
+    height: 7px;
+    border-bottom: 1px solid var(--line);
+    background-image: repeating-linear-gradient(
+      to right,
+      rgba(26,26,26,0.15) 0 1px,
+      transparent 1px 45px
+    );
+  }
+  .rule::before {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -1.5px;
+    width: 46px; height: 3px;
+    background: var(--bronze);
+  }
+</style>
+</head>
+<body>
+  <div class="marble">
+    <svg viewBox="0 0 820 312" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="vein" x="-20%" y="-40%" width="140%" height="180%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.006 0.016" numOctaves="4" seed="14" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="90" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+        <filter id="cloud">
+          <feTurbulence type="fractalNoise" baseFrequency="0.005 0.009" numOctaves="3" seed="4"/>
+          <feColorMatrix type="matrix" values="0 0 0 0 0.62  0 0 0 0 0.58  0 0 0 0 0.51  0 0 0 0.10 0"/>
+        </filter>
+        <filter id="cloud2">
+          <feTurbulence type="fractalNoise" baseFrequency="0.012 0.022" numOctaves="3" seed="27"/>
+          <feColorMatrix type="matrix" values="0 0 0 0 0.86  0 0 0 0 0.83  0 0 0 0 0.77  0 0 0 0.14 0"/>
+        </filter>
+      </defs>
+      <rect width="820" height="312" filter="url(#cloud)"/>
+      <rect width="820" height="312" filter="url(#cloud2)"/>
+      <g filter="url(#vein)" fill="none" stroke-linecap="round">
+        <path d="M -40 250 C 160 210 280 260 440 200 C 590 145 700 195 860 125" stroke="rgba(125,116,102,0.34)" stroke-width="1.8"/>
+        <path d="M -40 235 C 180 205 300 255 470 190 C 610 140 720 185 860 115" stroke="rgba(163,154,138,0.22)" stroke-width="0.9"/>
+        <path d="M -50 70 C 140 110 320 35 500 85 C 650 125 750 75 860 100" stroke="rgba(140,131,116,0.26)" stroke-width="1.3"/>
+        <path d="M 110 -30 C 180 90 140 200 220 340" stroke="rgba(150,141,125,0.2)" stroke-width="1"/>
+        <path d="M 545 -40 C 600 90 555 200 630 350" stroke="rgba(125,116,102,0.24)" stroke-width="1.2"/>
+        <path d="M -40 155 C 210 148 360 180 520 140 C 660 105 760 145 860 130" stroke="rgba(168,148,120,0.20)" stroke-width="1.1"/>
+        <path d="M 735 -30 C 770 90 730 190 790 340" stroke="rgba(140,131,116,0.18)" stroke-width="0.9"/>
+      </g>
+    </svg>
+  </div>
+  <div class="sheen"></div>
+  <div class="grain"></div>
+  <div class="datum"></div>
+  <div class="ghost">
+    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="square">
+      <line x1="4" y1="7" x2="28" y2="7"/>
+      <line x1="16" y1="7" x2="16" y2="14"/>
+      <path d="M16 14 L7 27 M16 14 L25 27 M16 14 L16 27"/>
+    </svg>
+  </div>
+  <div class="content">
+    <div class="wordmark">
+      <svg class="mark" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square">
+        <line x1="4" y1="7" x2="28" y2="7"/>
+        <line x1="16" y1="7" x2="16" y2="14"/>
+        <path d="M16 14 L7 27 M16 14 L25 27 M16 14 L16 27"/>
+      </svg>
+      <span>SAM <i>n</i> HARV</span>
+    </div>
+    <h1>Our names are on <i>everything.</i></h1>
+    <p class="annot">TWO BROTHERS — PROPERTY INVESTMENT &amp; DEAL SOURCING<br>UK SOUTH WEST</p>
+  </div>
+  <div class="rule"></div>
+</body>
+</html>
