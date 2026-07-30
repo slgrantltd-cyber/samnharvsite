@@ -1,0 +1,16 @@
+HARV — YOUR SAM N HARV KIT
+==========================
+
+1. EMAIL SIGNATURE (harvey-email-signature.html)
+   Best done on a computer:
+   - Double-click the file (opens in your browser)
+   - Select all (Cmd+A), copy (Cmd+C)
+   - Gmail: Settings > See all settings > Signature > paste
+   - Apple Mail: Settings > Signatures > paste
+
+2. LETTER TEMPLATE (samnharv-letter-harvey.docx)
+   Opens in Word or Pages. Type over the grey placeholder text,
+   print or export to PDF. Your signature is already on it.
+
+3. YOUR SIGNATURE (harvey-signature.png)
+   Transparent background - drop it onto any document or PDF.
