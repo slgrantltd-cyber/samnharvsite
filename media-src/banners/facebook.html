@@ -17,60 +17,54 @@
   body {
     background-color: var(--plaster);
     background-image:
-      radial-gradient(130% 95% at 18% -8%, rgba(255,252,244,0.5), rgba(255,252,244,0) 62%),
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch' seed='7'/><feColorMatrix type='matrix' values='0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+      radial-gradient(130% 120% at 20% -10%, rgba(255,252,244,0.6), rgba(255,252,244,0) 60%),
+      radial-gradient(120% 160% at 108% 120%, rgba(31,30,28,0.10), rgba(31,30,28,0) 55%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='980' height='980'><filter id='t'><feTurbulence type='fractalNoise' baseFrequency='0.0042 0.011' numOctaves='2' stitchTiles='stitch' seed='11'/><feColorMatrix type='matrix' values='0 0 0 0 0.12 0 0 0 0 0.10 0 0 0 0 0.08 0 0 0 0.07 0'/></filter><rect width='100%25' height='100%25' filter='url(%23t)'/></svg>"),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='560' height='560'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.085' numOctaves='2' stitchTiles='stitch' seed='19'/><feColorMatrix type='matrix' values='0 0 0 0 0.11 0 0 0 0 0.10 0 0 0 0 0.08 0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23p)'/></svg>"),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch' seed='7'/><feColorMatrix type='matrix' values='0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
     color: var(--ink);
     position: relative;
     font-family: "Libre Caslon Display", Georgia, serif;
   }
-  .photo {
+  .ghost {
     position: absolute;
-    top: 18px; right: 18px; bottom: 18px;
-    width: 330px;
-    background: url("/banners/manor.jpg") center 38% / cover no-repeat;
-    box-shadow: 0 18px 36px -14px rgba(31,30,28,0.38);
+    right: 44px; top: 50%;
+    transform: translateY(-45%);
+    width: 230px; height: 230px;
+    color: rgba(26,26,26,0.085);
   }
-  .photo::after {
-    content: "";
-    position: absolute; inset: 0;
-    background: rgba(242,239,232,0.06);
+  .ghost svg { width: 100%; height: 100%; }
+  .datum {
+    position: absolute;
+    left: 0; right: 0; top: 92px;
+    height: 1px;
+    background: rgba(26,26,26,0.07);
   }
   .content {
     position: absolute;
-    left: 44px; top: 0; bottom: 0;
-    width: 410px;
+    left: 48px; top: 0; bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  .wordmark {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-  }
-  .mark { width: 22px; height: 22px; color: var(--ink); }
-  .wordmark span {
-    font-size: 19px;
-    letter-spacing: 0.06em;
-  }
+  .wordmark { display: flex; align-items: center; gap: 11px; }
+  .mark { width: 23px; height: 23px; color: var(--bronze); }
+  .wordmark span { font-size: 20px; letter-spacing: 0.06em; }
   .wordmark i {
     font-family: "Libre Caslon Text", Georgia, serif;
     font-style: italic;
     color: var(--bronze);
   }
   h1 {
-    margin-top: 18px;
+    margin-top: 17px;
     font-weight: 400;
-    font-size: 46px;
+    font-size: 49px;
     line-height: 0.98;
     letter-spacing: -0.02em;
   }
-  h1 i {
-    font-family: "Libre Caslon Text", Georgia, serif;
-    font-style: italic;
-  }
+  h1 i { font-family: "Libre Caslon Text", Georgia, serif; font-style: italic; }
   .annot {
-    margin-top: 20px;
+    margin-top: 19px;
     font-family: "Fragment Mono", monospace;
     font-size: 10.5px;
     letter-spacing: 0.13em;
@@ -78,22 +72,33 @@
   }
   .rule {
     position: absolute;
-    left: 44px; bottom: 24px;
-    width: 380px;
-    height: 1px;
-    background: var(--line);
+    left: 48px; right: 48px; bottom: 26px;
+    height: 7px;
+    border-bottom: 1px solid var(--line);
+    background-image: repeating-linear-gradient(
+      to right,
+      rgba(26,26,26,0.16) 0 1px,
+      transparent 1px 45px
+    );
   }
-  .rule::after {
+  .rule::before {
     content: "";
     position: absolute;
-    left: 0; top: -1.5px;
-    width: 34px; height: 3px;
+    left: 0; bottom: -1.5px;
+    width: 46px; height: 3px;
     background: var(--bronze);
   }
 </style>
 </head>
 <body>
-  <div class="photo"></div>
+  <div class="datum"></div>
+  <div class="ghost">
+    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="square">
+      <line x1="4" y1="7" x2="28" y2="7"/>
+      <line x1="16" y1="7" x2="16" y2="14"/>
+      <path d="M16 14 L7 27 M16 14 L25 27 M16 14 L16 27"/>
+    </svg>
+  </div>
   <div class="content">
     <div class="wordmark">
       <svg class="mark" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square">
@@ -104,7 +109,7 @@
       <span>SAM <i>n</i> HARV</span>
     </div>
     <h1>Built on <i>relationships.</i></h1>
-    <p class="annot">PROPERTY INVESTMENT &amp; DEAL SOURCING<br>UK SOUTH WEST</p>
+    <p class="annot">PROPERTY INVESTMENT &amp; DEAL SOURCING — UK SOUTH WEST</p>
   </div>
   <div class="rule"></div>
 </body>
