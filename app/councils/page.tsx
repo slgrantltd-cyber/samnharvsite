@@ -25,7 +25,7 @@ const PROVIDE = [
   },
   {
     head: "Paperwork in order",
-    body: "Gas, electrical and safety certificates current and shared up front; clear agreements in writing; full cooperation with your safeguarding and inspection requirements.",
+    body: "Gas, electrical and safety certificates current and shared up front; clear agreements in writing; full cooperation with your safeguarding and inspection requirements. Samuel holds an Enhanced DBS check, available for inspection on request.",
   },
 ];
 
