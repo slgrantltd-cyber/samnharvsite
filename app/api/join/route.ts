@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { welcomeSubject, welcomeText, welcomeHtml } from "@/lib/welcome-email";
 
 /**
  * Public lead capture: adds a contact to the shared Deal Book (tagged by
@@ -68,9 +69,9 @@ export async function POST(req: NextRequest) {
         .sendMail({
           from: `"Sam n Harv" <${user}>`,
           to: email,
-          subject: "Welcome — from Sam & Harv",
-          text: `Hi ${first},\n\nGood to have you on the list. We're Samuel and Harvey — two brothers investing in property and sourcing deals across the UK.\n\nWhile you're here:\n— Analyse any deal free: https://www.samnharv.com/toolkit\n— Take our working checklists: https://www.samnharv.com/resources\n— When a deal fits what you told us, you'll hear from us directly.\n\nJust reply to talk sooner — it comes straight to us.\n\nSamuel & Harvey Grant\nwww.samnharv.com\nOur names are on everything.`,
-          html: `<div style="font-family:Georgia,serif;color:#1a1a1a;max-width:540px;margin:0 auto;padding:24px;background:#f5f2eb"><p style="font-size:13px;letter-spacing:2px;color:#8c7b65;text-transform:uppercase;border-bottom:1px solid rgba(26,26,26,0.3);padding-bottom:12px">SAM <i>n</i> HARV</p><p style="font-size:22px;margin:20px 0 8px">Hi ${first},</p><p style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.7">Good to have you on the list. We're Samuel and Harvey — two brothers investing in property and sourcing deals across the UK.</p><p style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.7">While you're here:<br>— Analyse any deal with our free <a href="https://www.samnharv.com/toolkit" style="color:#8c7b65">investment toolkit</a><br>— Take our working <a href="https://www.samnharv.com/resources" style="color:#8c7b65">checklists and templates</a><br>— When a deal fits what you told us, you'll hear from us directly.</p><p style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.7">Just reply to talk sooner — it comes straight to us.</p><p style="font-size:16px;margin-top:20px">Samuel &amp; Harvey Grant</p><p style="font-family:Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:1.5px;color:#5c5952;text-transform:uppercase;border-top:1px solid #8c7b65;padding-top:12px;margin-top:20px">Property Investment &amp; Deal Sourcing — <a href="https://www.samnharv.com" style="color:#8c7b65">samnharv.com</a></p></div>`,
+          subject: welcomeSubject,
+          text: welcomeText(first),
+          html: welcomeHtml(first),
         });
     } catch {}
   }
