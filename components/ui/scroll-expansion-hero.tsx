@@ -137,15 +137,20 @@ const ScrollExpandMedia = ({
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    const events = ["pointerdown", "touchstart", "keydown", "wheel"] as const;
-    const retry = () => {
+    const events = ["pointerdown", "touchstart", "keydown", "wheel", "scroll"] as const;
+    const detach = () => {
       events.forEach((e) => window.removeEventListener(e, retry));
-      if (v.paused && !reducedRef.current) v.play().catch(() => {});
+      v.removeEventListener("playing", detach);
     };
-    events.forEach((e) =>
-      window.addEventListener(e, retry, { passive: true, once: true }),
-    );
-    return () => events.forEach((e) => window.removeEventListener(e, retry));
+    // keep retrying on every gesture until playback truly starts — a
+    // one-shot listener can be consumed by a scroll during hydration
+    const retry = () => {
+      if (reducedRef.current) return detach();
+      if (v.paused) v.play().catch(() => {});
+    };
+    events.forEach((e) => window.addEventListener(e, retry, { passive: true }));
+    v.addEventListener("playing", detach);
+    return detach;
   }, []);
 
   /* the film runs continuously (autoplay + loop); it only pauses when the
