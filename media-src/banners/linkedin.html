@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital@1&family=Fragment+Mono&display=block" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --plaster: #f2efe8;
+    --smoked: #2b2926;
+    --ink: #1a1a1a;
+    --stone: #605d56;
+    --bronze: #8c7b65;
+    --line: rgba(26,26,26,0.14);
+  }
+  html, body { width: 1584px; height: 396px; overflow: hidden; }
+  body {
+    background-color: var(--plaster);
+    background-image:
+      radial-gradient(130% 95% at 18% -8%, rgba(255,252,244,0.5), rgba(255,252,244,0) 62%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch' seed='7'/><feColorMatrix type='matrix' values='0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+    color: var(--ink);
+    position: relative;
+    font-family: "Libre Caslon Display", Georgia, serif;
+  }
+  .photo {
+    position: absolute;
+    top: 26px; right: 26px; bottom: 26px;
+    width: 620px;
+    background: url("/banners/manor.jpg") center 38% / cover no-repeat;
+    box-shadow: 0 24px 48px -18px rgba(31,30,28,0.38);
+  }
+  .photo::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: rgba(242,239,232,0.06);
+  }
+  .content {
+    position: absolute;
+    left: 84px; top: 0; bottom: 0;
+    width: 780px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .mark { width: 34px; height: 34px; color: var(--ink); }
+  .wordmark span {
+    font-size: 30px;
+    letter-spacing: 0.06em;
+  }
+  .wordmark i {
+    font-family: "Libre Caslon Text", Georgia, serif;
+    font-style: italic;
+    color: var(--bronze);
+  }
+  h1 {
+    margin-top: 26px;
+    font-weight: 400;
+    font-size: 74px;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+  h1 i {
+    font-family: "Libre Caslon Text", Georgia, serif;
+    font-style: italic;
+  }
+  .annot {
+    margin-top: 30px;
+    font-family: "Fragment Mono", monospace;
+    font-size: 15px;
+    letter-spacing: 0.14em;
+    color: var(--stone);
+  }
+  .rule {
+    position: absolute;
+    left: 84px; right: 700px; bottom: 34px;
+    height: 1px;
+    background: var(--line);
+  }
+  .rule::after {
+    content: "";
+    position: absolute;
+    left: 0; top: -1.5px;
+    width: 46px; height: 3px;
+    background: var(--bronze);
+  }
+</style>
+</head>
+<body>
+  <div class="photo"></div>
+  <div class="content">
+    <div class="wordmark">
+      <svg class="mark" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square">
+        <line x1="4" y1="7" x2="28" y2="7"/>
+        <line x1="16" y1="7" x2="16" y2="14"/>
+        <path d="M16 14 L7 27 M16 14 L25 27 M16 14 L16 27"/>
+      </svg>
+      <span>SAM <i>n</i> HARV</span>
+    </div>
+    <h1>Built on <i>relationships.</i></h1>
+    <p class="annot">PROPERTY INVESTMENT &amp; DEAL SOURCING — UK SOUTH WEST</p>
+  </div>
+  <div class="rule"></div>
+</body>
+</html>
