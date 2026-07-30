@@ -16,8 +16,9 @@ export default function DealBookPage() {
             The Deal <span className="display-it">Book.</span>
           </h1>
           <p className="mt-6 max-w-xl leading-relaxed muted">
-            Contacts, deals and follow-ups. Everything here lives in this
-            browser — nothing is sent to any server.
+            Contacts, deals and follow-ups — qualified, tagged and colour
+            coded. Works privately in this browser; enable Sync with the
+            shared passphrase and you and Harv share one live book.
           </p>
           <div className="mt-10">
             <DealBook />

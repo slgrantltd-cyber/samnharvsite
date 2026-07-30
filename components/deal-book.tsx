@@ -14,14 +14,28 @@ const CONTACT_TYPES: ContactType[] = ["Investor", "Landlord", "Vendor", "Agent",
 const STAGES = ["Sourced", "Analysing", "Offered", "Agreed", "Completed", "Dead"] as const;
 type Stage = (typeof STAGES)[number];
 
+const LEAD_STATUS = ["New", "Contacted", "Qualified", "Hot", "Cold"] as const;
+type LeadStatus = (typeof LEAD_STATUS)[number];
+/* colour-coding via the site's mineral verdict palette */
+const STATUS_CLASS: Record<LeadStatus, string> = {
+  New: "muted",
+  Contacted: "text-bronze",
+  Qualified: "v-good",
+  Hot: "v-excellent",
+  Cold: "v-poor",
+};
+
 interface Contact {
   id: string;
   name: string;
   type: ContactType;
+  status: LeadStatus;
+  tags: string;
   phone: string;
   email: string;
   notes: string;
   followUp: string; // ISO date or ""
+  welcomed?: string;
 }
 
 interface Deal {
@@ -41,6 +55,7 @@ interface Book {
 }
 
 const KEY = "samnharv-deal-book-v1";
+const SYNC_KEY = "samnharv-book-passphrase";
 const uid = () => Math.random().toString(36).slice(2, 10);
 const today = () => new Date().toISOString().slice(0, 10);
 
@@ -58,11 +73,69 @@ export default function DealBook() {
   const [tab, setTab] = useState<"deals" | "contacts">("deals");
   const [query, setQuery] = useState("");
   const [editing, setEditing] = useState<string | null>(null);
+  const [passphrase, setPassphrase] = useState<string | null>(null);
+  const [syncState, setSyncState] = useState<"off" | "on" | "error">("off");
 
   useEffect(() => {
     setBook(load());
+    const key = localStorage.getItem(SYNC_KEY);
+    if (key) {
+      setPassphrase(key);
+      fetch("/api/book", { headers: { "x-book-key": key } })
+        .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+        .then((remote: Book) => {
+          setSyncState("on");
+          if (remote.contacts.length || remote.deals.length) setBook(remote);
+        })
+        .catch(() => setSyncState("error"));
+    }
     setReady(true);
   }, []);
+
+  /* push changes to the shared book, debounced */
+  useEffect(() => {
+    if (!ready || !passphrase || syncState !== "on") return;
+    const t = setTimeout(() => {
+      fetch("/api/book", {
+        method: "PUT",
+        headers: { "x-book-key": passphrase, "Content-Type": "application/json" },
+        body: JSON.stringify(book),
+      }).catch(() => setSyncState("error"));
+    }, 800);
+    return () => clearTimeout(t);
+  }, [book, ready, passphrase, syncState]);
+
+  const enableSync = () => {
+    const key = prompt("Enter the shared Book passphrase (same one Harv uses):");
+    if (!key) return;
+    localStorage.setItem(SYNC_KEY, key);
+    setPassphrase(key);
+    fetch("/api/book", { headers: { "x-book-key": key } })
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((remote: Book) => {
+        setSyncState("on");
+        if ((remote.contacts.length || remote.deals.length) && !book.contacts.length && !book.deals.length) {
+          setBook(remote);
+        }
+      })
+      .catch((s) => {
+        setSyncState("error");
+        alert(s === 401 ? "Wrong passphrase." : "Sync isn't configured on the server yet.");
+      });
+  };
+
+  const sendWelcome = (c: Contact) => {
+    if (!passphrase) return alert("Enable sync first — the passphrase also authorises sending.");
+    if (!c.email) return alert("This contact has no email address.");
+    fetch("/api/welcome", {
+      method: "POST",
+      headers: { "x-book-key": passphrase, "Content-Type": "application/json" },
+      body: JSON.stringify({ name: c.name, email: c.email }),
+    })
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then(() => setContact(c.id, { welcomed: today(), status: c.status === "New" ? "Contacted" : c.status }))
+      .catch((s) => alert(s === 503 ? "Email sending isn't configured on the server yet." : "Couldn't send — try again."));
+  };
 
   useEffect(() => {
     if (ready) localStorage.setItem(KEY, JSON.stringify(book));
@@ -79,7 +152,7 @@ export default function DealBook() {
   const contacts = useMemo(
     () =>
       book.contacts
-        .filter((c) => !q || `${c.name} ${c.type} ${c.email} ${c.notes}`.toLowerCase().includes(q))
+        .filter((c) => !q || `${c.name} ${c.type} ${c.email} ${c.notes} ${c.tags} ${c.status}`.toLowerCase().includes(q))
         .sort((a, b) => (a.followUp || "9999") < (b.followUp || "9999") ? -1 : 1),
     [book.contacts, q],
   );
@@ -93,7 +166,7 @@ export default function DealBook() {
     setEditing(d.id);
   };
   const addContact = () => {
-    const c: Contact = { id: uid(), name: "", type: "Investor", phone: "", email: "", notes: "", followUp: "" };
+    const c: Contact = { id: uid(), name: "", type: "Investor", status: "New", tags: "", phone: "", email: "", notes: "", followUp: "" };
     setBook((b) => ({ ...b, contacts: [c, ...b.contacts] }));
     setTab("contacts");
     setEditing(c.id);
@@ -157,6 +230,9 @@ export default function DealBook() {
         </button>
         <button onClick={exportBook} className="btn btn-ghost px-4 py-2.5 text-sm">
           Export
+        </button>
+        <button onClick={enableSync} className={`btn btn-ghost px-4 py-2.5 text-sm ${syncState === "on" ? "text-bronze" : ""}`}>
+          {syncState === "on" ? "Synced" : syncState === "error" ? "Sync error" : "Sync"}
         </button>
         <label className="btn btn-ghost cursor-pointer px-4 py-2.5 text-sm">
           Import
@@ -247,6 +323,18 @@ export default function DealBook() {
                   {c.name || "Unnamed contact"}
                 </button>
                 <span className="annot muted">{c.type}</span>
+                <select
+                  value={c.status ?? "New"}
+                  onChange={(e) => setContact(c.id, { status: e.target.value as LeadStatus })}
+                  className={`annot border bg-transparent px-2 py-1 hairline ${STATUS_CLASS[c.status ?? "New"]}`}
+                >
+                  {LEAD_STATUS.map((s) => (
+                    <option key={s}>{s}</option>
+                  ))}
+                </select>
+                {(c.tags ?? "").split(",").filter((t) => t.trim()).map((t) => (
+                  <span key={t} className="annot bg-[var(--limestone)] px-2 py-0.5">{t.trim()}</span>
+                ))}
                 {c.phone && (
                   <a href={`tel:${c.phone}`} className="font-mono text-sm muted hover:text-ink">
                     {c.phone}
@@ -281,6 +369,10 @@ export default function DealBook() {
                     <input className={input} value={c.email} onChange={(e) => setContact(c.id, { email: e.target.value })} />
                   </label>
                   <label className="block">
+                    <span className="annot muted">Tags — comma separated</span>
+                    <input className={input} placeholder="brrr, bristol, 200k, repeat" value={c.tags ?? ""} onChange={(e) => setContact(c.id, { tags: e.target.value })} />
+                  </label>
+                  <label className="block">
                     <span className="annot muted">Next follow-up</span>
                     <input type="date" className={input} value={c.followUp} onChange={(e) => setContact(c.id, { followUp: e.target.value })} />
                   </label>
@@ -288,7 +380,10 @@ export default function DealBook() {
                     <span className="annot muted">Notes — strategies, budget, what they want</span>
                     <textarea rows={3} className={input} value={c.notes} onChange={(e) => setContact(c.id, { notes: e.target.value })} />
                   </label>
-                  <div className="md:col-span-2">
+                  <div className="flex flex-wrap items-center gap-5 md:col-span-2">
+                    <button onClick={() => sendWelcome(c)} className="btn btn-ink px-4 py-2 text-sm" disabled={!c.email}>
+                      {c.welcomed ? `Welcome sent ${c.welcomed} — send again` : "Send welcome email"}
+                    </button>
                     <button onClick={() => { if (confirm("Remove this contact from the book?")) removeContact(c.id); }} className="annot v-poor">
                       Remove contact
                     </button>
