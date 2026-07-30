@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/resources",
     "/learn",
     "/insights",
+    "/standards",
     "/faq",
     "/contact",
   ].map(

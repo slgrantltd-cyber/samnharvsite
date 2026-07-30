@@ -54,6 +54,9 @@ export default function SiteFooter() {
             <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/faq">
               FAQs
             </Link>
+            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/standards">
+              Standards &amp; compliance
+            </Link>
             <a className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="mailto:contact@samnharv.com">
               Email the office
             </a>

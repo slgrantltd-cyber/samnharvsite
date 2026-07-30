@@ -83,6 +83,10 @@ export default function CouncilsPage() {
             We operate our own accommodation day to day —{" "}
             <Link href="/stays" className="text-bronze hover:text-ink">
               see the standard we run →
+            </Link>{" "}
+            · Insurance, training &amp; standards —{" "}
+            <Link href="/standards" className="text-bronze hover:text-ink">
+              our compliance ledger →
             </Link>
           </p>
         </div>
