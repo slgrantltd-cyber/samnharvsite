@@ -7,7 +7,7 @@ import BookingCalendar from "@/components/booking-calendar";
 export const metadata: Metadata = {
   title: "Stays — Serviced Accommodation",
   description:
-    "The Barrows and Cheddar — two serviced accommodation stays operated day-to-day by Sam n Harv, the proof behind our serviced accommodation investment strategy. Pick your dates and enquire directly.",
+    "The Barrows and Cheddar — serviced accommodation operated day-to-day by Sam n Harv. Short stays, plus contractor and staff accommodation for companies on weekly rates with invoicing. Pick your dates and enquire directly.",
   alternates: { canonical: "/stays" },
 };
 
@@ -126,6 +126,30 @@ export default function StaysPage() {
             <Link href="/services" className="btn btn-ghost mt-6">
               See how rent to rent works
             </Link>
+          </div>
+        </div>
+      </section>
+      {/* corporate stays — quiet, not a funnel */}
+      <section className="px-5 pb-24 md:px-10 md:pb-32">
+        <div className="mx-auto max-w-6xl">
+          <div className="m-paper border p-7 hairline md:p-10">
+            <div className="flex flex-wrap items-baseline justify-between gap-3">
+              <h2 className="display text-2xl md:text-3xl">
+                Housing a team? We do that <span className="display-it">too.</span>
+              </h2>
+              <p className="annot muted">Contractor &amp; staff accommodation</p>
+            </div>
+            <p className="mt-4 max-w-2xl text-[0.9375rem] leading-relaxed muted">
+              We house working teams for companies — weekly rates, proper
+              invoicing, longer bookings, and properties kept to the standard
+              you can see above. Tell us headcount, location and dates and
+              we&rsquo;ll quote plainly.
+            </p>
+            <div className="mt-6">
+              <Link href="/contact" className="btn btn-ghost">
+                Enquire for your team →
+              </Link>
+            </div>
           </div>
         </div>
       </section>
