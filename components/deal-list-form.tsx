@@ -24,6 +24,17 @@ export default function DealListForm() {
     }
     e.preventDefault();
     const data = new FormData(e.currentTarget);
+    // also drop the lead into the Deal Book + trigger the welcome email
+    fetch("/api/join", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: data.get("FNAME"),
+        email: data.get("EMAIL"),
+        interest: data.get("MMERGE7"),
+        source: "deal-list-form",
+      }),
+    }).catch(() => {});
     const name = String(data.get("FNAME") ?? "").trim();
     const email = String(data.get("EMAIL") ?? "").trim();
     const brief = String(data.get("MMERGE7") ?? "").trim();
