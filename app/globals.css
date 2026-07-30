@@ -260,6 +260,82 @@ button,
   outline-color: var(--bronze-bright);
 }
 
+/* ---- deal intelligence: verdict scale ----
+   graded in minerals, not traffic lights: moss ink, bronze, stone, oxide.
+   Base values hold ≥4.5:1 on the light materials; .on-stone swaps to the
+   light-fired variants for the dark panel. */
+
+:root {
+  --v-excellent: #47593c;
+  --v-good: #6d5c41;
+  --v-average: #5c5952;
+  --v-poor: #7d4030;
+}
+
+.v-excellent { color: var(--v-excellent); }
+.v-good { color: var(--v-good); }
+.v-average { color: var(--v-average); }
+.v-poor { color: var(--v-poor); }
+
+.on-stone .v-excellent, .m-concrete .v-excellent { color: #a9bd8e; }
+.on-stone .v-good, .m-concrete .v-good { color: #b5a183; }
+.on-stone .v-average, .m-concrete .v-average { color: #a49d91; }
+.on-stone .v-poor, .m-concrete .v-poor { color: #d69a83; }
+
+.vstamp-excellent { background: var(--v-excellent); color: var(--plaster); }
+.vstamp-good { background: var(--v-good); color: var(--plaster); }
+.vstamp-average { background: var(--v-average); color: var(--plaster); }
+.vstamp-poor { background: var(--v-poor); color: var(--plaster); }
+
+/* ---- deal intelligence: ledger inputs ----
+   a figure written on a ruled line, not a boxed form field */
+
+.ledger-input {
+  font-family: var(--font-fragment), monospace;
+  font-size: 1.0625rem;
+  text-align: right;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 0.375rem 0;
+  width: 100%;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  transition: border-color 0.2s ease-out;
+  border-radius: 0;
+}
+
+.ledger-input:hover {
+  border-bottom-color: rgba(26, 26, 26, 0.32);
+}
+
+.ledger-input:focus {
+  outline: none;
+  border-bottom-color: var(--bronze);
+}
+
+.ledger-input::-webkit-outer-spin-button,
+.ledger-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* strategy change: the desk re-sets itself */
+@keyframes desk-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.desk-enter {
+  animation: desk-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 /* ---- reveal primitives (GSAP targets; visible by default) ---- */
 
 .reveal-line {

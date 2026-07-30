@@ -10,6 +10,7 @@ const NAV = [
   { href: "/services", label: "What we do" },
   { href: "/about", label: "The brothers" },
   { href: "/stays", label: "Stays" },
+  { href: "/deal-intelligence", label: "Deal Intelligence" },
   { href: "/insights", label: "Insights" },
   { href: "/faq", label: "FAQs" },
   { href: "/contact", label: "Contact" },
