@@ -29,6 +29,8 @@ import Image from "next/image";
 interface ScrollExpandMediaProps {
   mediaType?: "video" | "image";
   mediaSrc: string;
+  /** lighter encode served to small screens and slow connections */
+  lowSrc?: string;
   posterSrc?: string;
   bgImageSrc?: string;
   title?: string;
@@ -44,6 +46,7 @@ const REDUCED_QUERY = "(prefers-reduced-motion: reduce)";
 const ScrollExpandMedia = ({
   mediaType = "video",
   mediaSrc,
+  lowSrc,
   posterSrc,
   bgImageSrc,
   title,
@@ -57,7 +60,27 @@ const ScrollExpandMedia = ({
   const [touchStartY, setTouchStartY] = useState<number>(0);
   const [reducedState, setReducedState] = useState<boolean>(false);
   const [videoReady, setVideoReady] = useState<boolean>(false);
+  const [src, setSrc] = useState<string>(mediaSrc);
   const reducedRef = useRef(false);
+
+  /* a film that stalls to buffer reads as broken: small screens and slow
+     connections get the lighter encode instead of the full-rate one */
+  useEffect(() => {
+    if (!lowSrc) return;
+    type NetInfo = {
+      downlink?: number;
+      effectiveType?: string;
+      saveData?: boolean;
+    };
+    const conn = (navigator as { connection?: NetInfo }).connection;
+    const slow =
+      !!conn &&
+      (conn.saveData === true ||
+        (conn.downlink !== undefined && conn.downlink < 4) ||
+        /2g|3g/.test(conn.effectiveType ?? ""));
+    const small = window.matchMedia("(max-width: 767px)").matches;
+    if (slow || small) setSrc(lowSrc);
+  }, [lowSrc]);
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
@@ -448,7 +471,7 @@ const ScrollExpandMedia = ({
                     )}
                     <video
                       ref={videoRef}
-                      src={mediaSrc}
+                      src={src}
                       poster={posterSrc}
                       muted
                       autoPlay

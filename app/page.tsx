@@ -34,6 +34,7 @@ export default function Home() {
       <ScrollExpandMedia
         mediaType="video"
         mediaSrc="/hero.mp4"
+        lowSrc="/hero-low.mp4"
         posterSrc="/hero-poster.jpg"
         bgImageSrc="/hero-background.jpg"
         title="BUILT ON RELATIONSHIPS."
