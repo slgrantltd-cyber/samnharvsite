@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import { welcomeSubject, welcomeText, welcomeHtml } from "@/lib/welcome-email";
+import { welcomeSubject, welcomeText, welcomeHtml, landlordSubject, landlordText, landlordHtml } from "@/lib/welcome-email";
 
 /**
  * Public lead capture: adds a contact to the shared Deal Book (tagged by
@@ -25,6 +25,7 @@ export async function POST(req: NextRequest) {
   const phone = (body.phone || "").trim().slice(0, 30);
   const interest = (body.interest || "").trim().slice(0, 300);
   const source = (body.source || "website").trim().slice(0, 30);
+  const isLandlord = body.kind === "landlord";
   if (!name || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
     return NextResponse.json({ error: "bad-input" }, { status: 400 });
   }
@@ -41,7 +42,7 @@ export async function POST(req: NextRequest) {
       book.contacts.unshift({
         id: Math.random().toString(36).slice(2, 10),
         name,
-        type: "Investor",
+        type: isLandlord ? "Landlord" : "Investor",
         status: "New",
         tags: source,
         phone,
@@ -69,9 +70,9 @@ export async function POST(req: NextRequest) {
         .sendMail({
           from: `"Sam n Harv" <${user}>`,
           to: email,
-          subject: welcomeSubject,
-          text: welcomeText(first),
-          html: welcomeHtml(first),
+          subject: isLandlord ? landlordSubject : welcomeSubject,
+          text: isLandlord ? landlordText(first) : welcomeText(first),
+          html: isLandlord ? landlordHtml(first) : welcomeHtml(first),
         });
     } catch {}
   }

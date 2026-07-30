@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function JoinForm({ source = "website" }: { source?: string }) {
+export default function JoinForm({ source = "website", kind = "investor" }: { source?: string; kind?: "investor" | "landlord" }) {
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -19,6 +19,7 @@ export default function JoinForm({ source = "website" }: { source?: string }) {
         interest: f.get("interest"),
         company: f.get("company"),
         source,
+        kind,
       }),
     })
       .then((r) => (r.ok ? setState("done") : setState("error")))
@@ -32,9 +33,9 @@ export default function JoinForm({ source = "website" }: { source?: string }) {
           You&rsquo;re on the list — <span className="display-it">welcome.</span>
         </p>
         <p className="mt-4 leading-relaxed muted">
-          A welcome email from contact@samnharv.com is on its way (check spam
-          the first time). When a deal fits what you told us, you&rsquo;ll hear
-          from us directly.
+          {kind === "landlord"
+            ? "An email from contact@samnharv.com is on its way (check spam the first time). Reply to it with your property address and we\u2019ll come back with straight answers — usually the same day."
+            : "A welcome email from contact@samnharv.com is on its way (check spam the first time). When a deal fits what you told us, you\u2019ll hear from us directly."}
         </p>
       </div>
     );
@@ -60,16 +61,20 @@ export default function JoinForm({ source = "website" }: { source?: string }) {
         </label>
         <label className="block md:col-span-2">
           <span className="annot muted">
-            What are you looking for? Strategy, areas, budget — optional
+            {kind === "landlord" ? "Your property — area, beds, current situation" : "What are you looking for? Strategy, areas, budget — optional"}
           </span>
-          <input name="interest" className={input} placeholder="e.g. BRRR or BTL around Bristol, up to £250k" />
+          <input name="interest" className={input} placeholder={kind === "landlord" ? "e.g. 3-bed in Weston, currently empty" : "e.g. BRRR or BTL around Bristol, up to £250k"} />
         </label>
         {/* honeypot */}
         <input name="company" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       </div>
       <div className="mt-8 flex flex-wrap items-center gap-4">
         <button type="submit" disabled={state === "sending"} className="btn btn-ink">
-          {state === "sending" ? "Joining…" : "Join the deal list"}
+          {state === "sending"
+            ? "Sending…"
+            : kind === "landlord"
+              ? "Get your guaranteed rent answer"
+              : "Join the deal list"}
         </button>
         {state === "error" && (
           <p className="annot v-poor">Something failed — try again, or WhatsApp us instead.</p>
