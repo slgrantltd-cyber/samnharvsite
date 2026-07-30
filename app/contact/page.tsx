@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Rise, Line, Lift } from "@/components/reveal";
 import DealListForm from "@/components/deal-list-form";
+import ContactForm from "@/components/contact-form";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -34,6 +35,12 @@ export default function ContactPage() {
             Short answers first? Read the FAQs{" "}
             <span aria-hidden="true">→</span>
           </Link>
+        </div>
+      </section>
+
+      <section className="px-5 pb-16 md:px-10 md:pb-20">
+        <div className="mx-auto max-w-3xl">
+          <ContactForm />
         </div>
       </section>
 
