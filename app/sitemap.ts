@@ -12,6 +12,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/stays",
     "/deal-intelligence",
     "/toolkit",
+    "/join",
+    "/landlords",
     "/resources",
     "/learn",
     "/insights",

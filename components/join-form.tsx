@@ -30,7 +30,11 @@ export default function JoinForm({ source = "website", kind = "investor" }: { so
     return (
       <div className="m-paper border p-8 hairline md:p-10">
         <p className="display text-3xl">
-          You&rsquo;re on the list — <span className="display-it">welcome.</span>
+          {kind === "landlord" ? (
+            <>Got it — <span className="display-it">speak soon.</span></>
+          ) : (
+            <>You&rsquo;re on the list — <span className="display-it">welcome.</span></>
+          )}
         </p>
         <p className="mt-4 leading-relaxed muted">
           {kind === "landlord"
