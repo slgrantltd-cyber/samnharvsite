@@ -53,13 +53,5 @@ export default function MaterialLight() {
     };
   }, []);
 
-  return (
-    <>
-      <div className="material-light" aria-hidden="true" />
-      {/* on pale materials the warm glow alone is invisible; this faint
-          shade AROUND the light makes the lit area read brighter there,
-          while multiply at 5% vanishes on the dark surfaces */}
-      <div className="material-light-shade" aria-hidden="true" />
-    </>
-  );
+  return <div className="material-light" aria-hidden="true" />;
 }

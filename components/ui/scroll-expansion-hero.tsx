@@ -58,12 +58,12 @@ const ScrollExpandMedia = ({
   const [touchStartY, setTouchStartY] = useState<number>(0);
   const [isMobileState, setIsMobileState] = useState<boolean>(false);
   const [reducedState, setReducedState] = useState<boolean>(false);
+  const [videoReady, setVideoReady] = useState<boolean>(false);
   const reducedRef = useRef(false);
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const durationRef = useRef(0);
 
   /* smoothed progress: input nudges a target; a rAF loop lerps the
      displayed progress toward it so expansion and scrub move with weight */
@@ -107,68 +107,39 @@ const ScrollExpandMedia = ({
 
   useEffect(() => () => cancelAnimationFrame(animRaf.current), []);
 
-  /* capture the film's duration however early its metadata arrives —
-     with a fast/cached source, loadedmetadata can fire before hydration
-     attaches React's event props, so read readyState directly too */
+  /* fade the film in over its poster once it can play through —
+     readyState is checked directly so a cached load can't outrun us */
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    const capture = () => {
-      if (v.duration && Number.isFinite(v.duration)) {
-        durationRef.current = v.duration;
-      }
-      v.pause();
-    };
-    if (v.readyState >= 1) {
-      capture();
+    const markReady = () => setVideoReady(true);
+    if (v.readyState >= 3) {
+      markReady();
     } else {
-      v.addEventListener("loadedmetadata", capture, { once: true });
+      v.addEventListener("canplaythrough", markReady, { once: true });
     }
-    return () => v.removeEventListener("loadedmetadata", capture);
+    return () => v.removeEventListener("canplaythrough", markReady);
   }, []);
 
-  /* the scroll IS the playhead — but seeking every frame forces keyframe
-     decodes and stutters. Instead the film PLAYS forward at an adaptive
-     rate to chase the scroll target (sequential decode is cheap and
-     buttery); only true rewinds seek. */
+  /* the film runs continuously (autoplay + loop); it only pauses when the
+     hero leaves the viewport, or for reduced-motion visitors */
   useEffect(() => {
     const v = videoRef.current;
     const section = sectionRef.current;
     if (!v || !section) return;
-    let raf = 0;
-    let running = false;
-    const chase = () => {
-      raf = requestAnimationFrame(chase);
-      const dur = durationRef.current;
-      if (!dur || reducedRef.current) return;
-      const target = Math.min(displayRef.current, 0.999) * dur;
-      const diff = target - v.currentTime;
-      if (diff > 0.05) {
-        v.playbackRate = Math.min(Math.max(diff * 5, 0.25), 8);
-        if (v.paused) v.play().catch(() => {});
-      } else if (diff < -0.08) {
-        if (!v.paused) v.pause();
-        v.currentTime = target;
-      } else if (!v.paused) {
-        v.pause();
-      }
-    };
-    // the loop only runs while the hero is actually on screen
     const io = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !running) {
-        running = true;
-        raf = requestAnimationFrame(chase);
-      } else if (!entry.isIntersecting && running) {
-        running = false;
-        cancelAnimationFrame(raf);
-        if (!v.paused) v.pause();
+      if (reducedRef.current) {
+        v.pause();
+        return;
+      }
+      if (entry.isIntersecting) {
+        v.play().catch(() => {});
+      } else {
+        v.pause();
       }
     });
     io.observe(section);
-    return () => {
-      io.disconnect();
-      cancelAnimationFrame(raf);
-    };
+    return () => io.disconnect();
   }, []);
 
   useEffect(() => {
@@ -397,16 +368,29 @@ const ScrollExpandMedia = ({
               >
                 {mediaType === "video" ? (
                   <div className="pointer-events-none relative h-full w-full overflow-clip">
-                    {/* scale-[1.19] crops the source clip's baked-in pillarbox
-                        bars (and its filmed fake nav strip) out of frame */}
+                    {/* poster layer: visible instantly, the film fades in over it */}
+                    {posterSrc && (
+                      <Image
+                        src={posterSrc}
+                        alt=""
+                        fill
+                        priority
+                        sizes="95vw"
+                        className="object-cover object-[58%_45%] md:object-center"
+                      />
+                    )}
                     <video
                       ref={videoRef}
                       src={mediaSrc}
                       poster={posterSrc}
                       muted
+                      autoPlay
+                      loop
                       playsInline
                       preload="auto"
-                      className="h-full w-full scale-[1.19] object-cover object-[60%_50%] md:object-center"
+                      className={`h-full w-full object-cover object-[58%_45%] transition-opacity duration-700 ease-out md:object-center ${
+                        videoReady ? "opacity-100" : "opacity-0"
+                      }`}
                       controls={false}
                       disablePictureInPicture
                       disableRemotePlayback
@@ -416,6 +400,8 @@ const ScrollExpandMedia = ({
                       className="absolute inset-0 bg-[#252421]"
                       style={{ opacity: Math.max(0, 0.3 - scrollProgress * 0.3) }}
                     />
+                    {/* cinematic vignette — quiet edges, open centre */}
+                    <div className="hero-vignette absolute inset-0" />
                     <div className="hero-veil absolute inset-0" />
                   </div>
                 ) : (

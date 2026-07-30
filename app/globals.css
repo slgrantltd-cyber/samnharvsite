@@ -321,38 +321,43 @@ button,
   pointer-events: none;
 }
 
+/* cinematic vignette for the hero film: quiet edges, open centre,
+   plain alpha only — never a blend mode */
+.hero-vignette {
+  background: radial-gradient(
+    120% 90% at 50% 45%,
+    transparent 55%,
+    rgba(20, 19, 17, 0.14) 82%,
+    rgba(20, 19, 17, 0.26) 100%
+  );
+  pointer-events: none;
+}
+
 /* ---- the living light ----
    A fixed veil of warm daylight whose centre follows the cursor. Soft-light
    blend at low alpha: most visitors will never name it, only feel it. */
+/* One plain-alpha layer, no blend modes: blend groups over a full viewport
+   force whole-page re-compositing every scrolled frame (the source of
+   site-wide scroll lag). A warm glow at the light position plus a faint
+   plain shade toward the edges reads the same and costs almost nothing. */
 .material-light {
   position: fixed;
   inset: 0;
   z-index: 40;
   pointer-events: none;
-  mix-blend-mode: soft-light;
-  background: radial-gradient(
-    42rem circle at var(--lx) var(--ly),
-    rgba(255, 246, 230, 0.5),
-    rgba(255, 246, 230, 0.14) 45%,
-    transparent 72%
-  );
-}
-
-/* the light's counterpart for pale materials: an almost-imperceptible
-   shade surrounding the lit area, so plaster and limestone catch the
-   daylight too. Multiply at this alpha disappears on smoked stone. */
-.material-light-shade {
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-  pointer-events: none;
-  mix-blend-mode: multiply;
-  background: radial-gradient(
-    60rem circle at var(--lx) var(--ly),
-    rgba(31, 30, 28, 0) 35%,
-    rgba(31, 30, 28, 0.05) 78%,
-    rgba(31, 30, 28, 0.075) 100%
-  );
+  background:
+    radial-gradient(
+      42rem circle at var(--lx) var(--ly),
+      rgba(255, 246, 230, 0.09),
+      rgba(255, 246, 230, 0.03) 45%,
+      transparent 70%
+    ),
+    radial-gradient(
+      60rem circle at var(--lx) var(--ly),
+      rgba(31, 30, 28, 0) 45%,
+      rgba(31, 30, 28, 0.035) 80%,
+      rgba(31, 30, 28, 0.055) 100%
+    );
 }
 }
 
