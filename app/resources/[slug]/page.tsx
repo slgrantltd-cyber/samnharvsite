@@ -61,6 +61,11 @@ export default async function ResourcePage({
           <h1 className="display mt-4 text-4xl md:text-6xl">{doc.title}</h1>
           <p className="mt-6 text-lg leading-relaxed muted">{doc.intro}</p>
 
+          <div className="mt-7 border-y py-4 hairline">
+            <p className="annot text-bronze">How to use this</p>
+            <p className="mt-2 leading-relaxed">{doc.use}</p>
+          </div>
+
           <div className="mt-8 flex flex-wrap gap-3">
             <a
               href={`/downloads/${doc.slug}.pdf`}

@@ -23,6 +23,8 @@ export interface Resource {
   title: string;
   category: ResourceCategory;
   description: string;
+  /** one plain sentence: when and how to actually use this document */
+  use: string;
   readMinutes: number;
   intro: string;
   sections: ResourceSection[];
@@ -45,6 +47,7 @@ export const RESOURCES: Resource[] = [
     description:
       "The full pre-offer investigation — title, structure, area, numbers — in the order we actually run it.",
     readMinutes: 8,
+    use: "Run it once per property, before any offer goes in. Work top to bottom, ticking each item as you verify it — anything you can't tick becomes a question for the agent, the vendor or your solicitor.",
     intro:
       "Due diligence is not a mood, it's a list. This is the one we run before any offer goes in. Work top to bottom; anything you can't tick becomes a question for the agent, the vendor or your solicitor — before exchange, not after.",
     sections: [
@@ -106,6 +109,7 @@ export const RESOURCES: Resource[] = [
     description:
       "A 15-minute viewing routine that reads the building, the vendor and the deal — printable, one page per property.",
     readMinutes: 5,
+    use: "Print one copy per property and take it to the viewing. Follow the route, tick as you look, and complete the score in the car before you drive away.",
     intro:
       "You learn more in fifteen structured minutes than in an hour of wandering. Run the same route every time: outside, ground floor, upstairs, loft, garden — then the questions. Photograph everything; your memory will lie to you by the third viewing.",
     sections: [
@@ -158,6 +162,7 @@ export const RESOURCES: Resource[] = [
     description:
       "The one-page appraisal we run on every opportunity — the paper version of our Deal Intelligence analyzer.",
     readMinutes: 6,
+    use: "Fill one in for every deal you seriously consider — print it, or run the same numbers in our Deal Intelligence analyzer online. If the page doesn't work, the deal doesn't.",
     intro:
       "Every deal gets the same page. If the page doesn't work, the deal doesn't happen — however pretty the kitchen is. Fill it in cold, before you fall for the property. Our online Deal Intelligence analyzer runs these numbers live if you'd rather type than write.",
     sections: [
@@ -210,6 +215,7 @@ export const RESOURCES: Resource[] = [
     description:
       "Room-by-room cost lines with realistic UK ranges, plus the rules that stop budgets doubling.",
     readMinutes: 7,
+    use: "Take it to the property before exchange and walk room by room, writing a number or a quote against every line that applies. The total plus 15% is your budget.",
     intro:
       "Refurbs don't overrun because trades are slow; they overrun because the budget was a guess. Price every line before exchange, get real quotes for the big five (roof, damp, electrics, heating, structure), and protect a 15% contingency you genuinely don't spend.",
     sections: [
@@ -262,6 +268,7 @@ export const RESOURCES: Resource[] = [
     description:
       "How we structure an offer, justify it, and hold the line — including the walk-away discipline.",
     readMinutes: 6,
+    use: "Complete the 'before any offer' section first, then keep the sheet in front of you during every call with the agent — your maximum stays visible so the moment can't move it.",
     intro:
       "A negotiation is won before the phone call: you know your maximum, their situation, and the evidence for your number. The planner keeps all three in front of you while you talk.",
     sections: [
@@ -311,6 +318,7 @@ export const RESOURCES: Resource[] = [
     description:
       "What your solicitor should be doing, what to chase, and the enquiries that actually matter.",
     readMinutes: 6,
+    use: "Start it the day your offer is accepted. Tick items as your solicitor confirms them, and chase weekly on anything still open.",
     intro:
       "Conveyancing feels like a black box until you know the sequence. This is the sequence — and the handful of enquiries that genuinely protect an investor, so you can push where it matters instead of chasing everything equally.",
     sections: [
@@ -363,6 +371,7 @@ export const RESOURCES: Resource[] = [
     description:
       "Preparing yourself and the deal for lending — what brokers need, what lenders check, what kills applications.",
     readMinutes: 6,
+    use: "Work through it before you start viewing seriously. When every item is ticked, your broker can move at deal speed instead of paperwork speed.",
     intro:
       "Finance falls over on paperwork and surprises, almost never on rates. Get your file lender-ready before you offer and the mortgage becomes the boring part of the deal — which is exactly what it should be.",
     sections: [
@@ -412,6 +421,7 @@ export const RESOURCES: Resource[] = [
     description:
       "How to evidence rent properly — three confirmed comparables per property, phoned not scraped.",
     readMinutes: 4,
+    use: "Complete one entry per comparable: find it, phone the letting agent, confirm the real figure, then tick it. Three confirmed entries and the sheet is done.",
     intro:
       "A rent figure from a listing is a hope; a rent figure from a phone call is evidence. Complete one line per comparable, and don't stop until three are confirmed — your lender's valuer will do exactly the same, so you want to get there first.",
     sections: [
@@ -444,6 +454,7 @@ export const RESOURCES: Resource[] = [
     description:
       "Licensing, safety and standards for shared houses — the checklist that keeps you the right side of the council.",
     readMinutes: 7,
+    use: "Use it twice: before purchase, to confirm the licensing and planning position — then quarterly, as an operating audit with the certificates in front of you.",
     intro:
       "HMOs out-earn single lets because they carry more obligation — licensing, fire safety, minimum standards. None of it is difficult; all of it is mandatory. Confirm the licensing position before you buy, not after.",
     sections: [
@@ -496,6 +507,7 @@ export const RESOURCES: Resource[] = [
     description:
       "From completion to first guest — the setup sequence we used on our own two units.",
     readMinutes: 7,
+    use: "Work through it in order between completion and your first booking. The legal and money items come first for a reason — confirm them before a penny goes on furniture.",
     intro:
       "We operate two serviced units ourselves, so this is the list we actually used — the difference between an SA that reviews at 4.9 and one that quietly dies is almost all in the setup fortnight.",
     sections: [
@@ -548,6 +560,7 @@ export const RESOURCES: Resource[] = [
     description:
       "Referencing to move-in day, done properly — the paperwork that protects both sides.",
     readMinutes: 5,
+    use: "Run it start to finish for every new tenancy. Keys don't change hands until every item in the first section is ticked.",
     intro:
       "A tenancy that starts tidy tends to stay tidy. Every item here exists because missing it costs real money later — several of them are the difference between a valid possession notice and an unenforceable one.",
     sections: [
@@ -589,6 +602,7 @@ export const RESOURCES: Resource[] = [
     description:
       "How to become the buyer agents call first — the exact opening, questions and follow-up rhythm.",
     readMinutes: 5,
+    use: "Keep it beside you when you phone agents. Use the structure, not the exact lines — it should sound like you on a good day.",
     intro:
       "Agents rank buyers in seconds: proceedable, decisive, low-maintenance — or not. The script isn't about tricks; it's about signalling you're the first kind, then staying on their radar without being a pest.",
     sections: [
@@ -629,6 +643,7 @@ export const RESOURCES: Resource[] = [
     description:
       "Plan the way out before the way in — primary exit, fallback, and the triggers that switch between them.",
     readMinutes: 5,
+    use: "Fill it in before completion and file it with the deal's paperwork. Re-read it at the trigger points you set — they're the whole point.",
     intro:
       "Deals go wrong at the exit, not the entrance. Before completion, every property we buy has this page filled in: the intended exit, the fallback, and the numbers at which each one still works. Hope is not a fallback.",
     sections: [
@@ -668,6 +683,7 @@ export const RESOURCES: Resource[] = [
     description:
       "One page per property, one summary page for everything — the review rhythm that catches drift early.",
     readMinutes: 5,
+    use: "Set up one page per property once, then update the figures quarterly. Put the review date in the diary now, before life decides otherwise.",
     intro:
       "A portfolio you don't measure quietly decays: rates drift, rents lag, equity sits idle. Track each asset on one page and the whole estate on one summary, reviewed quarterly like a board would.",
     sections: [
@@ -711,6 +727,7 @@ export const RESOURCES: Resource[] = [
     description:
       "The structure we use when presenting a deal to a partner or investor — clear, complete, honest about risk.",
     readMinutes: 6,
+    use: "Use it as the running order when you write a proposal — work through one section at a time, sourcing every number as you go.",
     intro:
       "A proposal earns trust by being easy to interrogate: every number sourced, every risk named, every assumption visible. This is the running order we use — if a section feels uncomfortable to write, that's usually the section the deal needed.",
     sections: [
@@ -758,6 +775,7 @@ export const RESOURCES: Resource[] = [
     description:
       "The 30 unglamorous jobs between getting the keys and the asset actually working.",
     readMinutes: 4,
+    use: "Print it the week before completion and start ticking from the moment the keys are in your hand. Everything on it is easier today than in month three.",
     intro:
       "Completion isn't the finish line — it's the handover into your systems. The first week sets up everything after; run it as a checklist and nothing leaks.",
     sections: [

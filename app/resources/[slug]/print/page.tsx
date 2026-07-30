@@ -47,6 +47,12 @@ export default async function ResourcePrintPage({
       <p className="mt-4 max-w-2xl text-[0.9375rem] leading-relaxed text-[#5c5952]">
         {doc.intro}
       </p>
+      <div className="mt-5 border-y border-[rgba(26,26,26,0.3)] py-3">
+        <span className="annot" style={{ color: "#8c7b65" }}>
+          How to use this —{" "}
+        </span>
+        <span className="text-[0.875rem] leading-relaxed">{doc.use}</span>
+      </div>
 
       {doc.sections.map((section, i) => (
         <section key={section.heading} className="mt-8 break-inside-avoid-page">
