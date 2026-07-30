@@ -34,7 +34,7 @@ const servicesJsonLd = {
   "@type": "Service",
   name: "Property Deal Sourcing",
   serviceType: "Property investment deal sourcing and packaging",
-  provider: { "@id": "https://samnharv.com/#org" },
+  provider: { "@id": "https://www.samnharv.com/#org" },
   areaServed: { "@type": "Country", name: "United Kingdom" },
   hasOfferCatalog: {
     "@type": "OfferCatalog",

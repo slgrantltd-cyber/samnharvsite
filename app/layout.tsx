@@ -36,7 +36,7 @@ const fragment = Fragment_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://samnharv.com"),
+  metadataBase: new URL("https://www.samnharv.com"),
   title: {
     default: "Sam n Harv — Property Investment & Deal Sourcing, UK South West",
     template: "%s — Sam n Harv",
@@ -69,12 +69,12 @@ const orgJsonLd = {
   "@graph": [
     {
       "@type": ["Organization", "ProfessionalService"],
-      "@id": "https://samnharv.com/#org",
+      "@id": "https://www.samnharv.com/#org",
       name: "Sam n Harv",
       legalName: "S L Grants Ltd",
-      url: "https://samnharv.com",
-      logo: "https://samnharv.com/apple-icon.png",
-      image: "https://samnharv.com/hero-poster.jpg",
+      url: "https://www.samnharv.com",
+      logo: "https://www.samnharv.com/apple-icon.png",
+      image: "https://www.samnharv.com/hero-poster.jpg",
       email: "contact@samnharv.com",
       telephone: "+447444551241",
       priceRange: "££",
@@ -104,10 +104,10 @@ const orgJsonLd = {
     },
     {
       "@type": "WebSite",
-      "@id": "https://samnharv.com/#website",
-      url: "https://samnharv.com",
+      "@id": "https://www.samnharv.com/#website",
+      url: "https://www.samnharv.com",
       name: "Sam n Harv",
-      publisher: { "@id": "https://samnharv.com/#org" },
+      publisher: { "@id": "https://www.samnharv.com/#org" },
       inLanguage: "en-GB",
     },
   ],
