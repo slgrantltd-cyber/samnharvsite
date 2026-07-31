@@ -29,6 +29,7 @@ export const GUIDES: PropertyGuide[] = [
         title: "The essentials",
         items: [
           { label: "Parking", value: "One space right outside the front door, plus two more down the side of the house — three in total, vans welcome." },
+          { label: "Wi-Fi", value: "The Virgin Media 'Scan to connect' card lives next to the router — point your phone camera at it and you're online in one tap." },
           { label: "Heating", value: "Thermostat in the hallway — set it to what you need; please turn it down when you head out." },
           { label: "Washing machine", value: "In the kitchen — detergent under the sink is yours to use." },
           { label: "Bins", value: "Black bins out Sunday evening for Monday collection; recycling in the green boxes." },
