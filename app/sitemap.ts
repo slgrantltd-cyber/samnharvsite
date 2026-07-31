@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services",
     "/about",
     "/stays",
+    "/stays/terms",
     "/deal-intelligence",
     "/toolkit",
     "/join",

@@ -116,6 +116,13 @@ export default function StaysPage() {
               Questions about staying? Read the FAQs{" "}
               <span aria-hidden="true">→</span>
             </Link>
+            <p className="annot mt-3 muted">
+              Direct bookings are covered by our{" "}
+              <Link href="/stays/terms" className="text-bronze hover:text-ink">
+                plain-English booking terms
+              </Link>{" "}
+              — cancellations, refunds, the lot.
+            </p>
           </div>
 
           <div className="mt-16 border-t hairline pt-10">

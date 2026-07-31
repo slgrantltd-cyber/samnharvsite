@@ -28,7 +28,7 @@ export const GUIDES: PropertyGuide[] = [
       {
         title: "The essentials",
         items: [
-          { label: "Parking", value: "Free parking for up to 3 cars or vans directly outside the house." },
+          { label: "Parking", value: "One space right outside the front door, plus two more down the side of the house — three in total, vans welcome." },
           { label: "Heating", value: "Thermostat in the hallway — set it to what you need; please turn it down when you head out." },
           { label: "Washing machine", value: "In the kitchen — detergent under the sink is yours to use." },
           { label: "Bins", value: "Black bins out Sunday evening for Monday collection; recycling in the green boxes." },
@@ -61,12 +61,13 @@ export const GUIDES: PropertyGuide[] = [
     strap: "Cheddar, Somerset",
     welcome:
       "Welcome — we're really glad you're here. This page has everything you need for your stay. If anything at all isn't right, message or call us and we'll sort it the same day. — Samuel & Harvey",
-    wifiName: "",
-    wifiPassword: "",
+    wifiName: "TP-Link_5358",
+    wifiPassword: "26399706",
     sections: [
       {
         title: "The essentials",
         items: [
+          { label: "Parking", value: "Use the large car park on the left of the property — plenty of room, no permit needed." },
           { label: "Heating", value: "Thermostat by the door — set it to what you need; please turn it down when you head out." },
           { label: "The big window", value: "The gorge-view windows open on the latches — please close them when you go out (the weather turns fast off the hills)." },
           { label: "Bins", value: "Bin store by the entrance — collection day is on the lid." },
