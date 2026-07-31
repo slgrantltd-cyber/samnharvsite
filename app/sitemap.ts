@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/deal-intelligence",
     "/toolkit",
     "/join",
+    "/deals",
     "/landlords",
     "/councils",
     "/resources",

@@ -36,6 +36,9 @@ export default function SiteFooter() {
             <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/councils">
               Councils
             </Link>
+            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/deals">
+              Current deals
+            </Link>
             <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/toolkit">
               Toolkit
             </Link>
