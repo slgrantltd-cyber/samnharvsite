@@ -809,6 +809,107 @@ export const RESOURCES: Resource[] = [
       },
     ],
   },
+  {
+    slug: "refurb-cost-guide",
+    title: "Refurb Cost Guide — What Works Really Cost",
+    category: "Money & finance",
+    description:
+      "Realistic 2026 price ranges for the works that come up on almost every refurb — external, systems, kitchens and bathrooms, finishes — plus whole-house rules of thumb and the traps that blow budgets.",
+    readMinutes: 9,
+    use: "Use it at viewing and offer stage: walk the property, list the works, price each line from the ranges here, add contingency — and you have a defensible refurb budget before you've spent a penny on quotes.",
+    intro:
+      "Most deals die in the refurb budget — usually because it was a guess. These are the ranges we actually see on our own projects and quotes across the South West. Prices assume labour and materials at a solid landlord spec, not luxury and not bodge. Your street, your spec and your builder will move any line — that's what the contingency is for. Treat every number as a planning range, then let written quotes replace them one by one.",
+    sections: [
+      {
+        heading: "How to use these numbers",
+        items: [
+          "Price the job from the property, not the sheet: walk every room, list the works, then price the list",
+          "These are South West ranges at landlord spec — London and the South East run 20–40% higher",
+          "Three written quotes for anything over £1,000; a verbal number is a mood, not a price",
+          "Ask every trade the same question: what would make this price change once you open it up?",
+          "Assume VAT is inside the quote only if it says so in writing — a VAT surprise is 20% of your budget",
+          "Self-managing trades saves 10–20% versus a main contractor, but costs you time and requires you to sequence the job correctly",
+        ],
+      },
+      {
+        heading: "External works",
+        items: [
+          "Full new roof, 2/3-bed terrace: £6,000–£9,000 (concrete tile, including scaffold)",
+          "Roof repairs — slipped tiles, ridge repointing: £300–£1,000",
+          "New guttering, fascias and soffits, terrace: £800–£1,500",
+          "Damp-proof course injection plus replastering affected walls: £2,500–£5,000 — diagnose the cause first; half of 'rising damp' is a leaking gutter",
+          "UPVC windows: £450–£650 per standard unit fitted; whole 3-bed terrace typically £3,000–£5,000",
+          "Composite front or back door, fitted: £900–£1,400; budget UPVC door £600–£850",
+          "Full render of a terrace front: £2,500–£4,500; whole house £5,000–£9,000",
+        ],
+      },
+      {
+        heading: "Heating, electrics & compliance",
+        items: [
+          "Combi boiler replacement, like-for-like: £2,200–£3,200 installed",
+          "Full new central heating system — boiler, rads, pipework, 3-bed: £4,500–£7,000",
+          "New consumer unit: £500–£900; if the board is old, price the rewire conversation immediately",
+          "Full rewire, 3-bed, including making good: £4,500–£7,500",
+          "EICR: £150–£300 · Gas safety certificate: £70–£120 · Both are legally required to let",
+          "EPC improvements to hit C — loft top-up, trickle vents, heating controls: £500–£2,500 depending on the starting point",
+        ],
+      },
+      {
+        heading: "Kitchens & bathrooms",
+        items: [
+          "Landlord-spec kitchen replacement — units, worktop, hob, oven, extractor, fitted: £3,500–£6,000",
+          "Kitchen refresh — doors, worktop, paint, hardware, keep the carcasses: £800–£2,000",
+          "Full bathroom replacement — suite, tiling, flooring, fitted: £3,000–£5,500",
+          "Bathroom refresh — new suite in same positions, minimal tiling: £1,500–£2,500",
+          "Adding an ensuite — stud wall, plumbing, suite, tiling, plastering: £4,000–£7,000",
+          "Moving soil pipes or bathrooms between floors: get a fixed quote before you count the deal — this is where budgets die",
+        ],
+      },
+      {
+        heading: "Walls, floors & finishes",
+        items: [
+          "Plaster skim, average room: £400–£700; full replaster (hack off and re-board): £900–£1,500 per room",
+          "Hallway, stairs and landing replastered: £800–£1,500",
+          "Internal doors: £120–£200 each fitted; FD30 fire doors with intumescent strips and closers: £300–£450 each fitted",
+          "Paint and decorate, average room: £250–£450; whole 3-bed house: £2,500–£4,500",
+          "Carpet, average bedroom, landlord spec: £250–£400 fitted",
+          "LVT or laminate, average room: £350–£600 fitted — LVT costs more and outlives three tenancies",
+        ],
+      },
+      {
+        heading: "Structural & everything else",
+        items: [
+          "RSJ / steel beam including building control sign-off: £1,500–£3,000 per opening",
+          "New staircase, standard softwood: £1,200–£2,500 fitted",
+          "New stud partition wall, plastered both sides: £600–£1,000",
+          "Skips: £250–£350 each — a full 3-bed strip-out fills three to five",
+          "Garden clearance: £150–£250 per day per person, plus disposal",
+          "Asbestos survey: £200–£400; removal is quoted per job — never disturb suspect materials to save the survey fee",
+        ],
+      },
+      {
+        heading: "Whole-house rules of thumb",
+        items: [
+          "Light refresh — paint, floors, tidy, minor repairs, 3-bed: £5,000–£10,000",
+          "Medium refurb — plus kitchen, bathroom, some plastering and doors: £15,000–£25,000",
+          "Full refurb — everything: systems, roofline, kitchen, bathroom, full redec: £30,000–£50,000+",
+          "Contingency: 15% on a light job, 20% on anything structural or pre-1930 — added at the end, spent only on surprises",
+          "Every week of overrun costs you a week of rent plus finance interest — build the timeline into the budget, not just the works",
+        ],
+      },
+      {
+        heading: "The traps that blow budgets",
+        items: [
+          "Scope creep: the spec you price is the spec you hold — upgrades mid-job cost double",
+          "Deposits: materials up front is normal; big labour deposits are not — pay against completed stages",
+          "Day rates without a defined scope drift; fixed price against a written spec wherever possible",
+          "Opening-up surprises: old properties hide their problems behind plasterboard — that's the contingency's job, not the budget's",
+          "Lead times: kitchens, windows and steels are ordered items — order dates belong in the programme before work starts",
+          "The cheapest quote is usually the most expensive one by completion — mid-priced, recommended, and busy is the sweet spot",
+        ],
+      },
+    ],
+  },
 ];
 
 export const getResource = (slug: string) =>
