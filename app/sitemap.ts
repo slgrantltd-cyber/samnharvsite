@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/power-team",
     "/landlords",
     "/councils",
+    "/agents",
     "/resources",
     "/learn",
     "/insights",
