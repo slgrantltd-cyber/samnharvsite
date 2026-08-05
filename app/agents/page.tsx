@@ -9,6 +9,44 @@ export const metadata: Metadata = {
   alternates: { canonical: "/agents" },
 };
 
+const PAINS = [
+  {
+    pain: "Fixed terms are gone",
+    detail:
+      "Under the Renters' Rights Act every tenancy is periodic — a tenant can walk with two months' notice, so you can no longer promise a landlord twelve secure months.",
+    answer:
+      "A company let is a business tenancy: 3–5 year terms with agreed exits still exist here. Security is the product again.",
+  },
+  {
+    pain: "Section 21 has gone",
+    detail:
+      "No-fault possession is over. Getting a property back now takes grounds, evidence and months — and your landlords know it.",
+    answer:
+      "With us the conversation changes: the rent never stops while anything gets resolved, and hand-back terms are agreed in the contract from day one.",
+  },
+  {
+    pain: "Rents capped, challengeable, chased",
+    detail:
+      "One increase a year, open to tribunal challenge — while arrears still take months to act on. Landlords feel the maths tightening.",
+    answer:
+      "Guaranteed rent by company standing order, agreed up front, reviewed by negotiation — not by tribunal.",
+  },
+  {
+    pain: "The compliance pile keeps growing",
+    detail:
+      "Database registration, ombudsman membership, Decent Homes, Awaab's Law — every new duty is another reason a tired landlord sells.",
+    answer:
+      "We keep the property maintained, certificated and inspection-ready as standard — it's our operating model, not an extra.",
+  },
+  {
+    pain: "Landlords are selling up — and books are shrinking",
+    detail:
+      "Every landlord who exits takes a management fee with them. The Act has given the tired ones their excuse.",
+    answer:
+      "“We can offer you guaranteed rent on a multi-year term” is the retention tool that keeps them — and keeps them with you.",
+  },
+];
+
 const STEPS = [
   {
     head: "You spot the fit",
@@ -92,6 +130,41 @@ export default function AgentsPage() {
               tenancies.
             </p>
           </div>
+        </div>
+      </section>
+
+      <section className="px-5 pb-16 md:px-10 md:pb-20">
+        <div className="mx-auto max-w-6xl">
+          <p className="annot text-bronze">Why now — the Renters&rsquo; Rights Act</p>
+          <h2 className="display mt-3 max-w-3xl text-3xl leading-snug md:text-4xl">
+            The Act took away the security your landlords bought management
+            for. <span className="display-it">A company let gives it back.</span>
+          </h2>
+          <div className="mt-8 grid grid-cols-1 gap-px border bg-[var(--line)] hairline">
+            {PAINS.map((p) => (
+              <Lift key={p.pain} className="bg-[var(--plaster)]">
+                <div className="grid grid-cols-1 gap-4 p-6 md:grid-cols-2 md:gap-10 md:p-7">
+                  <div>
+                    <h3 className="display text-xl md:text-2xl">{p.pain}</h3>
+                    <p className="muted mt-2 text-[0.9375rem] leading-relaxed">
+                      {p.detail}
+                    </p>
+                  </div>
+                  <div className="border-t hairline pt-4 md:border-l md:border-t-0 md:pl-10 md:pt-0">
+                    <p className="annot text-bronze">With a company let</p>
+                    <p className="mt-2 text-[0.9375rem] leading-relaxed">
+                      {p.answer}
+                    </p>
+                  </div>
+                </div>
+              </Lift>
+            ))}
+          </div>
+          <p className="annot mt-6 muted">
+            Why this works: a let to a company sits outside the
+            assured-tenancy framework the Act reshaped — which is why fixed
+            terms and agreed hand-backs still exist here.
+          </p>
         </div>
       </section>
 
