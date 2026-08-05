@@ -24,12 +24,16 @@ export default function ConnectPage() {
             stays and house council placements. Two names on everything.
           </p>
 
-          <a href="/samuel.vcf" download className="btn btn-ink mt-8 w-full text-center">
-            Save our contact ↓
+          <div className="mt-8">
+            <p className="annot muted mb-4">
+              Drop your number — takes 20 seconds, and we do the chasing
+            </p>
+            <ConnectForm />
+          </div>
+
+          <a href="/samuel.vcf" download className="btn btn-ghost mt-8 w-full text-center">
+            And save our contact ↓
           </a>
-          <p className="annot muted mt-3 text-center">
-            One tap — Samuel&rsquo;s number, email &amp; site into your phone
-          </p>
 
           <div className="mt-10 grid grid-cols-2 gap-px border bg-[var(--line)] hairline">
             {[
@@ -43,11 +47,6 @@ export default function ConnectPage() {
                 <p className="annot muted mt-2 group-hover:text-bronze">{sub} →</p>
               </Link>
             ))}
-          </div>
-
-          <div className="mt-10">
-            <p className="annot muted mb-4">Or leave your number — we&rsquo;ll do the chasing</p>
-            <ConnectForm />
           </div>
 
           <p className="annot muted mt-10 text-center">
