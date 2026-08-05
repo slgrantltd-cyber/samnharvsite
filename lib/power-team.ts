@@ -50,6 +50,11 @@ export const POWER_TEAM: PowerRole[] = [
     proof: "Our second opinion on every scary report.",
   },
   {
+    role: "Bridging finance",
+    why: "Fast, honest bridging for auction deadlines and heavy refurbs — agreed in principle before you bid, redeemed on the refinance.",
+    proof: "Funds the gaps on deals like ours.",
+  },
+  {
     role: "Serviced accommodation management",
     why: "That's us. Buy the deal, keep the asset — we furnish, list, and operate it as your hands-off SA unit.",
     proof: "We run our own units the same way — see /stays.",

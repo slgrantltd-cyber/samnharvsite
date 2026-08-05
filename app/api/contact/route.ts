@@ -15,10 +15,13 @@ export async function POST(req: NextRequest) {
   if (body.company) return NextResponse.json({ ok: true }); // honeypot
   const name = (body.name || "").trim().slice(0, 80);
   const email = (body.email || "").trim().slice(0, 120);
+  const phone = (body.phone || "").trim().slice(0, 30);
   const message = (body.message || "").trim().slice(0, 2000);
   const tag = (body.tag || "enquiry").trim().slice(0, 30);
   const subject = (body.subject || `Enquiry from ${(body.name || "").trim().slice(0, 80)}`).trim().slice(0, 120);
-  if (!name || !message || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+  const validEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+  // networking/event leads often give a phone only — accept either
+  if (!name || !message || (!validEmail && !phone)) {
     return NextResponse.json({ error: "bad-input" }, { status: 400 });
   }
 
@@ -31,9 +34,9 @@ export async function POST(req: NextRequest) {
         .sendMail({
           from: `"Website enquiry" <${user}>`,
           to: user,
-          replyTo: `"${name}" <${email}>`,
+          ...(validEmail ? { replyTo: `"${name}" <${email}>` } : {}),
           subject,
-          text: `From: ${name} <${email}>\n\n${message}`,
+          text: `From: ${name}${validEmail ? ` <${email}>` : ""}${phone ? ` · ${phone}` : ""}\n\n${message}`,
         });
     } catch {
       return NextResponse.json({ error: "send-failed" }, { status: 502 });
@@ -56,7 +59,7 @@ export async function POST(req: NextRequest) {
           type: "Other",
           status: "New",
           tags: tag,
-          phone: "",
+          phone,
           email,
           notes: message.slice(0, 300),
           followUp: new Date().toISOString().slice(0, 10),
