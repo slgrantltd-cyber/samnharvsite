@@ -5,13 +5,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import BenchmarkMark from "@/components/benchmark-mark";
 
+const INVEST_MENU = [
+  { href: "/join", label: "Join the deal list" },
+  { href: "/deals", label: "Current deals" },
+  { href: "/power-team", label: "The power team" },
+  { href: "/toolkit", label: "Toolkit" },
+];
+
 const NAV = [
   { href: "/", label: "Home" },
-  { href: "/join", label: "Invest" },
-  { href: "/deals", label: "Deals" },
   { href: "/landlords", label: "Landlords" },
   { href: "/councils", label: "Councils" },
-  { href: "/toolkit", label: "Toolkit" },
   { href: "/resources", label: "Resources" },
   { href: "/stays", label: "Stays" },
   { href: "/contact", label: "Contact" },
@@ -20,6 +24,7 @@ const NAV = [
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const investActive = INVEST_MENU.some((i) => pathname === i.href);
 
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
@@ -42,9 +47,37 @@ export default function SiteHeader() {
           </span>
         </Link>
 
-        {/* eight destinations need real room: full nav from lg, tighter
-            tracking until xl; below lg the menu button carries everything */}
+        {/* desktop: Invest carries a dropdown (list, deals, power team,
+            toolkit); hover/focus-within keeps it keyboard-reachable */}
         <nav aria-label="Primary" className="hidden items-center gap-5 lg:flex xl:gap-8">
+          <div className="group relative">
+            <Link
+              href="/join"
+              aria-current={investActive ? "page" : undefined}
+              className={`annot flex items-center gap-1.5 py-2 transition-colors hover:text-ink ${
+                investActive ? "text-ink" : "text-stone"
+              }`}
+            >
+              Invest
+              <span aria-hidden="true" className="text-[0.6em] translate-y-px">▾</span>
+            </Link>
+            <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+              <div className="w-52 border hairline bg-plaster/95 shadow-daylight backdrop-blur">
+                {INVEST_MENU.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={pathname === item.href ? "page" : undefined}
+                    className={`annot block border-b hairline px-4 py-3.5 transition-colors last:border-b-0 hover:bg-white/45 hover:text-ink ${
+                      pathname === item.href ? "text-ink" : "text-stone"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
           {NAV.slice(1).map((item) => (
             <Link
               key={item.href}
@@ -93,7 +126,36 @@ export default function SiteHeader() {
         }`}
       >
         <nav aria-label="Mobile" className="mt-auto flex flex-col gap-1">
-          {NAV.map((item, i) => (
+          <Link
+            href="/"
+            aria-current={pathname === "/" ? "page" : undefined}
+            onClick={() => setOpen(false)}
+            className="group flex items-baseline justify-between border-b hairline py-4"
+          >
+            <span className="display text-4xl">Home</span>
+            <span className="annot text-bronze-bright">01</span>
+          </Link>
+
+          <div className="border-b hairline py-4">
+            <div className="flex items-baseline justify-between">
+              <span className="display text-4xl">Invest</span>
+              <span className="annot text-bronze-bright">02</span>
+            </div>
+            <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+              {INVEST_MENU.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="annot flex min-h-11 items-center text-[var(--line-light)] transition-colors hover:text-bronze-bright"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {NAV.slice(1).map((item, i) => (
             <Link
               key={item.href}
               href={item.href}
@@ -102,7 +164,7 @@ export default function SiteHeader() {
               className="group flex items-baseline justify-between border-b hairline py-4"
             >
               <span className="display text-4xl">{item.label}</span>
-              <span className="annot text-bronze-bright">0{i + 1}</span>
+              <span className="annot text-bronze-bright">0{i + 3}</span>
             </Link>
           ))}
         </nav>

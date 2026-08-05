@@ -68,6 +68,14 @@ export default function PowerTeamPage() {
               surveyor. You remain free to use anyone you like; ours are
               simply the people we trust with our own money.
             </p>
+            <p className="mt-4 max-w-2xl leading-relaxed text-[var(--stone-dark)]">
+              And to be clear: <span className="text-bronze">introductions
+              are recommendations, not a charged service.</span> We make
+              nothing from them — you deal with each professional directly,
+              on their normal terms. We recommend them for one reason: they
+              make our deals go well, and we&rsquo;d like yours to go the
+              same way.
+            </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link href="/deals" className="btn btn-ink">
                 See the current deals
