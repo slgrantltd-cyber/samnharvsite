@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/toolkit",
     "/join",
     "/deals",
+    "/power-team",
     "/landlords",
     "/councils",
     "/resources",

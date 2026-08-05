@@ -101,7 +101,11 @@ export default function DealsPage() {
             <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
               <p className="muted max-w-xl leading-relaxed">
                 Deals go to the list before they go on this page — most are
-                reserved within days. Analyse any deal yourself with our{" "}
+                reserved within days. Every deal comes with introductions to{" "}
+                <Link href="/power-team" className="text-bronze hover:text-ink">
+                  the power team →
+                </Link>{" "}
+                and you can analyse it yourself with the{" "}
                 <Link href="/toolkit" className="text-bronze hover:text-ink">
                   Deal Intelligence toolkit →
                 </Link>
