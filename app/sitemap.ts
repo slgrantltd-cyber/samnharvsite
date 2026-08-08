@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/landlords",
     "/councils",
     "/agents",
+    "/developers",
     "/resources",
     "/learn",
     "/insights",

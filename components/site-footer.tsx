@@ -39,6 +39,9 @@ export default function SiteFooter() {
             <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/agents">
               For agents
             </Link>
+            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/developers">
+              For developers
+            </Link>
             <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/deals">
               Current deals
             </Link>

@@ -17,6 +17,7 @@ const NAV = [
   { href: "/landlords", label: "Landlords" },
   { href: "/councils", label: "Councils" },
   { href: "/agents", label: "Agents" },
+  { href: "/developers", label: "Developers" },
   { href: "/resources", label: "Resources" },
   { href: "/stays", label: "Stays" },
   { href: "/contact", label: "Contact" },
