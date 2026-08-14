@@ -9,19 +9,19 @@ wash that follows the cursor. Recognisable with all content removed.
 STORY: Visitor lands on the name, reads one honest manifesto, watches the
 territory get surveyed, opens the ledger of strategies, meets the brothers,
 sees only real proof, and leaves through one of three doors.
-FIRST VIEWPORT: The hero film — user-supplied cinematic footage of a
-limestone courtyard carrying its own baked-in typography ("BUILT ON
-RELATIONSHIPS."). The real nav bar replaces the filmed menu strip; a real
-link hotspot sits over the filmed CTA; scroll pins briefly while the film
-settles from 1.02 to 1.00 and brightens, then releases.
-FORM: Pinned by user references and the user's video-hero brief. Signature
-stagings: the hero film; the survey map.
+FIRST VIEWPORT: No imagery. The benchmark mark itself, drawn large in
+hairline ink, slowly surveying itself into a house and back — levelling
+line to ground, stem to walls, broad arrow to roof, centre leg to door —
+above the retained headline. The mark is the argument: we measure, and
+it becomes home.
+FORM: Pinned by user references. Signature stagings: the morphing mark;
+the survey map.
 */
 
 import Image from "next/image";
 import Link from "next/link";
 import { Rise, Line, Lift, ScrubWords } from "@/components/reveal";
-import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
+import MarkMorph from "@/components/mark-morph";
 import SurveyMap from "@/components/survey-map";
 import StrategyLedger from "@/components/strategy-ledger";
 import { photoPath } from "@/lib/photos";
@@ -30,33 +30,29 @@ export default function Home() {
   const brothersPhoto = photoPath("brothers.jpg");
   return (
     <main id="main">
-      {/* 01 — THE HERO FILM (scroll-expansion) */}
-      <ScrollExpandMedia
-        mediaType="video"
-        mediaSrc="/hero.mp4"
-        lowSrc="/hero-low.mp4"
-        posterSrc="/hero-poster.jpg"
-        bgImageSrc="/hero-background.jpg"
-        title="THE BEST OPPORTUNITIES|RARELY ARRIVE BY ACCIDENT."
-        date="Sam n Harv — Property Investment"
-        scrollToExpand="Scroll to step inside"
-        textBlend
-      >
-        <div className="mx-auto max-w-xl text-center">
-          <p className="text-lg leading-relaxed md:text-xl">
-            We partner with landlords, investors and organisations to unlock
-            the full potential of property — through guaranteed rent,
-            investment sourcing, serviced accommodation, management and
-            bespoke property solutions.
-          </p>
-          <Link
-            href="/services"
-            className="annot mt-6 inline-flex min-h-11 items-center gap-3 text-ink"
-          >
-            Explore our work <span aria-hidden="true">→</span>
-          </Link>
-        </div>
-      </ScrollExpandMedia>
+      {/* 01 — THE MARK BECOMES A HOUSE */}
+      <section className="flex min-h-[92svh] flex-col items-center justify-center px-5 pb-16 pt-28 text-center md:pt-32">
+        <p className="annot muted">Sam n Harv — Property Investment</p>
+        <MarkMorph className="mt-10 h-36 w-36 text-ink md:mt-12 md:h-48 md:w-48" />
+        <Rise as="h1" className="display mt-10 text-4xl leading-tight md:mt-12 md:text-7xl">
+          <Line>The best opportunities</Line>
+          <Line>
+            rarely arrive <span className="display-it">by accident.</span>
+          </Line>
+        </Rise>
+        <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed md:text-xl">
+          We partner with landlords, investors and organisations to unlock
+          the full potential of property — through guaranteed rent,
+          investment sourcing, serviced accommodation, management and
+          bespoke property solutions.
+        </p>
+        <Link
+          href="/services"
+          className="annot mt-8 inline-flex min-h-11 items-center gap-3 text-ink"
+        >
+          Explore our work <span aria-hidden="true">→</span>
+        </Link>
+      </section>
 
       {/* 01.25 — THE THREE DOORS */}
       <section className="px-5 pt-6 pb-16 md:px-10 md:pb-24">
