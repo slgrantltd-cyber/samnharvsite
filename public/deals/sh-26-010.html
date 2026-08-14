@@ -221,6 +221,33 @@
 </style>
 </head>
 <body>
+<style>
+.snh-nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;justify-content:space-between;align-items:center;gap:1rem;background:rgba(242,239,232,.95);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-bottom:1px solid rgba(26,26,26,.14);padding:.6rem 1.1rem}
+.snh-nav .w{font-family:'Libre Caslon Display',Georgia,serif;font-size:1rem;color:#1a1a1a;text-decoration:none;white-space:nowrap}
+.snh-nav .w i{font-family:'Libre Caslon Text',Georgia,serif;font-style:italic;color:#8c7b65}
+.snh-nav nav{display:flex;gap:1.05rem;align-items:center}
+.snh-nav nav a{font-family:'Fragment Mono',ui-monospace,monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#5c5952;text-decoration:none;transition:color .2s}
+.snh-nav nav a:hover{color:#1a1a1a}
+.snh-nav nav a.on{color:#1a1a1a}
+.snh-nav nav a.btn{background:#1a1a1a;color:#f2efe8;padding:.5rem .85rem}
+.snh-nav nav a.btn:hover{color:#c9ab7c}
+@media(max-width:820px){.snh-nav nav{gap:.7rem}.snh-nav nav a{display:none}.snh-nav nav a.keep{display:inline-block}.snh-nav nav a.btn{padding:.45rem .6rem}.snh-nav .w{font-size:.92rem}}
+body{padding-top:46px}
+</style>
+<div class="snh-nav">
+  <a class="w" href="/">SAM <i>n</i> HARV</a>
+  <nav>
+    <a href="/" class="keep">Home</a>
+    <a href="/landlords">Landlords</a>
+    <a href="/councils">Councils</a>
+    <a href="/agents">Agents</a>
+    <a href="/developers">Developers</a>
+    <a href="/deals" class="on keep">Deals</a>
+    <a href="/stays">Stays</a>
+    <a href="/contact" class="btn keep">Enquire</a>
+  </nav>
+</div>
+
 <div class="grain" aria-hidden="true"></div>
 
 <!-- ============ COVER ============ -->
