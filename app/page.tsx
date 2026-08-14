@@ -32,8 +32,11 @@ export default function Home() {
     <main id="main">
       {/* 01 — THE MARK BECOMES A HOUSE */}
       <section className="flex min-h-[92svh] flex-col items-center justify-center px-5 pb-16 pt-28 text-center md:pt-32">
-        <p className="annot muted">Sam n Harv — Property Investment</p>
-        <MarkMorph className="mt-10 h-36 w-36 text-ink md:mt-12 md:h-48 md:w-48" />
+        <p className="annot muted">Property investment · UK South West</p>
+        <p className="display mt-6 text-3xl tracking-tight md:text-4xl">
+          SAM <span className="display-it lowercase">n</span> HARV
+        </p>
+        <MarkMorph className="mt-9 h-36 w-36 text-ink md:mt-10 md:h-48 md:w-48" />
         <Rise as="h1" className="display mt-10 text-4xl leading-tight md:mt-12 md:text-7xl">
           <Line>The best opportunities</Line>
           <Line>
