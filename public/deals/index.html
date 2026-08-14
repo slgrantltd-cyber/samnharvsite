@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sam n Harv — Live Deals</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital@1&family=Fragment+Mono&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--plaster:#f2efe8;--paper:#faf8f3;--ink:#1a1a1a;--ink-60:rgba(26,26,26,.62);--ink-12:rgba(26,26,26,.12);
+    --bronze:#8c7b65;--bronze-bright:#c9ab7c;--bronze-deep:#6f6150;--stone:#5c5952;
+    --serif-display:'Libre Caslon Display',Georgia,serif;--serif:'Libre Caslon Text',Georgia,serif;
+    --mono:'Fragment Mono',ui-monospace,monospace;--sans:'Hanken Grotesk',-apple-system,sans-serif}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--plaster);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  main{max-width:920px;margin:0 auto;padding:0 clamp(1.2rem,4vw,2.5rem) 5rem}
+  .strip{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2.5px solid var(--ink);padding:2.2rem 0 .6rem}
+  .strip .word{font-family:var(--serif-display);font-size:1.15rem}
+  .strip .word i{font-family:var(--serif);font-style:italic;color:var(--bronze)}
+  .strip .sannot{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--stone)}
+  header{padding:4rem 0 3rem;text-align:center}
+  .kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.32em;color:var(--bronze);text-transform:uppercase}
+  h1{font-family:var(--serif-display);font-weight:400;font-size:clamp(2.2rem,5.5vw,3.4rem);line-height:1.1;margin:1rem 0 .8rem}
+  h1 i{font-family:var(--serif);font-style:italic;color:var(--bronze)}
+  .sub{font-family:var(--serif);font-size:1.05rem;color:var(--ink-60);max-width:560px;margin:0 auto}
+  .deals{display:grid;gap:1.4rem;margin-top:1rem}
+  .deal{display:block;text-decoration:none;color:var(--ink);background:var(--paper);border:1px solid var(--ink-12);padding:1.8rem 1.8rem 1.6rem;position:relative;transition:transform .25s ease,box-shadow .25s ease}
+  .deal:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(26,26,26,.10)}
+  .deal .top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap}
+  .deal .ref{font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--stone)}
+  .chip{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--bronze);color:var(--bronze-deep);padding:.28rem .7rem}
+  .chip.done{border-color:var(--ink-12);color:var(--ink-60)}
+  .deal h2{font-family:var(--serif-display);font-weight:400;font-size:1.55rem;margin:.7rem 0 .3rem}
+  .deal h2 i{font-family:var(--serif);font-style:italic;color:var(--bronze)}
+  .deal p{color:var(--ink-60);font-size:.95rem;max-width:560px}
+  .deal .stats{display:flex;gap:2.2rem;margin-top:1.1rem;flex-wrap:wrap}
+  .deal .stat .lab{font-family:var(--mono);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--stone)}
+  .deal .stat .val{font-family:var(--serif-display);font-size:1.3rem;margin-top:.2rem}
+  .deal .stat .val.accent{color:var(--bronze-deep)}
+  .deal .open{position:absolute;right:1.6rem;bottom:1.4rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze)}
+  .note{margin-top:3rem;border:1.5px solid var(--bronze);background:var(--paper);padding:1.2rem 1.4rem;font-size:.95rem}
+  footer{margin-top:4rem;border-top:1px solid var(--ink-12);padding-top:1.4rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;color:rgba(26,26,26,.42);line-height:1.9}
+</style>
+</head>
+<body>
+<main>
+  <div class="strip">
+    <span class="word">SAM <i>n</i> HARV</span>
+    <span class="sannot">Live deals · Underwritten, then offered</span>
+  </div>
+  <header>
+    <div class="kicker">Deals · Straight-talking · Done right</div>
+    <h1>The deals we'd do <i>ourselves.</i></h1>
+    <p class="sub">Every deal below is underwritten as a standard buy-to-let first, at the likely case, with the poor case checked positive — before it earns a place on this page. Addresses and photographs are released on acceptance.</p>
+  </header>
+
+  <div class="deals">
+    <!-- DEAL CARD : SH-26-004 -->
+    <a class="deal" href="/deals/sh-26-004.html">
+      <div class="top">
+        <span class="ref">SH-26-004 · Somerset</span>
+        <span class="chip">Live</span>
+      </div>
+      <h2>Two-bed, two-bath terrace — <i>priced to move.</i></h2>
+      <p>Move-in ready, no chain, guide already reduced. Below our line at the guide — and we say so. At £150,000 it makes the line, with zero works and a paired operator nearby.</p>
+      <div class="stats">
+        <div class="stat"><div class="lab">Guide</div><div class="val">£165,000</div></div>
+        <div class="stat"><div class="lab">Projected ROI · likely</div><div class="val accent">60% ROI</div></div>
+        <div class="stat"><div class="lab">Poor case</div><div class="val">24% ROI</div></div>
+        <div class="stat"><div class="lab">Payback</div><div class="val">~20 mo</div></div>
+      </div>
+      <span class="open">Open the pack →</span>
+    </a>
+    <!-- /DEAL CARD -->
+
+    <!-- DEAL CARD : SH-26-003 -->
+    <a class="deal" href="/deals/sh-26-003.html">
+      <div class="top">
+        <span class="ref">SH-26-003 · Somerset</span>
+        <span class="chip">Live</span>
+      </div>
+      <h2>Three-bed end-of-terrace — <i>cash-only mispricing.</i></h2>
+      <p>A solvable defect priced as a permanent one: cash buyers only, thin bidding, motivated seller. Buy cash, fix for £5k, refinance at 75%.</p>
+      <div class="stats">
+        <div class="stat"><div class="lab">Asking</div><div class="val">£165,000</div></div>
+        <div class="stat"><div class="lab">Projected ROI · likely</div><div class="val accent">73% ROI</div></div>
+        <div class="stat"><div class="lab">Poor case</div><div class="val">22% ROI</div></div>
+        <div class="stat"><div class="lab">Payback</div><div class="val">~16 mo</div></div>
+      </div>
+      <span class="open">Open the pack →</span>
+    </a>
+    <!-- /DEAL CARD -->
+
+    <!-- DEAL CARD : SH-26-005 -->
+    <a class="deal" href="/deals/sh-26-005.html">
+      <div class="top">
+        <span class="ref">SH-26-005 · Somerset</span>
+        <span class="chip">Live</span>
+      </div>
+      <h2>Three-bed character semi — <i>top of our book.</i></h2>
+      <p>71% ROI at the guide on the full model — fee and works loaded. First on our screen and still first after the honest costs.</p>
+      <div class="stats">
+        <div class="stat"><div class="lab">Guide</div><div class="val">£140,000</div></div>
+        <div class="stat"><div class="lab">ROI at our number</div><div class="val accent">71% ROI</div></div>
+        <div class="stat"><div class="lab">Poor case</div><div class="val">21% ROI</div></div>
+        <div class="stat"><div class="lab">Payback</div><div class="val">~17 mo</div></div>
+      </div>
+      <span class="open">Open the pack →</span>
+    </a>
+    <!-- /DEAL CARD -->
+
+    <!-- DEAL CARD : SH-26-006 -->
+    <a class="deal" href="/deals/sh-26-006.html">
+      <div class="top">
+        <span class="ref">SH-26-006 · Somerset</span>
+        <span class="chip">Live</span>
+      </div>
+      <h2>Victorian three-bed — <i>no chain.</i></h2>
+      <p>full-project condition removes retail buyers; the trade price sits well below the ask and the seller has no chain to protect.</p>
+      <div class="stats">
+        <div class="stat"><div class="lab">Asking</div><div class="val">£170,000</div></div>
+        <div class="stat"><div class="lab">ROI at our number</div><div class="val accent">62% ROI</div></div>
+        <div class="stat"><div class="lab">Poor case</div><div class="val">16% ROI</div></div>
+        <div class="stat"><div class="lab">Payback</div><div class="val">~19 mo</div></div>
+      </div>
+      <span class="open">Open the pack →</span>
+    </a>
+    <!-- /DEAL CARD -->
+
+    <!-- DEAL CARD : SH-26-007 -->
+    <a class="deal" href="/deals/sh-26-007.html">
+      <div class="top">
+        <span class="ref">SH-26-007 · Somerset</span>
+        <span class="chip done">Watchlist</span>
+      </div>
+      <h2>Three-bed with garage — <i>reduced since may.</i></h2>
+      <p>rare at the price and worth real money to contractor stays — secure tools, secure van, better bookings.</p>
+      <div class="stats">
+        <div class="stat"><div class="lab">Guide</div><div class="val">£180,000</div></div>
+        <div class="stat"><div class="lab">ROI at our number</div><div class="val accent">61% ROI</div></div>
+        <div class="stat"><div class="lab">Poor case</div><div class="val">17% ROI</div></div>
+        <div class="stat"><div class="lab">Payback</div><div class="val">~20 mo</div></div>
+      </div>
+      <span class="open">Open the pack →</span>
+    </a>
+    <!-- /DEAL CARD -->
+
+    <!-- DEAL CARD : SH-26-008 -->
+    <a class="deal" href="/deals/sh-26-008.html">
+      <div class="top">
+        <span class="ref">SH-26-008 · Somerset</span>
+        <span class="chip">Gated</span>
+      </div>
+      <h2>Three-bed semi, big garden — <i>broker-gated.</i></h2>
+      <p>retail buyers and their lenders flinch at non-standard construction; cash collects the fear premium.</p>
+      <div class="stats">
+        <div class="stat"><div class="lab">Asking</div><div class="val">£185,000</div></div>
+        <div class="stat"><div class="lab">ROI at our number</div><div class="val accent">60% ROI</div></div>
+        <div class="stat"><div class="lab">Poor case</div><div class="val">16% ROI</div></div>
+        <div class="stat"><div class="lab">Payback</div><div class="val">~20 mo</div></div>
+      </div>
+      <span class="open">Open the pack →</span>
+    </a>
+    <!-- /DEAL CARD -->
+
+    <!-- DEAL CARD : SH-26-009 -->
+    <a class="deal" href="/deals/sh-26-009.html">
+      <div class="top">
+        <span class="ref">SH-26-009 · Somerset</span>
+        <span class="chip">Live</span>
+      </div>
+      <h2>Three-bed end-of-terrace — <i>clean and conventional.</i></h2>
+      <p>no fees, no frame, no lease — a normal freehold on a normal timetable, with £8,000 of cosmetic work.</p>
+      <div class="stats">
+        <div class="stat"><div class="lab">Asking</div><div class="val">£189,000</div></div>
+        <div class="stat"><div class="lab">ROI at our number</div><div class="val accent">65% ROI</div></div>
+        <div class="stat"><div class="lab">Poor case</div><div class="val">18% ROI</div></div>
+        <div class="stat"><div class="lab">Payback</div><div class="val">~19 mo</div></div>
+      </div>
+      <span class="open">Open the pack →</span>
+    </a>
+    <!-- /DEAL CARD -->
+
+    <!-- DEAL CARD : SH-26-010 -->
+    <a class="deal" href="/deals/sh-26-010.html">
+      <div class="top">
+        <span class="ref">SH-26-010 · Somerset</span>
+        <span class="chip">Live</span>
+      </div>
+      <h2>Two-double maisonette — <i>smallest cheque on the book.</i></h2>
+      <p>two doubles, two bathrooms, well presented — the contractor-pair layout, bookable the week it completes.</p>
+      <div class="stats">
+        <div class="stat"><div class="lab">Asking</div><div class="val">£149,950</div></div>
+        <div class="stat"><div class="lab">ROI at our number</div><div class="val accent">61% ROI</div></div>
+        <div class="stat"><div class="lab">Poor case</div><div class="val">23% ROI</div></div>
+        <div class="stat"><div class="lab">Payback</div><div class="val">~20 mo</div></div>
+      </div>
+      <span class="open">Open the pack →</span>
+    </a>
+    <!-- /DEAL CARD -->
+
+    <!-- DEAL CARD : SH-26-011 -->
+    <a class="deal" href="/deals/sh-26-011.html">
+      <div class="top">
+        <span class="ref">SH-26-011 · Somerset</span>
+        <span class="chip done">Watchlist</span>
+      </div>
+      <h2>Two-bed semi — <i>priced above its condition.</i></h2>
+      <p>driveway, conservatory, enclosed garden — everything a refreshed 2-bed needs to earn.</p>
+      <div class="stats">
+        <div class="stat"><div class="lab">Asking</div><div class="val">£165,000</div></div>
+        <div class="stat"><div class="lab">ROI at our number</div><div class="val accent">61% ROI</div></div>
+        <div class="stat"><div class="lab">Poor case</div><div class="val">24% ROI</div></div>
+        <div class="stat"><div class="lab">Payback</div><div class="val">~20 mo</div></div>
+      </div>
+      <span class="open">Open the pack →</span>
+    </a>
+    <!-- /DEAL CARD -->
+
+    <!-- DEAL CARD : SH-26-012 -->
+    <a class="deal" href="/deals/sh-26-012.html">
+      <div class="top">
+        <span class="ref">SH-26-012 · Somerset</span>
+        <span class="chip">Verifying</span>
+      </div>
+      <h2>Period cottage, village green — <i>verification first.</i></h2>
+      <p>owned village parking is the scarcest amenity in the contractor-stay market — vans decide bookings.</p>
+      <div class="stats">
+        <div class="stat"><div class="lab">Asking</div><div class="val">£175,000</div></div>
+        <div class="stat"><div class="lab">ROI at our number</div><div class="val accent">61% ROI</div></div>
+        <div class="stat"><div class="lab">Poor case</div><div class="val">24% ROI</div></div>
+        <div class="stat"><div class="lab">Payback</div><div class="val">~20 mo</div></div>
+      </div>
+      <span class="open">Open the pack →</span>
+    </a>
+    <!-- /DEAL CARD -->
+
+    <!-- DEAL CARD : SH-26-013 -->
+    <a class="deal" href="/deals/sh-26-013.html">
+      <div class="top">
+        <span class="ref">SH-26-013 · Somerset</span>
+        <span class="chip done">Watchlist</span>
+      </div>
+      <h2>Two-double terrace — <i>lovely house, hopeful price.</i></h2>
+      <p>modern kitchen, loft room, wood burner — bookable the week it completes, at the right price.</p>
+      <div class="stats">
+        <div class="stat"><div class="lab">Guide</div><div class="val">£205,000</div></div>
+        <div class="stat"><div class="lab">ROI at our number</div><div class="val accent">60% ROI</div></div>
+        <div class="stat"><div class="lab">Poor case</div><div class="val">24% ROI</div></div>
+        <div class="stat"><div class="lab">Payback</div><div class="val">~20 mo</div></div>
+      </div>
+      <span class="open">Open the pack →</span>
+    </a>
+    <!-- /DEAL CARD -->
+
+    <!-- NEW DEAL CARDS GO ABOVE THIS LINE, NEWEST FIRST -->
+  </div>
+
+  <div class="note">
+    <b>Want deals like these before they reach this page?</b> Retained clients get first sight under our bespoke sourcing terms — £500 commitment to start, balance only when a deal is agreed and secured. Email <b>contact@samnharv.com</b> or join at <b>samnharv.co.uk/join</b>.
+  </div>
+
+  <footer>
+    S L GRANTS LTD · CO. NO. 16505504 · 66 PAUL STREET, LONDON EC2A 4NA · TRADING AS SAM N HARV · SAMNHARV.CO.UK<br>
+    Projected figures on stated assumptions, not guarantees of income. ROI basis: net income against money left in after a 75% refinance. Not financial advice.
+  </footer>
+</main>
+</body>
+</html>
