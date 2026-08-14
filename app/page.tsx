@@ -30,8 +30,11 @@ export default function Home() {
   const brothersPhoto = photoPath("brothers.jpg");
   return (
     <main id="main">
-      {/* 01 — THE MARK BECOMES A HOUSE */}
-      <section className="flex min-h-[92svh] flex-col items-center justify-center px-5 pb-16 pt-28 text-center md:pt-32">
+      {/* 01 — THE MARK BECOMES A HOUSE
+          Staged as a sheet on the drawing board: warmer paper with fibre
+          grain, raised above the plaster page on a daylight shadow; the
+          next section slides in beneath its bottom edge. */}
+      <section className="m-paper relative z-10 flex min-h-[92svh] flex-col items-center justify-center border-b hairline px-5 pb-20 pt-28 text-center shadow-[0_36px_70px_-24px_rgba(31,30,28,0.35),0_10px_24px_-14px_rgba(31,30,28,0.22)] md:pt-32">
         <p className="annot muted">Property investment · UK South West</p>
         <p className="display mt-6 text-3xl tracking-tight md:text-4xl">
           SAM <span className="display-it lowercase">n</span> HARV
