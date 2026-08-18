@@ -66,7 +66,7 @@ export default function PowerTeamPage() {
               to who the deal actually needs — an auction purchase needs the
               solicitor first; a heavy refurb starts with the builder and the
               surveyor. You remain free to use anyone you like; ours are
-              simply the people we trust with our own money.
+              simply the people we trust with our own operation.
             </p>
             <p className="mt-4 max-w-2xl leading-relaxed text-[var(--stone-dark)]">
               And to be clear: <span className="text-bronze">introductions

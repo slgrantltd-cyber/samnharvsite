@@ -71,8 +71,8 @@ export default function ServicesPage() {
             </Line>
           </Rise>
           <p className="mt-8 max-w-xl text-lg leading-relaxed md:text-xl">
-            Six strategies, one standard: we only bring people deals we would
-            put our own money into — and often already have.
+            Six strategies, one standard: we only bring people deals we
+            would put our own name to running — and in several cases already do.
           </p>
         </div>
       </section>

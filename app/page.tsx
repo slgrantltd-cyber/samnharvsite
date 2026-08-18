@@ -41,15 +41,15 @@ export default function Home() {
         </p>
         <MarkMorph className="mt-9 h-36 w-36 text-ink md:mt-10 md:h-48 md:w-48" />
         <Rise as="h1" className="display mt-10 text-4xl leading-tight md:mt-12 md:text-7xl">
-          <Line>We buy what we</Line>
+          <Line>We only bring you</Line>
           <Line>
-            would <span className="display-it">keep.</span>
+            what we&rsquo;d <span className="display-it">run ourselves.</span>
           </Line>
         </Rise>
         <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed md:text-xl">
           A small number of property mandates at any one time, held quietly
-          and released to a few qualified buyers. Our own money goes in
-          first. Our own hands run what we sell.
+          and released to a few qualified buyers. Every one underwritten the
+          way we underwrite our own operation — because it is our operation.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
           <Link href="/private-office" className="btn btn-ink">
@@ -110,8 +110,8 @@ export default function Home() {
             ))}
           </div>
           <p className="annot mt-6 flex flex-wrap gap-x-8 gap-y-2 muted">
-            <span>Our own capital, in first</span>
-            <span>Our own operation, every day</span>
+            <span>We operate what we place</span>
+            <span>Every deal underwritten to our own standard</span>
             <span>Two names on everything</span>
           </p>
         </div>
@@ -123,7 +123,7 @@ export default function Home() {
           <p className="annot muted mb-8">01 — The position</p>
           <ScrubWords
             className="display text-3xl leading-tight md:text-5xl"
-            text="We are not brokers of other people's ideas. Every mandate we hold has been bought, built or operated with our own money first — so by the time it reaches you, it has already passed the only test we trust: would we keep it ourselves."
+            text="We are not brokers of other people's ideas. We run property every day — the placements, the guests, the maintenance, the numbers — so every mandate we bring you has passed the only test we trust: would we put our own name to running it."
           />
         </div>
       </section>

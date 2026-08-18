@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     template: "%s — Sam n Harv",
   },
   description:
-    "A small number of property mandates at any one time — UK and international — held quietly and released to qualified buyers. Our own capital in first; our own operation behind every asset. Two brothers, based in the UK South West.",
+    "A small number of property mandates at any one time — UK and international — held quietly and released to qualified buyers. Every mandate underwritten to the standard we run our own operation by. Two brothers, based in the UK South West.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     url: "/",
     title: "Sam n Harv — Private Property Mandates",
     description:
-      "A few opportunities, held quietly. UK and international. Our own capital in first.",
+      "A few opportunities, held quietly. UK and international.",
     images: [{ url: "/hero-poster.jpg", width: 1600, height: 900 }],
   },
   twitter: {

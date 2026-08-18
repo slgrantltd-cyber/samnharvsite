@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 
 const PRINCIPLES = [
   {
-    name: "Our money goes in first",
-    body: "We invest in the same strategies we source. Advice you'd bet your own capital on is the only kind worth giving.",
+    name: "We run what we recommend",
+    body: "We operate property every day — placements, guests, maintenance, the numbers. Advice from people who do the work is the only kind worth giving.",
   },
   {
     name: "The person who answers does the work",
