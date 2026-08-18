@@ -66,11 +66,11 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-3">
             {[
               {
-                who: "For investors",
-                head: "Deals we'd do ourselves.",
-                body: "Analysed opportunities with our own money in first — hear about them before anyone else.",
-                href: "/join",
-                cta: "Join the deal list",
+                who: "Private office",
+                head: "A few opportunities. Held quietly.",
+                body: "UK and international mandates released to qualified buyers after a conversation, identity and proof of funds.",
+                href: "/private-office",
+                cta: "Request access",
               },
               {
                 who: "For landlords",

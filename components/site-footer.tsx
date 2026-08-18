@@ -12,12 +12,15 @@ export default function SiteFooter() {
               SAM <span className="display-it lowercase">n</span> HARV
             </p>
             <p className="muted mt-2 max-w-sm text-sm leading-relaxed">
-              Property investment &amp; deal sourcing. Two brothers, based in
-              the UK South West, working deals across the country.
+              Private property mandates, UK and international. Two brothers,
+              based in the UK South West.
             </p>
           </div>
 
           <nav aria-label="Footer" className="grid grid-cols-2 gap-x-12 gap-y-2">
+            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/private-office">
+              Private Office
+            </Link>
             <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/services">
               What we do
             </Link>
@@ -42,8 +45,8 @@ export default function SiteFooter() {
             <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/developers">
               For developers
             </Link>
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/deals">
-              Current deals
+            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/join">
+              Investor list
             </Link>
             <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/power-team">
               The power team
