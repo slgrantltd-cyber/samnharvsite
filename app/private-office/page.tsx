@@ -12,6 +12,15 @@ export const metadata: Metadata = {
 
 /* The shop window: never more than four. Each card is atmosphere + one
    line + "on application". Detail lives behind the gate. */
+/* Gated pages: a mandate's page link is only rendered when its gate is
+   released. Flip `released` to true the day the owner approves (TH) or
+   the brokerage agreement is signed (AE) — and move the file from
+   deals-held/ into public/deals/. Until then the card routes to #access. */
+const RELEASED: Record<string, boolean> = {
+  "int-th-001": false, // owner's written approval — Harvey
+  "int-ae-001": false, // Binghatti brokerage agreement — signed?
+};
+
 const MANDATES = [
   {
     ref: "Mandate I",
@@ -20,6 +29,7 @@ const MANDATES = [
     line: "27 rooms and cottages on five rai. Licensed, trading, sold whole. Guide on application.",
     tone: "island",
     status: "Off-market · under NDA",
+    page: "int-th-001",
   },
   {
     ref: "Mandate II",
@@ -28,6 +38,7 @@ const MANDATES = [
     line: "Developer pricing and payment plans, with our judgement on the unit — first call to handover.",
     tone: "dusk",
     status: "By introduction",
+    page: "int-ae-001",
   },
   {
     ref: "Mandate III",
@@ -36,6 +47,7 @@ const MANDATES = [
     line: "Two- and three-bedroom stock acquired for cash, refinanced at value, operated by us. Fully underwritten.",
     tone: "plaster",
     status: "Live",
+    page: "",
   },
   {
     ref: "Mandate IV",
@@ -44,6 +56,7 @@ const MANDATES = [
     line: "Victorian terrace to three flats on a proven street. Architect engaged. Comparable evidence in hand.",
     tone: "stone",
     status: "Under review",
+    page: "",
   },
 ];
 
@@ -92,7 +105,11 @@ export default function PrivateOfficePage() {
                   <p className="mt-3 max-w-md text-[0.95rem] leading-relaxed text-white/85">{m.line}</p>
                   <div className="mt-6 flex flex-wrap items-center gap-4">
                     <span className="annot border border-white/40 px-3 py-1.5 text-white/90">{m.status}</span>
-                    <a href="#access" className="annot text-white transition-colors hover:text-[var(--bronze-bright)]">Request access →</a>
+                    {m.page && (RELEASED[m.page] || process.env.NODE_ENV !== "production") ? (
+                      <a href={`/deals/${m.page}.html`} className="annot text-white transition-colors hover:text-[var(--bronze-bright)]">View the mandate →</a>
+                    ) : (
+                      <a href="#access" className="annot text-white transition-colors hover:text-[var(--bronze-bright)]">Request access →</a>
+                    )}
                   </div>
                 </div>
               </article>
