@@ -35,29 +35,33 @@ export default function Home() {
           grain, raised above the plaster page on a daylight shadow; the
           next section slides in beneath its bottom edge. */}
       <section className="m-paper relative z-10 flex min-h-[92svh] flex-col items-center justify-center border-b hairline px-5 pb-20 pt-28 text-center shadow-[0_36px_70px_-24px_rgba(31,30,28,0.35),0_10px_24px_-14px_rgba(31,30,28,0.22)] md:pt-32">
-        <p className="annot muted">Property investment · UK South West</p>
+        <p className="annot muted">Private property mandates · UK &amp; international</p>
         <p className="display mt-6 text-3xl tracking-tight md:text-4xl">
           SAM <span className="display-it lowercase">n</span> HARV
         </p>
         <MarkMorph className="mt-9 h-36 w-36 text-ink md:mt-10 md:h-48 md:w-48" />
         <Rise as="h1" className="display mt-10 text-4xl leading-tight md:mt-12 md:text-7xl">
-          <Line>The best opportunities</Line>
+          <Line>We buy what we</Line>
           <Line>
-            rarely arrive <span className="display-it">by accident.</span>
+            would <span className="display-it">keep.</span>
           </Line>
         </Rise>
         <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed md:text-xl">
-          We partner with landlords, investors and organisations to unlock
-          the full potential of property — through guaranteed rent,
-          investment sourcing, serviced accommodation, management and
-          bespoke property solutions.
+          A small number of property mandates at any one time, held quietly
+          and released to a few qualified buyers. Our own money goes in
+          first. Our own hands run what we sell.
         </p>
-        <Link
-          href="/services"
-          className="annot mt-8 inline-flex min-h-11 items-center gap-3 text-ink"
-        >
-          Explore our work <span aria-hidden="true">→</span>
-        </Link>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+          <Link href="/private-office" className="btn btn-ink">
+            Private Office
+          </Link>
+          <Link
+            href="/about"
+            className="annot inline-flex min-h-11 items-center gap-3 text-ink"
+          >
+            The two of us <span aria-hidden="true">→</span>
+          </Link>
+        </div>
       </section>
 
       {/* 01.25 — THE THREE DOORS */}
@@ -67,24 +71,24 @@ export default function Home() {
             {[
               {
                 who: "Private office",
-                head: "A few opportunities. Held quietly.",
-                body: "UK and international mandates released to qualified buyers after a conversation, identity and proof of funds.",
+                head: "Four mandates. Not forty.",
+                body: "An island resort. Dubai residences, direct from the developer. UK houses bought below the street. Released after a conversation, identity and proof of funds.",
                 href: "/private-office",
                 cta: "Request access",
               },
               {
-                who: "For landlords",
-                head: "Your rent, guaranteed.",
-                body: "A fixed monthly rent in writing, paid occupied or not — tenants, upkeep and compliance all handled.",
+                who: "For owners",
+                head: "Your asset, our covenant.",
+                body: "A company tenancy on a multi-year term — the rent arrives whether the property is occupied or not, and it comes back in the condition we agreed.",
                 href: "/landlords",
-                cta: "Get your answer",
+                cta: "Talk to us",
               },
               {
-                who: "For councils",
-                head: "Placements done properly.",
-                body: "Safe supported accommodation for young people — over a year of placements with our local authority.",
+                who: "For institutions",
+                head: "Placements, run properly.",
+                body: "Supported accommodation for a local authority — over a year of placements, inspection-ready as standard. The operating discipline behind everything else.",
                 href: "/councils",
-                cta: "Request a placement",
+                cta: "The standard",
               },
             ].map((d) => (
               <Link
@@ -106,8 +110,8 @@ export default function Home() {
             ))}
           </div>
           <p className="annot mt-6 flex flex-wrap gap-x-8 gap-y-2 muted">
-            <span>We operate our own properties</span>
-            <span>★★★★★ on Google</span>
+            <span>Our own capital, in first</span>
+            <span>Our own operation, every day</span>
             <span>Two names on everything</span>
           </p>
         </div>
@@ -119,7 +123,7 @@ export default function Home() {
           <p className="annot muted mb-8">01 — The position</p>
           <ScrubWords
             className="display text-3xl leading-tight md:text-5xl"
-            text="Most sourcing companies sell you a deal and disappear. We buy, refurbish and operate property with our own money first — so when we bring you something, it has already survived the only test that matters: would we do it ourselves."
+            text="We are not brokers of other people's ideas. Every mandate we hold has been bought, built or operated with our own money first — so by the time it reaches you, it has already passed the only test we trust: would we keep it ourselves."
           />
         </div>
       </section>
@@ -132,9 +136,9 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           <p className="annot muted">03 — The ledger</p>
           <Rise as="h2" className="display mt-3 text-4xl md:text-6xl">
-            <Line>Six ways we</Line>
+            <Line>How capital</Line>
             <Line>
-              put money to <span className="display-it">work.</span>
+              is put to <span className="display-it">work.</span>
             </Line>
           </Rise>
           <div className="mt-12">
@@ -188,8 +192,8 @@ export default function Home() {
                 <p className="annot text-bronze-bright">{p.role}</p>
                 <p className="display mt-3 text-5xl md:text-6xl">{p.name}</p>
                 <p className="muted mt-4 max-w-sm leading-relaxed">
-                  Message him directly — the person who answers is the person
-                  who does the work.
+                  Direct line. The person who answers is the person
+                  responsible.
                 </p>
                 <a href={p.wa} className="btn btn-ghost mt-8" rel="noopener">
                   WhatsApp {p.name} · {p.tel}
@@ -199,10 +203,10 @@ export default function Home() {
           </div>
 
           <p className="muted mt-10 max-w-2xl leading-relaxed">
-            Brothers, not business partners who met at a networking event. One
-            of us finds and structures the deals; the other makes sure the
-            works, the tenants and the numbers behave. You always know who
-            you&rsquo;re dealing with.
+            Brothers, not a partnership of convenience. One of us finds and
+            structures; the other makes the works, the occupancy and the
+            numbers behave. There is no account manager between you and the
+            people responsible.
           </p>
         </div>
       </section>
@@ -292,9 +296,9 @@ export default function Home() {
       <section className="px-5 pb-28 md:px-10 md:pb-40">
         <div className="mx-auto max-w-6xl border-t hairline pt-16">
           <Rise as="h2" className="display max-w-3xl text-4xl md:text-6xl">
-            <Line>Three doors.</Line>
+            <Line>Start with a</Line>
             <Line>
-              All of them <span className="display-it">open.</span>
+              <span className="display-it">conversation.</span>
             </Line>
           </Rise>
           <div className="mt-12 grid gap-px bg-[var(--line)] md:grid-cols-3">
@@ -303,27 +307,27 @@ export default function Home() {
               rel="noopener"
               className="group bg-plaster p-7 transition-colors hover:bg-smoked hover:text-plaster"
             >
-              <p className="annot muted group-hover:text-bronze-bright">Fastest</p>
-              <p className="display mt-3 text-2xl">WhatsApp the brothers</p>
+              <p className="annot muted group-hover:text-bronze-bright">Direct</p>
+              <p className="display mt-3 text-2xl">Speak to Samuel</p>
               <p className="muted mt-2 text-sm group-hover:text-stone-dark">
-                Straight to Samuel · 07444 551241
+                07444 551241 · WhatsApp or call
               </p>
             </a>
             <Link
-              href="/contact#investor-list"
+              href="/private-office#access"
               className="group bg-plaster p-7 transition-colors hover:bg-smoked hover:text-plaster"
             >
-              <p className="annot muted group-hover:text-bronze-bright">For investors</p>
-              <p className="display mt-3 text-2xl">Join the deal list</p>
+              <p className="annot muted group-hover:text-bronze-bright">Private office</p>
+              <p className="display mt-3 text-2xl">Request access</p>
               <p className="muted mt-2 text-sm group-hover:text-stone-dark">
-                Hear about opportunities as they land
+                Identity and proof of funds, then the particulars
               </p>
             </Link>
             <a
               href="mailto:contact@samnharv.com"
               className="group bg-plaster p-7 transition-colors hover:bg-smoked hover:text-plaster"
             >
-              <p className="annot muted group-hover:text-bronze-bright">On paper</p>
+              <p className="annot muted group-hover:text-bronze-bright">In writing</p>
               <p className="display mt-3 text-2xl">Email the office</p>
               <p className="muted mt-2 text-sm group-hover:text-stone-dark">
                 contact@samnharv.com

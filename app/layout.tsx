@@ -38,27 +38,27 @@ const fragment = Fragment_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.samnharv.com"),
   title: {
-    default: "Sam n Harv — Property Investment & Deal Sourcing, UK South West",
+    default: "Sam n Harv — Private Property Mandates, UK & International",
     template: "%s — Sam n Harv",
   },
   description:
-    "Two brothers investing in property and sourcing investment property deals across the UK — BRRR, rent to rent, flips, HMOs, blocks, land and serviced accommodation. Based in the South West, working the whole map.",
+    "A small number of property mandates at any one time — UK and international — held quietly and released to qualified buyers. Our own capital in first; our own operation behind every asset. Two brothers, based in the UK South West.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: "Sam n Harv",
     locale: "en_GB",
     url: "/",
-    title: "Sam n Harv — Property Investment & Deal Sourcing",
+    title: "Sam n Harv — Private Property Mandates",
     description:
-      "Two brothers investing in property and sourcing deals across the UK. Based in the South West, working the whole map.",
+      "A few opportunities, held quietly. UK and international. Our own capital in first.",
     images: [{ url: "/hero-poster.jpg", width: 1600, height: 900 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sam n Harv — Property Investment & Deal Sourcing",
+    title: "Sam n Harv — Private Property Mandates",
     description:
-      "Two brothers investing in property and sourcing deals across the UK.",
+      "A few opportunities, held quietly. UK and international.",
     images: ["/hero-poster.jpg"],
   },
   robots: { index: true, follow: true },
