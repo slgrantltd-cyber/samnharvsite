@@ -40,3 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 media-src/hero-drone-original.mov
+
+# held international pages — gated, not for public deploy (see deals-held/WEBSITE-NOTE-INT.md)
+/samnharv-international-addon/
