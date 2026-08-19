@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import {
-  Libre_Caslon_Display,
-  Libre_Caslon_Text,
+  Cormorant_Garamond,
   Hanken_Grotesk,
   Fragment_Mono,
 } from "next/font/google";
@@ -11,15 +10,18 @@ import MaterialLight from "@/components/material-light";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 
-const caslon = Libre_Caslon_Display({
+/* Display face: Cormorant Garamond — light, tall, with true italics.
+   Kept on the historic variable names so every .display/.display-it
+   across the site picks it up without touching a component. */
+const caslon = Cormorant_Garamond({
   variable: "--font-caslon",
-  weight: "400",
+  weight: ["300", "400", "500"],
   subsets: ["latin"],
 });
 
-const caslonItalic = Libre_Caslon_Text({
+const caslonItalic = Cormorant_Garamond({
   variable: "--font-caslon-it",
-  weight: "400",
+  weight: ["300", "400", "500"],
   style: "italic",
   subsets: ["latin"],
 });

@@ -22,6 +22,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Rise, Line, Lift, ScrubWords } from "@/components/reveal";
 import MarkMorph from "@/components/mark-morph";
+import MandateLight from "@/components/mandate-light";
 import SurveyMap from "@/components/survey-map";
 import StrategyLedger from "@/components/strategy-ledger";
 import { photoPath } from "@/lib/photos";
@@ -34,24 +35,25 @@ export default function Home() {
           Staged as a sheet on the drawing board: warmer paper with fibre
           grain, raised above the plaster page on a daylight shadow; the
           next section slides in beneath its bottom edge. */}
-      <section className="m-paper relative z-10 flex min-h-[92svh] flex-col items-center justify-center border-b hairline px-5 pb-20 pt-28 text-center shadow-[0_36px_70px_-24px_rgba(31,30,28,0.35),0_10px_24px_-14px_rgba(31,30,28,0.22)] md:pt-32">
-        <p className="annot muted">Private property mandates · UK &amp; international</p>
-        <p className="display mt-6 text-3xl tracking-tight md:text-4xl">
+      <section className="m-paper relative z-10 flex min-h-[92svh] flex-col items-center justify-center overflow-hidden border-b hairline px-5 pb-20 pt-28 text-center shadow-[0_36px_70px_-24px_rgba(31,30,28,0.35),0_10px_24px_-14px_rgba(31,30,28,0.22)] md:pt-32">
+        <MandateLight />
+        <p className="annot muted relative">Private property mandates · UK &amp; international</p>
+        <p className="display relative mt-6 text-3xl tracking-tight md:text-4xl">
           SAM <span className="display-it lowercase">n</span> HARV
         </p>
-        <MarkMorph className="mt-9 h-36 w-36 text-ink md:mt-10 md:h-48 md:w-48" />
-        <Rise as="h1" className="display mt-10 text-4xl leading-tight md:mt-12 md:text-7xl">
+        <MarkMorph className="relative mt-9 h-36 w-36 text-ink md:mt-10 md:h-48 md:w-48" />
+        <Rise as="h1" className="display relative mt-10 text-4xl leading-tight md:mt-12 md:text-7xl">
           <Line>We only bring you</Line>
           <Line>
             what we&rsquo;d <span className="display-it">run ourselves.</span>
           </Line>
         </Rise>
-        <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed md:text-xl">
+        <p className="relative mx-auto mt-8 max-w-xl text-lg leading-relaxed md:text-xl">
           A small number of property mandates at any one time, held quietly
           and released to a few qualified buyers. Every one underwritten the
           way we underwrite our own operation — because it is our operation.
         </p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+        <div className="relative mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
           <Link href="/private-office" className="btn btn-ink">
             Private Office
           </Link>
@@ -114,6 +116,87 @@ export default function Home() {
             <span>Every deal underwritten to our own standard</span>
             <span>Two names on everything</span>
           </p>
+        </div>
+      </section>
+
+
+      {/* 01.4 — THE RECORD (authority) */}
+      <section className="px-5 pb-16 md:px-10 md:pb-24">
+        <div className="mx-auto max-w-6xl">
+          <p className="annot muted">The record</p>
+          <div className="mt-6 grid grid-cols-2 gap-px border bg-[var(--line)] hairline md:grid-cols-4">
+            {[
+              ["£250k", "First-year revenue", "Trading since 2025"],
+              ["12+ months", "Local-authority placements", "Housed continuously"],
+              ["2", "Properties operated", "Live, staffed by us"],
+              ["★★★★★", "On Google", "Reviews we can't edit"],
+            ].map(([v, l, s]) => (
+              <Lift key={l} className="bg-[var(--plaster)] p-6 md:p-8">
+                <p className="display text-4xl md:text-5xl">{v}</p>
+                <p className="annot mt-3 text-bronze">{l}</p>
+                <p className="muted mt-1 text-sm">{s}</p>
+              </Lift>
+            ))}
+          </div>
+          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+            <Lift className="border hairline p-7 md:p-9">
+              <p className="display text-xl leading-snug md:text-2xl">
+                &ldquo;Through his expertise, we&rsquo;ve secured some fantastic
+                deals that have directly contributed to the growth of our
+                business, <span className="display-it">adding six figures in revenue.</span>&rdquo;
+              </p>
+              <p className="annot mt-5 muted">Stephen McLaughlin — director, serviced accommodation company</p>
+            </Lift>
+            <Lift className="border hairline p-7 md:p-9">
+              <p className="display text-xl leading-snug md:text-2xl">
+                &ldquo;I have dealt with Sam on a professional basis for over a
+                year now. Very professional, genuine and very hard working.
+                <span className="display-it"> I would highly recommend him and his company.</span>&rdquo;
+              </p>
+              <p className="annot mt-5 muted">Jonathan Thompson — landlord on two of our houses</p>
+            </Lift>
+          </div>
+        </div>
+      </section>
+
+      {/* 01.45 — WHO WE WORK WITH (qualification) */}
+      <section className="on-stone px-5 py-20 md:px-10 md:py-28">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-5">
+            <div className="md:col-span-2">
+              <p className="annot text-[var(--bronze-bright)]">Who we work with</p>
+              <Rise as="h2" className="display mt-3 text-4xl md:text-5xl">
+                <Line>Not everyone.</Line>
+                <Line>
+                  <span className="display-it">Deliberately.</span>
+                </Line>
+              </Rise>
+              <p className="mt-6 max-w-md leading-relaxed text-[var(--plaster)]/80">
+                We don&rsquo;t sell to whoever asks. Every buyer is qualified
+                before a single particular is shared, and every mandate is
+                matched to the person — not the other way round. If it
+                doesn&rsquo;t fit, we say so on the first call.
+              </p>
+            </div>
+            <div className="md:col-span-3">
+              <div className="grid grid-cols-1 gap-px bg-white/10 border border-white/10 md:grid-cols-3">
+                {[
+                  ["Serious", "Ready to transact, with capital available and a timescale — not browsing."],
+                  ["Clear-eyed", "Understands that property carries real risk, and wants it stated plainly rather than sold around."],
+                  ["Hands-on the decision", "Willing to engage with the numbers, the process and the work — we underwrite; you decide."],
+                ].map(([h, b]) => (
+                  <div key={h} className="p-6 md:p-7">
+                    <p className="display text-2xl">{h}</p>
+                    <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--plaster)]/80">{b}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-2">
+                <span className="annot text-[var(--bronze-bright)]">Conversation → identity &amp; funds → NDA → particulars</span>
+                <Link href="/private-office#access" className="annot text-[var(--plaster)] hover:text-[var(--bronze-bright)]">Request access →</Link>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -208,87 +291,6 @@ export default function Home() {
             numbers behave. There is no account manager between you and the
             people responsible.
           </p>
-        </div>
-      </section>
-
-      {/* 05 — PROOF (handmade paper — the records) */}
-      <section className="m-paper px-5 py-24 md:px-10 md:py-36">
-        <div className="mx-auto max-w-6xl">
-          <p className="annot muted">05 — On the record</p>
-          <Rise as="h2" className="display mt-3 max-w-3xl text-4xl md:text-6xl">
-            <Line>We&rsquo;d rather show</Line>
-            <Line>
-              less and <span className="display-it">mean it.</span>
-            </Line>
-          </Rise>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
-            <Lift className="border hairline p-7 md:p-9">
-              <p className="annot muted">★★★★★ — Google review</p>
-              <blockquote className="mt-5">
-                <p className="display text-xl leading-snug md:text-2xl">
-                  &ldquo;Through his expertise, we&rsquo;ve secured some
-                  fantastic deals that have directly contributed to the growth
-                  of our business, adding six figures in revenue. His
-                  knowledge, integrity, attention to detail, and ability to
-                  create opportunities have been invaluable.&rdquo;
-                </p>
-                <footer className="annot muted mt-5">
-                  Stephen McLaughlin — director, serviced accommodation
-                  company
-                </footer>
-              </blockquote>
-            </Lift>
-
-            <Lift className="border hairline p-7 md:p-9">
-              <p className="annot muted">★★★★★ — Google review</p>
-              <blockquote className="mt-5">
-                <p className="display text-xl leading-snug md:text-2xl">
-                  &ldquo;I have dealt with Sam on a professional basis for
-                  over a year now. I have found him very professional, genuine
-                  and very hard working. I would highly recommend him and his
-                  company.&rdquo;
-                </p>
-                <footer className="annot muted mt-5">
-                  Jonathan Thompson — landlord on two of our rent-to-rent
-                  houses
-                </footer>
-              </blockquote>
-            </Lift>
-          </div>
-
-          <div className="mt-6 grid gap-6 md:grid-cols-3">
-            <Lift className="border hairline p-7">
-              <p className="annot muted">Councils</p>
-              <p className="mt-4 leading-relaxed">
-                We work with local councils on housing placements — young
-                people and staff — the demand behind our buy-to-SA deals.
-              </p>
-            </Lift>
-            <Lift className="border hairline p-7">
-              <p className="annot muted">Operating proof</p>
-              <p className="mt-4 leading-relaxed">
-                Two serviced accommodation units, live and trading, run by us
-                day to day.
-              </p>
-              <Link href="/stays" className="btn btn-ghost mt-5">
-                See the stays
-              </Link>
-            </Lift>
-            <Lift className="border hairline p-7">
-              <p className="annot muted">On the record</p>
-              <p className="mt-4 leading-relaxed">
-                Our reviews live on Google, where we can&rsquo;t edit them.
-              </p>
-              <a
-                href="https://share.google/lsd2TlaWo3OpRFqhO"
-                className="btn btn-ghost mt-5"
-                rel="noopener"
-              >
-                Read them all
-              </a>
-            </Lift>
-          </div>
         </div>
       </section>
 
