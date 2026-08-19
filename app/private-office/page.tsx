@@ -24,9 +24,9 @@ const RELEASED: Record<string, boolean> = {
 const MANDATES = [
   {
     ref: "Mandate I",
-    where: "Koh Samui · Thailand",
-    head: "An island resort, operating.",
-    line: "27 rooms and cottages on five rai. Licensed, trading, sold whole. Guide on application.",
+    where: "Thailand",
+    head: "A resort, operating.",
+    line: "25+ keys on five-plus rai in one of Thailand's premier island destinations. Licensed, operating, sold whole. Guide on application.",
     tone: "island",
     status: "Off-market · under NDA",
     page: "int-th-001",
