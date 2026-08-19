@@ -86,6 +86,12 @@ export default function Home() {
               </Lift>
             ))}
           </div>
+          <p className="annot mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 muted">
+            <span>Every review below is live on our Google Business profile.</span>
+            <a href="https://share.google/lsd2TlaWo3OpRFqhO" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-ink hover:text-bronze">
+              Verify them on Google <span aria-hidden="true">↗</span>
+            </a>
+          </p>
           <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
             <Lift className="border hairline p-7 md:p-9">
               <p className="display text-xl leading-snug md:text-2xl">
@@ -93,7 +99,7 @@ export default function Home() {
                 deals that have directly contributed to the growth of our
                 business, <span className="display-it">adding six figures in revenue.</span>&rdquo;
               </p>
-              <p className="annot mt-5 muted">Stephen McLaughlin — director, serviced accommodation company</p>
+              <p className="annot mt-5 muted">Stephen McLaughlin — director, serviced accommodation company · <a href="https://share.google/lsd2TlaWo3OpRFqhO" target="_blank" rel="noopener noreferrer" className="text-ink hover:text-bronze">on Google ↗</a></p>
             </Lift>
             <Lift className="border hairline p-7 md:p-9">
               <p className="display text-xl leading-snug md:text-2xl">
@@ -101,7 +107,7 @@ export default function Home() {
                 year now. Very professional, genuine and very hard working.
                 <span className="display-it"> I would highly recommend him and his company.</span>&rdquo;
               </p>
-              <p className="annot mt-5 muted">Jonathan Thompson — landlord on two of our houses</p>
+              <p className="annot mt-5 muted">Jonathan Thompson — landlord on two of our houses · <a href="https://share.google/lsd2TlaWo3OpRFqhO" target="_blank" rel="noopener noreferrer" className="text-ink hover:text-bronze">on Google ↗</a></p>
             </Lift>
           </div>
         </div>
