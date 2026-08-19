@@ -45,12 +45,12 @@ export default function MandateLight() {
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
       <div
         ref={green}
-        className="absolute left-1/2 top-1/2 h-[140vmax] w-[140vmax] -translate-x-1/2 -translate-y-1/2 opacity-60 mix-blend-multiply will-change-transform"
+        className="absolute left-1/2 top-1/2 h-[110vmax] w-[110vmax] -translate-x-1/2 -translate-y-1/2 opacity-60 mix-blend-multiply will-change-transform"
         style={{ background: "radial-gradient(closest-side, rgba(43,74,53,0.55) 0%, rgba(43,74,53,0.18) 35%, rgba(43,74,53,0) 62%)" }}
       />
       <div
         ref={amber}
-        className="absolute left-1/2 top-1/2 h-[140vmax] w-[140vmax] -translate-x-1/2 -translate-y-1/2 opacity-60 mix-blend-multiply will-change-transform"
+        className="absolute left-1/2 top-1/2 h-[110vmax] w-[110vmax] -translate-x-1/2 -translate-y-1/2 opacity-60 mix-blend-multiply will-change-transform"
         style={{ background: "radial-gradient(closest-side, rgba(226,150,90,0.55) 0%, rgba(226,150,90,0.18) 35%, rgba(226,150,90,0) 62%)" }}
       />
     </div>

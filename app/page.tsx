@@ -35,11 +35,11 @@ export default function Home() {
           Staged as a sheet on the drawing board: warmer paper with fibre
           grain, raised above the plaster page on a daylight shadow; the
           next section slides in beneath its bottom edge. */}
-      <section className="relative flex min-h-[92svh] flex-col items-center justify-center overflow-hidden px-5 pb-24 pt-28 text-center md:pt-32">
+      <section className="relative flex min-h-[92svh] flex-col items-center justify-center overflow-hidden px-5 pb-24 pt-28 text-center [contain:paint] md:pt-32">
         <MandateLight />
         {/* the hero's light bleeds out into the page — no edge, no shadow */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-[var(--plaster)]" aria-hidden="true" />
-        <p className="annot muted relative">Private property mandates · UK &amp; international</p>
+        <p className="annot muted relative">Private investment · UK &amp; international</p>
         <p className="display relative mt-6 text-3xl tracking-tight md:text-4xl">
           SAM <span className="display-it lowercase">n</span> HARV
         </p>
@@ -68,64 +68,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 01.25 — THE THREE DOORS */}
-      <section className="px-5 pt-6 pb-16 md:px-10 md:pb-24">
-        <div className="mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-3">
-            {[
-              {
-                who: "Opportunities",
-                head: "Four mandates. Not forty.",
-                body: "An island resort. Dubai residences, direct from the developer. UK houses bought below the street. Released after a conversation, identity and proof of funds.",
-                href: "/opportunities",
-                cta: "Request access",
-              },
-              {
-                who: "For owners",
-                head: "Your asset, our covenant.",
-                body: "A company tenancy on a multi-year term — the rent arrives whether the property is occupied or not, and it comes back in the condition we agreed.",
-                href: "/landlords",
-                cta: "Talk to us",
-              },
-              {
-                who: "For institutions",
-                head: "Placements, run properly.",
-                body: "Supported accommodation for a local authority — over a year of placements, inspection-ready as standard. The operating discipline behind everything else.",
-                href: "/councils",
-                cta: "The standard",
-              },
-            ].map((d) => (
-              <Link
-                key={d.href}
-                href={d.href}
-                className="group bg-[var(--plaster)] p-6 transition-colors duration-300 hover:bg-[var(--limestone)] md:p-8"
-              >
-                <span className="annot muted group-hover:text-[var(--bronze)]">
-                  {d.who}
-                </span>
-                <span className="display mt-2 block text-2xl">{d.head}</span>
-                <span className="mt-3 block text-[0.9375rem] leading-relaxed muted">
-                  {d.body}
-                </span>
-                <span className="annot mt-5 inline-flex items-center gap-2 text-ink">
-                  {d.cta} <span aria-hidden="true">→</span>
-                </span>
-              </Link>
-            ))}
-          </div>
-          <p className="annot mt-6 flex flex-wrap gap-x-8 gap-y-2 muted">
-            <span>We operate what we place</span>
-            <span>Every deal underwritten to our own standard</span>
-            <span>Two names on everything</span>
-          </p>
-        </div>
-      </section>
-
-
       {/* 01.4 — THE RECORD (authority) */}
-      <section className="px-5 pb-16 md:px-10 md:pb-24">
+      <section className="px-5 pt-4 pb-16 md:px-10 md:pb-24">
         <div className="mx-auto max-w-6xl">
-          <p className="annot muted">The record</p>
+          <p className="annot muted">The record — before anything else</p>
           <div className="mt-6 grid grid-cols-2 gap-px border bg-[var(--line)] hairline md:grid-cols-4">
             {[
               ["£250k", "First-year revenue", "Trading since 2025"],
@@ -160,6 +106,67 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* 01.25 — THE THREE DOORS */}
+      <section className="px-5 pb-16 md:px-10 md:pb-24">
+        <div className="mx-auto max-w-6xl">
+          <p className="annot muted">Who you are, and what's been getting in the way</p>
+          <div className="mt-6 grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-3">
+            {[
+              {
+                who: "For investors",
+                pain: "Every sourcer in the country is sending you the same Rightmove listing with a fee stapled to it.",
+                head: "Four mandates. Not forty.",
+                body: "An island resort. Dubai residences, direct from the developer. UK houses bought below the street. Released after a conversation, identity and proof of funds.",
+                href: "/opportunities",
+                cta: "Request access",
+              },
+              {
+                who: "For owners",
+                pain: "Void months, tenant churn, and an agent who rings you for every lightbulb.",
+                head: "Your asset, our covenant.",
+                body: "A company tenancy on a multi-year term — the rent arrives whether the property is occupied or not, and it comes back in the condition we agreed.",
+                href: "/landlords",
+                cta: "Talk to us",
+              },
+              {
+                who: "For institutions",
+                pain: "Placements that collapse because the provider is never actually on site.",
+                head: "Placements, run properly.",
+                body: "Supported accommodation for a local authority — over a year of placements, inspection-ready as standard. The operating discipline behind everything else.",
+                href: "/councils",
+                cta: "The standard",
+              },
+            ].map((d) => (
+              <Link
+                key={d.href}
+                href={d.href}
+                className="group bg-[var(--plaster)] p-6 transition-colors duration-300 hover:bg-[var(--limestone)] md:p-8"
+              >
+                <span className="annot muted group-hover:text-[var(--bronze)]">
+                  {d.who}
+                </span>
+                <span className="mt-3 block text-[0.9375rem] leading-relaxed text-ink">
+                  {d.pain}
+                </span>
+                <span className="display mt-5 block text-2xl">{d.head}</span>
+                <span className="mt-3 block text-[0.9375rem] leading-relaxed muted">
+                  {d.body}
+                </span>
+                <span className="annot mt-5 inline-flex items-center gap-2 text-ink">
+                  {d.cta} <span aria-hidden="true">→</span>
+                </span>
+              </Link>
+            ))}
+          </div>
+          <p className="annot mt-6 flex flex-wrap gap-x-8 gap-y-2 muted">
+            <span>We operate what we place</span>
+            <span>Every deal underwritten to our own standard</span>
+            <span>Two names on everything</span>
+          </p>
+        </div>
+      </section>
+
 
       {/* 01.45 — WHO WE WORK WITH (qualification) */}
       <section className="on-stone px-5 py-20 md:px-10 md:py-28">

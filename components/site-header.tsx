@@ -37,7 +37,7 @@ export default function SiteHeader() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div className="flex items-center justify-between bg-gradient-to-b from-[var(--plaster)]/90 via-[var(--plaster)]/60 to-transparent px-5 py-3 backdrop-blur-[2px] md:px-10">
+      <div className="flex items-center justify-between bg-gradient-to-b from-[var(--plaster)]/90 via-[var(--plaster)]/60 to-transparent px-5 py-3 md:px-10">
         <Link
           href="/"
           aria-label="Sam n Harv — home"
@@ -56,7 +56,7 @@ export default function SiteHeader() {
               key={item.href}
               href={item.href}
               aria-current={pathname === item.href ? "page" : undefined}
-              className={`annot transition-colors hover:text-ink ${
+              className={`font-sans text-[0.9375rem] tracking-[0.01em] transition-colors hover:text-ink ${
                 pathname === item.href ? "text-ink" : "text-stone"
               }`}
             >
@@ -65,19 +65,19 @@ export default function SiteHeader() {
           ))}
           <Link
             href="/contact"
-            className="annot border-b border-ink/40 pb-0.5 text-ink transition-colors hover:border-bronze hover:text-bronze"
+            className="font-sans text-[0.9375rem] tracking-[0.01em] border-b border-ink/30 pb-0.5 text-ink transition-colors hover:border-bronze hover:text-bronze"
           >
             Enquire
           </Link>
         </nav>
 
         <div className="flex items-center gap-6 lg:hidden">
-          <Link href="/contact" className="annot text-ink transition-colors hover:text-bronze">
+          <Link href="/contact" className="font-sans text-[0.9375rem] tracking-[0.01em] text-ink transition-colors hover:text-bronze">
             Enquire
           </Link>
           <button
             type="button"
-            className="annot min-h-11 text-ink transition-colors hover:text-bronze"
+            className="font-sans text-[0.9375rem] tracking-[0.01em] min-h-11 text-ink transition-colors hover:text-bronze"
             aria-expanded={open}
             aria-controls="site-menu"
             onClick={() => setOpen((v) => !v)}
