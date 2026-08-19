@@ -175,35 +175,47 @@ body {
 
 /* ---- controls ---- */
 
+/* Buttons — softer, quieter. A pill with generous air, a hairline
+   rather than a block, and a slow ease so nothing snaps. */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.625rem;
-  padding: 0.875rem 1.5rem;
+  gap: 0.7rem;
+  padding: 0.95rem 1.75rem;
   font-weight: 500;
   font-size: 0.9375rem;
+  letter-spacing: 0.01em;
   line-height: 1;
   cursor: pointer;
+  border-radius: 999px;
   transition:
-    background-color 0.2s ease-out,
-    color 0.2s ease-out,
-    border-color 0.2s ease-out,
-    transform 0.15s ease-out;
+    background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   min-height: 44px;
 }
 
+.btn:hover {
+  transform: translateY(-1px);
+}
+
 .btn:active {
-  transform: scale(0.98);
+  transform: translateY(0) scale(0.99);
 }
 
 .btn-ink {
-  background: var(--concrete);
+  background: var(--ink);
   color: var(--plaster);
+  box-shadow: 0 10px 24px -14px rgba(26, 26, 26, 0.45);
 }
 
 .btn-ink:hover {
+  background: #2a2724;
   color: var(--bronze-bright);
+  box-shadow: 0 14px 30px -14px rgba(26, 26, 26, 0.5);
 }
 
 .btn-ghost {
@@ -213,9 +225,8 @@ body {
 }
 
 .btn-ghost:hover {
-  background: var(--concrete);
-  color: var(--plaster);
-  border-color: var(--concrete);
+  background: rgba(26, 26, 26, 0.04);
+  border-color: var(--ink);
 }
 
 .on-stone .btn-ghost,

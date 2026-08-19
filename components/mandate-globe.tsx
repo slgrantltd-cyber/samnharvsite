@@ -118,8 +118,14 @@ export default function MandateGlobe() {
   const pinRefs = useRef<(HTMLDivElement | null)[]>([]);
   const captionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // pre-convert land to unit vectors once
+  // pre-convert land + graticule to unit vectors once; per-frame work is rotation + projection only
   const landVec = useMemo(() => LAND.map((poly) => poly.map(([lo, la]) => toVec(lo, la))), []);
+  const gratVec = useMemo(() => {
+    const lines: V3[][] = [];
+    for (let lon = -180; lon < 180; lon += 15) { const l: V3[] = []; for (let lat = -90; lat <= 90; lat += 4) l.push(toVec(lon, lat)); lines.push(l); }
+    for (let lat = -75; lat <= 75; lat += 15) { const l: V3[] = []; for (let lon = -180; lon <= 180; lon += 4) l.push(toVec(lon, lat)); lines.push(l); }
+    return lines;
+  }, []);
   const initial = useMemo(() => ({ lam: MANDATES[0].lon, phi: MANDATES[0].lat - 12 }), []);
 
   useEffect(() => {
@@ -151,30 +157,23 @@ export default function MandateGlobe() {
       ctx.fillStyle = "rgba(26,26,26,0.16)";
       ctx.beginPath(); ctx.ellipse(CX + R * 0.04, CY + R * 1.06, R * 0.78, R * 0.07, 0, 0, Math.PI * 2); ctx.fill();
       ctx.restore();
-      // atmosphere halo
-      const halo = ctx.createRadialGradient(CX, CY, R * 0.98, CX, CY, R * 1.06);
-      halo.addColorStop(0, "rgba(140,123,101,0.22)"); halo.addColorStop(1, "rgba(140,123,101,0)");
+      // atmosphere halo — dusk amber
+      const halo = ctx.createRadialGradient(CX, CY, R * 0.98, CX, CY, R * 1.07);
+      halo.addColorStop(0, "rgba(226,150,90,0.26)"); halo.addColorStop(1, "rgba(226,150,90,0)");
       ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(CX, CY, R * 1.06, 0, Math.PI * 2); ctx.fill();
-      // ocean (lit sphere)
-      const ocean = ctx.createRadialGradient(CX - R * 0.32, CY - R * 0.36, R * 0.05, CX, CY, R * 1.05);
-      ocean.addColorStop(0, "#fbf8f1"); ocean.addColorStop(0.45, "#ebe4d6"); ocean.addColorStop(0.82, "#d1c6b1"); ocean.addColorStop(1, "#ad9f86");
+      // ocean — lit from the top-left in warm dusk light, falling into leaf-green shadow
+      const ocean = ctx.createRadialGradient(CX - R * 0.34, CY - R * 0.38, R * 0.05, CX, CY, R * 1.05);
+      ocean.addColorStop(0, "#fbf5ea"); ocean.addColorStop(0.35, "#eadfcb"); ocean.addColorStop(0.7, "#c9c2a8"); ocean.addColorStop(0.9, "#7d8a62"); ocean.addColorStop(1, "#3f5a45");
       ctx.fillStyle = ocean; ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI * 2); ctx.fill();
       // clip everything else to the disc
       ctx.save(); ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI * 2); ctx.clip();
-      // graticule
-      ctx.lineWidth = 0.6; ctx.strokeStyle = "rgba(26,26,26,0.16)";
+      // graticule (precomputed vectors)
+      ctx.lineWidth = 0.6; ctx.strokeStyle = "rgba(26,26,26,0.14)";
       ctx.beginPath();
-      for (let lon = -180; lon < 180; lon += 15) {
+      for (const line of gratVec) {
         let pen = false;
-        for (let lat = -90; lat <= 90; lat += 3) {
-          const v = rotate(toVec(lon, lat), state.lam, state.phi);
-          if (v[0] > 0) { const p = proj(v); if (pen) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y); pen = true; } else pen = false;
-        }
-      }
-      for (let lat = -75; lat <= 75; lat += 15) {
-        let pen = false;
-        for (let lon = -180; lon <= 180; lon += 3) {
-          const v = rotate(toVec(lon, lat), state.lam, state.phi);
+        for (const v0 of line) {
+          const v = rotate(v0, state.lam, state.phi);
           if (v[0] > 0) { const p = proj(v); if (pen) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y); pen = true; } else pen = false;
         }
       }
@@ -189,17 +188,19 @@ export default function MandateGlobe() {
         ctx.closePath();
         // shade land by depth: brighter facing the viewer, darker toward the limb
         const c = ring.reduce((s, v) => s + v[0], 0) / ring.length;
-        const lum = 0.78 + c * 0.22;
-        ctx.fillStyle = `rgba(${Math.round(201 * lum)},${Math.round(190 * lum)},${Math.round(165 * lum)},0.96)`;
+        // land: warm sand facing the light, cooling toward palm-green at the limb
+        const t = Math.max(0, Math.min(1, c));
+        const r = Math.round(212 * t + 88 * (1 - t)), gg = Math.round(192 * t + 110 * (1 - t)), b = Math.round(150 * t + 84 * (1 - t));
+        ctx.fillStyle = `rgba(${r},${gg},${b},0.96)`;
         ctx.fill();
-        ctx.strokeStyle = "rgba(26,26,26,0.75)"; ctx.stroke();
+        ctx.strokeStyle = "rgba(26,26,26,0.6)"; ctx.stroke();
       }
       // limb shading + specular
       const limb = ctx.createRadialGradient(CX - R * 0.2, CY - R * 0.28, R * 0.55, CX, CY, R);
-      limb.addColorStop(0, "rgba(26,26,26,0)"); limb.addColorStop(1, "rgba(26,26,26,0.30)");
+      limb.addColorStop(0, "rgba(43,74,53,0)"); limb.addColorStop(1, "rgba(35,58,44,0.42)");
       ctx.fillStyle = limb; ctx.fillRect(0, 0, W, H);
       const spec = ctx.createRadialGradient(CX - R * 0.4, CY - R * 0.48, 0, CX - R * 0.4, CY - R * 0.48, R * 0.5);
-      spec.addColorStop(0, "rgba(255,255,255,0.5)"); spec.addColorStop(1, "rgba(255,255,255,0)");
+      spec.addColorStop(0, "rgba(255,236,214,0.55)"); spec.addColorStop(1, "rgba(255,236,214,0)");
       ctx.fillStyle = spec; ctx.fillRect(0, 0, W, H);
       ctx.restore();
       // rim
@@ -235,7 +236,7 @@ export default function MandateGlobe() {
       .to({}, { duration: 0.6 });
 
     return () => { ro.disconnect(); tl.scrollTrigger?.kill(); tl.kill(); };
-  }, [initial, landVec]);
+  }, [initial, landVec, gratVec]);
 
   return (
     <section ref={section} className="m-limestone relative h-[100svh] overflow-hidden">
