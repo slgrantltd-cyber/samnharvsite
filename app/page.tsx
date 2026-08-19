@@ -23,7 +23,7 @@ import Link from "next/link";
 import { Rise, Line, Lift, ScrubWords } from "@/components/reveal";
 import MarkMorph from "@/components/mark-morph";
 import MandateLight from "@/components/mandate-light";
-import SurveyMap from "@/components/survey-map";
+import MandateGlobe from "@/components/mandate-globe";
 import StrategyLedger from "@/components/strategy-ledger";
 import { photoPath } from "@/lib/photos";
 
@@ -256,8 +256,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 02 — THE TERRITORY (pinned map) */}
-      <SurveyMap />
+      {/* 02 — THE TERRITORY (pinned globe: UK → Dubai → Thailand) */}
+      <MandateGlobe />
 
       {/* 03 — THE LEDGER (natural limestone) */}
       <section className="m-limestone px-5 py-24 md:px-10 md:py-36">
