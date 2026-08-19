@@ -11,10 +11,11 @@ import BenchmarkMark from "@/components/benchmark-mark";
 const NAV = [
   { href: "/", label: "Home" },
   { href: "/private-office", label: "Private Office" },
-  { href: "/services", label: "Work with us" },
+  { href: "/trust", label: "Our word" },
   { href: "/about", label: "The brothers" },
 ];
 const MENU_EXTRA = [
+  { href: "/services", label: "Work with us" },
   { href: "/landlords", label: "Owners" },
   { href: "/councils", label: "Institutions" },
   { href: "/agents", label: "Agents" },

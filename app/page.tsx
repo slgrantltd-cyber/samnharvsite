@@ -202,6 +202,49 @@ export default function Home() {
         </div>
       </section>
 
+
+      {/* 01.47 — OUR WORD (trust) */}
+      <section className="px-5 py-20 md:px-10 md:py-28">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-5">
+            <div className="md:col-span-2">
+              <p className="annot muted">Our word</p>
+              <Rise as="h2" className="display mt-3 text-4xl md:text-5xl">
+                <Line>Investment carries risk.</Line>
+                <Line>
+                  We won&rsquo;t <span className="display-it">pretend otherwise.</span>
+                </Line>
+              </Rise>
+              <p className="muted mt-6 max-w-md leading-relaxed">
+                We don&rsquo;t make our money on the sale — we make it on the
+                second deal, and the third. There is no second deal with
+                someone we let down. So the rules below aren&rsquo;t
+                marketing; they&rsquo;re the business model.
+              </p>
+              <Link href="/trust" className="annot mt-6 inline-flex items-center gap-2 text-ink hover:text-bronze">
+                All nine rules, and how to check them <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+            <div className="md:col-span-3">
+              <div className="grid grid-cols-1 gap-px border bg-[var(--line)] hairline">
+                {[
+                  ["Worst case first", "Three scenarios on every mandate. We buy on likely; we never sell on best."],
+                  ["Risk, stated plainly", "Planning, title, the railway line, the roof — first page, plain English."],
+                  ["Nothing guaranteed", "Not returns, not occupancy, not values. Walk away from anyone who says otherwise."],
+                  ["Our fee, in writing, up front", "Fixed, declared before you see a property, payable on exchange. No hidden margin."],
+                  ["We say no", "If it doesn't fit you, or stops working mid-process, we tell you to walk — and walk with you."],
+                ].map(([h, b]) => (
+                  <div key={h} className="bg-[var(--plaster)] p-5 md:p-6">
+                    <p className="display text-xl">{h}</p>
+                    <p className="muted mt-1.5 text-[0.9375rem] leading-relaxed">{b}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 01.5 — MANIFESTO */}
       <section className="px-5 py-28 md:px-10 md:py-40">
         <div className="mx-auto max-w-4xl">

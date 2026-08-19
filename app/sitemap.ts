@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/learn",
     "/insights",
     "/standards",
+    "/trust",
     "/faq",
     "/contact",
   ].map(
