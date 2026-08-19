@@ -77,18 +77,18 @@ export default function MarkMorph({ className }: { className?: string }) {
       onUpdate: apply,
       scrollTrigger: {
         start: 0,
-        end: () => window.innerHeight * 0.45,
-        scrub: 0.4,
+        end: () => window.innerHeight * 0.22,
+        scrub: 0.25,
       },
     });
     const drift = gsap.to(box.current, {
-      y: 46,
-      scale: 1.05,
+      y: 40,
+      scale: 1.06,
       ease: "none",
       scrollTrigger: {
         start: 0,
-        end: () => window.innerHeight * 0.9,
-        scrub: 0.4,
+        end: () => window.innerHeight * 0.6,
+        scrub: 0.25,
       },
     });
     return () => {

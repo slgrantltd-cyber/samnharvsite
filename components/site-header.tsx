@@ -5,11 +5,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import BenchmarkMark from "@/components/benchmark-mark";
 
+/* Primary nav stays minimal: four tabs + Enquire. Owners/institutions
+   pages live under "Work with us"; stays, agents, developers live in the
+   mobile menu and the footer. */
 const NAV = [
   { href: "/", label: "Home" },
   { href: "/private-office", label: "Private Office" },
-  { href: "/landlords", label: "Landlords" },
-  { href: "/councils", label: "Councils" },
+  { href: "/services", label: "Work with us" },
+  { href: "/about", label: "The brothers" },
+];
+const MENU_EXTRA = [
+  { href: "/landlords", label: "Owners" },
+  { href: "/councils", label: "Institutions" },
   { href: "/agents", label: "Agents" },
   { href: "/developers", label: "Developers" },
   { href: "/stays", label: "Stays" },
@@ -29,7 +36,7 @@ export default function SiteHeader() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div className="flex items-center justify-between border-b hairline bg-plaster/95 px-5 py-3 md:px-10">
+      <div className="flex items-center justify-between bg-gradient-to-b from-[var(--plaster)]/90 via-[var(--plaster)]/60 to-transparent px-5 py-3 backdrop-blur-[2px] md:px-10">
         <Link
           href="/"
           aria-label="Sam n Harv — home"
@@ -113,6 +120,18 @@ export default function SiteHeader() {
               <span className="annot text-bronze-bright">0{i + 2}</span>
             </Link>
           ))}
+          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+            {MENU_EXTRA.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="annot flex min-h-11 items-center text-[var(--line-light)] transition-colors hover:text-bronze-bright"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
         </nav>
         <div className="mt-8 flex flex-col gap-3">
           <a href="https://wa.me/447444551241" className="btn btn-ghost">

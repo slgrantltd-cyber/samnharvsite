@@ -35,8 +35,10 @@ export default function Home() {
           Staged as a sheet on the drawing board: warmer paper with fibre
           grain, raised above the plaster page on a daylight shadow; the
           next section slides in beneath its bottom edge. */}
-      <section className="m-paper relative z-10 flex min-h-[92svh] flex-col items-center justify-center overflow-hidden border-b hairline px-5 pb-20 pt-28 text-center shadow-[0_36px_70px_-24px_rgba(31,30,28,0.35),0_10px_24px_-14px_rgba(31,30,28,0.22)] md:pt-32">
+      <section className="relative flex min-h-[92svh] flex-col items-center justify-center overflow-hidden px-5 pb-24 pt-28 text-center md:pt-32">
         <MandateLight />
+        {/* the hero's light bleeds out into the page — no edge, no shadow */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-[var(--plaster)]" aria-hidden="true" />
         <p className="annot muted relative">Private property mandates · UK &amp; international</p>
         <p className="display relative mt-6 text-3xl tracking-tight md:text-4xl">
           SAM <span className="display-it lowercase">n</span> HARV

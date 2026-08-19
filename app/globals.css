@@ -96,8 +96,6 @@ body {
 .display {
   font-family: var(--font-caslon), Georgia, serif;
   font-weight: 400;
-  letter-spacing: -0.005em;
-  font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 0.98;
   text-wrap: balance;
@@ -105,8 +103,6 @@ body {
 
 .display-it {
   font-family: var(--font-caslon-it), Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
   font-style: italic;
 }
 
