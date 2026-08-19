@@ -58,7 +58,7 @@ export default function CouncilsPage() {
               young people placed safely, many now moved on into{" "}
               <span className="display-it">permanent, settled homes.</span>
             </p>
-            <p className="mt-5 max-w-2xl leading-relaxed text-[var(--stone-dark)]">
+            <p className="mt-5 max-w-2xl leading-relaxed text-[var(--plaster)]/82">
               That partnership is our reference. We&rsquo;re now offering the
               same service to other councils across the country — references
               from our current authority available on request.

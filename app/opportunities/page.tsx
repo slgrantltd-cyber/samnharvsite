@@ -135,7 +135,7 @@ export default function PrivateOfficePage() {
                 <div key={h}>
                   <span className="block h-px w-8 bg-[var(--bronze-bright)]" aria-hidden="true" />
                   <p className="display mt-3 text-xl">{h}</p>
-                  <p className="mt-2 text-[0.9rem] leading-relaxed text-[var(--line-light)]">{b}</p>
+                  <p className="mt-2 text-[0.9rem] leading-relaxed text-[var(--plaster)]/80">{b}</p>
                 </div>
               ))}
             </div>

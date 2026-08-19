@@ -35,7 +35,7 @@ export default function StandardsPage() {
         <div className="mx-auto max-w-6xl">
           <div className="on-stone p-8 shadow-daylight md:p-10">
             <p className="annot text-[var(--bronze-bright)]">How to read this page</p>
-            <p className="mt-4 max-w-3xl leading-relaxed text-[var(--stone-dark)]">
+            <p className="mt-4 max-w-3xl leading-relaxed text-[var(--plaster)]/82">
               Everything below is stated exactly as it stands. What we hold is
               marked as held. What we&rsquo;ve completed is marked as completed.
               And what we&rsquo;re still earning carries a{" "}

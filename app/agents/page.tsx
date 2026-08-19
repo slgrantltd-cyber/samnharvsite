@@ -121,7 +121,7 @@ export default function AgentsPage() {
               stays exactly as it is: landlord, agent, tenant.{" "}
               <span className="display-it">We&rsquo;re the tenant.</span>
             </p>
-            <p className="mt-5 max-w-2xl leading-relaxed text-[var(--stone-dark)]">
+            <p className="mt-5 max-w-2xl leading-relaxed text-[var(--plaster)]/82">
               You keep the landlord relationship. You keep the management.
               You keep the fee. What changes is the quality of the tenancy:
               one professional company on a multi-year agreement, instead of

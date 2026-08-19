@@ -37,7 +37,7 @@ export default function ToolkitPage() {
               <p className="annot text-[var(--bronze-bright)]">
                 The flagship instrument
               </p>
-              <p className="annot text-[var(--stone-dark)]">
+              <p className="annot text-[var(--plaster)]/82">
                 BTL · BRRR · R2R · HMO · LO · FLIP
               </p>
             </div>
@@ -45,7 +45,7 @@ export default function ToolkitPage() {
               Deal Intelligence — the full{" "}
               <span className="display-it">appraisal.</span>
             </h2>
-            <p className="mt-4 max-w-xl leading-relaxed text-[var(--stone-dark)]">
+            <p className="mt-4 max-w-xl leading-relaxed text-[var(--plaster)]/82">
               Six strategies, live recalculation, graded scores on every
               measure, and an honest written verdict: would we buy this deal?
               It covers cash flow, ROI, yield, refinance and profit in one

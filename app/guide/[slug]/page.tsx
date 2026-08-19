@@ -88,7 +88,7 @@ export default async function GuidePage({
               Enjoyed your stay?{" "}
               <span className="display-it">Tell someone.</span>
             </p>
-            <p className="mx-auto mt-4 max-w-md leading-relaxed text-[var(--stone-dark)]">
+            <p className="mx-auto mt-4 max-w-md leading-relaxed text-[var(--plaster)]/82">
               We&rsquo;re two brothers building this on our own name — a
               review from you genuinely changes things for us. It takes about
               a minute.

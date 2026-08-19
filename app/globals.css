@@ -140,8 +140,9 @@ body {
   color: var(--plaster);
 }
 
-.on-stone .muted {
-  color: var(--stone-dark);
+.on-stone .muted,
+.m-concrete .muted {
+  color: rgba(242, 239, 232, 0.78);
 }
 
 .m-concrete {

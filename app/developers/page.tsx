@@ -123,7 +123,7 @@ export default function DevelopersPage() {
                 you sell with vacant possession.
               </span>
             </p>
-            <p className="mt-5 max-w-2xl leading-relaxed text-[var(--stone-dark)]">
+            <p className="mt-5 max-w-2xl leading-relaxed text-[var(--plaster)]/82">
               A let to a company sits outside the assured-tenancy framework
               the Renters&rsquo; Rights Act reshaped — so fixed terms,
               break-on-sale clauses and agreed hand-back dates all still

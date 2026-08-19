@@ -232,25 +232,24 @@ export default function MandateGlobe() {
 
   return (
     <section ref={section} className="relative h-[100svh] overflow-hidden">
-      <div className="mx-auto grid h-full max-w-6xl grid-cols-1 items-center gap-6 px-5 pt-24 md:grid-cols-5 md:gap-8 md:px-10 md:pt-20">
-        <div className="relative z-10 md:col-span-2">
-          <div className="relative h-44 md:h-56">
-            {MANDATES.map((m, i) => (
-              <div key={m.label} ref={(el) => { captionRefs.current[i] = el; }} className="absolute inset-x-0">
-                <p className="annot muted">The territory</p>
-                <h2 className="display mt-2 text-4xl md:text-6xl">
-                  {m.label.split(" ")[0]}{" "}
-                  <span className="display-it">{m.label.split(" ").slice(1).join(" ") || ""}</span>
-                </h2>
-                <p className="annot mt-3 text-bronze">{m.kicker}</p>
-                <p className="muted mt-2 max-w-sm">{m.line}</p>
-              </div>
-            ))}
-          </div>
+      <div className="mx-auto flex h-full max-w-6xl flex-col items-center px-5 pt-24 text-center md:px-10 md:pt-28">
+        {/* caption above the globe */}
+        <div className="relative z-10 h-36 w-full max-w-2xl md:h-40">
+          {MANDATES.map((m, i) => (
+            <div key={m.label} ref={(el) => { captionRefs.current[i] = el; }} className="absolute inset-x-0">
+              <p className="annot muted">The territory</p>
+              <h2 className="display mt-2 text-4xl md:text-6xl">
+                {m.label.split(" ")[0]}{" "}
+                <span className="display-it">{m.label.split(" ").slice(1).join(" ") || ""}</span>
+              </h2>
+              <p className="annot mt-3 text-bronze">{m.kicker}</p>
+              <p className="muted mx-auto mt-2 max-w-md">{m.line}</p>
+            </div>
+          ))}
         </div>
-        <div className="relative mx-auto aspect-square w-full max-w-[520px] md:col-span-3 md:max-w-[700px]">
+        {/* the globe — fills the remaining height */}
+        <div className="relative mt-6 aspect-square w-full max-w-[min(62vh,640px)] md:mt-8">
           <canvas ref={canvas} className="absolute inset-0 h-full w-full" aria-label="A globe turning between the United Kingdom, Dubai and Thailand" />
-          {/* pins: HTML so the type stays crisp at any DPR */}
           {MANDATES.map((m, i) => (
             <div key={m.label} ref={(el) => { pinRefs.current[i] = el; }} className="pointer-events-none absolute left-0 top-0 will-change-transform" style={{ opacity: 0 }}>
               <div className="relative -translate-x-1/2 -translate-y-1/2">

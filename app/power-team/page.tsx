@@ -61,14 +61,14 @@ export default function PowerTeamPage() {
               recommendation is our name on{" "}
               <span className="display-it">someone else&rsquo;s work.</span>
             </p>
-            <p className="mt-5 max-w-2xl leading-relaxed text-[var(--stone-dark)]">
+            <p className="mt-5 max-w-2xl leading-relaxed text-[var(--plaster)]/82">
               We don&rsquo;t publish names and numbers, and we introduce you
               to who the deal actually needs — an auction purchase needs the
               solicitor first; a heavy refurb starts with the builder and the
               surveyor. You remain free to use anyone you like; ours are
               simply the people we trust with our own operation.
             </p>
-            <p className="mt-4 max-w-2xl leading-relaxed text-[var(--stone-dark)]">
+            <p className="mt-4 max-w-2xl leading-relaxed text-[var(--plaster)]/82">
               And to be clear: <span className="text-bronze">introductions
               are recommendations, not a charged service.</span> We make
               nothing from them — you deal with each professional directly,

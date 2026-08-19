@@ -73,7 +73,7 @@ export default function ResourcesPage() {
               Put the numbers to work in the{" "}
               <span className="display-it">Deal Analyzer.</span>
             </p>
-            <p className="mt-4 max-w-xl leading-relaxed text-[var(--stone-dark)]">
+            <p className="mt-4 max-w-xl leading-relaxed text-[var(--plaster)]/82">
               Every checklist here feeds one decision: buy or walk. Run your
               figures through Deal Intelligence and see the verdict we&rsquo;d
               reach.
