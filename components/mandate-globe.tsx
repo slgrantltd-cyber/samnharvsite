@@ -15,8 +15,6 @@ gsap.registerPlugin(ScrollTrigger);
  */
 
 type LonLat = [number, number];
-const R = 268; // globe radius in SVG units
-const CX = 300, CY = 300;
 
 // Very low-poly land outlines (lon,lat) — enough to read as the world.
 const LAND: LonLat[][] = [
@@ -72,90 +70,172 @@ const MANDATES = [
 
 const d2r = Math.PI / 180;
 
-/** Orthographic projection with rotation (lambda = centre lon, phi = centre lat). */
-function project(lon: number, lat: number, lam: number, phi: number) {
-  const λ = (lon - lam) * d2r, φ = lat * d2r, φ0 = phi * d2r;
-  const cosc = Math.sin(φ0) * Math.sin(φ) + Math.cos(φ0) * Math.cos(φ) * Math.cos(λ);
-  const x = R * Math.cos(φ) * Math.sin(λ);
-  const y = R * (Math.cos(φ0) * Math.sin(φ) - Math.sin(φ0) * Math.cos(φ) * Math.cos(λ));
-  return { x: CX + x, y: CY - y, visible: cosc > 0, depth: cosc };
+/* ---------- geometry ----------
+   Orthographic projection of a unit sphere rotated to (lam, phi).
+   We work in 3-D unit vectors so hemisphere clipping can be done
+   geometrically: polygons are clipped against the great-circle plane
+   z = 0 (the horizon) using Sutherland–Hodgman, so land stays a
+   CLOSED shape as it crosses the limb — fills never drop. */
+type V3 = [number, number, number];
+function toVec(lon: number, lat: number): V3 {
+  const λ = lon * d2r, φ = lat * d2r;
+  return [Math.cos(φ) * Math.cos(λ), Math.cos(φ) * Math.sin(λ), Math.sin(φ)];
 }
-
-function pathFor(poly: LonLat[], lam: number, phi: number) {
-  // Clip to the visible hemisphere by breaking the path at horizon crossings.
-  let d = ""; let pen = false;
-  for (const [lon, lat] of poly) {
-    const p = project(lon, lat, lam, phi);
-    if (p.visible) { d += (pen ? "L" : "M") + p.x.toFixed(1) + " " + p.y.toFixed(1) + " "; pen = true; }
-    else pen = false;
-  }
-  return d;
+function rotate(v: V3, lam: number, phi: number): V3 {
+  // 1) yaw about the polar (z) axis so longitude `lam` faces the viewer (+x)
+  const a = -lam * d2r;
+  const x1 = v[0] * Math.cos(a) - v[1] * Math.sin(a);
+  const y1 = v[0] * Math.sin(a) + v[1] * Math.cos(a);
+  const z1 = v[2];
+  // 2) pitch about the horizontal screen axis (y) so latitude `phi` faces the viewer
+  const b = phi * d2r;
+  const x2 = x1 * Math.cos(b) + z1 * Math.sin(b);
+  const z2 = -x1 * Math.sin(b) + z1 * Math.cos(b);
+  return [x2, y1, z2]; // x2 = depth toward viewer, y1 = screen-right, z2 = screen-up
 }
-
-function graticule(lam: number, phi: number) {
-  let d = "";
-  for (let lon = -180; lon < 180; lon += 30) {
-    let pen = false;
-    for (let lat = -90; lat <= 90; lat += 5) {
-      const p = project(lon, lat, lam, phi);
-      if (p.visible) { d += (pen ? "L" : "M") + p.x.toFixed(1) + " " + p.y.toFixed(1) + " "; pen = true; } else pen = false;
+/** Clip a ring (rotated vectors) to the visible hemisphere (x > 0). */
+function clipToFront(ring: V3[]): V3[] {
+  const out: V3[] = [];
+  const n = ring.length;
+  for (let i = 0; i < n; i++) {
+    const a = ring[i], b = ring[(i + 1) % n];
+    const ina = a[0] > 0, inb = b[0] > 0;
+    if (ina) out.push(a);
+    if (ina !== inb) {
+      const t = a[0] / (a[0] - b[0]);
+      const m: V3 = [0, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+      // push intersection onto the limb circle
+      const l = Math.hypot(m[1], m[2]) || 1;
+      out.push([0, m[1] / l, m[2] / l]);
     }
   }
-  for (let lat = -60; lat <= 60; lat += 30) {
-    let pen = false;
-    for (let lon = -180; lon <= 180; lon += 5) {
-      const p = project(lon, lat, lam, phi);
-      if (p.visible) { d += (pen ? "L" : "M") + p.x.toFixed(1) + " " + p.y.toFixed(1) + " "; pen = true; } else pen = false;
-    }
-  }
-  return d;
+  return out;
 }
 
 export default function MandateGlobe() {
   const section = useRef<HTMLDivElement>(null);
-  const landRef = useRef<SVGPathElement>(null);
-  const gratRef = useRef<SVGPathElement>(null);
-  const pinRefs = useRef<(SVGGElement | null)[]>([]);
+  const canvas = useRef<HTMLCanvasElement>(null);
+  const pinRefs = useRef<(HTMLDivElement | null)[]>([]);
   const captionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const initial = useMemo(() => ({ lam: MANDATES[0].lon, phi: MANDATES[0].lat - 15 }), []);
+  // pre-convert land to unit vectors once
+  const landVec = useMemo(() => LAND.map((poly) => poly.map(([lo, la]) => toVec(lo, la))), []);
+  const initial = useMemo(() => ({ lam: MANDATES[0].lon, phi: MANDATES[0].lat - 12 }), []);
 
   useEffect(() => {
-    const sec = section.current; if (!sec) return;
+    const sec = section.current, cv = canvas.current; if (!sec || !cv) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const state = { lam: initial.lam, phi: initial.phi };
+    const ctx = cv.getContext("2d")!;
+    let W = 0, H = 0, R = 0, CX = 0, CY = 0, dpr = 1;
 
-    const render = () => {
-      landRef.current?.setAttribute("d", LAND.map((p) => pathFor(p, state.lam, state.phi)).join(" "));
-      gratRef.current?.setAttribute("d", graticule(state.lam, state.phi));
+    const resize = () => {
+      const rect = cv.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+      W = rect.width; H = rect.height;
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      R = Math.min(W, H) * 0.46; CX = W / 2; CY = H / 2;
+      draw();
+    };
+
+    const proj = (v: V3) => ({ x: CX + v[1] * R, y: CY - v[2] * R, depth: v[0] });
+
+    let queued = false;
+    const draw = () => {
+      queued = false;
+      ctx.clearRect(0, 0, W, H);
+      // soft drop shadow
+      ctx.save();
+      ctx.filter = "blur(10px)";
+      ctx.fillStyle = "rgba(26,26,26,0.16)";
+      ctx.beginPath(); ctx.ellipse(CX + R * 0.04, CY + R * 1.06, R * 0.78, R * 0.07, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+      // atmosphere halo
+      const halo = ctx.createRadialGradient(CX, CY, R * 0.98, CX, CY, R * 1.06);
+      halo.addColorStop(0, "rgba(140,123,101,0.22)"); halo.addColorStop(1, "rgba(140,123,101,0)");
+      ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(CX, CY, R * 1.06, 0, Math.PI * 2); ctx.fill();
+      // ocean (lit sphere)
+      const ocean = ctx.createRadialGradient(CX - R * 0.32, CY - R * 0.36, R * 0.05, CX, CY, R * 1.05);
+      ocean.addColorStop(0, "#fbf8f1"); ocean.addColorStop(0.45, "#ebe4d6"); ocean.addColorStop(0.82, "#d1c6b1"); ocean.addColorStop(1, "#ad9f86");
+      ctx.fillStyle = ocean; ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI * 2); ctx.fill();
+      // clip everything else to the disc
+      ctx.save(); ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI * 2); ctx.clip();
+      // graticule
+      ctx.lineWidth = 0.6; ctx.strokeStyle = "rgba(26,26,26,0.16)";
+      ctx.beginPath();
+      for (let lon = -180; lon < 180; lon += 15) {
+        let pen = false;
+        for (let lat = -90; lat <= 90; lat += 3) {
+          const v = rotate(toVec(lon, lat), state.lam, state.phi);
+          if (v[0] > 0) { const p = proj(v); if (pen) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y); pen = true; } else pen = false;
+        }
+      }
+      for (let lat = -75; lat <= 75; lat += 15) {
+        let pen = false;
+        for (let lon = -180; lon <= 180; lon += 3) {
+          const v = rotate(toVec(lon, lat), state.lam, state.phi);
+          if (v[0] > 0) { const p = proj(v); if (pen) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y); pen = true; } else pen = false;
+        }
+      }
+      ctx.stroke();
+      // land — closed polygons clipped to the hemisphere; fills never drop
+      ctx.lineJoin = "round"; ctx.lineWidth = 0.9;
+      for (const poly of landVec) {
+        const ring = clipToFront(poly.map((v) => rotate(v, state.lam, state.phi)));
+        if (ring.length < 3) continue;
+        ctx.beginPath();
+        ring.forEach((v, i) => { const p = proj(v); if (i) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y); });
+        ctx.closePath();
+        // shade land by depth: brighter facing the viewer, darker toward the limb
+        const c = ring.reduce((s, v) => s + v[0], 0) / ring.length;
+        const lum = 0.78 + c * 0.22;
+        ctx.fillStyle = `rgba(${Math.round(201 * lum)},${Math.round(190 * lum)},${Math.round(165 * lum)},0.96)`;
+        ctx.fill();
+        ctx.strokeStyle = "rgba(26,26,26,0.75)"; ctx.stroke();
+      }
+      // limb shading + specular
+      const limb = ctx.createRadialGradient(CX - R * 0.2, CY - R * 0.28, R * 0.55, CX, CY, R);
+      limb.addColorStop(0, "rgba(26,26,26,0)"); limb.addColorStop(1, "rgba(26,26,26,0.30)");
+      ctx.fillStyle = limb; ctx.fillRect(0, 0, W, H);
+      const spec = ctx.createRadialGradient(CX - R * 0.4, CY - R * 0.48, 0, CX - R * 0.4, CY - R * 0.48, R * 0.5);
+      spec.addColorStop(0, "rgba(255,255,255,0.5)"); spec.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = spec; ctx.fillRect(0, 0, W, H);
+      ctx.restore();
+      // rim
+      ctx.lineWidth = 1; ctx.strokeStyle = "rgba(26,26,26,0.55)";
+      ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI * 2); ctx.stroke();
+      // pins (HTML overlays positioned over the canvas)
       MANDATES.forEach((m, i) => {
-        const p = project(m.lon, m.lat, state.lam, state.phi);
-        const g = pinRefs.current[i]; if (!g) return;
-        g.setAttribute("transform", `translate(${p.x.toFixed(1)} ${p.y.toFixed(1)})`);
-        g.style.opacity = p.visible ? String(0.35 + p.depth * 0.65) : "0";
+        const v = rotate(toVec(m.lon, m.lat), state.lam, state.phi);
+        const el = pinRefs.current[i]; if (!el) return;
+        const p = proj(v);
+        el.style.transform = `translate(${p.x.toFixed(1)}px, ${p.y.toFixed(1)}px)`;
+        el.style.opacity = v[0] > 0.02 ? String(0.3 + v[0] * 0.7) : "0";
       });
     };
-    render();
-    if (reduced) return;
+    const request = () => { if (!queued) { queued = true; requestAnimationFrame(draw); } };
+
+    const ro = new ResizeObserver(resize); ro.observe(cv); resize();
+    if (reduced) return () => ro.disconnect();
 
     gsap.set(captionRefs.current.slice(1), { autoAlpha: 0, y: 24 });
     const tl = gsap.timeline({
       scrollTrigger: { trigger: sec, start: "top top", end: "+=260%", pin: true, scrub: 0.6 },
       defaults: { ease: "none" },
     });
-    // UK (rest) → Dubai → Thailand, captions swapping as the globe turns
     tl.to({}, { duration: 0.6 })
-      .to(state, { lam: MANDATES[1].lon, phi: MANDATES[1].lat - 10, duration: 1.2, onUpdate: render })
+      .to(state, { lam: MANDATES[1].lon, phi: MANDATES[1].lat - 12, duration: 1.2, onUpdate: request })
       .to(captionRefs.current[0], { autoAlpha: 0, y: -24, duration: 0.4 }, "<0.2")
       .to(captionRefs.current[1], { autoAlpha: 1, y: 0, duration: 0.4 }, "<0.25")
       .to({}, { duration: 0.5 })
-      .to(state, { lam: MANDATES[2].lon, phi: MANDATES[2].lat - 4, duration: 1.2, onUpdate: render })
+      .to(state, { lam: MANDATES[2].lon, phi: MANDATES[2].lat - 6, duration: 1.2, onUpdate: request })
       .to(captionRefs.current[1], { autoAlpha: 0, y: -24, duration: 0.4 }, "<0.2")
       .to(captionRefs.current[2], { autoAlpha: 1, y: 0, duration: 0.4 }, "<0.25")
       .to({}, { duration: 0.6 });
 
-    return () => { tl.scrollTrigger?.kill(); tl.kill(); };
-  }, [initial]);
+    return () => { ro.disconnect(); tl.scrollTrigger?.kill(); tl.kill(); };
+  }, [initial, landVec]);
 
   return (
     <section ref={section} className="m-limestone relative h-[100svh] overflow-hidden">
@@ -175,58 +255,19 @@ export default function MandateGlobe() {
             ))}
           </div>
         </div>
-        <div className="md:col-span-3">
-          <svg viewBox="0 0 600 600" className="mx-auto h-auto w-full max-w-[520px] md:max-w-[680px]" aria-label="A globe turning between the United Kingdom, Dubai and Thailand">
-            <defs>
-              {/* ocean: a lit sphere — highlight upper-left, falling to shadow lower-right */}
-              <radialGradient id="ocean" cx="36%" cy="32%" r="78%">
-                <stop offset="0%" stopColor="#fbf8f1" />
-                <stop offset="45%" stopColor="#ece6d8" />
-                <stop offset="80%" stopColor="#d3c9b5" />
-                <stop offset="100%" stopColor="#b7ab93" />
-              </radialGradient>
-              {/* terminator shade: darkens the limb so the sphere reads as round */}
-              <radialGradient id="limb" cx="40%" cy="36%" r="70%">
-                <stop offset="70%" stopColor="rgba(26,26,26,0)" />
-                <stop offset="100%" stopColor="rgba(26,26,26,0.28)" />
-              </radialGradient>
-              {/* specular: one soft highlight */}
-              <radialGradient id="spec" cx="30%" cy="26%" r="30%">
-                <stop offset="0%" stopColor="rgba(255,255,255,0.55)" />
-                <stop offset="100%" stopColor="rgba(255,255,255,0)" />
-              </radialGradient>
-              {/* atmosphere halo outside the disc */}
-              <radialGradient id="halo" cx="50%" cy="50%" r="50%">
-                <stop offset="88%" stopColor="rgba(140,123,101,0)" />
-                <stop offset="96%" stopColor="rgba(140,123,101,0.22)" />
-                <stop offset="100%" stopColor="rgba(140,123,101,0)" />
-              </radialGradient>
-              <clipPath id="disc"><circle cx={CX} cy={CY} r={R} /></clipPath>
-            </defs>
-            {/* drop shadow on the limestone beneath */}
-            <ellipse cx={CX + 10} cy={CY + R + 22} rx={R * 0.82} ry="16" fill="rgba(26,26,26,0.12)" />
-            {/* halo */}
-            <circle cx={CX} cy={CY} r={R + 14} fill="url(#halo)" />
-            {/* the sphere */}
-            <circle cx={CX} cy={CY} r={R} fill="url(#ocean)" />
-            <g clipPath="url(#disc)">
-              <path ref={gratRef} fill="none" stroke="var(--ink)" strokeOpacity="0.16" strokeWidth="0.55" />
-              <path ref={landRef} fill="#c9bea5" fillOpacity="0.9" stroke="var(--ink)" strokeOpacity="0.8" strokeWidth="0.9" strokeLinejoin="round" />
-              <circle cx={CX} cy={CY} r={R} fill="url(#limb)" />
-              <circle cx={CX} cy={CY} r={R} fill="url(#spec)" />
-            </g>
-            <circle cx={CX} cy={CY} r={R} fill="none" stroke="var(--ink)" strokeOpacity="0.55" strokeWidth="1" />
-            {MANDATES.map((m, i) => (
-              <g key={m.label} ref={(el) => { pinRefs.current[i] = el; }}>
-                <circle r="12" fill="none" stroke="var(--bronze)" strokeWidth="1" opacity=".65" />
-                <circle r="3.6" fill="var(--bronze)" />
-                <line x1="0" y1="-14" x2="0" y2="-34" stroke="var(--ink)" strokeWidth="0.8" />
-                <text y="-40" textAnchor="middle" className="fill-[var(--ink)]" style={{ font: "500 9.5px var(--font-fragment), monospace", letterSpacing: ".16em" }}>
-                  {m.label.toUpperCase()}
-                </text>
-              </g>
-            ))}
-          </svg>
+        <div className="relative mx-auto aspect-square w-full max-w-[520px] md:col-span-3 md:max-w-[700px]">
+          <canvas ref={canvas} className="absolute inset-0 h-full w-full" aria-label="A globe turning between the United Kingdom, Dubai and Thailand" />
+          {/* pins: HTML so the type stays crisp at any DPR */}
+          {MANDATES.map((m, i) => (
+            <div key={m.label} ref={(el) => { pinRefs.current[i] = el; }} className="pointer-events-none absolute left-0 top-0 will-change-transform" style={{ opacity: 0 }}>
+              <div className="relative -translate-x-1/2 -translate-y-1/2">
+                <span className="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border border-bronze/70" />
+                <span className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-bronze" />
+                <span className="absolute left-1/2 top-[-34px] h-[22px] w-px -translate-x-1/2 bg-ink/70" />
+                <span className="annot absolute left-1/2 top-[-46px] -translate-x-1/2 whitespace-nowrap text-ink">{m.label}</span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
       <p className="annot muted absolute bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap">Scroll to turn the globe</p>
