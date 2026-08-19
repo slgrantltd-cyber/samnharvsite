@@ -27,6 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/trust",
     "/faq",
     "/contact",
+    "/call",
   ].map(
     (path) => ({
       url: `${BASE}${path}`,

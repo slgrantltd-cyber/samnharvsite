@@ -2,7 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   async redirects() {
-    return [{ source: "/private-office", destination: "/opportunities", permanent: true }];
+    return [
+      { source: "/private-office", destination: "/opportunities", permanent: true },
+      { source: "/book", destination: "/call", permanent: false },
+      { source: "/intro", destination: "/call", permanent: false },
+    ];
   },
   async rewrites() {
     // /deals is a static system maintained as plain HTML in public/deals

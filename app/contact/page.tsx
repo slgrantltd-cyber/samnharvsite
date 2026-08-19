@@ -28,13 +28,18 @@ export default function ContactPage() {
             you&rsquo;re trying to do — invest, sell, hand over a property, or
             just ask a question — and we&rsquo;ll answer properly.
           </p>
-          <Link
-            href="/faq"
-            className="annot mt-6 inline-flex min-h-11 items-center gap-3 text-ink"
-          >
-            Short answers first? Read the FAQs{" "}
-            <span aria-hidden="true">→</span>
-          </Link>
+          <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
+            <Link href="/call" className="btn btn-ink">
+              Book a 15-minute intro call
+            </Link>
+            <Link
+              href="/faq"
+              className="annot inline-flex min-h-11 items-center gap-3 text-ink"
+            >
+              Short answers first? Read the FAQs{" "}
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
         </div>
       </section>
 
