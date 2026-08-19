@@ -244,7 +244,7 @@ export default function MandateGlobe() {
           <div className="relative h-44 md:h-56">
             {MANDATES.map((m, i) => (
               <div key={m.label} ref={(el) => { captionRefs.current[i] = el; }} className="absolute inset-x-0">
-                <p className="annot muted">02 — The territory</p>
+                <p className="annot muted">The territory</p>
                 <h2 className="display mt-2 text-4xl md:text-6xl">
                   {m.label.split(" ")[0]}{" "}
                   <span className="display-it">{m.label.split(" ").slice(1).join(" ") || ""}</span>

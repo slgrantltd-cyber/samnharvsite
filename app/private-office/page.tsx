@@ -127,14 +127,14 @@ export default function PrivateOfficePage() {
             <p className="annot text-[var(--bronze-bright)]">How access works</p>
             <div className="mt-6 grid grid-cols-1 gap-8 md:grid-cols-4">
               {[
-                ["01", "A conversation", "Twenty minutes. What you're looking for, what you have to deploy, your timescale."],
-                ["02", "Identity & funds", "Certified ID and proof of funds — the same standard we'd want from anyone we introduce."],
-                ["03", "NDA", "Then the address, the photography, the numbers and the pack."],
-                ["04", "Direct", "Viewings, the owner or developer, offer and diligence — supported end to end."],
-              ].map(([n, h, b]) => (
-                <div key={n}>
-                  <p className="annot text-[var(--bronze-bright)]">{n}</p>
-                  <p className="display mt-2 text-xl">{h}</p>
+                ["A conversation", "Twenty minutes. What you're looking for, what you have to deploy, your timescale."],
+                ["Identity & funds", "Certified ID and proof of funds — the same standard we'd want from anyone we introduce."],
+                ["NDA", "Then the address, the photography, the numbers and the pack."],
+                ["Direct", "Viewings, the owner or developer, offer and diligence — supported end to end."],
+              ].map(([h, b]) => (
+                <div key={h}>
+                  <span className="block h-px w-8 bg-[var(--bronze-bright)]" aria-hidden="true" />
+                  <p className="display mt-3 text-xl">{h}</p>
                   <p className="mt-2 text-[0.9rem] leading-relaxed text-[var(--line-light)]">{b}</p>
                 </div>
               ))}

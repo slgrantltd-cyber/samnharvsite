@@ -248,7 +248,7 @@ export default function Home() {
       {/* 01.5 — MANIFESTO */}
       <section className="px-5 py-28 md:px-10 md:py-40">
         <div className="mx-auto max-w-4xl">
-          <p className="annot muted mb-8">01 — The position</p>
+          <p className="annot muted mb-8">The position</p>
           <ScrubWords
             className="display text-3xl leading-tight md:text-5xl"
             text="We are not brokers of other people's ideas. We run property every day — the placements, the guests, the maintenance, the numbers — so every mandate we bring you has passed the only test we trust: would we put our own name to running it."
@@ -262,7 +262,7 @@ export default function Home() {
       {/* 03 — THE LEDGER (natural limestone) */}
       <section className="m-limestone px-5 py-24 md:px-10 md:py-36">
         <div className="mx-auto max-w-6xl">
-          <p className="annot muted">03 — The ledger</p>
+          <p className="annot muted">The ledger</p>
           <Rise as="h2" className="display mt-3 text-4xl md:text-6xl">
             <Line>How capital</Line>
             <Line>
@@ -278,7 +278,7 @@ export default function Home() {
       {/* 04 — THE BROTHERS */}
       <section className="on-stone px-5 py-24 md:px-10 md:py-36">
         <div className="mx-auto max-w-6xl">
-          <p className="annot muted">04 — The people</p>
+          <p className="annot muted">The people</p>
           <Rise as="h2" className="display mt-3 text-4xl md:text-6xl">
             <Line>Two names.</Line>
             <Line>

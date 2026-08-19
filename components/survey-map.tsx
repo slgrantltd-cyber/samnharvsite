@@ -115,14 +115,14 @@ export default function SurveyMap() {
       <div className="pointer-events-none absolute inset-x-0 top-0 z-10 px-5 pt-24 md:px-10 md:pt-28">
         <div className="relative h-28 md:h-32">
           <div data-caption className="absolute inset-x-0">
-            <p className="annot muted">02 — The territory</p>
+            <p className="annot muted">The territory</p>
             <h2 className="display mt-2 text-4xl md:text-6xl">
               Based in the <span className="display-it">South&nbsp;West.</span>
             </h2>
           </div>
           {/* hidden by default so reduced-motion never shows both at once */}
           <div data-caption className="absolute inset-x-0 opacity-0">
-            <p className="annot muted">02 — The territory</p>
+            <p className="annot muted">The territory</p>
             <h2 className="display mt-2 text-4xl md:text-6xl" aria-hidden="true">
               Working the <span className="display-it">whole&nbsp;map.</span>
             </h2>

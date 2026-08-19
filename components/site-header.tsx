@@ -106,10 +106,9 @@ export default function SiteHeader() {
             className="group flex items-baseline justify-between border-b hairline py-4"
           >
             <span className="display text-4xl">Home</span>
-            <span className="annot text-bronze-bright">01</span>
           </Link>
 
-          {NAV.slice(1).map((item, i) => (
+          {NAV.slice(1).map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -118,7 +117,6 @@ export default function SiteHeader() {
               className="group flex items-baseline justify-between border-b hairline py-4"
             >
               <span className="display text-4xl">{item.label}</span>
-              <span className="annot text-bronze-bright">0{i + 2}</span>
             </Link>
           ))}
           <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">

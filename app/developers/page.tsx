@@ -168,10 +168,10 @@ export default function DevelopersPage() {
         <div className="mx-auto max-w-6xl">
           <p className="annot text-bronze">How it works — step by step</p>
           <div className="mt-6 grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-5">
-            {STEPS.map((s, i) => (
+            {STEPS.map((s) => (
               <Lift key={s.head} className="bg-[var(--plaster)]">
                 <div className="flex h-full flex-col p-6">
-                  <p className="annot text-bronze">0{i + 1}</p>
+                  <span className="block h-px w-8 bg-bronze" aria-hidden="true" />
                   <h2 className="display mt-3 text-xl leading-snug">{s.head}</h2>
                   <p className="muted mt-3 text-[0.875rem] leading-relaxed">
                     {s.body}
