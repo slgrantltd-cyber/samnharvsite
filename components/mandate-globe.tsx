@@ -141,7 +141,7 @@ export default function MandateGlobe() {
       W = rect.width; H = rect.height;
       cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      R = Math.min(W, H) * 0.46; CX = W / 2; CY = H / 2;
+      R = Math.min(W, H) * 0.44; CX = W / 2; CY = H / 2;
       draw();
     };
 
@@ -151,24 +151,20 @@ export default function MandateGlobe() {
     const draw = () => {
       queued = false;
       ctx.clearRect(0, 0, W, H);
-      // soft drop shadow
-      ctx.save();
-      ctx.filter = "blur(10px)";
-      ctx.fillStyle = "rgba(26,26,26,0.16)";
-      ctx.beginPath(); ctx.ellipse(CX + R * 0.04, CY + R * 1.06, R * 0.78, R * 0.07, 0, 0, Math.PI * 2); ctx.fill();
-      ctx.restore();
-      // atmosphere halo — dusk amber
-      const halo = ctx.createRadialGradient(CX, CY, R * 0.98, CX, CY, R * 1.07);
-      halo.addColorStop(0, "rgba(226,150,90,0.26)"); halo.addColorStop(1, "rgba(226,150,90,0)");
-      ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(CX, CY, R * 1.06, 0, Math.PI * 2); ctx.fill();
-      // ocean — lit from the top-left in warm dusk light, falling into leaf-green shadow
-      const ocean = ctx.createRadialGradient(CX - R * 0.34, CY - R * 0.38, R * 0.05, CX, CY, R * 1.05);
-      ocean.addColorStop(0, "#fbf5ea"); ocean.addColorStop(0.35, "#eadfcb"); ocean.addColorStop(0.7, "#c9c2a8"); ocean.addColorStop(0.9, "#7d8a62"); ocean.addColorStop(1, "#3f5a45");
-      ctx.fillStyle = ocean; ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI * 2); ctx.fill();
-      // clip everything else to the disc
+
+      /* One material, one light. A plaster sphere: flat pale ground, a
+         single soft shade at the limb so it reads as round, and nothing
+         else. Land is one quiet ink tint with no outline. The only colour
+         on the whole object is three bronze points. */
+
+      // sphere ground
+      ctx.fillStyle = "#f4f0e7";
+      ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI * 2); ctx.fill();
+
       ctx.save(); ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI * 2); ctx.clip();
-      // graticule (precomputed vectors)
-      ctx.lineWidth = 0.6; ctx.strokeStyle = "rgba(26,26,26,0.14)";
+
+      // graticule — a whisper
+      ctx.lineWidth = 0.5; ctx.strokeStyle = "rgba(26,26,26,0.085)";
       ctx.beginPath();
       for (const line of gratVec) {
         let pen = false;
@@ -178,41 +174,37 @@ export default function MandateGlobe() {
         }
       }
       ctx.stroke();
-      // land — closed polygons clipped to the hemisphere; fills never drop
-      ctx.lineJoin = "round"; ctx.lineWidth = 0.9;
+
+      // land — one tone, no stroke; a touch darker toward the limb so the
+      // curvature reads without any lighting tricks
       for (const poly of landVec) {
         const ring = clipToFront(poly.map((v) => rotate(v, state.lam, state.phi)));
         if (ring.length < 3) continue;
         ctx.beginPath();
         ring.forEach((v, i) => { const p = proj(v); if (i) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y); });
         ctx.closePath();
-        // shade land by depth: brighter facing the viewer, darker toward the limb
-        const c = ring.reduce((s, v) => s + v[0], 0) / ring.length;
-        // land: warm sand facing the light, cooling toward palm-green at the limb
-        const t = Math.max(0, Math.min(1, c));
-        const r = Math.round(212 * t + 88 * (1 - t)), gg = Math.round(192 * t + 110 * (1 - t)), b = Math.round(150 * t + 84 * (1 - t));
-        ctx.fillStyle = `rgba(${r},${gg},${b},0.96)`;
+        const c = Math.max(0, Math.min(1, ring.reduce((s, v) => s + v[0], 0) / ring.length));
+        ctx.fillStyle = `rgba(26,26,26,${(0.10 + (1 - c) * 0.05).toFixed(3)})`;
         ctx.fill();
-        ctx.strokeStyle = "rgba(26,26,26,0.6)"; ctx.stroke();
       }
-      // limb shading + specular
-      const limb = ctx.createRadialGradient(CX - R * 0.2, CY - R * 0.28, R * 0.55, CX, CY, R);
-      limb.addColorStop(0, "rgba(43,74,53,0)"); limb.addColorStop(1, "rgba(35,58,44,0.42)");
+
+      // the limb: one soft shade, that's the whole lighting model
+      const limb = ctx.createRadialGradient(CX - R * 0.12, CY - R * 0.16, R * 0.62, CX, CY, R);
+      limb.addColorStop(0, "rgba(26,26,26,0)"); limb.addColorStop(1, "rgba(26,26,26,0.16)");
       ctx.fillStyle = limb; ctx.fillRect(0, 0, W, H);
-      const spec = ctx.createRadialGradient(CX - R * 0.4, CY - R * 0.48, 0, CX - R * 0.4, CY - R * 0.48, R * 0.5);
-      spec.addColorStop(0, "rgba(255,236,214,0.55)"); spec.addColorStop(1, "rgba(255,236,214,0)");
-      ctx.fillStyle = spec; ctx.fillRect(0, 0, W, H);
       ctx.restore();
-      // rim
-      ctx.lineWidth = 1; ctx.strokeStyle = "rgba(26,26,26,0.55)";
+
+      // hairline rim
+      ctx.lineWidth = 0.8; ctx.strokeStyle = "rgba(26,26,26,0.32)";
       ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI * 2); ctx.stroke();
-      // pins (HTML overlays positioned over the canvas)
+
+      // pins (HTML overlays)
       MANDATES.forEach((m, i) => {
         const v = rotate(toVec(m.lon, m.lat), state.lam, state.phi);
         const el = pinRefs.current[i]; if (!el) return;
         const p = proj(v);
         el.style.transform = `translate(${p.x.toFixed(1)}px, ${p.y.toFixed(1)}px)`;
-        el.style.opacity = v[0] > 0.02 ? String(0.3 + v[0] * 0.7) : "0";
+        el.style.opacity = v[0] > 0.02 ? String(0.25 + v[0] * 0.75) : "0";
       });
     };
     const request = () => { if (!queued) { queued = true; requestAnimationFrame(draw); } };
@@ -239,7 +231,7 @@ export default function MandateGlobe() {
   }, [initial, landVec, gratVec]);
 
   return (
-    <section ref={section} className="m-limestone relative h-[100svh] overflow-hidden">
+    <section ref={section} className="relative h-[100svh] overflow-hidden">
       <div className="mx-auto grid h-full max-w-6xl grid-cols-1 items-center gap-6 px-5 pt-24 md:grid-cols-5 md:gap-8 md:px-10 md:pt-20">
         <div className="relative z-10 md:col-span-2">
           <div className="relative h-44 md:h-56">
@@ -262,10 +254,9 @@ export default function MandateGlobe() {
           {MANDATES.map((m, i) => (
             <div key={m.label} ref={(el) => { pinRefs.current[i] = el; }} className="pointer-events-none absolute left-0 top-0 will-change-transform" style={{ opacity: 0 }}>
               <div className="relative -translate-x-1/2 -translate-y-1/2">
-                <span className="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border border-bronze/70" />
-                <span className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-bronze" />
-                <span className="absolute left-1/2 top-[-34px] h-[22px] w-px -translate-x-1/2 bg-ink/70" />
-                <span className="annot absolute left-1/2 top-[-46px] -translate-x-1/2 whitespace-nowrap text-ink">{m.label}</span>
+                <span className="absolute left-1/2 top-1/2 h-[7px] w-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-bronze" />
+                <span className="absolute left-1/2 top-[-30px] h-[22px] w-px -translate-x-1/2 bg-ink/45" />
+                <span className="annot absolute left-1/2 top-[-44px] -translate-x-1/2 whitespace-nowrap text-ink/85">{m.label}</span>
               </div>
             </div>
           ))}

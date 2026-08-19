@@ -4,7 +4,7 @@ import { useState } from "react";
 
 /**
  * Request access — the paper gate as product. Posts to /api/contact with
- * tag "private-office"; nothing identifying is ever sent back automatically.
+ * tag "opportunities"; nothing identifying is ever sent back automatically.
  */
 export default function AccessForm({ mandate = "" }: { mandate?: string }) {
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
@@ -20,8 +20,8 @@ export default function AccessForm({ mandate = "" }: { mandate?: string }) {
         name: f.get("name"),
         email: f.get("email"),
         phone: f.get("phone"),
-        message: `PRIVATE OFFICE ACCESS REQUEST\nMandate of interest: ${f.get("mandate") || mandate || "General"}\nCapital range: ${f.get("capital")}\nBuying as: ${f.get("entity")}\n\n${f.get("note") || ""}`,
-        tag: "private-office",
+        message: `OPPORTUNITIES — ACCESS REQUEST\nMandate of interest: ${f.get("mandate") || mandate || "General"}\nCapital range: ${f.get("capital")}\nBuying as: ${f.get("entity")}\n\n${f.get("note") || ""}`,
+        tag: "opportunities",
       }),
     })
       .then((r) => (r.ok ? setState("done") : setState("error")))
@@ -60,7 +60,7 @@ export default function AccessForm({ mandate = "" }: { mandate?: string }) {
         <span className="annot muted">Mandate of interest</span>
         <select name="mandate" defaultValue={mandate} className="mt-2 w-full border-b hairline bg-transparent py-2 outline-none focus:border-ink">
           <option value="">General</option>
-          <option>Island resort · Thailand</option>
+          <option>Resort · Thailand</option>
           <option>Dubai residences</option>
           <option>UK — cash-flow portfolio</option>
           <option>UK — conversion &amp; development</option>

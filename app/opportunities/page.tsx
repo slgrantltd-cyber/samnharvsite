@@ -4,10 +4,10 @@ import { Rise, Line, Lift } from "@/components/reveal";
 import AccessForm from "@/components/access-form";
 
 export const metadata: Metadata = {
-  title: "Private Office — Mandates by Introduction",
+  title: "Opportunities — By Introduction",
   description:
     "A small number of opportunities at any one time — UK and international — held off-market and released to qualified buyers after a conversation, identity and proof of funds.",
-  alternates: { canonical: "/private-office" },
+  alternates: { canonical: "/opportunities" },
 };
 
 /* The shop window: never more than four. Each card is atmosphere + one
@@ -76,7 +76,7 @@ export default function PrivateOfficePage() {
     <main id="main" className="pt-24 md:pt-28">
       <section className="px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto max-w-6xl">
-          <p className="annot muted">Private office</p>
+          <p className="annot muted">Opportunities</p>
           <Rise as="h1" className="display mt-3 text-5xl md:text-8xl">
             <Line>A few opportunities.</Line>
             <Line>

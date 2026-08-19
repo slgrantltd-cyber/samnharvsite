@@ -10,7 +10,7 @@ import BenchmarkMark from "@/components/benchmark-mark";
    mobile menu and the footer. */
 const NAV = [
   { href: "/", label: "Home" },
-  { href: "/private-office", label: "Private Office" },
+  { href: "/opportunities", label: "Opportunities" },
   { href: "/trust", label: "Our word" },
   { href: "/about", label: "The brothers" },
 ];
@@ -49,7 +49,7 @@ export default function SiteHeader() {
           </span>
         </Link>
 
-        {/* desktop: flat primary nav — Private Office leads */}
+        {/* desktop: flat primary nav — Opportunities leads */}
         <nav aria-label="Primary" className="hidden items-center gap-5 lg:flex xl:gap-8">
           {NAV.slice(1).map((item) => (
             <Link

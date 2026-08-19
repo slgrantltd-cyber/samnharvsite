@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [{ source: "/private-office", destination: "/opportunities", permanent: true }];
+  },
   async rewrites() {
     // /deals is a static system maintained as plain HTML in public/deals
     // (deal pages are dropped in as files; see public/deals/index.html)

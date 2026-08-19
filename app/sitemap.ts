@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/stays/terms",
     "/deal-intelligence",
     "/toolkit",
-    "/private-office",
+    "/opportunities",
     "/join",
     "/power-team",
     "/landlords",

@@ -18,8 +18,8 @@ export default function SiteFooter() {
           </div>
 
           <nav aria-label="Footer" className="grid grid-cols-2 gap-x-12 gap-y-2">
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/private-office">
-              Private Office
+            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/opportunities">
+              Opportunities
             </Link>
             <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/services">
               What we do

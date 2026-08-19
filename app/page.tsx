@@ -56,8 +56,8 @@ export default function Home() {
           way we underwrite our own operation — because it is our operation.
         </p>
         <div className="relative mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-          <Link href="/private-office" className="btn btn-ink">
-            Private Office
+          <Link href="/opportunities" className="btn btn-ink">
+            Opportunities
           </Link>
           <Link
             href="/about"
@@ -74,10 +74,10 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-3">
             {[
               {
-                who: "Private office",
+                who: "Opportunities",
                 head: "Four mandates. Not forty.",
                 body: "An island resort. Dubai residences, direct from the developer. UK houses bought below the street. Released after a conversation, identity and proof of funds.",
-                href: "/private-office",
+                href: "/opportunities",
                 cta: "Request access",
               },
               {
@@ -195,7 +195,7 @@ export default function Home() {
               </div>
               <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-2">
                 <span className="annot text-[var(--bronze-bright)]">Conversation → identity &amp; funds → NDA → particulars</span>
-                <Link href="/private-office#access" className="annot text-[var(--plaster)] hover:text-[var(--bronze-bright)]">Request access →</Link>
+                <Link href="/opportunities#access" className="annot text-[var(--plaster)] hover:text-[var(--bronze-bright)]">Request access →</Link>
               </div>
             </div>
           </div>
@@ -361,10 +361,10 @@ export default function Home() {
               </p>
             </a>
             <Link
-              href="/private-office#access"
+              href="/opportunities#access"
               className="group bg-plaster p-7 transition-colors hover:bg-smoked hover:text-plaster"
             >
-              <p className="annot muted group-hover:text-bronze-bright">Private office</p>
+              <p className="annot muted group-hover:text-bronze-bright">Opportunities</p>
               <p className="display mt-3 text-2xl">Request access</p>
               <p className="muted mt-2 text-sm group-hover:text-stone-dark">
                 Identity and proof of funds, then the particulars

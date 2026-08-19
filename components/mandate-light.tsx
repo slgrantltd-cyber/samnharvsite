@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
  * and follows the cursor — leaf-green toward the left, dusk-amber toward
  * the right, plaster between. The same two palettes as the island and
  * desert mandate pages, so the home page quietly carries the world of
- * the Private Office. Composited translate only; pointer-fine devices;
+ * the Opportunities page. Composited translate only; pointer-fine devices;
  * reduced-motion and touch keep a still, centred wash.
  */
 export default function MandateLight() {
