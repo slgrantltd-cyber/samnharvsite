@@ -63,18 +63,21 @@ export default function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <Link href="/contact" className="btn btn-ink">
+          <Link
+            href="/contact"
+            className="annot border-b border-ink/40 pb-0.5 text-ink transition-colors hover:border-bronze hover:text-bronze"
+          >
             Enquire
           </Link>
         </nav>
 
-        <div className="flex items-center gap-2 lg:hidden">
-          <Link href="/contact" className="btn btn-ink px-4">
+        <div className="flex items-center gap-6 lg:hidden">
+          <Link href="/contact" className="annot text-ink transition-colors hover:text-bronze">
             Enquire
           </Link>
           <button
             type="button"
-            className="btn btn-ghost"
+            className="annot min-h-11 text-ink transition-colors hover:text-bronze"
             aria-expanded={open}
             aria-controls="site-menu"
             onClick={() => setOpen((v) => !v)}

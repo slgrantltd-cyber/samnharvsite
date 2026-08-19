@@ -63,9 +63,9 @@ const LAND: LonLat[][] = [
 ];
 
 const MANDATES = [
-  { label: "United Kingdom", lon: -2.9, lat: 51.3, kicker: "Somerset · Bristol corridor", line: "Cash-flowing houses and conversions — operated by us." },
-  { label: "Dubai", lon: 55.3, lat: 25.2, kicker: "United Arab Emirates", line: "Residences, direct from the developer." },
-  { label: "Thailand", lon: 100.5, lat: 12.0, kicker: "One of its premier island destinations", line: "A resort, operating — off-market." },
+  { label: "United Kingdom", lon: -2.9, lat: 51.3, kicker: "Cash-flowing · long term", line: "Houses bought below the street, refinanced at value, operated by us — income from month one." },
+  { label: "Dubai", lon: 55.3, lat: 25.2, kicker: "Capital appreciation · short to medium term", line: "Off-plan residences direct from the developer — growth over the build, yield at handover." },
+  { label: "Thailand", lon: 100.5, lat: 12.0, kicker: "Operating asset · long term", line: "A trading resort, off-market — income and appreciation in one complete operation." },
 ];
 
 const d2r = Math.PI / 180;
