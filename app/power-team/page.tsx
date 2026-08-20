@@ -48,38 +48,39 @@ const CHAIN = [
   },
 ];
 
-/* Partner brand plates — each partner shown in their own colours, not ours. */
+/* Partner brand plates — real logos and palettes pulled from each partner's
+   own site, rendered with the restraint of ours: deep grounds, small marks,
+   one fine accent. Lendhub: #14062c / #813dff. Base: black / #fdd300. */
 const PLATES: Record<string, ReactNode> = {
   lendhub: (
     <div
-      className="relative overflow-hidden px-6 py-6 md:px-7"
-      style={{ background: "linear-gradient(115deg, #0e1430 0%, #1a2348 55%, #25315e 100%)" }}
+      className="relative flex min-h-[7rem] flex-col justify-center overflow-hidden px-6 py-6 md:px-7"
+      style={{ background: "linear-gradient(120deg, #100522 0%, #14062c 55%, #1d0b3d 100%)" }}
     >
       <div
-        className="pointer-events-none absolute -right-12 -top-20 h-56 w-56 rounded-full"
-        style={{ background: "radial-gradient(closest-side, rgba(122,142,255,0.28), transparent)" }}
+        className="pointer-events-none absolute -right-14 -top-24 h-64 w-64 rounded-full"
+        style={{ background: "radial-gradient(closest-side, rgba(129,61,255,0.32), transparent)" }}
         aria-hidden="true"
       />
-      <p className="font-sans text-[1.55rem] font-semibold tracking-tight text-white">
-        lendhub<span style={{ color: "#7a8eff" }}>.</span>
-      </p>
-      <p className="annot mt-1 text-white/60">Flexible · Trusted · Innovative</p>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/partners/lendhub-white.svg" alt="Lendhub" className="relative h-7 w-auto self-start" />
+      <p className="annot relative mt-3 text-white/55">Flexible · Trusted · Innovative</p>
     </div>
   ),
   base: (
     <div
-      className="relative overflow-hidden px-6 py-6 md:px-7"
-      style={{ background: "linear-gradient(120deg, #16130f 0%, #241f18 60%, #2f2820 100%)" }}
+      className="relative flex min-h-[7rem] flex-col justify-center overflow-hidden px-6 py-6 md:px-7"
+      style={{ background: "linear-gradient(120deg, #0c0b0a 0%, #131211 60%, #1b1917 100%)" }}
     >
-      <div
-        className="pointer-events-none absolute -left-14 -bottom-24 h-56 w-56 rounded-full"
-        style={{ background: "radial-gradient(closest-side, rgba(214,188,150,0.16), transparent)" }}
-        aria-hidden="true"
-      />
-      <p className="font-sans text-[1.35rem] font-semibold tracking-[0.02em] text-[#f5f1ea]">
-        BASE <span className="font-normal tracking-[0.18em] text-[#cbb69a]">FURNISHINGS</span>
-      </p>
-      <p className="annot mt-1 text-[#f5f1ea]/55">Complete furnishing solutions · since 2010</p>
+      <span className="absolute inset-x-0 top-0 h-px" style={{ background: "#fdd300", opacity: 0.75 }} aria-hidden="true" />
+      <div className="relative flex items-center gap-4">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/partners/base-mark-light.png" alt="" className="h-9 w-auto" />
+        <div>
+          <p className="font-sans text-[1.05rem] font-semibold tracking-[0.14em] text-[#f5f1ea]">BASE FURNISHINGS</p>
+          <p className="annot mt-1 text-[#f5f1ea]/50">Complete furnishing solutions · <span style={{ color: "#fdd300", opacity: 0.85 }}>since 2010</span></p>
+        </div>
+      </div>
     </div>
   ),
 };
