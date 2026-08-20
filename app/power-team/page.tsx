@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { Rise, Line, Lift } from "@/components/reveal";
 import { POWER_TEAM } from "@/lib/power-team";
@@ -18,8 +19,10 @@ const CHAIN = [
   },
   {
     stage: "Fund",
-    who: "LendHub",
-    body: "Bridging and below-market-value lending from a specialist lender — terms discussed before you commit, so the finance is shaped around the deal, not the other way round.",
+    who: "Lendhub",
+    brand: "lendhub",
+    site: "lendhub.co.uk",
+    body: "Specialist bridging, refurbishment and development lending from £100k to £10m — terms discussed before you commit, so the finance is shaped around the deal, not the other way round.",
   },
   {
     stage: "Design & planning",
@@ -34,14 +37,53 @@ const CHAIN = [
   {
     stage: "Furnish",
     who: "Base Furnishings",
-    body: "Full serviced-accommodation fit-outs at trade prices — furniture packages that photograph well, survive guests, and land installed, not flat-packed on the drive.",
+    brand: "base",
+    site: "basefurnishings.co.uk",
+    body: "Design-led furniture packages installed, not flat-packed — over 10,000 apartments delivered since 2010, from a single unit to a whole block inside a fortnight.",
   },
   {
-    stage: "Operate",
-    who: "Sam n Harv",
-    body: "That's us again. Furnished, listed and run as your hands-off unit — or handed over turnkey with the systems documented. The chain ends where it started.",
+    stage: "Manage",
+    who: "Management partner",
+    body: "Day-to-day management sits with a dedicated specialist — lettings, guests, maintenance, compliance — held to the standard we run our own properties at. You own an investment, not a job.",
   },
 ];
+
+/* Partner brand plates — each partner shown in their own colours, not ours. */
+const PLATES: Record<string, ReactNode> = {
+  lendhub: (
+    <div
+      className="relative overflow-hidden px-6 py-6 md:px-7"
+      style={{ background: "linear-gradient(115deg, #0e1430 0%, #1a2348 55%, #25315e 100%)" }}
+    >
+      <div
+        className="pointer-events-none absolute -right-12 -top-20 h-56 w-56 rounded-full"
+        style={{ background: "radial-gradient(closest-side, rgba(122,142,255,0.28), transparent)" }}
+        aria-hidden="true"
+      />
+      <p className="font-sans text-[1.55rem] font-semibold tracking-tight text-white">
+        lendhub<span style={{ color: "#7a8eff" }}>.</span>
+      </p>
+      <p className="annot mt-1 text-white/60">Flexible · Trusted · Innovative</p>
+    </div>
+  ),
+  base: (
+    <div
+      className="relative overflow-hidden px-6 py-6 md:px-7"
+      style={{ background: "linear-gradient(120deg, #16130f 0%, #241f18 60%, #2f2820 100%)" }}
+    >
+      <div
+        className="pointer-events-none absolute -left-14 -bottom-24 h-56 w-56 rounded-full"
+        style={{ background: "radial-gradient(closest-side, rgba(214,188,150,0.16), transparent)" }}
+        aria-hidden="true"
+      />
+      <p className="font-sans text-[1.35rem] font-semibold tracking-[0.02em] text-[#f5f1ea]">
+        BASE <span className="font-normal tracking-[0.18em] text-[#cbb69a]">FURNISHINGS</span>
+      </p>
+      <p className="annot mt-1 text-[#f5f1ea]/55">Complete furnishing solutions · since 2010</p>
+    </div>
+  ),
+};
+
 
 export default function PowerTeamPage() {
   return (
@@ -71,7 +113,7 @@ export default function PowerTeamPage() {
         <div className="mx-auto max-w-6xl">
           <p className="annot text-bronze">The complete package</p>
           <h2 className="display mt-3 max-w-3xl text-3xl leading-snug md:text-4xl">
-            Source, fund, design, build, furnish, operate —{" "}
+            Source, fund, design, build, furnish, manage —{" "}
             <span className="display-it">without leaving the room.</span>
           </h2>
           <p className="muted mt-5 max-w-2xl leading-relaxed">
@@ -82,12 +124,25 @@ export default function PowerTeamPage() {
           <div className="mt-8 grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-2 lg:grid-cols-3">
             {CHAIN.map((c) => (
               <Lift key={c.stage} className="bg-[var(--plaster)]">
-                <div className="flex h-full flex-col p-6 md:p-7">
-                  <p className="annot muted">{c.stage}</p>
-                  <h3 className="display mt-2 text-2xl">{c.who}</h3>
-                  <p className="muted mt-3 text-[0.9375rem] leading-relaxed">
-                    {c.body}
-                  </p>
+                <div className="flex h-full flex-col">
+                  {c.brand && PLATES[c.brand]}
+                  <div className="flex flex-1 flex-col p-6 md:p-7">
+                    <p className="annot muted">{c.stage}</p>
+                    <h3 className="display mt-2 text-2xl">{c.who}</h3>
+                    <p className="muted mt-3 text-[0.9375rem] leading-relaxed">
+                      {c.body}
+                    </p>
+                    {c.site && (
+                      <a
+                        href={`https://${c.site}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="annot mt-auto inline-flex items-center gap-2 pt-5 text-bronze hover:text-ink"
+                      >
+                        {c.site} <span aria-hidden="true">↗</span>
+                      </a>
+                    )}
+                  </div>
                 </div>
               </Lift>
             ))}

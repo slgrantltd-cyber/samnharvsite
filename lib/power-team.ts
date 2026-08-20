@@ -56,7 +56,7 @@ export const POWER_TEAM: PowerRole[] = [
   },
   {
     role: "Serviced accommodation management",
-    why: "That's us. Buy the deal, keep the asset — we furnish, list, and operate it as your hands-off SA unit.",
+    why: "A dedicated management partner runs the unit day to day — listings, guests, cleaning, maintenance — so the asset performs without you (or us) becoming the front desk.",
     proof: "We run our own units the same way — see /stays.",
   },
 ];

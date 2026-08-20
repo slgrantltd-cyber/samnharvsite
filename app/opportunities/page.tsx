@@ -44,7 +44,7 @@ const MANDATES = [
     ref: "Mandate III",
     where: "Somerset · UK",
     head: "Cash-flowing houses, bought below the street.",
-    line: "Two- and three-bedroom stock bought for cash by our buyers, refinanced at value, operated by us. Fully underwritten.",
+    line: "Two- and three-bedroom stock bought for cash by our buyers, refinanced at value, professionally managed. Fully underwritten.",
     tone: "plaster",
     status: "Live",
     page: "",
