@@ -4,11 +4,44 @@ import { Rise, Line, Lift } from "@/components/reveal";
 import { POWER_TEAM } from "@/lib/power-team";
 
 export const metadata: Metadata = {
-  title: "The Power Team — Introductions With Every Deal",
+  title: "The Complete Package — Every Part of the Deal, One Roof",
   description:
-    "Buy a deal from Sam n Harv and inherit the bench that runs our own projects — auction solicitor, independent surveyor, builder, SA-specialist broker, accountant and more. Introductions on request, per deal.",
+    "Sam n Harv is a complete hub for property investment — sourcing, bridging finance with LendHub, architecture and planning, build, furnishing by Base Furnishings, and operation. Plus the full professional bench, introduced per deal.",
   alternates: { canonical: "/power-team" },
 };
+
+const CHAIN = [
+  {
+    stage: "Source",
+    who: "Sam n Harv",
+    body: "The deal itself — found, negotiated and underwritten by us, to the same standard we buy at. Numbers you can hold us to.",
+  },
+  {
+    stage: "Fund",
+    who: "LendHub",
+    body: "Bridging and below-market-value lending from a specialist lender — terms discussed before you commit, so the finance is shaped around the deal, not the other way round.",
+  },
+  {
+    stage: "Design & planning",
+    who: "Architect & planner",
+    body: "Drawings, permitted development and planning applications from the team on our own conversions — so the scheme that gets priced is the scheme that gets approved.",
+  },
+  {
+    stage: "Build",
+    who: "Our builder",
+    body: "The refurbishment and conversion work, itemised against a defined spec with staged payments — priced by the people who deliver our own projects.",
+  },
+  {
+    stage: "Furnish",
+    who: "Base Furnishings",
+    body: "Full serviced-accommodation fit-outs at trade prices — furniture packages that photograph well, survive guests, and land installed, not flat-packed on the drive.",
+  },
+  {
+    stage: "Operate",
+    who: "Sam n Harv",
+    body: "That's us again. Furnished, listed and run as your hands-off unit — or handed over turnkey with the systems documented. The chain ends where it started.",
+  },
+];
 
 export default function PowerTeamPage() {
   return (
@@ -23,23 +56,59 @@ export default function PowerTeamPage() {
             </Line>
           </Rise>
           <p className="mt-8 max-w-xl text-lg leading-relaxed md:text-xl">
-            A deal is only as good as the team that executes it. Every
-            professional below works on our own projects — and when you buy
-            a deal through us, the introductions come with it. No directories,
-            no strangers: the same people, warmed up, expecting your call.
+            A deal is only as good as the team that executes it — so
+            we&rsquo;ve built the whole team under one roof. Finance,
+            planning, build, furnishing, operation: partners who already work
+            alongside us, plus a professional bench introduced per deal. One
+            conversation starts all of it.
+          </p>
+        </div>
+      </section>
+
+
+      {/* THE COMPLETE PACKAGE — the deal chain, one roof */}
+      <section className="px-5 pb-16 md:px-10 md:pb-24">
+        <div className="mx-auto max-w-6xl">
+          <p className="annot text-bronze">The complete package</p>
+          <h2 className="display mt-3 max-w-3xl text-3xl leading-snug md:text-4xl">
+            Source, fund, design, build, furnish, operate —{" "}
+            <span className="display-it">without leaving the room.</span>
+          </h2>
+          <p className="muted mt-5 max-w-2xl leading-relaxed">
+            Most investments die in the gaps between professionals. We&rsquo;ve
+            closed the gaps: every stage of a deal now has a partner who already
+            works alongside us, on terms we&rsquo;d take ourselves.
+          </p>
+          <div className="mt-8 grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-2 lg:grid-cols-3">
+            {CHAIN.map((c) => (
+              <Lift key={c.stage} className="bg-[var(--plaster)]">
+                <div className="flex h-full flex-col p-6 md:p-7">
+                  <p className="annot muted">{c.stage}</p>
+                  <h3 className="display mt-2 text-2xl">{c.who}</h3>
+                  <p className="muted mt-3 text-[0.9375rem] leading-relaxed">
+                    {c.body}
+                  </p>
+                </div>
+              </Lift>
+            ))}
+          </div>
+          <p className="annot mt-6 max-w-3xl leading-relaxed muted">
+            Partners are independent businesses — you deal with each directly,
+            on their normal terms. We put them here for one reason: they
+            already work on deals like ours, and they&rsquo;ve agreed to look
+            after people we send properly.
           </p>
         </div>
       </section>
 
       <section className="px-5 pb-16 md:px-10 md:pb-24">
         <div className="mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-3">
-            {POWER_TEAM.map((p, i) => (
+          <p className="annot muted">And behind them — the bench</p>
+          <div className="mt-6 grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-3">
+            {POWER_TEAM.map((p) => (
               <Lift key={p.role} className="bg-[var(--plaster)]">
                 <div className="flex h-full flex-col p-6 md:p-7">
-                  <p className="annot text-bronze">
-                    {String(i + 1).padStart(2, "0")}
-                  </p>
+                  <span className="block h-px w-8 bg-bronze" aria-hidden="true" />
                   <h2 className="display mt-3 text-2xl">{p.role}</h2>
                   <p className="muted mt-3 text-[0.9375rem] leading-relaxed">
                     {p.why}

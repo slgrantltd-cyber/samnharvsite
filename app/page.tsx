@@ -166,6 +166,7 @@ export default function Home() {
             ))}
           </div>
           <p className="annot mt-6 flex flex-wrap gap-x-8 gap-y-2 muted">
+            <span>Finance, build, furnishing &amp; operation under one roof — <Link href="/power-team" className="text-ink hover:text-bronze">the complete package →</Link></span>
             <span>We operate what we place</span>
             <span>Every deal underwritten to our own standard</span>
             <span>Two names on everything</span>
