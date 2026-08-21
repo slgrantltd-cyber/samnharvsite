@@ -1,11 +1,12 @@
 import Link from "next/link";
 import BenchmarkMark from "@/components/benchmark-mark";
+import { SITE_MAP } from "@/lib/site-nav";
 
 export default function SiteFooter() {
   return (
     <footer className="m-concrete mt-auto">
       <div className="mx-auto max-w-6xl px-5 py-14 md:px-10">
-        <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+        <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
           <div>
             <BenchmarkMark className="h-8 w-8 text-bronze-bright" />
             <p className="display mt-4 text-3xl">
@@ -17,77 +18,23 @@ export default function SiteFooter() {
             </p>
           </div>
 
-          <nav aria-label="Footer" className="grid grid-cols-2 gap-x-12 gap-y-2">
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/opportunities">
-              Opportunities
-            </Link>
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/services">
-              What we do
-            </Link>
-            <a className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="https://wa.me/447444551241">
-              WhatsApp Samuel
-            </a>
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/about">
-              The brothers
-            </Link>
-            <a className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="https://wa.me/447753600183">
-              WhatsApp Harvey
-            </a>
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/landlords">
-              Landlords
-            </Link>
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/councils">
-              Councils
-            </Link>
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/agents">
-              For agents
-            </Link>
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/developers">
-              For developers
-            </Link>
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/join">
-              Investor list
-            </Link>
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/power-team">
-              The power team
-            </Link>
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/toolkit">
-              Toolkit
-            </Link>
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/resources">
-              Resources
-            </Link>
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/learn">
-              Learning Centre
-            </Link>
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/stays">
-              Stays
-            </Link>
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/insights">
-              Insights
-            </Link>
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/faq">
-              FAQs
-            </Link>
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/trust">
-              Our word
-            </Link>
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/standards">
-              Standards &amp; compliance
-            </Link>
-            <a className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="mailto:contact@samnharv.com">
-              Email the office
-            </a>
-            <Link className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright" href="/contact">
-              Contact
-            </Link>
-            <a
-              className="annot muted flex min-h-11 items-center transition-colors hover:text-bronze-bright"
-              href="https://share.google/lsd2TlaWo3OpRFqhO"
-              rel="noopener"
-            >
-              Google reviews
-            </a>
+          <nav aria-label="Footer" className="grid grid-cols-2 gap-x-8 gap-y-8 md:grid-cols-4 md:gap-x-12">
+            {SITE_MAP.map((g) => (
+              <div key={g.label}>
+                <p className="annot text-bronze-bright">{g.label}</p>
+                <ul className="mt-3">
+                  {g.items.map((item) => (
+                    <li key={item.href}>
+                      {item.external ? (
+                        <a className="annot muted flex min-h-10 items-center transition-colors hover:text-bronze-bright" href={item.href} target="_blank" rel="noopener noreferrer">{item.label} ↗</a>
+                      ) : (
+                        <Link className="annot muted flex min-h-10 items-center transition-colors hover:text-bronze-bright" href={item.href}>{item.label}</Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </nav>
         </div>
 
@@ -95,7 +42,11 @@ export default function SiteFooter() {
           <p className="annot muted">
             © {new Date().getFullYear()} S L Grants Ltd, trading as Sam n Harv
           </p>
-          <p className="annot muted">UK South West · Working the whole map</p>
+          <p className="annot flex flex-wrap gap-x-6 muted">
+            <a href="https://wa.me/447444551241" className="hover:text-bronze-bright">WhatsApp Samuel</a>
+            <a href="https://wa.me/447753600183" className="hover:text-bronze-bright">WhatsApp Harvey</a>
+            <a href="mailto:contact@samnharv.com" className="hover:text-bronze-bright">contact@samnharv.com</a>
+          </p>
         </div>
       </div>
     </footer>

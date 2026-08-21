@@ -4,25 +4,17 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import BenchmarkMark from "@/components/benchmark-mark";
+import { SITE_MAP } from "@/lib/site-nav";
 
-/* Primary nav stays minimal: four tabs + Enquire. Owners/institutions
-   pages live under "Work with us"; stays, agents, developers live in the
-   mobile menu and the footer. */
+/* Primary nav stays minimal: three tabs + Enquire + Menu. The Menu opens
+   the full grouped site map (lib/site-nav) on every screen size. */
 const NAV = [
   { href: "/", label: "Home" },
   { href: "/opportunities", label: "Opportunities" },
   { href: "/trust", label: "Our word" },
   { href: "/about", label: "The brothers" },
 ];
-const MENU_EXTRA = [
-  { href: "/services", label: "Work with us" },
-  { href: "/landlords", label: "Owners" },
-  { href: "/councils", label: "Institutions" },
-  { href: "/agents", label: "Agents" },
-  { href: "/developers", label: "Developers" },
-  { href: "/stays", label: "Stays" },
-  { href: "/contact", label: "Contact" },
-];
+
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -69,6 +61,15 @@ export default function SiteHeader() {
           >
             Enquire
           </Link>
+          <button
+            type="button"
+            className="font-sans text-[0.9375rem] tracking-[0.01em] text-ink transition-colors hover:text-bronze"
+            aria-expanded={open}
+            aria-controls="site-menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? "Close" : "Menu"}
+          </button>
         </nav>
 
         <div className="flex items-center gap-6 lg:hidden">
@@ -87,65 +88,55 @@ export default function SiteHeader() {
         </div>
       </div>
 
-      {/* mobile menu */}
-      {/* scrollable (data-lenis-prevent keeps the smooth-scroller's hands
-          off it); mt-auto on the nav keeps the bottom-anchored composition
-          on screens tall enough to not need scrolling */}
+      {/* the menu — every page, grouped; all screen sizes */}
       <div
         id="site-menu"
         inert={!open}
         data-lenis-prevent
-        className={`on-stone fixed inset-0 -z-10 flex flex-col overflow-y-auto overscroll-contain px-5 pb-10 pt-24 transition-[clip-path] duration-500 ease-out lg:hidden ${
+        className={`on-stone fixed inset-0 -z-10 flex flex-col overflow-y-auto overscroll-contain px-5 pb-12 pt-24 transition-[clip-path] duration-500 ease-out md:px-10 md:pt-28 ${
           open
             ? "[clip-path:inset(0_0_0%_0)]"
             : "pointer-events-none [clip-path:inset(0_0_100%_0)]"
         }`}
       >
-        <nav aria-label="Mobile" className="mt-auto flex flex-col gap-1">
-          <Link
-            href="/"
-            aria-current={pathname === "/" ? "page" : undefined}
-            onClick={() => setOpen(false)}
-            className="group flex items-baseline justify-between border-b hairline py-4"
-          >
-            <span className="display text-4xl">Home</span>
-          </Link>
-
-          {NAV.slice(1).map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={pathname === item.href ? "page" : undefined}
-              onClick={() => setOpen(false)}
-              className="group flex items-baseline justify-between border-b hairline py-4"
-            >
-              <span className="display text-4xl">{item.label}</span>
-            </Link>
-          ))}
-          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
-            {MENU_EXTRA.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="annot flex min-h-11 items-center text-[var(--line-light)] transition-colors hover:text-bronze-bright"
-              >
-                {item.label}
-              </Link>
+        <nav aria-label="Site" className="mx-auto w-full max-w-6xl">
+          <div className="grid grid-cols-1 gap-x-10 gap-y-10 md:grid-cols-2 lg:grid-cols-4">
+            {SITE_MAP.map((g) => (
+              <div key={g.label}>
+                <p className="annot text-[var(--bronze-bright)]">{g.label}</p>
+                <ul className="mt-4 border-t hairline">
+                  {g.items.map((item) =>
+                    item.external ? (
+                      <li key={item.href} className="border-b hairline">
+                        <a href={item.href} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className="block py-3 transition-colors hover:text-[var(--bronze-bright)]">
+                          <span className="display text-xl">{item.label} ↗</span>
+                        </a>
+                      </li>
+                    ) : (
+                      <li key={item.href} className="border-b hairline">
+                        <Link
+                          href={item.href}
+                          aria-current={pathname === item.href ? "page" : undefined}
+                          onClick={() => setOpen(false)}
+                          className="block py-3 transition-colors hover:text-[var(--bronze-bright)]"
+                        >
+                          <span className="display text-xl">{item.label}</span>
+                          {item.note && <span className="mt-0.5 block text-sm text-[var(--plaster)]/60">{item.note}</span>}
+                        </Link>
+                      </li>
+                    ),
+                  )}
+                </ul>
+              </div>
             ))}
           </div>
+          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3">
+            <Link href="/" onClick={() => setOpen(false)} className="annot text-[var(--plaster)]/70 hover:text-[var(--bronze-bright)]">Home</Link>
+            <a href="https://wa.me/447444551241" className="annot text-[var(--plaster)]/70 hover:text-[var(--bronze-bright)]">WhatsApp Samuel</a>
+            <a href="https://wa.me/447753600183" className="annot text-[var(--plaster)]/70 hover:text-[var(--bronze-bright)]">WhatsApp Harvey</a>
+            <a href="mailto:contact@samnharv.com" className="annot text-[var(--plaster)]/70 hover:text-[var(--bronze-bright)]">contact@samnharv.com</a>
+          </div>
         </nav>
-        <div className="mt-8 flex flex-col gap-3">
-          <a href="https://wa.me/447444551241" className="btn btn-ghost">
-            WhatsApp Samuel
-          </a>
-          <a href="https://wa.me/447753600183" className="btn btn-ghost">
-            WhatsApp Harvey
-          </a>
-          <a href="mailto:contact@samnharv.com" className="btn btn-ink border border-[var(--line-light)]">
-            contact@samnharv.com
-          </a>
-        </div>
       </div>
     </header>
   );
