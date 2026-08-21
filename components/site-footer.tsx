@@ -10,7 +10,7 @@ export default function SiteFooter() {
           <div>
             <BenchmarkMark className="h-8 w-8 text-bronze-bright" />
             <p className="display mt-4 text-3xl">
-              SAM <span className="display-it lowercase">n</span> HARV
+              SAM <span className="display-it lowercase gold-text">n</span> HARV
             </p>
             <p className="muted mt-2 max-w-sm text-sm leading-relaxed">
               Private property mandates, UK and international. Two brothers,

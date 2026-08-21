@@ -109,7 +109,15 @@ export default function MarkMorph({ className }: { className?: string }) {
         strokeLinecap="square"
         className="h-full w-full [&_path]:[vector-effect:non-scaling-stroke]"
       >
-        <path ref={ground} className="stroke-[var(--bronze)]" d="M4 7 L28 7" />
+        <defs>
+          <linearGradient id="sh-gold-morph" gradientUnits="userSpaceOnUse" x1="4" y1="0" x2="28" y2="0">
+            <stop offset="0" stopColor="#b8965c" />
+            <stop offset="0.38" stopColor="#f3e3b4" />
+            <stop offset="0.58" stopColor="#e2c389" />
+            <stop offset="1" stopColor="#a98a52" />
+          </linearGradient>
+        </defs>
+        <path ref={ground} stroke="url(#sh-gold-morph)" d="M4 7 L28 7" />
         <path ref={wl} d="M16 7 L16 14" />
         <path ref={wr} d="M16 7 L16 14" />
         <path ref={arrow} d="M16 14 L7 27 M16 14 L25 27 M16 14 L16 27" />

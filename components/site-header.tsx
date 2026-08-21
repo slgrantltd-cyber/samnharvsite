@@ -37,7 +37,7 @@ export default function SiteHeader() {
         >
           <BenchmarkMark className="h-6 w-6 text-ink" />
           <span className="display text-lg leading-none tracking-tight">
-            SAM <span className="display-it lowercase">n</span> HARV
+            SAM <span className="display-it lowercase gold-text">n</span> HARV
           </span>
         </Link>
 
