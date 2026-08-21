@@ -25,6 +25,7 @@ import MarkMorph from "@/components/mark-morph";
 import MandateLight from "@/components/mandate-light";
 import MandateGlobe from "@/components/mandate-globe";
 import InvestorBrief from "@/components/investor-brief";
+import DubaiStrip from "@/components/dubai-strip";
 import StrategyLedger from "@/components/strategy-ledger";
 import { photoPath } from "@/lib/photos";
 
@@ -115,6 +116,9 @@ export default function Home() {
 
       {/* 01.35 — THE TERRITORY (pinned globe: UK → Dubai → Thailand) */}
       <MandateGlobe />
+
+      {/* 01.37 — DUBAI, UNMISTAKABLY */}
+      <DubaiStrip />
 
       {/* 01.4 — THE INVESTOR BRIEF (enquiry, near the top) */}
       <InvestorBrief />

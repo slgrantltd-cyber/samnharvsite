@@ -4,9 +4,11 @@ import { Rise, Line, Lift } from "@/components/reveal";
 import AccessForm from "@/components/access-form";
 import LogoMarquee from "@/components/dubai/logo-marquee";
 import DuskLight from "@/components/dubai/dusk-light";
-import CountUp from "@/components/dubai/count-up";
 import TiltCard from "@/components/dubai/tilt-card";
 import ProcessRail from "@/components/dubai/process-rail";
+import { PsfLines, VolumeBars, YieldBars, DeveloperBars } from "@/components/dubai/market-charts";
+import { HEADLINES, SOURCE } from "@/lib/dubai-data";
+import { INSIGHTS } from "@/lib/insights";
 
 export const metadata: Metadata = {
   title: "Dubai Property Investment for UK Investors — Developer-Direct",
@@ -43,30 +45,45 @@ const RISKS = [
 export default function DubaiPage() {
   return (
     <main id="main" className="pt-24 md:pt-28">
-      <section className="relative overflow-hidden px-5 py-16 md:px-10 md:py-24 [contain:paint]">
+      <section className="relative -mt-24 overflow-hidden px-5 pb-20 pt-40 text-[var(--plaster)] md:-mt-28 md:pb-28 md:pt-52 [contain:paint]" style={{ background: "linear-gradient(160deg, #17110d 0%, #241811 40%, #3a2418 75%, #4a2f1d 100%)" }}>
         <DuskLight />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[var(--plaster)]" aria-hidden="true" />
         <div className="relative mx-auto max-w-6xl">
-          <p className="annot muted">Dubai · for UK investors</p>
-          <Rise as="h1" className="display mt-3 text-5xl md:text-8xl">
+          <p className="annot text-[var(--bronze-bright)]">Dubai · for UK investors</p>
+          <Rise as="h1" className="display mt-4 text-5xl leading-[0.95] md:text-8xl">
             <Line>Developer-direct Dubai,</Line>
             <Line>
-              underwritten by a <span className="display-it">UK desk.</span>
+              underwritten by a <span className="display-it gold-text">UK desk.</span>
             </Line>
           </Rise>
-          <p className="mt-8 max-w-xl text-lg leading-relaxed md:text-xl">
-            Launch allocations from Dubai&rsquo;s leading developers —
-            Binghatti, Danube, Sobha, Emaar, Damac and more — at developer
-            price, on developer payment plans. We pick the unit, run the
-            numbers net of every cost, and tell you when not to buy.
+          <p className="mt-8 max-w-xl text-lg leading-relaxed text-[var(--plaster)]/85 md:text-xl">
+            Launch allocations from Binghatti, Danube, Sobha, Emaar, Damac and
+            more — at developer price, on developer payment plans. We pick the
+            unit, run the numbers against the transaction record, and tell you
+            when not to buy.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
-            <a href="https://wa.me/447444551241?text=Dubai%20%E2%80%94%20I%27d%20like%20to%20talk" className="btn btn-ink">
+          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <a href="https://wa.me/447444551241?text=Dubai%20%E2%80%94%20I%27d%20like%20to%20talk" className="btn btn-ink border border-[var(--plaster)]/30">
               WhatsApp Samuel about Dubai
             </a>
-            <Link href="/call" className="annot inline-flex min-h-11 items-center gap-3 text-ink hover:text-bronze">
+            <Link href="/call" className="annot inline-flex min-h-11 items-center gap-3 text-[var(--plaster)]/85 hover:text-[var(--bronze-bright)]">
               Book a 15-minute intro call <span aria-hidden="true">→</span>
             </Link>
           </div>
+          <div className="mt-14 grid grid-cols-2 gap-px border border-[var(--plaster)]/15 bg-[var(--plaster)]/15 md:grid-cols-4">
+            {[
+              [HEADLINES.tx2025.toLocaleString("en-GB"), "Sales in 2025"],
+              [`AED ${HEADLINES.valueBn2025}bn`, "Transacted in 2025"],
+              [`${HEADLINES.offplanShare2026}%`, "Off-plan share, 2026"],
+              [`+${HEADLINES.readyPsfFromFloor}%`, "Ready price/sq ft since 2020"],
+            ].map(([v, l]) => (
+              <div key={l} className="p-4 md:p-5" style={{ background: "rgba(23,17,13,.55)" }}>
+                <p className="display text-2xl md:text-3xl">{v}</p>
+                <p className="annot mt-2 text-[var(--bronze-bright)]">{l}</p>
+              </div>
+            ))}
+          </div>
+          <p className="annot mt-3 text-[var(--plaster)]/45">{SOURCE.short}</p>
         </div>
       </section>
 
@@ -87,24 +104,6 @@ export default function DubaiPage() {
               plan, delivery record, service charge, rental evidence — and the
               honest call on which one, or none.
             </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="px-5 pb-16 md:px-10 md:pb-24">
-        <div className="mx-auto max-w-6xl">
-          <div className="grid grid-cols-2 gap-px border bg-[var(--line)] hairline md:grid-cols-4">
-            {[
-              { to: 0, suffix: "%", l: "UAE income & capital gains tax" },
-              { to: 4, suffix: "%", l: "DLD transfer fee — often split on launches" },
-              { to: 10, suffix: " yr", l: "Golden Visa at AED 2m+" },
-              { to: 20, prefix: "from ", suffix: "%", l: "Typical deposit to reserve" },
-            ].map((c) => (
-              <div key={c.l} className="bg-[var(--plaster)] p-6 md:p-8">
-                <p className="display text-4xl md:text-5xl"><CountUp to={c.to} prefix={c.prefix} suffix={c.suffix} className="gold-text" /></p>
-                <p className="annot mt-3 muted">{c.l}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -140,6 +139,43 @@ export default function DubaiPage() {
             ))}
           </div>
           <p className="annot mt-6 muted">Figures indicative of current launches; sterling at prevailing rates. Current price sheets on request.</p>
+        </div>
+      </section>
+
+      <section id="market" className="px-5 pb-16 md:px-10 md:pb-24">
+        <div className="mx-auto max-w-6xl">
+          <p className="annot text-bronze">The market, in numbers</p>
+          <h2 className="display mt-3 max-w-3xl text-3xl leading-snug md:text-4xl">
+            Sixteen years of Land Department data — <span className="display-it">read without the brochure.</span>
+          </h2>
+          <p className="muted mt-5 max-w-2xl leading-relaxed">
+            Every figure below is a registered transaction, not a forecast. The
+            same series sit behind each unit we underwrite. Hover for values; each
+            chart has a table view.
+          </p>
+          <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <PsfLines />
+            <VolumeBars />
+            <YieldBars />
+            <DeveloperBars />
+          </div>
+          <p className="annot mt-6 max-w-3xl leading-relaxed muted">{SOURCE.label} Past performance is not a guide to future returns.</p>
+        </div>
+      </section>
+
+      <section className="px-5 pb-16 md:px-10 md:pb-24">
+        <div className="mx-auto max-w-6xl">
+          <p className="annot text-bronze">Dubai desk notes</p>
+          <div className="mt-6 grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-2 lg:grid-cols-4">
+            {INSIGHTS.filter((i) => i.tag === "Dubai").map((i) => (
+              <Link key={i.slug} href={`/insights/${i.slug}`} className="group glow-gold z-0 bg-[var(--plaster)] p-6 hover:z-10">
+                <span className="annot muted">{i.readMinutes} min</span>
+                <span className="display mt-3 block text-xl leading-snug">{i.title}</span>
+                <span className="muted mt-3 block text-sm leading-relaxed">{i.standfirst}</span>
+                <span className="annot mt-4 inline-flex items-center gap-2 text-ink transition-colors group-hover:text-bronze">Read <span aria-hidden="true">→</span></span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

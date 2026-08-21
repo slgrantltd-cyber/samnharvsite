@@ -14,12 +14,12 @@ const LOGOS = [
   { src: "/partners/dubai/nakheel.svg", alt: "Nakheel", h: "h-5" },
 ];
 
-export default function LogoMarquee() {
+export default function LogoMarquee({ fade = "#2b2823" }: { fade?: string }) {
   const track = [...LOGOS, ...LOGOS];
   return (
     <div className="marquee relative overflow-hidden" aria-label="Developers we bring allocations from">
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#2b2823] to-transparent" aria-hidden="true" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#2b2823] to-transparent" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24" style={{ background: `linear-gradient(90deg, ${fade}, transparent)` }} aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24" style={{ background: `linear-gradient(270deg, ${fade}, transparent)` }} aria-hidden="true" />
       <ul className="marquee-track flex w-max items-center gap-16 py-6 md:gap-24">
         {track.map((l, i) => (
           <li key={`${l.alt}-${i}`} className="shrink-0" aria-hidden={i >= LOGOS.length}>
