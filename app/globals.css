@@ -499,7 +499,7 @@ button,
 
 /* ---- Dubai motion ---- */
 @keyframes marquee { from { transform: translate3d(0,0,0) } to { transform: translate3d(-50%,0,0) } }
-.marquee-track { animation: marquee 46s linear infinite; }
+.marquee-track { animation: marquee 46s linear infinite; will-change: transform; }
 .marquee:hover .marquee-track { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center } }
 .tilt { transform-style: preserve-3d; }

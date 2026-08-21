@@ -8,7 +8,8 @@ import { useEffect, useRef } from "react";
  * arcs with a soft radial glow; draws only while on screen; still under
  * reduced-motion. Desert air, not confetti.
  */
-export default function GoldDust({ count = 110 }: { count?: number }) {
+export default function GoldDust({ count: countProp = 110 }: { count?: number }) {
+  const count = typeof window !== "undefined" && window.innerWidth < 768 ? Math.round(countProp * 0.5) : countProp;
   const ref = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const cv = ref.current; if (!cv) return;

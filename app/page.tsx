@@ -93,7 +93,26 @@ export default function Home() {
               Verify them on Google <span aria-hidden="true">↗</span>
             </a>
           </p>
-          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+          {/* phone: each review folds under its author; desktop: both open side by side */}
+          <div className="mt-8 md:hidden">
+            {[
+              ["Stephen McLaughlin", "director, serviced accommodation company", <>&ldquo;Through his expertise, we&rsquo;ve secured some fantastic deals that have directly contributed to the growth of our business, <span className="display-it">adding six figures in revenue.</span>&rdquo;</>],
+              ["Jonathan Thompson", "landlord on two of our houses", <>&ldquo;I have dealt with Sam on a professional basis for over a year now. Very professional, genuine and very hard working. <span className="display-it">I would highly recommend him and his company.</span>&rdquo;</>],
+            ].map(([name, role, quote], i) => (
+              <details key={String(name)} className="group border-t hairline last:border-b" open={i === 0}>
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 [&::-webkit-details-marker]:hidden">
+                  <span>
+                    <span className="display block text-lg">{name}</span>
+                    <span className="annot muted">{role}</span>
+                  </span>
+                  <span className="annot text-bronze transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+                </summary>
+                <p className="display pb-5 text-xl leading-snug">{quote}</p>
+                <a href="https://share.google/lsd2TlaWo3OpRFqhO" target="_blank" rel="noopener noreferrer" className="annot mb-5 inline-block text-ink">on Google ↗</a>
+              </details>
+            ))}
+          </div>
+          <div className="mt-8 hidden grid-cols-1 gap-6 md:grid md:grid-cols-2">
             <Lift className="border hairline p-7 md:p-9">
               <p className="display text-xl leading-snug md:text-2xl">
                 &ldquo;Through his expertise, we&rsquo;ve secured some fantastic

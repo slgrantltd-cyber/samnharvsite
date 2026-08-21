@@ -113,7 +113,7 @@ export default function MandateGlobe() {
   const canvas = useRef<HTMLCanvasElement>(null);
   const pinRefs = useRef<(HTMLDivElement | null)[]>([]);
   const captionRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const dots = useMemo(() => buildDots(1.5), []);
+  const dots = useMemo(() => buildDots(typeof window !== "undefined" && window.innerWidth < 768 ? 2.1 : 1.5), []);
   const initial = useMemo(() => ({ lam: MANDATES[0].lon, phi: MANDATES[0].lat - 12 }), []);
 
   useEffect(() => {
@@ -128,7 +128,7 @@ export default function MandateGlobe() {
 
     const resize = () => {
       const rect = cv.getBoundingClientRect();
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 768 ? 1.5 : 2);
       W = rect.width; H = rect.height;
       cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
