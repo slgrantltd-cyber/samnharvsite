@@ -45,9 +45,9 @@ export default function Home() {
         </p>
         <MarkMorph className="relative mt-9 h-36 w-36 text-ink md:mt-10 md:h-48 md:w-48" />
         <Rise as="h1" className="display relative mt-10 text-4xl leading-tight md:mt-12 md:text-7xl">
-          <Line>We only bring you</Line>
+          <Line>Character</Line>
           <Line>
-            what we&rsquo;d <span className="display-it">run ourselves.</span>
+            over <span className="display-it">commission.</span>
           </Line>
         </Rise>
         <p className="relative mx-auto mt-8 max-w-xl text-lg leading-relaxed md:text-xl">
@@ -263,11 +263,12 @@ export default function Home() {
       {/* 01.5 — MANIFESTO */}
       <section className="px-5 py-28 md:px-10 md:py-40">
         <div className="mx-auto max-w-4xl">
-          <p className="annot muted mb-8">The position</p>
+          <p className="annot muted mb-8">Our mission</p>
           <ScrubWords
             className="display text-3xl leading-tight md:text-5xl"
-            text="We are not brokers of other people's ideas. We run property every day — the placements, the guests, the maintenance, the numbers — so every mandate we bring you has passed the only test we trust: would we put our own name to running it."
+            text="Our mission is to put a small number of exceptional property investments in front of serious investors — across the UK, Dubai and Thailand — each underwritten to a return we would accept with our own money, and to put your outcome ahead of our fee, every time. Character over commission."
           />
+          <p className="annot mt-8 muted">Samuel &amp; Harvey Grant — founders</p>
         </div>
       </section>
 

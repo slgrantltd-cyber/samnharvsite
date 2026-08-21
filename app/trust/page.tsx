@@ -77,6 +77,12 @@ export default function TrustPage() {
             promises are cheap, every one below is a rule you can check
             against the pack in front of you.
           </p>
+          <div className="mt-10 max-w-2xl border-l-2 border-bronze pl-6">
+            <p className="annot text-bronze">Our mission</p>
+            <p className="display mt-3 text-xl leading-snug md:text-2xl">
+              Our mission is to put a small number of exceptional property investments in front of serious investors — across the UK, Dubai and Thailand — each underwritten to a return we would accept with our own money, and to put your outcome ahead of our fee, every time. Character over commission.
+            </p>
+          </div>
         </div>
       </section>
 
