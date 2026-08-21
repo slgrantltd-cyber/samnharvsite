@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Rise, Line, Lift } from "@/components/reveal";
-import AccessForm from "@/components/access-form";
+import UnitsGallery from "@/components/dubai/units-gallery";
 import LogoMarquee from "@/components/dubai/logo-marquee";
 import DuskLight from "@/components/dubai/dusk-light";
 import MarkMorph from "@/components/mark-morph";
@@ -110,37 +110,20 @@ export default function DubaiPage() {
         </div>
       </section>
 
-      <section id="allocations" className="px-5 pb-16 md:px-10 md:pb-24">
+      <section id="units" className="px-5 pb-16 md:px-10 md:pb-24">
         <div className="mx-auto max-w-6xl">
           <p className="annot text-bronze">Current allocations</p>
           <h2 className="display mt-3 max-w-3xl text-3xl leading-snug md:text-4xl">
-            Live launches, with the numbers — <span className="display-it">on request.</span>
+            The product, seen — <span className="display-it">price, plan and handover on every one.</span>
           </h2>
           <p className="muted mt-5 max-w-2xl leading-relaxed">
-            We hold current allocations and price lists across the developers
-            above. Launch pricing changes weekly and is shared with qualified
-            investors directly, not published — ask and you&rsquo;ll have the
-            current sheet the same day: price from, payment plan, handover,
-            projected net yield, service charge.
+            A working selection across the developers, as they publish it. Every
+            card has an Enquire — you get the current price sheet for that unit
+            the same day, with our view on it.
           </p>
-          <div className="mt-8 grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-3">
-            {[
-              ["Studios & 1-beds", "Income-led", "Highest yield per pound; the rental engine of the city. Typical entry from the low £100ks."],
-              ["2 & 3-beds", "Balanced", "Family and long-stay demand, stronger resale. Mid-hundreds of thousands upward."],
-              ["Villas & branded", "Growth-led", "Scarcer product, larger tickets, the strongest capital appreciation story. £1m+."],
-            ].map(([h, k, b]) => (
-              <Lift key={h} className="bg-[var(--plaster)]">
-                <TiltCard className="glow-gold h-full bg-[var(--plaster)]">
-                  <div className="relative flex h-full flex-col p-6 md:p-7">
-                    <p className="annot text-bronze">{k}</p>
-                    <h3 className="display mt-2 text-2xl">{h}</h3>
-                    <p className="muted mt-3 text-[0.9375rem] leading-relaxed">{b}</p>
-                  </div>
-                </TiltCard>
-              </Lift>
-            ))}
+          <div className="mt-8">
+            <UnitsGallery />
           </div>
-          <p className="annot mt-6 muted">Figures indicative of current launches; sterling at prevailing rates. Current price sheets on request.</p>
         </div>
       </section>
 
@@ -227,21 +210,18 @@ export default function DubaiPage() {
         </div>
       </section>
 
-      <section id="access" className="px-5 pb-24 md:px-10 md:pb-32">
+      <section className="px-5 pb-24 md:px-10 md:pb-32">
         <div className="mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-5">
-            <div className="lg:col-span-2">
-              <p className="annot muted">Request the current sheet</p>
-              <h2 className="display mt-3 text-3xl md:text-4xl">
-                Tell us your capital. <span className="display-it">We&rsquo;ll send what fits.</span>
-              </h2>
-              <p className="muted mt-4 leading-relaxed">
-                Current allocations and price lists, the same day, with our
-                view on each. Identity and proof of funds before particulars — always.
-              </p>
-            </div>
-            <div className="lg:col-span-3">
-              <AccessForm mandate="Dubai residences" />
+          <div className="border hairline p-8 md:p-12">
+            <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+              <div className="max-w-2xl">
+                <h2 className="display text-3xl md:text-4xl">Nothing above quite right? <span className="display-it">Tell us the brief.</span></h2>
+                <p className="muted mt-4 leading-relaxed">Allocations change weekly and we hold more than we show. One WhatsApp, or fifteen minutes on a call, and we&rsquo;ll send what fits.</p>
+              </div>
+              <div className="flex shrink-0 flex-col gap-3">
+                <a href="https://wa.me/447444551241?text=Dubai%20%E2%80%94%20here%27s%20my%20brief" className="btn btn-ink">WhatsApp Samuel</a>
+                <Link href="/call" className="btn btn-ghost">Book a 15-minute intro call</Link>
+              </div>
             </div>
           </div>
         </div>
