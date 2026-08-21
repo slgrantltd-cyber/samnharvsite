@@ -41,15 +41,15 @@ export default function UnitsGallery() {
             {/* phone: swipe rail · desktop: grid */}
             <div className={`-mx-5 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:snap-none md:gap-px md:overflow-visible md:border md:bg-[var(--line)] md:hairline md:px-0 md:pb-0 md:grid-cols-2 ${items.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}>
               {items.map((u) => (
-                <article key={u.slug} className="group glow-gold z-0 flex w-[84vw] max-w-[22rem] shrink-0 snap-start flex-col border hairline bg-[var(--plaster)] hover:z-10 md:w-auto md:max-w-none md:border-0">
+                <article key={u.slug} className="group glow-gold z-0 flex w-[84vw] max-w-[22rem] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border hairline bg-[var(--plaster)] hover:z-10 md:w-auto md:max-w-none md:rounded-none md:border-0">
                   <button type="button" onClick={() => setActive({ unit: u, mode: "view" })} className="relative block aspect-[3/2] w-full overflow-hidden text-left" aria-label={`View ${u.name}`}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={u.image} alt={`${u.name} — developer render`} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]" />
                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent" aria-hidden="true" />
                     <p className="annot absolute left-4 top-4 rounded-full bg-black/45 px-3 py-1 text-[var(--plaster)] backdrop-blur-[2px]">{u.brand ? `${u.brand} · ${u.developer}` : u.developer}</p>
                     <p className="annot absolute bottom-4 left-4 text-[var(--plaster)]/85">{TONE[u.tone]}</p>
-                    {u.availability && <p className={`annot absolute right-4 top-4 rounded-full px-3 py-1 ${AV_STYLE[u.availability]}`}>{u.availability}</p>}
-                    <span className="annot absolute bottom-4 right-4 text-[var(--bronze-bright)] opacity-0 transition-opacity group-hover:opacity-100">View →</span>
+                    {u.availability && <p className={`annot absolute bottom-4 right-4 rounded-full px-3 py-1 ${AV_STYLE[u.availability]}`}>{u.availability}</p>}
+                    <span className="annot absolute right-4 top-4 text-[var(--bronze-bright)] opacity-0 transition-opacity group-hover:opacity-100">View →</span>
                   </button>
                   <div className="relative flex flex-1 flex-col p-5">
                     <h4 className="display text-xl leading-tight">{u.name}</h4>
@@ -77,6 +77,20 @@ export default function UnitsGallery() {
 
       {active && <UnitSheet unit={active.unit} initialType={active.type} initialMode={active.mode} onClose={() => setActive(null)} />}
     </>
+  );
+}
+
+/** On phones a section is a drop-down; on desktop it is always open. */
+function Section({ title, defaultOpen = true, children }: { title: string; defaultOpen?: boolean; children: React.ReactNode }) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <div className="mt-6 border-t hairline pt-5 md:mt-8 md:pt-8">
+      <button type="button" onClick={() => setOpen((v) => !v)} className="flex w-full items-center justify-between text-left md:pointer-events-none" aria-expanded={open}>
+        <span className="annot text-bronze">{title}</span>
+        <span className={`annot text-bronze transition-transform md:hidden ${open ? "rotate-45" : ""}`} aria-hidden="true">+</span>
+      </button>
+      <div className={`${open ? "block" : "hidden"} md:block`}>{children}</div>
+    </div>
   );
 }
 
@@ -108,11 +122,12 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
   const field = "mt-2 w-full border-b hairline bg-transparent py-2 text-[0.9375rem] outline-none focus:border-ink";
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-end justify-center md:items-center md:p-6" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
-      <button type="button" aria-label="Close" onClick={onClose} className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
-      <div className="relative flex max-h-[94vh] w-full max-w-5xl flex-col overflow-hidden bg-[var(--plaster)] shadow-daylight md:max-h-[90vh] md:border md:hairline" data-lenis-prevent>
+    <div className="fixed inset-0 z-[60] flex items-end justify-center md:items-center md:p-8" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+      <button type="button" aria-label="Close" onClick={onClose} className="absolute inset-0 bg-[#0d0a08]/70 backdrop-blur-[6px]" />
+      <div className="sheet-float relative flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-t-3xl bg-[var(--plaster)] md:max-h-[88vh] md:rounded-3xl" data-lenis-prevent>
+        <span className="absolute left-1/2 top-2 z-10 h-1 w-10 -translate-x-1/2 rounded-full bg-[var(--plaster)]/70 md:hidden" aria-hidden="true" />
         {/* gallery */}
-        <div className="relative aspect-[16/9] max-h-[46vh] w-full shrink-0 bg-black md:aspect-[21/9]">
+        <div className="relative aspect-[16/9] max-h-[44vh] w-full shrink-0 bg-black md:aspect-[21/9]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img key={gallery[idx]} src={gallery[idx]} alt={`${unit.name} — render ${idx + 1}`} className="h-full w-full object-cover" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/75 via-black/20 to-transparent" aria-hidden="true" />
@@ -143,8 +158,8 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
           </div>
         )}
 
-        <div className="overflow-y-auto p-5 md:p-8">
-          <p className="max-w-2xl leading-relaxed">{unit.line}</p>
+        <div className="overflow-y-auto p-5 pb-8 md:p-10">
+          <p className="max-w-2xl text-[1.05rem] leading-relaxed md:text-lg">{unit.line}</p>
           <dl className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 text-sm md:grid-cols-4">
             <div><dt className="annot muted">From</dt><dd className="mt-0.5 font-medium">{unit.priceFrom}{unit.priceNote && <span className="muted"> · {unit.priceNote}</span>}</dd></div>
             <div><dt className="annot muted">Handover</dt><dd className="mt-0.5 font-medium">{unit.handover}</dd></div>
@@ -153,12 +168,11 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
           </dl>
 
           {/* unit-by-unit table — Enquire on every row */}
-          <div className="mt-8">
-            <p className="annot text-bronze">Units</p>
+          <Section title="Units & prices">
             <ul className="mt-3 border-t hairline">
               {unit.mix.map((m: MixRow) => (
-                <li key={m.type} className="grid grid-cols-[1fr_auto] items-center gap-3 border-b hairline py-3 md:grid-cols-[10rem_1fr_1fr_auto]">
-                  <span className="display text-lg">{m.type}</span>
+                <li key={m.type} className="grid grid-cols-[1fr_auto] items-center gap-3 border-b hairline py-3.5 md:grid-cols-[10rem_1fr_1fr_auto]">
+                  <span className="display text-lg md:text-xl">{m.type}</span>
                   <span className="hidden text-sm md:block">{m.from || <span className="muted">Price on enquiry</span>}</span>
                   <span className="hidden text-sm muted md:block">{m.size || m.note || ""}</span>
                   <div className="flex items-center gap-3">
@@ -168,11 +182,10 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
                 </li>
               ))}
             </ul>
-          </div>
+          </Section>
 
           {unit.plans && (
-            <div className="mt-8">
-              <p className="annot text-bronze">Floor plans</p>
+            <Section title="Floor plans" defaultOpen={false}>
               <div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4">
                 {unit.plans.map((p) => (
                   <a key={p.label} href={p.image} target="_blank" rel="noopener noreferrer" className="group/plan block border hairline bg-white p-2">
@@ -182,7 +195,7 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
                   </a>
                 ))}
               </div>
-            </div>
+            </Section>
           )}
 
           <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -192,8 +205,8 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
           </div>
 
           {/* enquiry */}
-          <div ref={formRef} className="mt-8 border-t hairline pt-8">
-            <p className="annot text-bronze">Enquire{type ? ` — ${type}` : ""}</p>
+          <div ref={formRef}>
+          <Section title={`Enquire${type ? ` — ${type}` : ""}`}>
             <div className="mt-3 flex flex-wrap items-center gap-4">
               <a href={waEnquiry(unit, type)} target="_blank" rel="noopener noreferrer" className="btn btn-ink">Enquire on WhatsApp</a>
               {unit.availability && <span className={`annot rounded-full px-3 py-1 ${AV_STYLE[unit.availability]}`}>{unit.availability}</span>}
@@ -225,6 +238,7 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
                 </div>
               </form>
             ))}
+          </Section>
           </div>
         </div>
       </div>
