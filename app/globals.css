@@ -78,7 +78,7 @@ html.lenis body {
 
 body {
   background-color: var(--plaster);
-  background-image: var(--wash-light), var(--grain-trowel), var(--grain-fine), var(--grain-pores);
+  background-image: var(--grain-trowel), var(--grain-fine);
   color: var(--ink);
   font-family: var(--font-hanken), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;

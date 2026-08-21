@@ -26,7 +26,7 @@ export default function SmoothScroll() {
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const lenis = new Lenis({ lerp: 0.12 });
+    const lenis = new Lenis({ lerp: 0.16, wheelMultiplier: 0.95 });
     window.__lenis = lenis;
     if (!window.location.hash) {
       lenis.scrollTo(0, { immediate: true });
