@@ -20,6 +20,13 @@ export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
+  useEffect(() => { setOpen(false); }, [pathname]);
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
     return () => {
@@ -33,6 +40,7 @@ export default function SiteHeader() {
         <Link
           href="/"
           aria-label="Sam n Harv — home"
+          onClick={() => setOpen(false)}
           className="flex items-center gap-3 py-1"
         >
           <BenchmarkMark className="h-6 w-6 text-ink" />
@@ -48,6 +56,7 @@ export default function SiteHeader() {
               key={item.href}
               href={item.href}
               aria-current={pathname === item.href ? "page" : undefined}
+              onClick={() => setOpen(false)}
               className={`font-sans text-[0.9375rem] tracking-[0.01em] transition-colors hover:text-bronze ${
                 pathname === item.href ? "text-ink" : "text-stone"
               }`}
@@ -57,6 +66,7 @@ export default function SiteHeader() {
           ))}
           <Link
             href="/contact"
+            onClick={() => setOpen(false)}
             className="font-sans text-[0.9375rem] tracking-[0.01em] border-b border-ink/30 pb-0.5 text-ink transition-colors hover:border-bronze hover:text-bronze"
           >
             Enquire
@@ -73,7 +83,7 @@ export default function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-6 lg:hidden">
-          <Link href="/contact" className="font-sans text-[0.9375rem] tracking-[0.01em] text-ink transition-colors hover:text-bronze">
+          <Link href="/contact" onClick={() => setOpen(false)} className="font-sans text-[0.9375rem] tracking-[0.01em] text-ink transition-colors hover:text-bronze">
             Enquire
           </Link>
           <button
