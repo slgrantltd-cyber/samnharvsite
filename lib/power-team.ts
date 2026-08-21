@@ -56,7 +56,7 @@ export const POWER_TEAM: PowerRole[] = [
   },
   {
     role: "Serviced accommodation management",
-    why: "A dedicated management partner runs the unit day to day — listings, guests, cleaning, maintenance — so the asset performs without you (or us) becoming the front desk.",
+    why: "Summit Property Group (Maria Di Fonzo) runs the unit hands-off — listings, guests, housekeeping, maintenance, compliance — for a 15% management fee.",
     proof: "We run our own units the same way — see /stays.",
   },
 ];

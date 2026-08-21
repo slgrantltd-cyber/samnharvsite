@@ -3,11 +3,12 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { Rise, Line, Lift } from "@/components/reveal";
 import { POWER_TEAM } from "@/lib/power-team";
+import BenchmarkMark from "@/components/benchmark-mark";
 
 export const metadata: Metadata = {
   title: "The Complete Package — Every Part of the Deal, One Roof",
   description:
-    "Sam n Harv is a complete hub for property investment — sourcing, bridging finance with Lendhub, whole-of-market commercial finance through Watts Commercial, architecture and planning, build, furnishing by Base Furnishings, and operation. Plus the full professional bench, introduced per deal.",
+    "Sam n Harv is a complete hub for property investment — sourcing, bridging finance with Lendhub, whole-of-market commercial finance through Watts Commercial, architecture and planning, build, furnishing by Base Furnishings, and hands-off management by Summit Property Group. Plus the full professional bench, introduced per deal.",
   alternates: { canonical: "/power-team" },
 };
 
@@ -15,48 +16,58 @@ const CHAIN = [
   {
     stage: "Source",
     who: "Sam n Harv",
-    body: "The deal itself — found, negotiated and underwritten by us, to the same standard we buy at. Numbers you can hold us to.",
+    brand: "samnharv",
+    body: "The deal — found, negotiated and underwritten by us, to the standard we buy at.",
   },
   {
-    stage: "Fund",
+    stage: "Fund · direct lender",
     who: "Lendhub",
     brand: "lendhub",
     site: "lendhub.co.uk",
-    body: "Specialist bridging, refurbishment and development lending from £100k to £10m — terms discussed before you commit, so the finance is shaped around the deal, not the other way round.",
+    intro: true,
+    body: "Bridging, refurbishment and development lending, £100k to £10m. Terms shaped around the deal before you commit.",
   },
   {
     stage: "Fund · whole of market",
     who: "Watts Commercial Finance",
     brand: "watts",
     site: "watts-commercial.co.uk",
-    body: "Independent commercial broker across an extensive lender panel — commercial mortgages, bridging, development and portfolio finance. FCA-regulated, NACFB member, and a named contact there we recommend personally.",
+    intro: true,
+    body: "Independent commercial broker across an extensive lender panel — commercial mortgages, bridging, development, portfolios. FCA-regulated, NACFB member.",
   },
   {
     stage: "Design & planning",
     who: "Architect & planner",
-    body: "Drawings, permitted development and planning applications from the team on our own conversions — so the scheme that gets priced is the scheme that gets approved.",
+    brand: "quiet",
+    body: "Drawings, permitted development and planning applications from the team on our own conversions.",
   },
   {
     stage: "Build",
     who: "Our builder",
-    body: "The refurbishment and conversion work, itemised against a defined spec with staged payments — priced by the people who deliver our own projects.",
+    brand: "quiet",
+    body: "Refurbishment and conversion, itemised against a defined spec with staged payments — by the people who deliver our projects.",
   },
   {
     stage: "Furnish",
     who: "Base Furnishings",
     brand: "base",
     site: "basefurnishings.co.uk",
-    body: "Design-led furniture packages installed, not flat-packed — over 10,000 apartments delivered since 2010, from a single unit to a whole block inside a fortnight.",
+    intro: true,
+    body: "Design-led furniture packages, installed not flat-packed. 10,000+ apartments delivered since 2010.",
   },
   {
-    stage: "Manage",
-    who: "Management partner",
-    body: "Day-to-day management sits with a dedicated specialist — lettings, guests, maintenance, compliance — held to the standard we run our own properties at. You own an investment, not a job.",
+    stage: "Manage · hands-off",
+    who: "Summit Property Group",
+    brand: "summit",
+    site: "summit-propertygroup.co.uk",
+    intro: true,
+    body: "Maria Di Fonzo runs serviced accommodation hands-off for investors — listings, guests, housekeeping, maintenance, compliance. 15% management fee. You own an investment, not a job.",
   },
   {
     stage: "Then",
     who: "Your deal",
-    body: "One conversation starts the whole chain. Tell us your capital and what it's for, and we line up the people the deal actually needs.",
+    brand: "samnharv",
+    body: "One conversation starts the whole chain. Tell us your capital and what it's for.",
     cta: { href: "/call", label: "Book a 15-minute intro call" },
   },
 ];
@@ -112,6 +123,45 @@ const PLATES: Record<string, ReactNode> = {
       <p className="annot relative mt-2 text-[#253e6e]/70">Independent advice on commercial finance</p>
     </div>
   ),
+  samnharv: (
+    <div
+      className="relative flex min-h-[7rem] flex-col justify-center overflow-hidden px-6 py-6 md:px-7"
+      style={{ background: "linear-gradient(120deg, #141414 0%, #1a1a1a 60%, #232120 100%)" }}
+    >
+      <div
+        className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full"
+        style={{ background: "radial-gradient(closest-side, rgba(201,171,124,0.22), transparent)" }}
+        aria-hidden="true"
+      />
+      <div className="relative flex items-center gap-4">
+        <BenchmarkMark className="h-9 w-9 text-[var(--plaster)]" />
+        <p className="display text-xl tracking-tight text-[var(--plaster)]">
+          SAM <span className="display-it lowercase gold-text">n</span> HARV
+        </p>
+      </div>
+      <p className="annot relative mt-2 text-[var(--plaster)]/55">Character over commission</p>
+    </div>
+  ),
+  summit: (
+    <div
+      className="relative flex min-h-[7rem] flex-col justify-center overflow-hidden px-6 py-6 md:px-7"
+      style={{ background: "linear-gradient(120deg, #5f5946 0%, #736c57 60%, #847c66 100%)" }}
+    >
+      <div
+        className="pointer-events-none absolute -left-14 -bottom-24 h-56 w-56 rounded-full"
+        style={{ background: "radial-gradient(closest-side, rgba(245,245,245,0.14), transparent)" }}
+        aria-hidden="true"
+      />
+      <p className="display relative text-[1.35rem] tracking-[0.06em] text-[#f5f5f5]">SUMMIT</p>
+      <p className="annot relative mt-1 text-[#f5f5f5]/70">Property Group · Maria Di Fonzo</p>
+    </div>
+  ),
+  quiet: (
+    <div className="relative flex min-h-[7rem] flex-col justify-center px-6 py-6 md:px-7" style={{ background: "var(--limestone)" }}>
+      <span className="block h-px w-10" style={{ background: "linear-gradient(90deg, #a98a52, #ead8ab, #a98a52)" }} aria-hidden="true" />
+      <p className="annot mt-3 muted">Introduced per deal</p>
+    </div>
+  ),
 };
 
 
@@ -147,9 +197,8 @@ export default function PowerTeamPage() {
             <span className="display-it">without leaving the room.</span>
           </h2>
           <p className="muted mt-5 max-w-2xl leading-relaxed">
-            Most investments die in the gaps between professionals. We&rsquo;ve
-            closed the gaps: every stage of a deal now has a partner who already
-            works alongside us, on terms we&rsquo;d take ourselves.
+            Every stage of a deal has a partner who already works alongside us.
+            You deal with each directly, on their normal terms — introduced by name.
           </p>
           <div className="mt-8 grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-2 lg:grid-cols-4">
             {CHAIN.map((c) => (
@@ -162,6 +211,11 @@ export default function PowerTeamPage() {
                     <p className="muted mt-3 text-[0.9375rem] leading-relaxed">
                       {c.body}
                     </p>
+                    {c.intro && (
+                      <p className="annot mt-4 text-bronze">
+                        Say Samuel Grant sent you — they&rsquo;ve agreed to look after you.
+                      </p>
+                    )}
                     {c.cta && (
                       <Link href={c.cta.href} className="btn btn-ink mt-auto self-start">
                         {c.cta.label}
@@ -182,11 +236,8 @@ export default function PowerTeamPage() {
               </Lift>
             ))}
           </div>
-          <p className="annot mt-6 max-w-3xl leading-relaxed muted">
-            Partners are independent businesses — you deal with each directly,
-            on their normal terms. We put them here for one reason: they
-            already work on deals like ours, and they&rsquo;ve agreed to look
-            after people we send properly.
+          <p className="annot mt-6 muted">
+            Independent businesses. We earn nothing from the introductions.
           </p>
         </div>
       </section>
