@@ -41,7 +41,7 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-[var(--plaster)]" aria-hidden="true" />
         <p className="annot muted relative">Private investment · UK &amp; international</p>
         <p className="display relative mt-6 text-3xl tracking-tight md:text-4xl">
-          SAM <span className="display-it lowercase">n</span> HARV
+          SAM <span className="display-it lowercase text-[var(--bronze-bright)]">n</span> HARV
         </p>
         <MarkMorph className="relative mt-9 h-36 w-36 text-ink md:mt-10 md:h-48 md:w-48" />
         <Rise as="h1" className="display relative mt-10 text-4xl leading-tight md:mt-12 md:text-7xl">
