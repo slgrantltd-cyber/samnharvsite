@@ -1,8 +1,8 @@
 # Email signatures
 
-Two files: `samuel.html`, `harvey.html`. The mark image is served from
-https://www.samnharv.co.uk/brand/mark-gold.png — it appears in emails once the
-site is pushed/deployed (file lives in `public/brand/`).
+Two files: `samuel.html`, `harvey.html`. The mark image is served from https://samnharv.vercel.app/brand/mark-gold.png
+(the always-on Vercel project, deployed via CLI) so it works without waiting
+for a push. The same file also lives in `public/brand/` on the main site.
 
 ## Gmail
 1. Open the HTML file in a browser (double-click it).
