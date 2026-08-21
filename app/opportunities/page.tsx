@@ -37,10 +37,11 @@ const MANDATES = [
     id: "dubai",
     where: "Dubai · UAE",
     head: "Residences, direct from the developer.",
-    line: "Launch allocations at developer price, on developer payment plans — no resale premium, no middle layer. Unit selection, floor and view called by us; yield and exit modelled before you reserve.",
+    line: "Launch allocations from Binghatti, Danube, Sobha, Emaar, Damac and more — at developer price, on developer payment plans. Unit, floor and view called by us; yield and exit modelled before you reserve.",
     tone: "dusk",
-    status: "By introduction",
+    status: "Live allocations",
     page: "int-ae-001",
+    href: "/dubai",
   },
   {
     ref: "Mandate III",

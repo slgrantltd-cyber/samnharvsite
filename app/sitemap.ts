@@ -28,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/faq",
     "/contact",
     "/call",
+    "/dubai",
   ].map(
     (path) => ({
       url: `${BASE}${path}`,
