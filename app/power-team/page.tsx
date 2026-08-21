@@ -32,9 +32,8 @@ const CHAIN = [
     stage: "Fund · whole of market",
     who: "Watts Commercial Finance",
     brand: "watts",
-    site: "watts-commercial.co.uk",
     intro: true,
-    body: "Independent commercial broker across an extensive lender panel — commercial mortgages, bridging, development, portfolios. FCA-regulated, NACFB member.",
+    body: "Daniel Jones, Commercial Manager. Independent broker across an extensive lender panel — commercial mortgages, bridging, development, portfolios. FCA-regulated, NACFB member.",
   },
   {
     stage: "Design & planning",
