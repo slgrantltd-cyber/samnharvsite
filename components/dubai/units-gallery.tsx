@@ -49,7 +49,6 @@ export default function UnitsGallery() {
                     <p className="annot absolute left-4 top-4 rounded-full bg-[#0d0a08]/75 px-3 py-1 text-[var(--plaster)] backdrop-blur-[3px]">{u.brand ? `${u.brand} · ${u.developer}` : u.developer}</p>
                     <p className="annot absolute bottom-4 left-4 text-[var(--plaster)] [text-shadow:0_1px_10px_rgba(0,0,0,.8)]">{TONE[u.tone]}</p>
                     {u.availability && <p className={`annot absolute bottom-4 right-4 rounded-full px-3 py-1 ${AV_STYLE[u.availability]}`}>{u.availability}</p>}
-                    <span className="annot absolute right-4 top-4 rounded-full bg-[#0d0a08]/75 px-3 py-1 text-[var(--bronze-bright)] opacity-0 transition-opacity group-hover:opacity-100">View →</span>
                   </button>
                   <div className="relative flex flex-1 flex-col p-5">
                     <h4 className="display text-xl leading-tight">{u.name}</h4>
@@ -133,22 +132,21 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
           <img key={`bg-${gallery[idx]}`} src={gallery[idx]} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-60 blur-2xl" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img key={gallery[idx]} src={gallery[idx]} alt={`${unit.name} — render ${idx + 1}`} className="relative h-full w-full object-contain" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-[#0d0a08]/92 via-[#0d0a08]/55 to-transparent" aria-hidden="true" />
-          <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 text-[var(--plaster)] [text-shadow:0_1px_14px_rgba(0,0,0,.75)] md:left-8 md:right-8">
-            <div>
-              <p className="annot text-[var(--bronze-bright)]">{unit.brand ? `${unit.brand} · ${unit.developer}` : unit.developer} · {unit.area}, {unit.city}</p>
-              <h3 id="sheet-title" className="display mt-1 text-2xl md:text-4xl">{unit.name}</h3>
-              {unit.availability && <p className={`annot mt-2 inline-block rounded-full px-3 py-1 ${AV_STYLE[unit.availability]}`}>{unit.availability}</p>}
-            </div>
-            {gallery.length > 1 && (
-              <div className="flex items-center gap-2">
-                <button type="button" onClick={() => setIdx((i) => (i - 1 + gallery.length) % gallery.length)} className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--plaster)]/40 bg-black/30 text-[var(--plaster)] backdrop-blur-[2px] transition-colors hover:border-[var(--bronze-bright)] hover:text-[var(--bronze-bright)]" aria-label="Previous image">←</button>
-                <span className="annot text-[var(--plaster)]/75">{idx + 1} / {gallery.length}</span>
-                <button type="button" onClick={() => setIdx((i) => (i + 1) % gallery.length)} className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--plaster)]/40 bg-black/30 text-[var(--plaster)] backdrop-blur-[2px] transition-colors hover:border-[var(--bronze-bright)] hover:text-[var(--bronze-bright)]" aria-label="Next image">→</button>
-              </div>
-            )}
-          </div>
           <button type="button" onClick={onClose} className="annot absolute right-4 top-4 rounded-full bg-black/45 px-3 py-1.5 text-[var(--plaster)] backdrop-blur-[2px]">Close</button>
+        </div>
+        <div className="flex items-end justify-between gap-4 bg-[#0d0a08] px-5 pb-3 pt-4 text-[var(--plaster)] md:px-8">
+          <div>
+            <p className="annot text-[var(--bronze-bright)]">{unit.brand ? `${unit.brand} · ${unit.developer}` : unit.developer} · {unit.area}, {unit.city}</p>
+            <h3 id="sheet-title" className="display mt-1 text-2xl md:text-4xl">{unit.name}</h3>
+            {unit.availability && <p className={`annot mt-2 inline-block rounded-full px-3 py-1 ${AV_STYLE[unit.availability]}`}>{unit.availability}</p>}
+          </div>
+          {gallery.length > 1 && (
+            <div className="flex shrink-0 items-center gap-2">
+              <button type="button" onClick={() => setIdx((i) => (i - 1 + gallery.length) % gallery.length)} className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--plaster)]/30 text-[var(--plaster)] transition-colors hover:border-[var(--bronze-bright)] hover:text-[var(--bronze-bright)]" aria-label="Previous image">←</button>
+              <span className="annot text-[var(--plaster)]/75">{idx + 1} / {gallery.length}</span>
+              <button type="button" onClick={() => setIdx((i) => (i + 1) % gallery.length)} className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--plaster)]/30 text-[var(--plaster)] transition-colors hover:border-[var(--bronze-bright)] hover:text-[var(--bronze-bright)]" aria-label="Next image">→</button>
+            </div>
+          )}
         </div>
         {gallery.length > 1 && (
           <div className="flex items-center gap-2 overflow-x-auto bg-[#0d0a08] px-4 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
