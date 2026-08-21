@@ -200,14 +200,27 @@ export default function MandateGlobe() {
 
     // drag to turn, spring back
     let down = false, lx = 0, ly = 0;
-    const pd = (e: PointerEvent) => { down = true; lx = e.clientX; ly = e.clientY; gsap.killTweensOf(drag); cv.setPointerCapture(e.pointerId); };
+    const pd = (e: PointerEvent) => { down = true; lx = e.clientX; ly = e.clientY; vx = vy = 0; gsap.killTweensOf(drag); realigning = false; cv.setPointerCapture(e.pointerId); };
+    let vx = 0, vy = 0, realigning = false;
     const pm = (e: PointerEvent) => {
       if (!down) return;
-      drag.lam -= (e.clientX - lx) * 0.25; drag.phi += (e.clientY - ly) * 0.18;
-      drag.phi = Math.max(-40, Math.min(40, drag.phi));
+      const dx = (e.clientX - lx) * 0.25, dy = (e.clientY - ly) * 0.18;
+      drag.lam -= dx; drag.phi += dy;
+      drag.phi = Math.max(-50, Math.min(50, drag.phi));
+      vx = -dx; vy = dy;
       lx = e.clientX; ly = e.clientY; request();
     };
-    const pu = () => { if (!down) return; down = false; gsap.to(drag, { lam: 0, phi: 0, duration: 1.6, ease: "elastic.out(1, 0.7)", onUpdate: request }); };
+    // release: keep where you left it, with a little momentum — no snap back
+    const pu = () => {
+      if (!down) return; down = false;
+      gsap.to(drag, { lam: drag.lam + vx * 12, phi: Math.max(-50, Math.min(50, drag.phi + vy * 6)), duration: 1.2, ease: "power3.out", onUpdate: request });
+    };
+    // the next scroll movement eases the hand-offset away so each mandate still lands facing you
+    const realign = () => {
+      if (realigning || down || (Math.abs(drag.lam) < 0.01 && Math.abs(drag.phi) < 0.01)) return;
+      realigning = true;
+      gsap.to(drag, { lam: 0, phi: 0, duration: 1.4, ease: "power2.inOut", onUpdate: request, onComplete: () => { realigning = false; } });
+    };
     cv.addEventListener("pointerdown", pd); cv.addEventListener("pointermove", pm);
     cv.addEventListener("pointerup", pu); cv.addEventListener("pointercancel", pu);
 
@@ -219,11 +232,11 @@ export default function MandateGlobe() {
       defaults: { ease: "power1.inOut" },
     });
     tl.to({}, { duration: 0.6 })
-      .to(state, { lam: MANDATES[1].lon, phi: MANDATES[1].lat - 12, duration: 1.2, onUpdate: request })
+      .to(state, { lam: MANDATES[1].lon, phi: MANDATES[1].lat - 12, duration: 1.2, onUpdate: request, onStart: realign, onReverseComplete: realign })
       .to(captionRefs.current[0], { autoAlpha: 0, y: -24, duration: 0.4, ease: "none" }, "<0.2")
       .to(captionRefs.current[1], { autoAlpha: 1, y: 0, duration: 0.4, ease: "none" }, "<0.25")
       .to({}, { duration: 0.5 })
-      .to(state, { lam: MANDATES[2].lon, phi: MANDATES[2].lat - 6, duration: 1.2, onUpdate: request })
+      .to(state, { lam: MANDATES[2].lon, phi: MANDATES[2].lat - 6, duration: 1.2, onUpdate: request, onStart: realign, onReverseComplete: realign })
       .to(captionRefs.current[1], { autoAlpha: 0, y: -24, duration: 0.4, ease: "none" }, "<0.2")
       .to(captionRefs.current[2], { autoAlpha: 1, y: 0, duration: 0.4, ease: "none" }, "<0.25")
       .to({}, { duration: 0.6 });
