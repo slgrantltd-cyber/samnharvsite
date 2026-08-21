@@ -7,7 +7,7 @@ import { POWER_TEAM } from "@/lib/power-team";
 export const metadata: Metadata = {
   title: "The Complete Package — Every Part of the Deal, One Roof",
   description:
-    "Sam n Harv is a complete hub for property investment — sourcing, bridging finance with LendHub, architecture and planning, build, furnishing by Base Furnishings, and operation. Plus the full professional bench, introduced per deal.",
+    "Sam n Harv is a complete hub for property investment — sourcing, bridging finance with Lendhub, whole-of-market commercial finance through Watts Commercial, architecture and planning, build, furnishing by Base Furnishings, and operation. Plus the full professional bench, introduced per deal.",
   alternates: { canonical: "/power-team" },
 };
 
@@ -23,6 +23,13 @@ const CHAIN = [
     brand: "lendhub",
     site: "lendhub.co.uk",
     body: "Specialist bridging, refurbishment and development lending from £100k to £10m — terms discussed before you commit, so the finance is shaped around the deal, not the other way round.",
+  },
+  {
+    stage: "Fund · whole of market",
+    who: "Watts Commercial Finance",
+    brand: "watts",
+    site: "watts-commercial.co.uk",
+    body: "Independent commercial broker across an extensive lender panel — commercial mortgages, bridging, development and portfolio finance. FCA-regulated, NACFB member, and a named contact there we recommend personally.",
   },
   {
     stage: "Design & planning",
@@ -45,6 +52,12 @@ const CHAIN = [
     stage: "Manage",
     who: "Management partner",
     body: "Day-to-day management sits with a dedicated specialist — lettings, guests, maintenance, compliance — held to the standard we run our own properties at. You own an investment, not a job.",
+  },
+  {
+    stage: "Then",
+    who: "Your deal",
+    body: "One conversation starts the whole chain. Tell us your capital and what it's for, and we line up the people the deal actually needs.",
+    cta: { href: "/call", label: "Book a 15-minute intro call" },
   },
 ];
 
@@ -81,6 +94,22 @@ const PLATES: Record<string, ReactNode> = {
           <p className="annot mt-1 text-[#f5f1ea]/50">Complete furnishing solutions · <span style={{ color: "#fdd300", opacity: 0.85 }}>since 2010</span></p>
         </div>
       </div>
+    </div>
+  ),
+  watts: (
+    <div
+      className="relative flex min-h-[7rem] flex-col justify-center overflow-hidden px-6 py-6 md:px-7"
+      style={{ background: "linear-gradient(120deg, #ffffff 0%, #f4f7fb 60%, #eaf1f8 100%)" }}
+    >
+      <span className="absolute inset-x-0 top-0 h-px" style={{ background: "linear-gradient(90deg, #003d73, #00adef)" }} aria-hidden="true" />
+      <div
+        className="pointer-events-none absolute -right-16 -bottom-20 h-56 w-56 rounded-full"
+        style={{ background: "radial-gradient(closest-side, rgba(0,173,239,0.16), transparent)" }}
+        aria-hidden="true"
+      />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/partners/watts-commercial.svg" alt="Watts Commercial Finance" className="relative h-14 w-auto self-start" />
+      <p className="annot relative mt-2 text-[#253e6e]/70">Independent advice on commercial finance</p>
     </div>
   ),
 };
@@ -122,7 +151,7 @@ export default function PowerTeamPage() {
             closed the gaps: every stage of a deal now has a partner who already
             works alongside us, on terms we&rsquo;d take ourselves.
           </p>
-          <div className="mt-8 grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-2 lg:grid-cols-4">
             {CHAIN.map((c) => (
               <Lift key={c.stage} className="bg-[var(--plaster)]">
                 <div className="flex h-full flex-col">
@@ -133,6 +162,11 @@ export default function PowerTeamPage() {
                     <p className="muted mt-3 text-[0.9375rem] leading-relaxed">
                       {c.body}
                     </p>
+                    {c.cta && (
+                      <Link href={c.cta.href} className="btn btn-ink mt-auto self-start">
+                        {c.cta.label}
+                      </Link>
+                    )}
                     {c.site && (
                       <a
                         href={`https://${c.site}`}
