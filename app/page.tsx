@@ -24,6 +24,7 @@ import { Rise, Line, Lift, ScrubWords } from "@/components/reveal";
 import MarkMorph from "@/components/mark-morph";
 import MandateLight from "@/components/mandate-light";
 import MandateGlobe from "@/components/mandate-globe";
+import InvestorBrief from "@/components/investor-brief";
 import StrategyLedger from "@/components/strategy-ledger";
 import { photoPath } from "@/lib/photos";
 
@@ -111,6 +112,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* 01.3 — THE INVESTOR BRIEF (enquiry, near the top) */}
+      <InvestorBrief />
 
       {/* 01.25 — THE THREE DOORS */}
       <section className="px-5 pb-16 md:px-10 md:pb-24">
