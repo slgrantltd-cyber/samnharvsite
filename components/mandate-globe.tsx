@@ -85,11 +85,21 @@ function inPoly(lon: number, lat: number, poly: LonLat[]): boolean {
 /** Even-density dot field over land: lat rows, lon spacing widened by 1/cos(lat). */
 function buildDots(stepDeg: number): Float32Array {
   const out: number[] = [];
+  // bounding boxes first — most points are ocean and fail the cheap test
+  const boxes = LAND.map((p) => {
+    let x0 = 180, x1 = -180, y0 = 90, y1 = -90;
+    for (const [x, y] of p) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+    return [x0, x1, y0, y1] as const;
+  });
   for (let lat = -84; lat <= 84; lat += stepDeg) {
     const step = stepDeg / Math.max(0.18, Math.cos(lat * d2r));
     for (let lon = -180; lon < 180; lon += step) {
       let land = false;
-      for (const p of LAND) if (inPoly(lon, lat, p)) { land = true; break; }
+      for (let k = 0; k < LAND.length; k++) {
+        const b = boxes[k];
+        if (lon < b[0] || lon > b[1] || lat < b[2] || lat > b[3]) continue;
+        if (inPoly(lon, lat, LAND[k])) { land = true; break; }
+      }
       if (!land) continue;
       const λ = lon * d2r, φ = lat * d2r;
       out.push(Math.cos(φ) * Math.cos(λ), Math.cos(φ) * Math.sin(λ), Math.sin(φ));
