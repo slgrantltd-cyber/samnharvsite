@@ -9,6 +9,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/smooth-scroll";
 import MaterialLight from "@/components/material-light";
 import SiteHeader from "@/components/site-header";
+import GoldSheen from "@/components/gold-sheen";
 import SiteFooter from "@/components/site-footer";
 
 const caslon = Libre_Caslon_Display({
@@ -136,6 +137,7 @@ export default function RootLayout({
         />
         <SmoothScroll />
         <MaterialLight />
+        <GoldSheen />
         <SiteHeader />
         {children}
         <SiteFooter />

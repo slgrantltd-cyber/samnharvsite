@@ -7,11 +7,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * The territory, now the world: a surveyor's globe — hairline graticule,
- * simplified land outlines, no textures — pinned while it turns on scroll
- * so each mandate rotates to the front in turn: UK → Dubai → Thailand.
- * Orthographic projection drawn by hand in SVG; one re-render per frame
- * on a scrubbed timeline. Stylised on purpose: a plan, not an atlas.
+ * The territory, as a globe: a dot-matrix sphere — land rendered as a
+ * field of fine ink points on plaster, lit by a gold rim and a sheen that
+ * travels with the page. Pinned while it turns on scroll (UK → Dubai →
+ * Thailand); drag to turn it yourself, it springs back. All geometry is
+ * precomputed once into typed arrays; each frame is one rotation pass and
+ * a few thousand tiny arcs — fast on a phone, no WebGL, no textures.
  */
 
 type LonLat = [number, number];
@@ -69,47 +70,31 @@ const MANDATES = [
 ];
 
 const d2r = Math.PI / 180;
+const GOLD = { deep: "#a98a52", mid: "#c9ab7c", hi: "#f3e3b4" };
 
-/* ---------- geometry ----------
-   Orthographic projection of a unit sphere rotated to (lam, phi).
-   We work in 3-D unit vectors so hemisphere clipping can be done
-   geometrically: polygons are clipped against the great-circle plane
-   z = 0 (the horizon) using Sutherland–Hodgman, so land stays a
-   CLOSED shape as it crosses the limb — fills never drop. */
-type V3 = [number, number, number];
-function toVec(lon: number, lat: number): V3 {
-  const λ = lon * d2r, φ = lat * d2r;
-  return [Math.cos(φ) * Math.cos(λ), Math.cos(φ) * Math.sin(λ), Math.sin(φ)];
+/* ---------- geometry ---------- */
+function inPoly(lon: number, lat: number, poly: LonLat[]): boolean {
+  let inside = false;
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    const [xi, yi] = poly[i], [xj, yj] = poly[j];
+    if (yi > lat !== yj > lat && lon < ((xj - xi) * (lat - yi)) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
 }
-function rotate(v: V3, lam: number, phi: number): V3 {
-  // 1) yaw about the polar (z) axis so longitude `lam` faces the viewer (+x)
-  const a = -lam * d2r;
-  const x1 = v[0] * Math.cos(a) - v[1] * Math.sin(a);
-  const y1 = v[0] * Math.sin(a) + v[1] * Math.cos(a);
-  const z1 = v[2];
-  // 2) pitch about the horizontal screen axis (y) so latitude `phi` faces the viewer
-  const b = phi * d2r;
-  const x2 = x1 * Math.cos(b) + z1 * Math.sin(b);
-  const z2 = -x1 * Math.sin(b) + z1 * Math.cos(b);
-  return [x2, y1, z2]; // x2 = depth toward viewer, y1 = screen-right, z2 = screen-up
-}
-/** Clip a ring (rotated vectors) to the visible hemisphere (x > 0). */
-function clipToFront(ring: V3[]): V3[] {
-  const out: V3[] = [];
-  const n = ring.length;
-  for (let i = 0; i < n; i++) {
-    const a = ring[i], b = ring[(i + 1) % n];
-    const ina = a[0] > 0, inb = b[0] > 0;
-    if (ina) out.push(a);
-    if (ina !== inb) {
-      const t = a[0] / (a[0] - b[0]);
-      const m: V3 = [0, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
-      // push intersection onto the limb circle
-      const l = Math.hypot(m[1], m[2]) || 1;
-      out.push([0, m[1] / l, m[2] / l]);
+/** Even-density dot field over land: lat rows, lon spacing widened by 1/cos(lat). */
+function buildDots(stepDeg: number): Float32Array {
+  const out: number[] = [];
+  for (let lat = -84; lat <= 84; lat += stepDeg) {
+    const step = stepDeg / Math.max(0.18, Math.cos(lat * d2r));
+    for (let lon = -180; lon < 180; lon += step) {
+      let land = false;
+      for (const p of LAND) if (inPoly(lon, lat, p)) { land = true; break; }
+      if (!land) continue;
+      const λ = lon * d2r, φ = lat * d2r;
+      out.push(Math.cos(φ) * Math.cos(λ), Math.cos(φ) * Math.sin(λ), Math.sin(φ));
     }
   }
-  return out;
+  return new Float32Array(out);
 }
 
 export default function MandateGlobe() {
@@ -117,123 +102,139 @@ export default function MandateGlobe() {
   const canvas = useRef<HTMLCanvasElement>(null);
   const pinRefs = useRef<(HTMLDivElement | null)[]>([]);
   const captionRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  // pre-convert land + graticule to unit vectors once; per-frame work is rotation + projection only
-  const landVec = useMemo(() => LAND.map((poly) => poly.map(([lo, la]) => toVec(lo, la))), []);
-  const gratVec = useMemo(() => {
-    const lines: V3[][] = [];
-    for (let lon = -180; lon < 180; lon += 15) { const l: V3[] = []; for (let lat = -90; lat <= 90; lat += 4) l.push(toVec(lon, lat)); lines.push(l); }
-    for (let lat = -75; lat <= 75; lat += 15) { const l: V3[] = []; for (let lon = -180; lon <= 180; lon += 4) l.push(toVec(lon, lat)); lines.push(l); }
-    return lines;
-  }, []);
+  const dots = useMemo(() => buildDots(1.35), []);
   const initial = useMemo(() => ({ lam: MANDATES[0].lon, phi: MANDATES[0].lat - 12 }), []);
 
   useEffect(() => {
     const sec = section.current, cv = canvas.current; if (!sec || !cv) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const state = { lam: initial.lam, phi: initial.phi };
+    const state = { lam: initial.lam, phi: initial.phi };   // scroll-driven
+    const drag = { lam: 0, phi: 0 };                         // hand-driven offset, springs back
     const ctx = cv.getContext("2d")!;
     let W = 0, H = 0, R = 0, CX = 0, CY = 0, dpr = 1;
+    const N = dots.length / 3;
+    const rx = new Float32Array(N), ry = new Float32Array(N), rz = new Float32Array(N);
 
     const resize = () => {
       const rect = cv.getBoundingClientRect();
-      dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
       W = rect.width; H = rect.height;
       cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      R = Math.min(W, H) * 0.44; CX = W / 2; CY = H / 2;
+      R = Math.min(W, H) * 0.45; CX = W / 2; CY = H / 2;
       draw();
     };
 
-    const proj = (v: V3) => ({ x: CX + v[1] * R, y: CY - v[2] * R, depth: v[0] });
+    const sheen = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--sheen")) || 0.5;
 
     let queued = false;
     const draw = () => {
       queued = false;
+      const lam = state.lam + drag.lam, phi = state.phi + drag.phi;
+      const a = -lam * d2r, ca = Math.cos(a), sa = Math.sin(a);
+      const b = phi * d2r, cb = Math.cos(b), sb = Math.sin(b);
+      // rotate every dot: yaw about polar axis, then pitch toward viewer
+      for (let i = 0; i < N; i++) {
+        const x = dots[i * 3], y = dots[i * 3 + 1], z = dots[i * 3 + 2];
+        const x1 = x * ca - y * sa, y1 = x * sa + y * ca;
+        rx[i] = x1 * cb + z * sb;           // depth toward viewer
+        ry[i] = y1;                          // screen right
+        rz[i] = -x1 * sb + z * cb;           // screen up
+      }
+
       ctx.clearRect(0, 0, W, H);
 
-      /* One material, one light. A plaster sphere: flat pale ground, a
-         single soft shade at the limb so it reads as round, and nothing
-         else. Land is one quiet ink tint with no outline. The only colour
-         on the whole object is three bronze points. */
+      // ground: plaster sphere with a soft inner glow, gold at the rim
+      const ground = ctx.createRadialGradient(CX - R * 0.25, CY - R * 0.3, R * 0.1, CX, CY, R);
+      ground.addColorStop(0, "#faf8f3"); ground.addColorStop(0.7, "#f1ede4"); ground.addColorStop(1, "#e6e0d3");
+      ctx.fillStyle = ground; ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI * 2); ctx.fill();
 
-      // sphere ground
-      ctx.fillStyle = "#f4f0e7";
-      ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI * 2); ctx.fill();
+      // dots — size and weight by depth so the sphere reads as round
+      ctx.fillStyle = "#1a1a1a";
+      for (let i = 0; i < N; i++) {
+        const d = rx[i]; if (d <= 0.02) continue;
+        const px = CX + ry[i] * R, py = CY - rz[i] * R;
+        const r = R * (0.0034 + d * 0.0036);
+        ctx.globalAlpha = 0.22 + d * 0.6;
+        ctx.beginPath(); ctx.arc(px, py, r, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
 
+      // gold rim light + a travelling sheen tied to the page's --sheen
       ctx.save(); ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI * 2); ctx.clip();
-
-      // graticule — a whisper
-      ctx.lineWidth = 0.5; ctx.strokeStyle = "rgba(26,26,26,0.085)";
-      ctx.beginPath();
-      for (const line of gratVec) {
-        let pen = false;
-        for (const v0 of line) {
-          const v = rotate(v0, state.lam, state.phi);
-          if (v[0] > 0) { const p = proj(v); if (pen) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y); pen = true; } else pen = false;
-        }
-      }
-      ctx.stroke();
-
-      // land — one tone, no stroke; a touch darker toward the limb so the
-      // curvature reads without any lighting tricks
-      for (const poly of landVec) {
-        const ring = clipToFront(poly.map((v) => rotate(v, state.lam, state.phi)));
-        if (ring.length < 3) continue;
-        ctx.beginPath();
-        ring.forEach((v, i) => { const p = proj(v); if (i) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y); });
-        ctx.closePath();
-        const c = Math.max(0, Math.min(1, ring.reduce((s, v) => s + v[0], 0) / ring.length));
-        ctx.fillStyle = `rgba(26,26,26,${(0.10 + (1 - c) * 0.05).toFixed(3)})`;
-        ctx.fill();
-      }
-
-      // the limb: one soft shade, that's the whole lighting model
-      const limb = ctx.createRadialGradient(CX - R * 0.12, CY - R * 0.16, R * 0.62, CX, CY, R);
-      limb.addColorStop(0, "rgba(26,26,26,0)"); limb.addColorStop(1, "rgba(26,26,26,0.16)");
-      ctx.fillStyle = limb; ctx.fillRect(0, 0, W, H);
+      const rim = ctx.createRadialGradient(CX, CY, R * 0.78, CX, CY, R);
+      rim.addColorStop(0, "rgba(201,171,124,0)"); rim.addColorStop(0.75, "rgba(201,171,124,0.12)"); rim.addColorStop(1, "rgba(169,138,82,0.42)");
+      ctx.fillStyle = rim; ctx.fillRect(0, 0, W, H);
+      const s = sheen();
+      const sx = CX + (s * 2 - 1) * R * 1.2, sy = CY - R * 0.55;
+      const glint = ctx.createRadialGradient(sx, sy, 0, sx, sy, R * 0.9);
+      glint.addColorStop(0, "rgba(243,227,180,0.34)"); glint.addColorStop(0.45, "rgba(243,227,180,0.08)"); glint.addColorStop(1, "rgba(243,227,180,0)");
+      ctx.fillStyle = glint; ctx.fillRect(0, 0, W, H);
       ctx.restore();
 
-      // hairline rim
-      ctx.lineWidth = 0.8; ctx.strokeStyle = "rgba(26,26,26,0.32)";
+      // rim line — gold, fine
+      ctx.lineWidth = 1; ctx.strokeStyle = "rgba(169,138,82,0.55)";
       ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI * 2); ctx.stroke();
 
       // pins (HTML overlays)
       MANDATES.forEach((m, i) => {
-        const v = rotate(toVec(m.lon, m.lat), state.lam, state.phi);
+        const λ = m.lon * d2r, φ = m.lat * d2r;
+        const x = Math.cos(φ) * Math.cos(λ), y = Math.cos(φ) * Math.sin(λ), z = Math.sin(φ);
+        const x1 = x * ca - y * sa, y1 = x * sa + y * ca;
+        const d = x1 * cb + z * sb, sr = y1, su = -x1 * sb + z * cb;
         const el = pinRefs.current[i]; if (!el) return;
-        const p = proj(v);
-        el.style.transform = `translate(${p.x.toFixed(1)}px, ${p.y.toFixed(1)}px)`;
-        el.style.opacity = v[0] > 0.02 ? String(0.25 + v[0] * 0.75) : "0";
+        el.style.transform = `translate(${(CX + sr * R).toFixed(1)}px, ${(CY - su * R).toFixed(1)}px)`;
+        el.style.opacity = d > 0.02 ? String(0.2 + d * 0.8) : "0";
       });
     };
     const request = () => { if (!queued) { queued = true; requestAnimationFrame(draw); } };
 
     const ro = new ResizeObserver(resize); ro.observe(cv); resize();
-    if (reduced) return () => ro.disconnect();
+    const onSheen = () => request();
+    window.addEventListener("scroll", onSheen, { passive: true });
+
+    // drag to turn, spring back
+    let down = false, lx = 0, ly = 0;
+    const pd = (e: PointerEvent) => { down = true; lx = e.clientX; ly = e.clientY; gsap.killTweensOf(drag); cv.setPointerCapture(e.pointerId); };
+    const pm = (e: PointerEvent) => {
+      if (!down) return;
+      drag.lam -= (e.clientX - lx) * 0.25; drag.phi += (e.clientY - ly) * 0.18;
+      drag.phi = Math.max(-40, Math.min(40, drag.phi));
+      lx = e.clientX; ly = e.clientY; request();
+    };
+    const pu = () => { if (!down) return; down = false; gsap.to(drag, { lam: 0, phi: 0, duration: 1.6, ease: "elastic.out(1, 0.7)", onUpdate: request }); };
+    cv.addEventListener("pointerdown", pd); cv.addEventListener("pointermove", pm);
+    cv.addEventListener("pointerup", pu); cv.addEventListener("pointercancel", pu);
+
+    if (reduced) return () => { ro.disconnect(); window.removeEventListener("scroll", onSheen); };
 
     gsap.set(captionRefs.current.slice(1), { autoAlpha: 0, y: 24 });
     const tl = gsap.timeline({
-      scrollTrigger: { trigger: sec, start: "top top", end: "+=260%", pin: true, scrub: 0.6 },
-      defaults: { ease: "none" },
+      scrollTrigger: { trigger: sec, start: "top top", end: "+=260%", pin: true, scrub: 1.1 },
+      defaults: { ease: "power1.inOut" },
     });
     tl.to({}, { duration: 0.6 })
       .to(state, { lam: MANDATES[1].lon, phi: MANDATES[1].lat - 12, duration: 1.2, onUpdate: request })
-      .to(captionRefs.current[0], { autoAlpha: 0, y: -24, duration: 0.4 }, "<0.2")
-      .to(captionRefs.current[1], { autoAlpha: 1, y: 0, duration: 0.4 }, "<0.25")
+      .to(captionRefs.current[0], { autoAlpha: 0, y: -24, duration: 0.4, ease: "none" }, "<0.2")
+      .to(captionRefs.current[1], { autoAlpha: 1, y: 0, duration: 0.4, ease: "none" }, "<0.25")
       .to({}, { duration: 0.5 })
       .to(state, { lam: MANDATES[2].lon, phi: MANDATES[2].lat - 6, duration: 1.2, onUpdate: request })
-      .to(captionRefs.current[1], { autoAlpha: 0, y: -24, duration: 0.4 }, "<0.2")
-      .to(captionRefs.current[2], { autoAlpha: 1, y: 0, duration: 0.4 }, "<0.25")
+      .to(captionRefs.current[1], { autoAlpha: 0, y: -24, duration: 0.4, ease: "none" }, "<0.2")
+      .to(captionRefs.current[2], { autoAlpha: 1, y: 0, duration: 0.4, ease: "none" }, "<0.25")
       .to({}, { duration: 0.6 });
 
-    return () => { ro.disconnect(); tl.scrollTrigger?.kill(); tl.kill(); };
-  }, [initial, landVec, gratVec]);
+    return () => {
+      ro.disconnect(); window.removeEventListener("scroll", onSheen);
+      cv.removeEventListener("pointerdown", pd); cv.removeEventListener("pointermove", pm);
+      cv.removeEventListener("pointerup", pu); cv.removeEventListener("pointercancel", pu);
+      tl.scrollTrigger?.kill(); tl.kill();
+    };
+  }, [initial, dots]);
 
   return (
     <section ref={section} className="relative h-[100svh] overflow-hidden">
       <div className="mx-auto flex h-full max-w-6xl flex-col items-center px-5 pb-16 pt-24 text-center md:px-10 md:pt-28">
-        {/* caption above the globe */}
+        {/* caption — stacked captions crossfade in a fixed-height block above the globe */}
         <div className="relative z-10 h-44 w-full max-w-2xl md:h-40">
           {MANDATES.map((m, i) => (
             <div key={m.label} ref={(el) => { captionRefs.current[i] = el; }} className="absolute inset-x-0">
@@ -247,23 +248,24 @@ export default function MandateGlobe() {
             </div>
           ))}
         </div>
-        {/* the globe — fills the remaining height */}
+
         <div className="relative mt-4 flex min-h-0 w-full flex-1 justify-center md:mt-6">
           <div className="relative aspect-square h-full max-h-[640px] max-w-full">
-          <canvas ref={canvas} className="absolute inset-0 h-full w-full" aria-label="A globe turning between the United Kingdom, Dubai and Thailand" />
-          {MANDATES.map((m, i) => (
-            <div key={m.label} ref={(el) => { pinRefs.current[i] = el; }} className="pointer-events-none absolute left-0 top-0 will-change-transform" style={{ opacity: 0 }}>
-              <div className="relative -translate-x-1/2 -translate-y-1/2">
-                <span className="absolute left-1/2 top-1/2 h-[7px] w-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-bronze" />
-                <span className="absolute left-1/2 top-[-30px] h-[22px] w-px -translate-x-1/2 bg-ink/45" />
-                <span className="annot absolute left-1/2 top-[-44px] -translate-x-1/2 whitespace-nowrap text-ink/85">{m.label}</span>
+            <canvas ref={canvas} className="absolute inset-0 h-full w-full cursor-grab touch-pan-y active:cursor-grabbing" aria-label="A globe turning between the United Kingdom, Dubai and Thailand" />
+            {MANDATES.map((m, i) => (
+              <div key={m.label} ref={(el) => { pinRefs.current[i] = el; }} className="pointer-events-none absolute left-0 top-0 will-change-transform" style={{ opacity: 0 }}>
+                <div className="relative -translate-x-1/2 -translate-y-1/2">
+                  <span className="globe-pulse absolute left-1/2 top-1/2 h-[26px] w-[26px] -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ border: `1px solid ${GOLD.mid}` }} />
+                  <span className="absolute left-1/2 top-1/2 h-[8px] w-[8px] -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ background: `radial-gradient(circle at 35% 35%, ${GOLD.hi}, ${GOLD.deep})`, boxShadow: `0 0 10px rgba(201,171,124,.55)` }} />
+                  <span className="absolute left-1/2 top-[-30px] h-[22px] w-px -translate-x-1/2" style={{ background: `linear-gradient(${GOLD.deep}, rgba(169,138,82,0))` }} />
+                  <span className="annot absolute left-1/2 top-[-44px] -translate-x-1/2 whitespace-nowrap text-ink/85">{m.label}</span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
           </div>
         </div>
       </div>
-      <p className="annot muted absolute bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap">Scroll to turn the globe</p>
+      <p className="annot muted absolute bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap">Scroll to turn · drag to explore</p>
     </section>
   );
 }

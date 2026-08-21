@@ -469,8 +469,13 @@ button,
 
 /* the wordmark's n — glossy gold, like the mark's levelling line */
 .gold-text {
-  background: linear-gradient(100deg, #b8965c 0%, #f3e3b4 38%, #e2c389 58%, #a98a52 100%);
+  background: linear-gradient(100deg, #a98a52 0%, #c9ab7c 30%, #f3e3b4 50%, #c9ab7c 70%, #a98a52 100%);
+  background-size: 300% 100%;
+  background-position: calc((1 - var(--sheen, 0.5)) * 100%) 0;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
+@keyframes globe-pulse { 0% { transform: translate(-50%, -50%) scale(.4); opacity: .9 } 100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0 } }
+.globe-pulse { animation: globe-pulse 2.6s ease-out infinite; }
+@media (prefers-reduced-motion: reduce) { .globe-pulse { animation: none; opacity: .35 } }
