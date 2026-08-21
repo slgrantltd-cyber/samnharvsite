@@ -232,9 +232,9 @@ export default function MandateGlobe() {
 
   return (
     <section ref={section} className="relative h-[100svh] overflow-hidden">
-      <div className="mx-auto flex h-full max-w-6xl flex-col items-center px-5 pt-24 text-center md:px-10 md:pt-28">
+      <div className="mx-auto flex h-full max-w-6xl flex-col items-center px-5 pb-16 pt-24 text-center md:px-10 md:pt-28">
         {/* caption above the globe */}
-        <div className="relative z-10 h-36 w-full max-w-2xl md:h-40">
+        <div className="relative z-10 h-44 w-full max-w-2xl md:h-40">
           {MANDATES.map((m, i) => (
             <div key={m.label} ref={(el) => { captionRefs.current[i] = el; }} className="absolute inset-x-0">
               <p className="annot muted">The territory</p>
@@ -248,7 +248,8 @@ export default function MandateGlobe() {
           ))}
         </div>
         {/* the globe — fills the remaining height */}
-        <div className="relative mt-6 aspect-square w-full max-w-[min(62vh,640px)] md:mt-8">
+        <div className="relative mt-4 flex min-h-0 w-full flex-1 justify-center md:mt-6">
+          <div className="relative aspect-square h-full max-h-[640px] max-w-full">
           <canvas ref={canvas} className="absolute inset-0 h-full w-full" aria-label="A globe turning between the United Kingdom, Dubai and Thailand" />
           {MANDATES.map((m, i) => (
             <div key={m.label} ref={(el) => { pinRefs.current[i] = el; }} className="pointer-events-none absolute left-0 top-0 will-change-transform" style={{ opacity: 0 }}>
@@ -259,6 +260,7 @@ export default function MandateGlobe() {
               </div>
             </div>
           ))}
+          </div>
         </div>
       </div>
       <p className="annot muted absolute bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap">Scroll to turn the globe</p>
