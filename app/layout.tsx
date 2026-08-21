@@ -40,7 +40,7 @@ const fragment = Fragment_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.samnharv.com"),
   title: {
-    default: "Sam n Harv — Private Property Mandates, UK & International",
+    default: "Sam n Harv — Property Investment · UK · Dubai · Thailand",
     template: "%s — Sam n Harv",
   },
   description:
@@ -51,17 +51,17 @@ export const metadata: Metadata = {
     siteName: "Sam n Harv",
     locale: "en_GB",
     url: "/",
-    title: "Sam n Harv — Private Property Mandates",
+    title: "Sam n Harv",
     description:
       "A few opportunities, held quietly. UK and international.",
-    images: [{ url: "/hero-poster.jpg", width: 1600, height: 900 }],
+    images: [{ url: "/og/default.png", width: 1200, height: 630, alt: "Sam n Harv" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sam n Harv — Private Property Mandates",
+    title: "Sam n Harv",
     description:
       "A few opportunities, held quietly. UK and international.",
-    images: ["/hero-poster.jpg"],
+    images: ["/og/default.png"],
   },
   robots: { index: true, follow: true },
 };

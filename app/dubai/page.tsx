@@ -17,6 +17,13 @@ export const metadata: Metadata = {
   description:
     "Developer-direct Dubai residences for UK investors — launch allocations from Binghatti, Danube, Sobha, Emaar, Damac and more, on developer payment plans, underwritten by a UK desk. No fee to you: the developer pays our commission.",
   alternates: { canonical: "/dubai" },
+  openGraph: {
+    title: "Sam n Harv — Dubai",
+    description: "Developer-direct Dubai for UK investors — Binghatti, Danube, Sobha, Emaar, Damac — at developer price, on developer payment plans.",
+    url: "/dubai",
+    images: [{ url: "/og/dubai.png", width: 1200, height: 630, alt: "Sam n Harv — Dubai, developer-direct" }],
+  },
+  twitter: { card: "summary_large_image", title: "Sam n Harv — Dubai", images: ["/og/dubai.png"] },
 };
 
 const FACTS = [
