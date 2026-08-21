@@ -45,7 +45,7 @@ const RISKS = [
 export default function DubaiPage() {
   return (
     <main id="main" className="pt-24 md:pt-28">
-      <section className="relative -mt-24 overflow-hidden px-5 pb-20 pt-40 text-[var(--plaster)] md:-mt-28 md:pb-28 md:pt-52 [contain:paint]" style={{ background: "linear-gradient(160deg, #17110d 0%, #241811 40%, #3a2418 75%, #4a2f1d 100%)" }}>
+      <section data-hero="dark" className="relative -mt-24 overflow-hidden px-5 pb-20 pt-40 text-[var(--plaster)] md:-mt-28 md:pb-28 md:pt-52 [contain:paint]" style={{ background: "linear-gradient(160deg, #17110d 0%, #241811 40%, #3a2418 75%, #4a2f1d 100%)" }}>
         <DuskLight />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[var(--plaster)]" aria-hidden="true" />
         <div className="relative mx-auto max-w-6xl">

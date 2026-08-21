@@ -18,7 +18,19 @@ const NAV = [
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [overDark, setOverDark] = useState(false);
   const pathname = usePathname();
+
+  // Pages can mark a dark opening with data-hero="dark"; while it's under the
+  // bar the header turns to plaster so it stays legible.
+  useEffect(() => {
+    const hero = document.querySelector<HTMLElement>('[data-hero="dark"]');
+    if (!hero) { setOverDark(false); return; }
+    const check = () => setOverDark(hero.getBoundingClientRect().bottom > 72);
+    check();
+    window.addEventListener("scroll", check, { passive: true });
+    return () => window.removeEventListener("scroll", check);
+  }, [pathname]);
 
   useEffect(() => { setOpen(false); }, [pathname]);
   useEffect(() => {
@@ -36,14 +48,14 @@ export default function SiteHeader() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div className="flex items-center justify-between bg-gradient-to-b from-[var(--plaster)]/90 via-[var(--plaster)]/60 to-transparent px-5 py-3 md:px-10">
+      <div className={`flex items-center justify-between px-5 py-3 transition-colors duration-500 md:px-10 ${overDark && !open ? "bg-gradient-to-b from-black/40 to-transparent text-[var(--plaster)]" : "bg-gradient-to-b from-[var(--plaster)]/90 via-[var(--plaster)]/60 to-transparent"}`}>
         <Link
           href="/"
           aria-label="Sam n Harv — home"
           onClick={() => setOpen(false)}
           className="flex items-center gap-3 py-1"
         >
-          <BenchmarkMark className="h-6 w-6 text-ink" />
+          <BenchmarkMark className={`h-6 w-6 ${overDark && !open ? "text-[var(--plaster)]" : "text-ink"}`} />
           <span className="display text-lg leading-none tracking-tight">
             SAM <span className="display-it lowercase gold-text">n</span> HARV
           </span>
@@ -58,7 +70,7 @@ export default function SiteHeader() {
               aria-current={pathname === item.href ? "page" : undefined}
               onClick={() => setOpen(false)}
               className={`font-sans text-[0.9375rem] tracking-[0.01em] transition-colors hover:text-bronze ${
-                pathname === item.href ? "text-ink" : "text-stone"
+                overDark && !open ? (pathname === item.href ? "text-[var(--plaster)]" : "text-[var(--plaster)]/70") : pathname === item.href ? "text-ink" : "text-stone"
               }`}
             >
               {item.label}
@@ -67,13 +79,13 @@ export default function SiteHeader() {
           <Link
             href="/contact"
             onClick={() => setOpen(false)}
-            className="font-sans text-[0.9375rem] tracking-[0.01em] border-b border-ink/30 pb-0.5 text-ink transition-colors hover:border-bronze hover:text-bronze"
+            className={`font-sans text-[0.9375rem] tracking-[0.01em] border-b pb-0.5 transition-colors hover:border-bronze hover:text-bronze ${overDark && !open ? "border-[var(--plaster)]/40 text-[var(--plaster)]" : "border-ink/30 text-ink"}`}
           >
             Enquire
           </Link>
           <button
             type="button"
-            className="font-sans text-[0.9375rem] tracking-[0.01em] text-ink transition-colors hover:text-bronze"
+            className={`font-sans text-[0.9375rem] tracking-[0.01em] transition-colors hover:text-bronze ${overDark && !open ? "text-[var(--plaster)]" : "text-ink"}`}
             aria-expanded={open}
             aria-controls="site-menu"
             onClick={() => setOpen((v) => !v)}
@@ -83,12 +95,12 @@ export default function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-6 lg:hidden">
-          <Link href="/contact" onClick={() => setOpen(false)} className="font-sans text-[0.9375rem] tracking-[0.01em] text-ink transition-colors hover:text-bronze">
+          <Link href="/contact" onClick={() => setOpen(false)} className={`font-sans text-[0.9375rem] tracking-[0.01em] transition-colors hover:text-bronze ${overDark && !open ? "text-[var(--plaster)]" : "text-ink"}`}>
             Enquire
           </Link>
           <button
             type="button"
-            className="font-sans text-[0.9375rem] tracking-[0.01em] min-h-11 text-ink transition-colors hover:text-bronze"
+            className={`font-sans text-[0.9375rem] tracking-[0.01em] min-h-11 transition-colors hover:text-bronze ${overDark && !open ? "text-[var(--plaster)]" : "text-ink"}`}
             aria-expanded={open}
             aria-controls="site-menu"
             onClick={() => setOpen((v) => !v)}
