@@ -30,6 +30,12 @@ export default function CallPage() {
             rings you. We&rsquo;d rather find out in fifteen minutes whether
             there&rsquo;s something worth doing together than trade emails for a month.
           </p>
+          <p className="mt-5 max-w-xl border-l-2 border-bronze pl-5 leading-relaxed">
+            <span className="annot text-bronze">Investing in Dubai?</span><br />
+            This is the complimentary consultation — to see whether you
+            qualify, and what&rsquo;s still available across Binghatti&rsquo;s
+            branded residences, Aldar in Abu Dhabi, Damac, Sobha and Emaar.
+          </p>
 
           <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-5">
             <div className="lg:col-span-3">
