@@ -24,6 +24,9 @@ export default function SmoothScroll() {
     if ("scrollRestoration" in history) history.scrollRestoration = "manual";
     if (!window.location.hash) window.scrollTo(0, 0);
 
+    // Native scrolling by default — the inertial layer read as lag. Set
+    // NEXT_PUBLIC_SMOOTH_SCROLL=1 to bring Lenis back.
+    if (process.env.NEXT_PUBLIC_SMOOTH_SCROLL !== "1") { ScrollTrigger.refresh(); return; }
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const lenis = new Lenis({ lerp: 0.16, wheelMultiplier: 0.95 });
