@@ -103,7 +103,7 @@ export default function MandateGlobe() {
   const canvas = useRef<HTMLCanvasElement>(null);
   const pinRefs = useRef<(HTMLDivElement | null)[]>([]);
   const captionRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const dots = useMemo(() => buildDots(1.35), []);
+  const dots = useMemo(() => buildDots(1.5), []);
   const initial = useMemo(() => ({ lam: MANDATES[0].lon, phi: MANDATES[0].lat - 12 }), []);
 
   useEffect(() => {
@@ -191,7 +191,11 @@ export default function MandateGlobe() {
     const request = () => { if (!queued) { queued = true; requestAnimationFrame(draw); } };
 
     const ro = new ResizeObserver(resize); ro.observe(cv); resize();
-    const onSheen = () => request();
+    // only spend frames while the globe is actually on screen
+    let visible = false;
+    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) request(); }, { threshold: 0.05 });
+    io.observe(sec);
+    const onSheen = () => { if (visible) request(); };
     window.addEventListener("scroll", onSheen, { passive: true });
 
     // drag to turn, spring back
@@ -207,7 +211,7 @@ export default function MandateGlobe() {
     cv.addEventListener("pointerdown", pd); cv.addEventListener("pointermove", pm);
     cv.addEventListener("pointerup", pu); cv.addEventListener("pointercancel", pu);
 
-    if (reduced) return () => { ro.disconnect(); window.removeEventListener("scroll", onSheen); };
+    if (reduced) return () => { ro.disconnect(); io.disconnect(); window.removeEventListener("scroll", onSheen); };
 
     gsap.set(captionRefs.current.slice(1), { autoAlpha: 0, y: 24 });
     const tl = gsap.timeline({
@@ -225,7 +229,7 @@ export default function MandateGlobe() {
       .to({}, { duration: 0.6 });
 
     return () => {
-      ro.disconnect(); window.removeEventListener("scroll", onSheen);
+      ro.disconnect(); io.disconnect(); window.removeEventListener("scroll", onSheen);
       cv.removeEventListener("pointerdown", pd); cv.removeEventListener("pointermove", pm);
       cv.removeEventListener("pointerup", pu); cv.removeEventListener("pointercancel", pu);
       tl.scrollTrigger?.kill(); tl.kill();
