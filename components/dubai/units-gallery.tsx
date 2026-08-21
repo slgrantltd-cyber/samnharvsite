@@ -1,10 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { COLLECTIONS, UNITS, type DubaiUnit, type MixRow } from "@/lib/dubai-units";
+import { COLLECTIONS, PLANS_NOTE, UNITS, type DubaiUnit, type MixRow } from "@/lib/dubai-units";
 
 const TONE: Record<DubaiUnit["tone"], string> = { income: "Income-led", balanced: "Balanced", growth: "Growth-led", trophy: "Trophy asset" };
 const WA = (text: string) => `https://wa.me/447444551241?text=${encodeURIComponent(text)}`;
+const waEnquiry = (u: DubaiUnit, type?: string) =>
+  WA(`Hi Samuel — ${u.name} (${u.developer}, ${u.area}, ${u.city})${type ? ` · ${type}` : ""}. Could you send me the current price sheet and payment plan? From ${u.priceFrom}, handover ${u.handover}.`);
+const AV_STYLE: Record<string, string> = { "Limited stock": "bg-[#1a1a1a] text-[#ead8ab]", "Selling fast": "bg-[#8a6a35] text-[var(--plaster)]", "Final units": "bg-[#6b1f1f] text-[var(--plaster)]", "New release": "bg-[var(--plaster)] text-ink" };
 
 /**
  * The collection — branded, Abu Dhabi, Dubai launches. Desktop: grids.
@@ -24,6 +27,10 @@ export default function UnitsGallery() {
 
   return (
     <>
+      <p className="annot mb-2 inline-flex items-center gap-2 rounded-full border border-[#c9ab7c]/60 px-3 py-1.5 text-[#8a6a35]">
+        <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#c9ab7c]" aria-hidden="true" /> Exclusive payment plans available
+      </p>
+      <p className="muted mb-2 max-w-2xl text-sm leading-relaxed">{PLANS_NOTE}</p>
       {COLLECTIONS.map((c) => {
         const items = UNITS.filter((u) => u.collection === c.key);
         return (
@@ -41,6 +48,7 @@ export default function UnitsGallery() {
                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent" aria-hidden="true" />
                     <p className="annot absolute left-4 top-4 rounded-full bg-black/45 px-3 py-1 text-[var(--plaster)] backdrop-blur-[2px]">{u.brand ? `${u.brand} · ${u.developer}` : u.developer}</p>
                     <p className="annot absolute bottom-4 left-4 text-[var(--plaster)]/85">{TONE[u.tone]}</p>
+                    {u.availability && <p className={`annot absolute right-4 top-4 rounded-full px-3 py-1 ${AV_STYLE[u.availability]}`}>{u.availability}</p>}
                     <span className="annot absolute bottom-4 right-4 text-[var(--bronze-bright)] opacity-0 transition-opacity group-hover:opacity-100">View →</span>
                   </button>
                   <div className="relative flex flex-1 flex-col p-5">
@@ -53,7 +61,7 @@ export default function UnitsGallery() {
                       <div><dt className="annot muted">Plan</dt><dd className="mt-0.5 truncate" title={u.plan}>{u.plan.replace("Developer payment plan", "Developer plan")}</dd></div>
                     </dl>
                     <div className="mt-auto flex items-center justify-between gap-3 pt-5">
-                      <button type="button" onClick={() => setActive({ unit: u, mode: "enquire" })} className="btn btn-ink">Enquire</button>
+                      <a href={waEnquiry(u)} target="_blank" rel="noopener noreferrer" className="btn btn-ink">Enquire</a>
                       <button type="button" onClick={() => setActive({ unit: u, mode: "view" })} className="annot text-bronze hover:text-ink">Units &amp; plans →</button>
                     </div>
                   </div>
@@ -94,6 +102,8 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
         tag: "dubai-unit",
       }),
     }).then((r) => (r.ok ? setState("done") : setState("error"))).catch(() => setState("error"));
+    // and straight to Samuel's WhatsApp with the same detail
+    window.open(WA(`Hi Samuel — ${f.get("name")} here. ${unit.name} (${unit.developer}, ${unit.city})${type ? ` · ${type}` : ""}. Budget ${f.get("budget")}, buying as ${f.get("entity")}. ${f.get("note") || ""}`), "_blank", "noopener");
   };
   const field = "mt-2 w-full border-b hairline bg-transparent py-2 text-[0.9375rem] outline-none focus:border-ink";
 
@@ -110,6 +120,7 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
             <div>
               <p className="annot text-[var(--bronze-bright)]">{unit.brand ? `${unit.brand} · ${unit.developer}` : unit.developer} · {unit.area}, {unit.city}</p>
               <h3 id="sheet-title" className="display mt-1 text-2xl md:text-4xl">{unit.name}</h3>
+              {unit.availability && <p className={`annot mt-2 inline-block rounded-full px-3 py-1 ${AV_STYLE[unit.availability]}`}>{unit.availability}</p>}
             </div>
             {gallery.length > 1 && (
               <div className="flex items-center gap-2">
@@ -151,7 +162,7 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
                   <span className="hidden text-sm md:block">{m.from || <span className="muted">Price on enquiry</span>}</span>
                   <span className="hidden text-sm muted md:block">{m.size || m.note || ""}</span>
                   <div className="flex items-center gap-3">
-                    <button type="button" onClick={() => enquire(m.type)} className="btn btn-ink px-4 py-2 text-sm">Enquire</button>
+                    <a href={waEnquiry(unit, m.type)} target="_blank" rel="noopener noreferrer" className="btn btn-ink px-4 py-2 text-sm">Enquire</a>
                   </div>
                   <span className="col-span-2 -mt-1 text-sm muted md:hidden">{m.from || "Price on enquiry"}{(m.size || m.note) ? ` · ${m.size || m.note}` : ""}</span>
                 </li>
@@ -183,8 +194,13 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
           {/* enquiry */}
           <div ref={formRef} className="mt-8 border-t hairline pt-8">
             <p className="annot text-bronze">Enquire{type ? ` — ${type}` : ""}</p>
+            <div className="mt-3 flex flex-wrap items-center gap-4">
+              <a href={waEnquiry(unit, type)} target="_blank" rel="noopener noreferrer" className="btn btn-ink">Enquire on WhatsApp</a>
+              {unit.availability && <span className={`annot rounded-full px-3 py-1 ${AV_STYLE[unit.availability]}`}>{unit.availability}</span>}
+              <span className="annot muted">Exclusive payment plans on request</span>
+            </div>
             {mode === "view" && (
-              <button type="button" onClick={() => enquire(undefined)} className="btn btn-ink mt-3">Enquire about {unit.name}</button>
+              <button type="button" onClick={() => enquire(undefined)} className="annot mt-4 text-bronze hover:text-ink">Prefer email? Send a written enquiry →</button>
             )}
             {mode === "enquire" && (state === "done" ? (
               <div className="mt-4 border hairline p-6">
