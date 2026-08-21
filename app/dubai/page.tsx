@@ -4,6 +4,7 @@ import { Rise, Line, Lift } from "@/components/reveal";
 import AccessForm from "@/components/access-form";
 import LogoMarquee from "@/components/dubai/logo-marquee";
 import DuskLight from "@/components/dubai/dusk-light";
+import MarkMorph from "@/components/mark-morph";
 import TiltCard from "@/components/dubai/tilt-card";
 import ProcessRail from "@/components/dubai/process-rail";
 import { PsfLines, VolumeBars, YieldBars, DeveloperBars } from "@/components/dubai/market-charts";
@@ -49,6 +50,7 @@ export default function DubaiPage() {
         <DuskLight />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[var(--plaster)]" aria-hidden="true" />
         <div className="relative mx-auto max-w-6xl">
+          <MarkMorph className="mb-8 h-24 w-24 text-[var(--plaster)] md:mb-10 md:h-32 md:w-32" />
           <p className="annot text-[var(--bronze-bright)]">Dubai · for UK investors</p>
           <Rise as="h1" className="display mt-4 text-5xl leading-[0.95] md:text-8xl">
             <Line>Developer-direct Dubai,</Line>
