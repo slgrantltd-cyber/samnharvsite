@@ -79,7 +79,7 @@ export default function Home() {
               ["£100k +", "Entry capital, no ceiling", "Single units to whole assets"],
             ].map(([v, l, s]) => (
               <Lift key={l} className="bg-[var(--plaster)] p-6 md:p-8">
-                <p className={`display text-4xl md:text-5xl ${v.startsWith("★") ? "gold-text" : ""}`}>{v}</p>
+                <p className={`display ${v.startsWith("★") ? "gold-text text-2xl tracking-tight md:text-4xl" : "text-4xl md:text-5xl"}`}>{v}</p>
                 <p className="annot mt-3 text-bronze">{l}</p>
                 <p className="muted mt-1 text-sm">{s}</p>
               </Lift>

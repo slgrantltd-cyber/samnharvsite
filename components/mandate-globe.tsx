@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -64,9 +65,9 @@ const LAND: LonLat[][] = [
 ];
 
 const MANDATES = [
-  { label: "United Kingdom", lon: -2.9, lat: 51.3, kicker: "Cash-flowing · long term", line: "Houses bought below the street, refinanced at value, professionally managed — income from month one." },
-  { label: "Dubai", lon: 55.3, lat: 25.2, kicker: "Capital appreciation · short to medium term", line: "Launch allocations at developer price, on developer payment plans — growth over the build, yield at handover." },
-  { label: "Thailand", lon: 100.5, lat: 12.0, kicker: "Operating asset · long term", line: "A trading resort, off-market — income and appreciation in one complete operation." },
+  { label: "United Kingdom", href: "/opportunities#uk", cta: "See the UK mandates", lon: -2.9, lat: 51.3, kicker: "Cash-flowing · long term", line: "Houses bought below the street, refinanced at value, professionally managed — income from month one." },
+  { label: "Dubai", href: "/opportunities#dubai", cta: "See the Dubai mandate", lon: 55.3, lat: 25.2, kicker: "Capital appreciation · short to medium term", line: "Launch allocations at developer price, on developer payment plans — growth over the build, yield at handover." },
+  { label: "Thailand", href: "/opportunities#thailand", cta: "See the resort mandate", lon: 100.5, lat: 12.0, kicker: "Operating asset · long term", line: "A trading resort, off-market — income and appreciation in one complete operation." },
 ];
 
 const d2r = Math.PI / 180;
@@ -168,7 +169,7 @@ export default function MandateGlobe() {
       const s = sheen();
       const sx = CX + (s * 2 - 1) * R * 1.2, sy = CY - R * 0.55;
       const glint = ctx.createRadialGradient(sx, sy, 0, sx, sy, R * 0.9);
-      glint.addColorStop(0, "rgba(243,227,180,0.34)"); glint.addColorStop(0.45, "rgba(243,227,180,0.08)"); glint.addColorStop(1, "rgba(243,227,180,0)");
+      glint.addColorStop(0, "rgba(243,227,180,0.16)"); glint.addColorStop(0.45, "rgba(243,227,180,0.04)"); glint.addColorStop(1, "rgba(243,227,180,0)");
       ctx.fillStyle = glint; ctx.fillRect(0, 0, W, H);
       ctx.restore();
 
@@ -184,7 +185,7 @@ export default function MandateGlobe() {
         const d = x1 * cb + z * sb, sr = y1, su = -x1 * sb + z * cb;
         const el = pinRefs.current[i]; if (!el) return;
         el.style.transform = `translate(${(CX + sr * R).toFixed(1)}px, ${(CY - su * R).toFixed(1)}px)`;
-        el.style.opacity = d > 0.02 ? String(0.2 + d * 0.8) : "0";
+        el.style.opacity = d > 0.02 ? String(0.2 + d * 0.8) : "0"; el.style.pointerEvents = d > 0.1 ? "auto" : "none";
       });
     };
     const request = () => { if (!queued) { queued = true; requestAnimationFrame(draw); } };
@@ -245,6 +246,9 @@ export default function MandateGlobe() {
               </h2>
               <p className="annot mt-3 text-bronze">{m.kicker}</p>
               <p className="muted mx-auto mt-2 max-w-md">{m.line}</p>
+              <Link href={m.href} className="annot mt-3 inline-flex items-center gap-2 text-ink transition-colors hover:text-bronze">
+                {m.cta} <span aria-hidden="true">→</span>
+              </Link>
             </div>
           ))}
         </div>
@@ -253,13 +257,13 @@ export default function MandateGlobe() {
           <div className="relative aspect-square h-full max-h-[640px] max-w-full">
             <canvas ref={canvas} className="absolute inset-0 h-full w-full cursor-grab touch-pan-y active:cursor-grabbing" aria-label="A globe turning between the United Kingdom, Dubai and Thailand" />
             {MANDATES.map((m, i) => (
-              <div key={m.label} ref={(el) => { pinRefs.current[i] = el; }} className="pointer-events-none absolute left-0 top-0 will-change-transform" style={{ opacity: 0 }}>
-                <div className="relative -translate-x-1/2 -translate-y-1/2">
-                  <span className="globe-pulse absolute left-1/2 top-1/2 h-[26px] w-[26px] -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ border: `1px solid ${GOLD.mid}` }} />
+              <div key={m.label} ref={(el) => { pinRefs.current[i] = el; }} className="absolute left-0 top-0 will-change-transform" style={{ opacity: 0 }}>
+                <Link href={m.href} aria-label={m.cta} className="group/pin relative block h-12 w-12 -translate-x-1/2 -translate-y-1/2">
+                  <span className="globe-pulse absolute left-1/2 top-1/2 h-[26px] w-[26px] rounded-full" style={{ border: `1px solid ${GOLD.mid}` }} />
                   <span className="absolute left-1/2 top-1/2 h-[8px] w-[8px] -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ background: `radial-gradient(circle at 35% 35%, ${GOLD.hi}, ${GOLD.deep})`, boxShadow: `0 0 10px rgba(201,171,124,.55)` }} />
-                  <span className="absolute left-1/2 top-[-30px] h-[22px] w-px -translate-x-1/2" style={{ background: `linear-gradient(${GOLD.deep}, rgba(169,138,82,0))` }} />
-                  <span className="annot absolute left-1/2 top-[-44px] -translate-x-1/2 whitespace-nowrap text-ink/85">{m.label}</span>
-                </div>
+                  <span className="absolute left-1/2 top-[-6px] h-[22px] w-px -translate-x-1/2" style={{ background: `linear-gradient(${GOLD.deep}, rgba(169,138,82,0))` }} />
+                  <span className="annot absolute left-1/2 top-[-20px] -translate-x-1/2 whitespace-nowrap text-ink/85 transition-colors group-hover/pin:text-bronze">{m.label}</span>
+                </Link>
               </div>
             ))}
           </div>

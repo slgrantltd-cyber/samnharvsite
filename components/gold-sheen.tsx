@@ -21,13 +21,13 @@ export default function GoldSheen() {
     };
     const tick = (now: number) => {
       const dt = Math.min(64, now - last); last = now;
-      if (!reduced) idle += dt * 0.00004;
-      const want = (target + (reduced ? 0 : Math.sin(idle) * 0.35) + 10) % 1;
-      cur += (want - cur) * 0.08;
+      if (!reduced) idle += dt * 0.000012;
+      const want = (target + (reduced ? 0 : Math.sin(idle) * 0.22) + 10) % 1;
+      cur += (want - cur) * 0.025;
       apply();
       raf = requestAnimationFrame(tick);
     };
-    const onScroll = () => { target = ((window.scrollY / 900) % 1 + 1) % 1; };
+    const onScroll = () => { target = ((window.scrollY / 2600) % 1 + 1) % 1; };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll(); raf = requestAnimationFrame(tick);
     return () => { window.removeEventListener("scroll", onScroll); cancelAnimationFrame(raf); };

@@ -24,7 +24,7 @@ export default function BenchmarkMark({
 <defs>
         <linearGradient id="sh-gold" gradientUnits="userSpaceOnUse" x1="4" y1="0" x2="28" y2="0">
           <stop offset="0" stopColor="#b8965c" />
-          <stop offset="0.38" stopColor="#f3e3b4" />
+          <stop offset="0.38" stopColor="#ead8ab" />
           <stop offset="0.58" stopColor="#e2c389" />
           <stop offset="1" stopColor="#a98a52" />
         </linearGradient>

@@ -24,6 +24,7 @@ const RELEASED: Record<string, boolean> = {
 const MANDATES = [
   {
     ref: "Mandate I",
+    id: "thailand",
     where: "Thailand",
     head: "A resort, operating.",
     line: "25+ keys on five-plus rai in one of Thailand's premier island destinations. Licensed, operating, sold whole. Guide on application.",
@@ -33,6 +34,7 @@ const MANDATES = [
   },
   {
     ref: "Mandate II",
+    id: "dubai",
     where: "Dubai · UAE",
     head: "Residences, direct from the developer.",
     line: "Launch allocations at developer price, on developer payment plans — no resale premium, no middle layer. Unit selection, floor and view called by us; yield and exit modelled before you reserve.",
@@ -42,6 +44,7 @@ const MANDATES = [
   },
   {
     ref: "Mandate III",
+    id: "uk",
     where: "Somerset · UK",
     head: "Cash-flowing houses, bought below the street.",
     line: "Two- and three-bedroom stock bought for cash, refinanced at value to recycle the capital, professionally managed. Net yield and money-left-in underwritten before we bring it to you.",
@@ -51,6 +54,7 @@ const MANDATES = [
   },
   {
     ref: "Mandate IV",
+    id: "uk-conversion",
     where: "Weston-super-Mare · UK",
     head: "A three-storey conversion, subject to planning.",
     line: "Victorian terrace to three flats on a proven street. Architect engaged. Comparable evidence in hand.",
@@ -96,7 +100,7 @@ export default function PrivateOfficePage() {
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2">
           {MANDATES.map((m) => (
             <Lift key={m.ref}>
-              <article className="group relative flex min-h-[420px] flex-col justify-end overflow-hidden border hairline md:min-h-[520px]">
+              <article id={m.id} className="group relative flex scroll-mt-28 min-h-[420px] flex-col justify-end overflow-hidden border hairline md:min-h-[520px]">
                 <div className={`absolute inset-0 ${TONES[m.tone]} transition-transform duration-[1400ms] ease-out group-hover:scale-[1.03]`} aria-hidden="true" />
                 <div className={`absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t ${m.tone === "plaster" ? "from-[#2b2823]/85 via-[#2b2823]/45" : "from-black/75 via-black/35"} to-transparent`} aria-hidden="true" />
                 <div className="relative p-7 text-[var(--plaster)] md:p-9">
