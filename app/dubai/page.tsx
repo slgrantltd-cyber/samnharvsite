@@ -74,8 +74,9 @@ export default function DubaiPage() {
             when not to buy.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-            <a href="https://wa.me/447444551241?text=Dubai%20%E2%80%94%20I%27d%20like%20to%20talk" className="btn btn-ink border border-[var(--plaster)]/30">
-              WhatsApp Samuel about Dubai
+            <a href="https://wa.me/447444551241?text=Dubai%20%E2%80%94%20I%27d%20like%20to%20talk" className="btn-gold">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2m0 18.13c-1.5 0-2.97-.4-4.25-1.16l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.35c0-4.54 3.7-8.24 8.24-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.54-3.7 8.24-8.24 8.24m4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.37 1 2.54.12.17 1.73 2.64 4.2 3.7.59.25 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28"/></svg>
+              <span>WhatsApp Samuel</span>
             </a>
             <Link href="/call" className="annot inline-flex min-h-11 items-center gap-3 text-[var(--plaster)]/85 hover:text-[var(--bronze-bright)]">
               Book a 15-minute intro call <span aria-hidden="true">→</span>
@@ -121,14 +122,14 @@ export default function DubaiPage() {
 
       <section id="units" className="px-5 pb-16 md:px-10 md:pb-24">
         <div className="mx-auto max-w-6xl">
-          <p className="annot text-bronze">Current allocations</p>
+          <p className="annot text-bronze">The collection</p>
           <h2 className="display mt-3 max-w-3xl text-3xl leading-snug md:text-4xl">
-            The product, seen — <span className="display-it">price, plan and handover on every one.</span>
+            Branded, Abu Dhabi, Dubai — <span className="display-it">every unit, every price, an Enquire on each.</span>
           </h2>
           <p className="muted mt-5 max-w-2xl leading-relaxed">
-            A working selection across the developers, as they publish it. Every
-            card has an Enquire — you get the current price sheet for that unit
-            the same day, with our view on it.
+            Tap any card for the gallery, the unit-by-unit table, floor plans and
+            tours. Enquire on a project or on a single unit type — the current
+            price sheet comes back the same day, with our view.
           </p>
           <div className="mt-8">
             <UnitsGallery />
@@ -228,7 +229,7 @@ export default function DubaiPage() {
                 <p className="muted mt-4 leading-relaxed">Allocations change weekly and we hold more than we show. One WhatsApp, or fifteen minutes on a call, and we&rsquo;ll send what fits.</p>
               </div>
               <div className="flex shrink-0 flex-col gap-3">
-                <a href="https://wa.me/447444551241?text=Dubai%20%E2%80%94%20here%27s%20my%20brief" className="btn btn-ink">WhatsApp Samuel</a>
+                <a href="https://wa.me/447444551241?text=Dubai%20%E2%80%94%20here%27s%20my%20brief" className="btn-gold on-light"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2m0 18.13c-1.5 0-2.97-.4-4.25-1.16l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.35c0-4.54 3.7-8.24 8.24-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.54-3.7 8.24-8.24 8.24m4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.37 1 2.54.12.17 1.73 2.64 4.2 3.7.59.25 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28"/></svg><span>WhatsApp Samuel</span></a>
                 <Link href="/call" className="btn btn-ghost">Book a 15-minute intro call</Link>
               </div>
             </div>
