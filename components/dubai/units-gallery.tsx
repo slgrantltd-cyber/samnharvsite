@@ -127,7 +127,7 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
       <div className="sheet-float relative flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-t-3xl bg-[var(--plaster)] md:max-h-[88vh] md:rounded-3xl" data-lenis-prevent>
         <span className="absolute left-1/2 top-2 z-10 h-1 w-10 -translate-x-1/2 rounded-full bg-[var(--plaster)]/70 md:hidden" aria-hidden="true" />
         {/* gallery */}
-        <div className="relative aspect-[3/2] max-h-[54vh] w-full shrink-0 overflow-hidden bg-[#0d0a08] md:aspect-[16/9]">
+        <div className="relative w-full shrink-0 overflow-hidden bg-[#0d0a08]" style={{ height: "min(54vh, 66.67vw)" }}>
           {/* blurred echo of the render behind, so the full image shows uncropped */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img key={`bg-${gallery[idx]}`} src={gallery[idx]} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-60 blur-2xl" />
@@ -151,11 +151,11 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
           <button type="button" onClick={onClose} className="annot absolute right-4 top-4 rounded-full bg-black/45 px-3 py-1.5 text-[var(--plaster)] backdrop-blur-[2px]">Close</button>
         </div>
         {gallery.length > 1 && (
-          <div className="flex gap-1.5 overflow-x-auto bg-black px-3 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex items-center gap-2 overflow-x-auto bg-[#0d0a08] px-4 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {gallery.map((g, i) => (
-              <button key={g} type="button" onClick={() => setIdx(i)} className={`h-12 w-20 shrink-0 overflow-hidden border ${i === idx ? "border-[var(--bronze-bright)]" : "border-transparent opacity-60"}`} aria-label={`Image ${i + 1}`}>
+              <button key={g} type="button" onClick={() => setIdx(i)} className={`aspect-[3/2] h-14 shrink-0 overflow-hidden rounded-md border transition-opacity ${i === idx ? "border-[var(--bronze-bright)] opacity-100" : "border-[var(--plaster)]/15 opacity-55 hover:opacity-90"}`} aria-label={`Image ${i + 1}`}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={g} alt="" className="h-full w-full object-cover" />
+                <img src={g} alt="" className="h-full w-full object-contain" />
               </button>
             ))}
           </div>
