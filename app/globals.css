@@ -533,3 +533,27 @@ button,
 @keyframes sheet-in { from { opacity: 0; transform: translateY(28px) scale(.985) } to { opacity: 1; transform: none } }
 .sheet-float { animation: sheet-in .55s cubic-bezier(.22,1,.36,1); box-shadow: 0 40px 90px -30px rgba(0,0,0,.65), 0 0 0 1px rgba(201,171,124,.45), inset 0 0 0 1px rgba(243,227,180,.12); }
 @media (prefers-reduced-motion: reduce) { .sheet-float { animation: none } }
+
+/* ================= THEME PREVIEWS (?theme=) ================= */
+/* 1 · sandstone — deeper ground, stronger grain, nothing else moves */
+html[data-theme="sandstone"] { --plaster: #e9e0cf; --limestone: #ddd3c0; --paper: #e6dcca; --linen: #e3d9c6; --line: rgba(26,26,26,.16); }
+html[data-theme="sandstone"] body { background-image: var(--wash-light), var(--grain-trowel), var(--grain-fine), var(--grain-pores); }
+
+/* 2 · dark — dusk ground throughout, plaster type, gold accents */
+html[data-theme="dark"] { --plaster: #1a1411; --limestone: #231b16; --paper: #1f1813; --linen: #221a15; --smoked: #2b2220; --concrete: #120e0b; --ink: #f2efe8; --stone: #c7bfb1; --stone-lg: #b8afa0; --stone-dark: #8c8273; --line: rgba(242,239,232,.14); --line-light: rgba(242,239,232,.12); --bronze: #c9ab7c; --bronze-bright: #ead8ab; }
+html[data-theme="dark"] body { background-color: #1a1411; background-image: radial-gradient(120% 80% at 70% 0%, #3a2418 0%, #241811 45%, #17110d 100%); }
+html[data-theme="dark"] .on-stone, html[data-theme="dark"] .m-concrete { background-color: #0f0c0a; }
+html[data-theme="dark"] .btn-ink { background: #ead8ab; color: #1a1a1a; }
+html[data-theme="dark"] .bg-\[var\(--plaster\)\] { background-color: #1f1813 !important; }
+html[data-theme="dark"] img { filter: none; }
+
+/* 3 · hybrid — sandstone reading ground; dusk where people arrive and decide */
+html[data-theme="hybrid"] { --plaster: #e9e0cf; --limestone: #ddd3c0; --paper: #e6dcca; --linen: #e3d9c6; --line: rgba(26,26,26,.16); }
+html[data-theme="hybrid"] body { background-image: var(--wash-light), var(--grain-trowel), var(--grain-fine), var(--grain-pores); }
+html[data-theme="hybrid"] .dusk-when-hybrid { background: linear-gradient(160deg, #17110d 0%, #241811 40%, #3a2418 75%, #4a2f1d 100%); color: #f2efe8; --ink: #f2efe8; --stone: #c7bfb1; --line: rgba(242,239,232,.14); --bronze: #c9ab7c; }
+html[data-theme="hybrid"] .dusk-when-hybrid .muted { color: rgba(242,239,232,.72); }
+html[data-theme="hybrid"] .dusk-when-hybrid .btn-ink { background: #ead8ab; color: #1a1a1a; border-color: transparent; }
+html[data-theme="hybrid"] .dusk-when-hybrid .btn-ghost { color: #f2efe8; border-color: rgba(242,239,232,.4); }
+html[data-theme="hybrid"] .dusk-when-hybrid .bg-\[var\(--plaster\)\] { background-color: rgba(23,17,13,.55) !important; }
+html[data-theme="hybrid"] .dusk-when-hybrid .hairline { border-color: rgba(242,239,232,.16); }
+html[data-theme="hybrid"] .dusk-when-hybrid .bg-\[var\(--line\)\] { background-color: rgba(242,239,232,.16) !important; }

@@ -37,7 +37,7 @@ export default function Home() {
           Staged as a sheet on the drawing board: warmer paper with fibre
           grain, raised above the plaster page on a daylight shadow; the
           next section slides in beneath its bottom edge. */}
-      <section className="relative flex min-h-[92svh] flex-col items-center justify-center overflow-hidden px-5 pb-24 pt-28 text-center [contain:paint] md:pt-32">
+      <section className="dusk-when-hybrid relative flex min-h-[92svh] flex-col items-center justify-center overflow-hidden px-5 pb-24 pt-28 text-center [contain:paint] md:pt-32">
         <MandateLight />
         {/* the hero's light bleeds out into the page — no edge, no shadow */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-[var(--plaster)]" aria-hidden="true" />
@@ -134,7 +134,7 @@ export default function Home() {
       </section>
 
       {/* 01.35 — THE TERRITORY (pinned globe: UK → Dubai → Thailand) */}
-      <MandateGlobe />
+      <div className="dusk-when-hybrid"><MandateGlobe /></div>
 
       {/* 01.37 — DUBAI, UNMISTAKABLY */}
       <DubaiStrip />
@@ -381,7 +381,7 @@ export default function Home() {
       </section>
 
       {/* 06 — THE DOORS */}
-      <section className="px-5 pb-28 md:px-10 md:pb-40">
+      <section className="dusk-when-hybrid px-5 py-28 md:px-10 md:py-40">
         <div className="mx-auto max-w-6xl border-t hairline pt-16">
           <Rise as="h2" className="display max-w-3xl text-4xl md:text-6xl">
             <Line>Start with a</Line>

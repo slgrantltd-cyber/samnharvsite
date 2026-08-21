@@ -11,6 +11,8 @@ import MaterialLight from "@/components/material-light";
 import SiteHeader from "@/components/site-header";
 import GoldSheen from "@/components/gold-sheen";
 import WhatsAppButton from "@/components/whatsapp-button";
+import ThemePreview from "@/components/theme-preview";
+import { Suspense } from "react";
 import SiteFooter from "@/components/site-footer";
 
 const caslon = Libre_Caslon_Display({
@@ -140,6 +142,7 @@ export default function RootLayout({
         <MaterialLight />
         <GoldSheen />
         <WhatsAppButton />
+        <Suspense fallback={null}><ThemePreview /></Suspense>
         <SiteHeader />
         {children}
         <SiteFooter />
