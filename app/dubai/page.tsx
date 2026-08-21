@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Rise, Line, Lift } from "@/components/reveal";
 import AccessForm from "@/components/access-form";
+import LogoMarquee from "@/components/dubai/logo-marquee";
+import DuskLight from "@/components/dubai/dusk-light";
+import CountUp from "@/components/dubai/count-up";
+import TiltCard from "@/components/dubai/tilt-card";
+import ProcessRail from "@/components/dubai/process-rail";
 
 export const metadata: Metadata = {
   title: "Dubai Property Investment for UK Investors — Developer-Direct",
@@ -9,8 +14,6 @@ export const metadata: Metadata = {
     "Developer-direct Dubai residences for UK investors — launch allocations from Binghatti, Danube, Sobha, Emaar, Damac and more, on developer payment plans, underwritten by a UK desk. No fee to you: the developer pays our commission.",
   alternates: { canonical: "/dubai" },
 };
-
-const DEVELOPERS = ["Binghatti", "Danube", "Sobha", "Emaar", "Damac", "Ellington", "Aldar", "Nakheel"];
 
 const FACTS = [
   ["No fee to you", "The developer pays our commission. You pay developer price — the same price as walking into their sales centre, with our underwriting on top."],
@@ -40,8 +43,9 @@ const RISKS = [
 export default function DubaiPage() {
   return (
     <main id="main" className="pt-24 md:pt-28">
-      <section className="px-5 py-16 md:px-10 md:py-24">
-        <div className="mx-auto max-w-6xl">
+      <section className="relative overflow-hidden px-5 py-16 md:px-10 md:py-24 [contain:paint]">
+        <DuskLight />
+        <div className="relative mx-auto max-w-6xl">
           <p className="annot muted">Dubai · for UK investors</p>
           <Rise as="h1" className="display mt-3 text-5xl md:text-8xl">
             <Line>Developer-direct Dubai,</Line>
@@ -74,18 +78,33 @@ export default function DubaiPage() {
               One conversation, every developer that matters — so the unit
               is chosen for you, <span className="display-it">not for the developer.</span>
             </p>
-            <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
-              {DEVELOPERS.map((d) => (
-                <li key={d} className="display text-xl text-[var(--plaster)] md:text-2xl">{d}</li>
-              ))}
-              <li className="annot self-center text-[var(--plaster)]/60">and others, by launch</li>
-            </ul>
+            <div className="mt-8 -mx-8 md:-mx-12">
+              <LogoMarquee />
+            </div>
             <p className="mt-6 max-w-2xl text-sm leading-relaxed text-[var(--plaster)]/70">
               Each developer sells its own stock at its own price. Our job is
               the comparison across them — price per square foot, payment
               plan, delivery record, service charge, rental evidence — and the
               honest call on which one, or none.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 pb-16 md:px-10 md:pb-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid grid-cols-2 gap-px border bg-[var(--line)] hairline md:grid-cols-4">
+            {[
+              { to: 0, suffix: "%", l: "UAE income & capital gains tax" },
+              { to: 4, suffix: "%", l: "DLD transfer fee — often split on launches" },
+              { to: 10, suffix: " yr", l: "Golden Visa at AED 2m+" },
+              { to: 20, prefix: "from ", suffix: "%", l: "Typical deposit to reserve" },
+            ].map((c) => (
+              <div key={c.l} className="bg-[var(--plaster)] p-6 md:p-8">
+                <p className="display text-4xl md:text-5xl"><CountUp to={c.to} prefix={c.prefix} suffix={c.suffix} className="gold-text" /></p>
+                <p className="annot mt-3 muted">{c.l}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -110,11 +129,13 @@ export default function DubaiPage() {
               ["Villas & branded", "Growth-led", "Scarcer product, larger tickets, the strongest capital appreciation story. £1m+."],
             ].map(([h, k, b]) => (
               <Lift key={h} className="bg-[var(--plaster)]">
-                <div className="flex h-full flex-col p-6 md:p-7">
-                  <p className="annot text-bronze">{k}</p>
-                  <h3 className="display mt-2 text-2xl">{h}</h3>
-                  <p className="muted mt-3 text-[0.9375rem] leading-relaxed">{b}</p>
-                </div>
+                <TiltCard className="glow-gold h-full bg-[var(--plaster)]">
+                  <div className="relative flex h-full flex-col p-6 md:p-7">
+                    <p className="annot text-bronze">{k}</p>
+                    <h3 className="display mt-2 text-2xl">{h}</h3>
+                    <p className="muted mt-3 text-[0.9375rem] leading-relaxed">{b}</p>
+                  </div>
+                </TiltCard>
               </Lift>
             ))}
           </div>
@@ -141,17 +162,10 @@ export default function DubaiPage() {
       <section className="px-5 pb-16 md:px-10 md:pb-24">
         <div className="mx-auto max-w-6xl">
           <p className="annot text-bronze">How it runs</p>
-          <div className="mt-6 grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-3 lg:grid-cols-6">
-            {PROCESS.map(([h, b]) => (
-              <Lift key={h} className="bg-[var(--plaster)]">
-                <div className="flex h-full flex-col p-6">
-                  <span className="block h-px w-8 bg-bronze" aria-hidden="true" />
-                  <h3 className="display mt-3 text-xl">{h}</h3>
-                  <p className="muted mt-3 text-[0.875rem] leading-relaxed">{b}</p>
-                </div>
-              </Lift>
-            ))}
-          </div>
+          <h2 className="display mt-3 max-w-3xl text-3xl leading-snug md:text-4xl">
+            Six steps from brief to <span className="display-it">keys and tenants.</span>
+          </h2>
+          <ProcessRail steps={PROCESS as [string, string][]} />
         </div>
       </section>
 
