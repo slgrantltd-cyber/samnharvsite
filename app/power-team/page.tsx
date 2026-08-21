@@ -181,7 +181,45 @@ export default function PowerTeamPage() {
             Every stage of a deal has a partner who already works alongside us.
             You deal with each directly, on their normal terms — introduced by name.
           </p>
-          <div className="mt-8 grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-2 lg:grid-cols-4">
+          {/* phone: tap to open each stage — plate is the header */}
+          <div className="mt-8 border-t hairline md:hidden">
+            {CHAIN.map((c) => (
+              <details key={c.stage} className="group border-b hairline">
+                <summary className="flex cursor-pointer list-none items-stretch gap-0 [&::-webkit-details-marker]:hidden">
+                  <div className="w-[38%] shrink-0 [&>div]:h-full [&>div]:min-h-[5.5rem] [&>div]:px-4 [&>div_p.annot]:hidden [&_p.text-xl]:hidden [&_p.font-sans]:hidden [&_img]:h-7 [&_.display]:text-lg [&_svg]:h-7 [&_svg]:w-7 [&_.h-10]:h-auto">
+                    {c.brand && PLATES[c.brand]}
+                  </div>
+                  <div className="flex flex-1 items-center justify-between gap-3 px-4 py-4">
+                    <div>
+                      <p className="annot muted">{c.stage}</p>
+                      <p className="display mt-1 text-lg leading-tight">{c.who}</p>
+                    </div>
+                    <span className="annot text-bronze transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+                  </div>
+                </summary>
+                <div className="px-4 pb-5 pt-1">
+                  <p className="muted text-[0.9375rem] leading-relaxed">{c.body}</p>
+                  {c.intro && (
+                    <p className="annot mt-3 leading-relaxed text-bronze">
+                      We introduce you personally — mention Samuel Grant.{" "}
+                      <a href={`mailto:contact@samnharv.com?subject=${encodeURIComponent(`Introduction to ${c.who}`)}`} className="text-ink">Request an introduction →</a>
+                    </p>
+                  )}
+                  {c.cta && (
+                    <Link href={c.cta.href} className="btn btn-ink mt-4">{c.cta.label}</Link>
+                  )}
+                  {c.site && (
+                    <a href={`https://${c.site}`} target="_blank" rel="noopener noreferrer" className="annot mt-3 inline-flex items-center gap-2 text-bronze">
+                      {c.site} <span aria-hidden="true">↗</span>
+                    </a>
+                  )}
+                </div>
+              </details>
+            ))}
+          </div>
+
+          {/* desktop: the full grid */}
+          <div className="mt-8 hidden gap-px border bg-[var(--line)] hairline md:grid md:grid-cols-2 lg:grid-cols-4">
             {CHAIN.map((c) => (
               <Lift key={c.stage} className="bg-[var(--plaster)]">
                 <div className="flex h-full flex-col">
@@ -232,7 +270,21 @@ export default function PowerTeamPage() {
       <section className="px-5 pb-16 md:px-10 md:pb-24">
         <div className="mx-auto max-w-6xl">
           <p className="annot muted">And behind them — the bench</p>
-          <div className="mt-6 grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-3">
+          <div className="mt-6 border-t hairline md:hidden">
+            {POWER_TEAM.map((r) => (
+              <details key={r.role} className="group border-b hairline">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 py-4 [&::-webkit-details-marker]:hidden">
+                  <span className="display text-lg">{r.role}</span>
+                  <span className="annot text-bronze transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+                </summary>
+                <div className="pb-5">
+                  <p className="muted text-[0.9375rem] leading-relaxed">{r.why}</p>
+                  <p className="annot mt-3 muted">{r.proof}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+          <div className="mt-6 hidden gap-px border bg-[var(--line)] hairline md:grid md:grid-cols-3">
             {POWER_TEAM.map((p) => (
               <Lift key={p.role} className="bg-[var(--plaster)]">
                 <div className="flex h-full flex-col p-6 md:p-7">
