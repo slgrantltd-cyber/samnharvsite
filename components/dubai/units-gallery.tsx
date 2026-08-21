@@ -127,9 +127,12 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
       <div className="sheet-float relative flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-t-3xl bg-[var(--plaster)] md:max-h-[88vh] md:rounded-3xl" data-lenis-prevent>
         <span className="absolute left-1/2 top-2 z-10 h-1 w-10 -translate-x-1/2 rounded-full bg-[var(--plaster)]/70 md:hidden" aria-hidden="true" />
         {/* gallery */}
-        <div className="relative aspect-[16/9] max-h-[44vh] w-full shrink-0 bg-black md:aspect-[21/9]">
+        <div className="relative aspect-[3/2] max-h-[54vh] w-full shrink-0 overflow-hidden bg-[#0d0a08] md:aspect-[16/9]">
+          {/* blurred echo of the render behind, so the full image shows uncropped */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img key={gallery[idx]} src={gallery[idx]} alt={`${unit.name} — render ${idx + 1}`} className="h-full w-full object-cover" />
+          <img key={`bg-${gallery[idx]}`} src={gallery[idx]} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-60 blur-2xl" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img key={gallery[idx]} src={gallery[idx]} alt={`${unit.name} — render ${idx + 1}`} className="relative h-full w-full object-contain" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/75 via-black/20 to-transparent" aria-hidden="true" />
           <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 text-[var(--plaster)] md:left-8 md:right-8">
             <div>
