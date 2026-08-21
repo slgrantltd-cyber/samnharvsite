@@ -3,10 +3,10 @@
 import { useEffect, useRef } from "react";
 
 /**
- * The mandate light: a soft colour wash that lives on the homepage hero
+ * The opportunity light: a soft colour wash that lives on the homepage hero
  * and follows the cursor — leaf-green toward the left, dusk-amber toward
  * the right, plaster between. The same two palettes as the island and
- * desert mandate pages, so the home page quietly carries the world of
+ * desert opportunity pages, so the home page quietly carries the world of
  * the Opportunities page. Composited translate only; pointer-fine devices;
  * reduced-motion and touch keep a still, centred wash.
  */

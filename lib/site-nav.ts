@@ -9,7 +9,7 @@ export const SITE_MAP: NavGroup[] = [
   {
     label: "Invest",
     items: [
-      { href: "/opportunities", label: "Opportunities", note: "Current mandates, by introduction" },
+      { href: "/opportunities", label: "Opportunities", note: "Current opportunities, by introduction" },
       { href: "/dubai", label: "Dubai", note: "Developer-direct — Binghatti, Danube, Sobha, Emaar" },
       { href: "/power-team", label: "The complete package", note: "Finance, build, furnish, manage — one roof" },
       { href: "/deal-intelligence", label: "Deal analyzer", note: "Run the numbers on any deal" },

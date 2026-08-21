@@ -52,6 +52,7 @@ const arrowD = (t: number) => {
 export default function MarkMorph({ className }: { className?: string }) {
   const box = useRef<HTMLDivElement>(null);
   const ground = useRef<SVGPathElement>(null);
+  const glint = useRef<SVGPathElement>(null);
   const wl = useRef<SVGPathElement>(null);
   const wr = useRef<SVGPathElement>(null);
   const arrow = useRef<SVGPathElement>(null);
@@ -66,7 +67,9 @@ export default function MarkMorph({ className }: { className?: string }) {
     const proxy = { p: 0 };
     const apply = () => {
       const t = ease(proxy.p);
-      ground.current?.setAttribute("d", seg(GROUND, t));
+      const gd = seg(GROUND, t);
+      ground.current?.setAttribute("d", gd);
+      glint.current?.setAttribute("d", gd);
       wl.current?.setAttribute("d", seg(WALL_L, t));
       wr.current?.setAttribute("d", seg(WALL_R, t));
       arrow.current?.setAttribute("d", arrowD(t));
@@ -117,7 +120,9 @@ export default function MarkMorph({ className }: { className?: string }) {
             <stop offset="1" stopColor="#a98a52" />
           </linearGradient>
         </defs>
-        <path ref={ground} stroke="url(#sh-gold-morph)" d="M4 7 L28 7" />
+        <path ref={ground} stroke="url(#sh-gold-morph)" strokeWidth="2.1" d="M4 7 L28 7" />
+        {/* the twinkle: a short bright glint that travels the line */}
+        <path ref={glint} className="mark-glint" stroke="#fff8e1" strokeWidth="1" strokeLinecap="round" d="M4 7 L28 7" pathLength="100" />
         <path ref={wl} d="M16 7 L16 14" />
         <path ref={wr} d="M16 7 L16 14" />
         <path ref={arrow} d="M16 14 L7 27 M16 14 L25 27 M16 14 L16 27" />

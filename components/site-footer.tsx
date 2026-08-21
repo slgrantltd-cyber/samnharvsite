@@ -13,7 +13,7 @@ export default function SiteFooter() {
               SAM <span className="display-it lowercase gold-text">n</span> HARV
             </p>
             <p className="muted mt-2 max-w-sm text-sm leading-relaxed">
-              Private property mandates, UK and international. Two brothers,
+              Private property opportunities, UK and international. Two brothers,
               based in the UK South West.
             </p>
           </div>

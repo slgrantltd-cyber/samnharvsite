@@ -39,7 +39,7 @@ export default function UnitsGallery() {
             <h3 className="display mt-2 text-2xl md:text-3xl">{c.title}</h3>
             <p className="muted mt-2 max-w-2xl text-[0.9375rem] leading-relaxed">{c.body}</p>
             {/* phone: swipe rail · desktop: grid */}
-            <div className="-mx-5 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:snap-none md:gap-px md:overflow-visible md:border md:bg-[var(--line)] md:hairline md:px-0 md:pb-0 md:grid-cols-2 lg:grid-cols-4">
+            <div className={`-mx-5 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:snap-none md:gap-px md:overflow-visible md:border md:bg-[var(--line)] md:hairline md:px-0 md:pb-0 md:grid-cols-2 ${items.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}>
               {items.map((u) => (
                 <article key={u.slug} className="group glow-gold z-0 flex w-[84vw] max-w-[22rem] shrink-0 snap-start flex-col border hairline bg-[var(--plaster)] hover:z-10 md:w-auto md:max-w-none md:border-0">
                   <button type="button" onClick={() => setActive({ unit: u, mode: "view" })} className="relative block aspect-[3/2] w-full overflow-hidden text-left" aria-label={`View ${u.name}`}>

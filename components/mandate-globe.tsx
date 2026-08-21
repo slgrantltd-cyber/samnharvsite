@@ -65,9 +65,9 @@ const LAND: LonLat[][] = [
 ];
 
 const MANDATES = [
-  { label: "United Kingdom", href: "/opportunities#uk", cta: "See the UK mandates", lon: -2.9, lat: 51.3, kicker: "Cash-flowing · long term", line: "Houses bought below the street, refinanced at value, professionally managed — income from month one." },
+  { label: "United Kingdom", href: "/opportunities#uk", cta: "See the UK opportunities", lon: -2.9, lat: 51.3, kicker: "Cash-flowing · long term", line: "Houses bought below the street, refinanced at value, professionally managed — income from month one." },
   { label: "Dubai", href: "/dubai", cta: "Dubai, developer-direct", lon: 55.3, lat: 25.2, kicker: "Capital appreciation · short to medium term", line: "Launch allocations at developer price, on developer payment plans — growth over the build, yield at handover." },
-  { label: "Thailand", href: "/opportunities#thailand", cta: "See the resort mandate", lon: 100.5, lat: 12.0, kicker: "Operating asset · long term", line: "A trading resort, off-market — income and appreciation in one complete operation." },
+  { label: "Thailand", href: "/opportunities#thailand", cta: "See the resort opportunity", lon: 100.5, lat: 12.0, kicker: "Operating asset · long term", line: "A trading resort, off-market — income and appreciation in one complete operation." },
 ];
 
 const d2r = Math.PI / 180;
@@ -225,7 +225,7 @@ export default function MandateGlobe() {
       if (!down) return; down = false;
       gsap.to(drag, { lam: drag.lam + vx * 12, phi: Math.max(-50, Math.min(50, drag.phi + vy * 6)), duration: 1.2, ease: "power3.out", onUpdate: request });
     };
-    // the next scroll movement eases the hand-offset away so each mandate still lands facing you
+    // the next scroll movement eases the hand-offset away so each opportunity still lands facing you
     const realign = () => {
       if (realigning || down || (Math.abs(drag.lam) < 0.01 && Math.abs(drag.phi) < 0.01)) return;
       realigning = true;

@@ -53,7 +53,7 @@ export default function Home() {
           </Line>
         </Rise>
         <p className="relative mx-auto mt-8 max-w-xl text-lg leading-relaxed md:text-xl">
-          Live mandates in the UK, Dubai and Thailand — or a search run to
+          Live opportunities in the UK, Dubai and Thailand — or a search run to
           your brief. Whatever the deal needs, done properly, quietly.
         </p>
         <div className="relative mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
@@ -132,7 +132,7 @@ export default function Home() {
               {
                 who: "For investors",
                 pain: "Every sourcer in the country is sending you the same Rightmove listing with a fee stapled to it.",
-                head: "Four mandates. Not forty.",
+                head: "Four opportunities. Not forty.",
                 body: "An island resort. Dubai residences, direct from the developer. UK houses bought below the street. Released after a conversation, identity and proof of funds.",
                 href: "/opportunities",
                 cta: "Request access",
@@ -199,7 +199,7 @@ export default function Home() {
               </Rise>
               <p className="mt-6 max-w-md leading-relaxed text-[var(--plaster)]/80">
                 We don&rsquo;t sell to whoever asks. Every buyer is qualified
-                before a single particular is shared, and every mandate is
+                before a single particular is shared, and every opportunity is
                 matched to the person — not the other way round. If it
                 doesn&rsquo;t fit, we say so on the first call.
               </p>
@@ -252,7 +252,7 @@ export default function Home() {
             <div className="md:col-span-3">
               <div className="grid grid-cols-1 gap-px border bg-[var(--line)] hairline">
                 {[
-                  ["Worst case first", "Three scenarios on every mandate. We buy on likely; we never sell on best."],
+                  ["Worst case first", "Three scenarios on every opportunity. We buy on likely; we never sell on best."],
                   ["Risk, stated plainly", "Planning, title, the railway line, the roof — first page, plain English."],
                   ["Nothing guaranteed", "Not returns, not occupancy, not values. Walk away from anyone who says otherwise."],
                   ["Our fee, in writing, up front", "Fixed, declared before you see a property, payable on exchange. No hidden margin."],

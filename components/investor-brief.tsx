@@ -45,7 +45,7 @@ export default function InvestorBrief() {
               <span className="display-it">We&rsquo;ll tell you what fits.</span>
             </h2>
             <p className="mt-4 max-w-md leading-relaxed text-[var(--plaster)]/80">
-              Thirty seconds. One of us replies personally — with the mandate
+              Thirty seconds. One of us replies personally — with the opportunity
               that matches, or an honest &ldquo;not yet&rdquo;.
             </p>
             <div className="mt-8 border-t hairline pt-6">

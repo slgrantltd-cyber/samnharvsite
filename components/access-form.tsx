@@ -57,7 +57,7 @@ export default function AccessForm({ mandate = "" }: { mandate?: string }) {
         <input name="phone" className="mt-2 w-full border-b hairline bg-transparent py-2 outline-none focus:border-ink" />
       </label>
       <label className="block">
-        <span className="annot muted">Mandate of interest</span>
+        <span className="annot muted">Opportunity of interest</span>
         <select name="mandate" defaultValue={mandate} className="mt-2 w-full border-b hairline bg-transparent py-2 outline-none focus:border-ink">
           <option value="">General</option>
           <option>Resort · Thailand</option>

@@ -5,7 +5,7 @@ import { Rise, Line, Lift } from "@/components/reveal";
 export const metadata: Metadata = {
   title: "Our Word — How We Underwrite, Disclose and Behave",
   description:
-    "The rules we hold ourselves to on every mandate: worst case stays positive, risk stated plainly, the same numbers to every buyer, no return guaranteed, and we stay after completion. Investment carries risk — we'd rather lose a sale than your trust.",
+    "The rules we hold ourselves to on every opportunity: worst case stays positive, risk stated plainly, the same numbers to every buyer, no return guaranteed, and we stay after completion. Investment carries risk — we'd rather lose a sale than your trust.",
   alternates: { canonical: "/trust" },
 };
 
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const RULES = [
   {
     head: "Worst case first.",
-    body: "Every mandate is shown at a poor case, a likely case and a best case — and we don't bring it to you unless the poor case still stands up. We buy on likely. We never sell on best.",
+    body: "Every opportunity is shown at a poor case, a likely case and a best case — and we don't bring it to you unless the poor case still stands up. We buy on likely. We never sell on best.",
     check: "Check it: every pack carries all three scenarios on one page.",
   },
   {
@@ -49,7 +49,7 @@ const RULES = [
   },
   {
     head: "We stay after completion.",
-    body: "Every deal we sell carries the option for us to take it on as tenant or operator once the works are done. We're not going anywhere — our next mandate depends on how this one performs for you.",
+    body: "Every deal we sell carries the option for us to take it on as tenant or operator once the works are done. We're not going anywhere — our next opportunity depends on how this one performs for you.",
     check: "Check it: the aftercare provision is written into every sourcing agreement.",
   },
   {

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 /* The shop window: never more than four. Each card is atmosphere + one
    line + "on application". Detail lives behind the gate. */
-/* Gated pages: a mandate's page link is only rendered when its gate is
+/* Gated pages: a opportunity's page link is only rendered when its gate is
    released. Flip `released` to true the day the owner approves (TH) or
    the brokerage agreement is signed (AE) — and move the file from
    deals-held/ into public/deals/. Until then the card routes to #access. */
@@ -23,7 +23,7 @@ const RELEASED: Record<string, boolean> = {
 
 const MANDATES = [
   {
-    ref: "Mandate I",
+    ref: "Opportunity I",
     id: "thailand",
     where: "Thailand",
     head: "A resort, operating.",
@@ -33,7 +33,7 @@ const MANDATES = [
     page: "int-th-001",
   },
   {
-    ref: "Mandate II",
+    ref: "Opportunity II",
     id: "dubai",
     where: "Dubai · UAE",
     head: "Residences, direct from the developer.",
@@ -44,7 +44,7 @@ const MANDATES = [
     href: "/dubai",
   },
   {
-    ref: "Mandate III",
+    ref: "Opportunity III",
     id: "uk",
     where: "Somerset · UK",
     head: "Cash-flowing houses, bought below the street.",
@@ -54,7 +54,7 @@ const MANDATES = [
     page: "",
   },
   {
-    ref: "Mandate IV",
+    ref: "Opportunity IV",
     id: "uk-conversion",
     where: "Weston-super-Mare · UK",
     head: "A three-storey conversion, subject to planning.",
@@ -90,7 +90,7 @@ export default function PrivateOfficePage() {
           </Rise>
           <p className="mt-8 max-w-xl text-lg leading-relaxed md:text-xl">
             We don&rsquo;t list what we hold. At any one time there are a
-            handful of mandates — UK and international — released to qualified
+            handful of opportunities — UK and international — released to qualified
             buyers after a conversation, identity and proof of funds. What
             follows is the shape of them, not the detail.
           </p>
@@ -111,7 +111,7 @@ export default function PrivateOfficePage() {
                   <div className="mt-6 flex flex-wrap items-center gap-4">
                     <span className="annot border border-white/40 px-3 py-1.5 text-white/90">{m.status}</span>
                     {m.page && (RELEASED[m.page] || process.env.NODE_ENV !== "production") ? (
-                      <a href={`/deals/${m.page}.html`} className="annot text-white transition-colors hover:text-[var(--bronze-bright)]">View the mandate →</a>
+                      <a href={`/deals/${m.page}.html`} className="annot text-white transition-colors hover:text-[var(--bronze-bright)]">View the opportunity →</a>
                     ) : (
                       <a href="#access" className="annot text-white transition-colors hover:text-[var(--bronze-bright)]">Request access →</a>
                     )}

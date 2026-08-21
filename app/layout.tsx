@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     template: "%s — Sam n Harv",
   },
   description:
-    "A small number of property mandates at any one time — UK and international — held quietly and released to qualified buyers. Every mandate underwritten to the standard we run our own operation by. Two brothers, based in the UK South West.",
+    "A small number of property opportunities at any one time — UK and international — held quietly and released to qualified buyers. Every opportunity underwritten to the standard we run our own operation by. Two brothers, based in the UK South West.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
