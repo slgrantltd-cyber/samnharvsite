@@ -64,7 +64,7 @@ const LAND: LonLat[][] = [
 
 const MANDATES = [
   { label: "United Kingdom", lon: -2.9, lat: 51.3, kicker: "Cash-flowing · long term", line: "Houses bought below the street, refinanced at value, professionally managed — income from month one." },
-  { label: "Dubai", lon: 55.3, lat: 25.2, kicker: "Capital appreciation · short to medium term", line: "Off-plan residences direct from the developer — growth over the build, yield at handover." },
+  { label: "Dubai", lon: 55.3, lat: 25.2, kicker: "Capital appreciation · short to medium term", line: "Launch allocations at developer price, on developer payment plans — growth over the build, yield at handover." },
   { label: "Thailand", lon: 100.5, lat: 12.0, kicker: "Operating asset · long term", line: "A trading resort, off-market — income and appreciation in one complete operation." },
 ];
 

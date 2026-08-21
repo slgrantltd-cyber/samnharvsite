@@ -51,9 +51,10 @@ export default function Home() {
           </Line>
         </Rise>
         <p className="relative mx-auto mt-8 max-w-xl text-lg leading-relaxed md:text-xl">
-          A small number of property mandates at any one time, held quietly
-          and released to a few qualified buyers. Every one underwritten the
-          way we underwrite our own operation — because it is our operation.
+          A small number of mandates at any one time — UK cash-flow,
+          developer-direct Dubai residences, an operating resort in Thailand —
+          released quietly to a few qualified investors. Every one
+          underwritten to a return we&rsquo;d put our own name to.
         </p>
         <div className="relative mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
           <Link href="/opportunities" className="btn btn-ink">
@@ -71,13 +72,13 @@ export default function Home() {
       {/* 01.4 — THE RECORD (authority) */}
       <section className="px-5 pt-4 pb-16 md:px-10 md:pb-24">
         <div className="mx-auto max-w-6xl">
-          <p className="annot muted">The record — before anything else</p>
+          <p className="annot muted">Track record — before anything else</p>
           <div className="mt-6 grid grid-cols-2 gap-px border bg-[var(--line)] hairline md:grid-cols-4">
             {[
-              ["£250k", "First-year revenue", "Trading since 2025"],
-              ["12+ months", "Local-authority placements", "Housed continuously"],
-              ["2", "Properties operated", "Live, staffed by us"],
+              ["Six figures", "Revenue a client credits to our deals", "In his words — below"],
               ["★★★★★", "On Google", "Reviews we can't edit"],
+              ["3 markets", "UK · Dubai · Thailand", "One desk, three currencies of return"],
+              ["From £100k", "Entry capital", "Cash-flow, growth, or both"],
             ].map(([v, l, s]) => (
               <Lift key={l} className="bg-[var(--plaster)] p-6 md:p-8">
                 <p className="display text-4xl md:text-5xl">{v}</p>
