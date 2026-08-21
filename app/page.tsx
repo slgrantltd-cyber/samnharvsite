@@ -51,10 +51,8 @@ export default function Home() {
           </Line>
         </Rise>
         <p className="relative mx-auto mt-8 max-w-xl text-lg leading-relaxed md:text-xl">
-          A small number of mandates at any one time — UK cash-flow,
-          developer-direct Dubai residences, an operating resort in Thailand —
-          released quietly to a few qualified investors. Every one
-          underwritten to a return we&rsquo;d put our own name to.
+          Live mandates in the UK, Dubai and Thailand — or a search run to
+          your brief. Whatever the deal needs, done properly, quietly.
         </p>
         <div className="relative mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
           <Link href="/opportunities" className="btn btn-ink">
