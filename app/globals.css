@@ -10,10 +10,10 @@
 */
 
 :root {
-  --plaster: #f2efe8;
-  --limestone: #e4ded3;
-  --paper: #efeae0;
-  --linen: #ede7da;
+  --plaster: #e9e0cf;
+  --limestone: #ddd3c0;
+  --paper: #e6dcca;
+  --linen: #e3d9c6;
   --smoked: #2b2926;
   --concrete: #1f1e1c;
   --ink: #1a1a1a;
@@ -23,7 +23,7 @@
   --bronze: #8c7b65;
   --bronze-chip: #a89478;
   --bronze-bright: #b5a183;
-  --line: rgba(26, 26, 26, 0.12);
+  --line: rgba(26, 26, 26, 0.16);
   --line-light: rgba(242, 239, 232, 0.16);
 
   /* ---- grain plates: baked PNG noise tiles (was live feTurbulence — far cheaper to paint) ----
@@ -78,7 +78,7 @@ html.lenis body {
 
 body {
   background-color: var(--plaster);
-  background-image: var(--wash-light), var(--grain-trowel), var(--grain-fine);
+  background-image: var(--wash-light), var(--grain-trowel), var(--grain-fine), var(--grain-pores);
   color: var(--ink);
   font-family: var(--font-hanken), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -535,10 +535,6 @@ button,
 @media (prefers-reduced-motion: reduce) { .sheet-float { animation: none } }
 
 /* ================= THEME PREVIEWS (?theme=) ================= */
-/* 1 · sandstone — deeper ground, stronger grain, nothing else moves */
-html[data-theme="sandstone"] { --plaster: #e9e0cf; --limestone: #ddd3c0; --paper: #e6dcca; --linen: #e3d9c6; --line: rgba(26,26,26,.16); }
-html[data-theme="sandstone"] body { background-image: var(--wash-light), var(--grain-trowel), var(--grain-fine), var(--grain-pores); }
-
 /* 2 · dark — dusk ground throughout, plaster type, gold accents */
 html[data-theme="dark"] { --plaster: #1a1411; --limestone: #231b16; --paper: #1f1813; --linen: #221a15; --smoked: #2b2220; --concrete: #120e0b; --ink: #f2efe8; --stone: #c7bfb1; --stone-lg: #b8afa0; --stone-dark: #8c8273; --line: rgba(242,239,232,.14); --line-light: rgba(242,239,232,.12); --bronze: #c9ab7c; --bronze-bright: #ead8ab; }
 html[data-theme="dark"] body { background-color: #1a1411; background-image: radial-gradient(120% 80% at 70% 0%, #3a2418 0%, #241811 45%, #17110d 100%); }
