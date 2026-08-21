@@ -238,7 +238,7 @@ export default function MandateGlobe() {
 
   return (
     <section ref={section} className="relative h-[100svh] overflow-hidden">
-      <div className="mx-auto flex h-full max-w-6xl flex-col items-center px-5 pb-16 pt-24 text-center md:px-10 md:pt-28">
+      <div className="mx-auto flex h-full max-w-6xl flex-col items-center px-5 pb-14 pt-20 text-center md:px-10 md:pt-20">
         {/* caption — stacked captions crossfade in a fixed-height block above the globe */}
         <div className="relative z-10 h-44 w-full max-w-2xl md:h-40">
           {MANDATES.map((m, i) => (

@@ -69,7 +69,7 @@ export default function Home() {
       </section>
 
       {/* 01.4 — THE RECORD (authority) */}
-      <section className="px-5 pt-4 pb-16 md:px-10 md:pb-24">
+      <section className="px-5 pt-4 pb-4 md:px-10 md:pb-6">
         <div className="mx-auto max-w-6xl">
           <p className="annot muted">Track record — before anything else</p>
           <div className="mt-6 grid grid-cols-2 gap-px border bg-[var(--line)] hairline md:grid-cols-4">
