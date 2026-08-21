@@ -113,7 +113,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 01.3 — THE INVESTOR BRIEF (enquiry, near the top) */}
+      {/* 01.35 — THE TERRITORY (pinned globe: UK → Dubai → Thailand) */}
+      <MandateGlobe />
+
+      {/* 01.4 — THE INVESTOR BRIEF (enquiry, near the top) */}
       <InvestorBrief />
 
       {/* 01.25 — THE THREE DOORS */}
@@ -273,9 +276,6 @@ export default function Home() {
           <p className="annot mt-8 muted">Samuel &amp; Harvey Grant — founders</p>
         </div>
       </section>
-
-      {/* 02 — THE TERRITORY (pinned globe: UK → Dubai → Thailand) */}
-      <MandateGlobe />
 
       {/* 03 — THE LEDGER (natural limestone) */}
       <section className="m-limestone px-5 py-24 md:px-10 md:py-36">
