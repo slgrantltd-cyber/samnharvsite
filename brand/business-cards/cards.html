@@ -5,7 +5,7 @@
    Safe zone: keep text ≥ 3 mm inside the trim (i.e. ≥ 6 mm from page edge). */
 @page { size: 91mm 61mm; margin: 0; }
 html,body{margin:0;padding:0}
-:root{--plaster:#e9e0cf;--sand-deep:#dccfb8;--ink:#1a1a1a;--bronze:#8c7b65;--bronze-bright:#c9ab7c;--stone:#5c5952}
+:root{--plaster:#efe8da;--sand-deep:#dccfb8;--ink:#1a1a1a;--bronze:#8c7b65;--bronze-bright:#c9ab7c;--stone:#5c5952}
 .card{position:relative;width:91mm;height:61mm;overflow:hidden;page-break-after:always;box-sizing:border-box;
   -webkit-print-color-adjust:exact;print-color-adjust:exact}
 .card:last-child{page-break-after:auto}
@@ -95,5 +95,52 @@ html,body{margin:0;padding:0}
     </div>
   </div>
 </div></div>
+
+<!-- ============ VARIANT C — THE BENCHMARK: the card is the mark ============ -->
+<!-- C · Samuel · front -->
+<div class="card plaster">
+  <div style="position:absolute;left:0;right:0;top:24mm;height:.45mm;background:linear-gradient(90deg,#a98a52 0%,#c4a676 30%,#ead8ab 50%,#c4a676 70%,#a98a52 100%)"></div>
+  <svg style="position:absolute;left:9mm;top:24.2mm;width:16mm;height:16mm;overflow:visible" viewBox="0 0 32 32" fill="none" stroke="#1a1a1a" stroke-width="1.7" stroke-linecap="square"><line x1="16" y1="0" x2="16" y2="10"/><path d="M16 10 L5 26 M16 10 L27 26 M16 10 L16 26"/></svg>
+  <div style="position:absolute;right:6mm;top:13.5mm;text-align:right">
+    <div class="display" style="font-size:16pt;line-height:1">Samuel Grant</div>
+    <div class="annot" style="margin-top:1.8mm;color:var(--bronze)">CEO · Sam n Harv</div>
+  </div>
+  <div style="position:absolute;right:6mm;top:26.4mm;text-align:right">
+    <div class="annot" style="color:var(--stone);line-height:2">07444 551241</div>
+    <div class="annot" style="color:var(--stone);line-height:2">contact@samnharv.com</div>
+    <div class="annot" style="color:var(--stone);line-height:2">samnharv.co.uk</div>
+  </div>
+  <div class="annot" style="position:absolute;left:6mm;bottom:6mm;color:var(--bronze)">Benchmark · measured properly</div>
+</div>
+
+<!-- C · back (shared) -->
+<div class="card ink">
+  <div style="position:absolute;left:0;right:0;top:24mm;height:.45mm;background:linear-gradient(90deg,#a98a52 0%,#c4a676 30%,#ead8ab 50%,#c4a676 70%,#a98a52 100%);opacity:.9"></div>
+  <div style="position:absolute;left:6mm;right:6mm;top:13mm;display:flex;justify-content:space-between;align-items:flex-end">
+    <div class="display" style="font-size:17pt;line-height:1;letter-spacing:.01em">SAM <span class="it gold">n</span> HARV</div>
+    <div class="annot" style="color:rgba(242,239,232,.55)">51.346° N · 2.977° W</div>
+  </div>
+  <div style="position:absolute;left:6mm;top:27mm">
+    <div class="annot" style="color:rgba(242,239,232,.62);line-height:2">Property investment · UK · Dubai · Thailand</div>
+    <div class="annot" style="color:rgba(242,239,232,.5);line-height:2">www.samnharv.co.uk</div>
+  </div>
+  <div class="annot" style="position:absolute;left:6mm;bottom:6mm;color:rgba(242,239,232,.45)">Character over commission</div>
+</div>
+
+<!-- C · Harvey · front -->
+<div class="card plaster">
+  <div style="position:absolute;left:0;right:0;top:24mm;height:.45mm;background:linear-gradient(90deg,#a98a52 0%,#c4a676 30%,#ead8ab 50%,#c4a676 70%,#a98a52 100%)"></div>
+  <svg style="position:absolute;left:9mm;top:24.2mm;width:16mm;height:16mm;overflow:visible" viewBox="0 0 32 32" fill="none" stroke="#1a1a1a" stroke-width="1.7" stroke-linecap="square"><line x1="16" y1="0" x2="16" y2="10"/><path d="M16 10 L5 26 M16 10 L27 26 M16 10 L16 26"/></svg>
+  <div style="position:absolute;right:6mm;top:13.5mm;text-align:right">
+    <div class="display" style="font-size:16pt;line-height:1">Harvey Grant</div>
+    <div class="annot" style="margin-top:1.8mm;color:var(--bronze)">Co-founder · Sam n Harv</div>
+  </div>
+  <div style="position:absolute;right:6mm;top:26.4mm;text-align:right">
+    <div class="annot" style="color:var(--stone);line-height:2">07753 600183</div>
+    <div class="annot" style="color:var(--stone);line-height:2">contact@samnharv.com</div>
+    <div class="annot" style="color:var(--stone);line-height:2">samnharv.co.uk</div>
+  </div>
+  <div class="annot" style="position:absolute;left:6mm;bottom:6mm;color:var(--bronze)">Benchmark · measured properly</div>
+</div>
 
 </body></html>
