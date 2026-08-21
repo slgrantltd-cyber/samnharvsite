@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import type React from "react";
 import Link from "next/link";
 import { Rise, Line, Lift } from "@/components/reveal";
 import { POWER_TEAM } from "@/lib/power-team";
@@ -72,69 +73,61 @@ const CHAIN = [
   },
 ];
 
-/* Partner brand plates — real logos and palettes pulled from each partner's
-   own site, rendered with the restraint of ours: deep grounds, small marks,
-   one fine accent. Lendhub: #14062c / #813dff. Base: black / #fdd300. */
+/* Partner brand plates — one size, one layout. Every plate is the same
+   height; every mark sits in the same 40px row, left-aligned; one line of
+   strapline beneath. Partners in their own colours, us in ink and gold. */
+const PLATE = "relative flex h-32 flex-col justify-center overflow-hidden px-6 md:px-7";
+const ROW = "relative flex h-10 items-center";
+const Glow = ({ style }: { style: React.CSSProperties }) => (
+  <div className="pointer-events-none absolute h-56 w-56 rounded-full" style={style} aria-hidden="true" />
+);
 const PLATES: Record<string, ReactNode> = {
   lendhub: (
-    <div
-      className="relative flex min-h-[7rem] flex-col justify-center overflow-hidden px-6 py-6 md:px-7"
-      style={{ background: "linear-gradient(120deg, #100522 0%, #14062c 55%, #1d0b3d 100%)" }}
-    >
-      <div
-        className="pointer-events-none absolute -right-14 -top-24 h-64 w-64 rounded-full"
-        style={{ background: "radial-gradient(closest-side, rgba(129,61,255,0.32), transparent)" }}
-        aria-hidden="true"
-      />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/partners/lendhub-white.svg" alt="Lendhub" className="relative h-7 w-auto self-start" />
-      <p className="annot relative mt-3 text-white/55">Flexible · Trusted · Innovative</p>
-    </div>
-  ),
-  base: (
-    <div
-      className="relative flex min-h-[7rem] flex-col justify-center overflow-hidden px-6 py-6 md:px-7"
-      style={{ background: "linear-gradient(120deg, #0c0b0a 0%, #131211 60%, #1b1917 100%)" }}
-    >
-      <span className="absolute inset-x-0 top-0 h-px" style={{ background: "#fdd300", opacity: 0.75 }} aria-hidden="true" />
-      <div className="relative flex items-center gap-4">
+    <div className={PLATE} style={{ background: "linear-gradient(120deg, #100522 0%, #14062c 55%, #1d0b3d 100%)" }}>
+      <Glow style={{ right: -56, top: -80, background: "radial-gradient(closest-side, rgba(129,61,255,0.32), transparent)" }} />
+      <div className={ROW}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/partners/base-mark-light.png" alt="" className="h-9 w-auto" />
-        <div>
-          <p className="font-sans text-[1.05rem] font-semibold tracking-[0.14em] text-[#f5f1ea]">BASE FURNISHINGS</p>
-          <p className="annot mt-1 text-[#f5f1ea]/50">Complete furnishing solutions · <span style={{ color: "#fdd300", opacity: 0.85 }}>since 2010</span></p>
-        </div>
+        <img src="/partners/lendhub-white.svg" alt="Lendhub" className="h-7 w-auto" />
       </div>
+      <p className="annot relative mt-2 text-white/55">Flexible · Trusted · Innovative</p>
     </div>
   ),
   watts: (
-    <div
-      className="relative flex min-h-[7rem] flex-col justify-center overflow-hidden px-6 py-6 md:px-7"
-      style={{ background: "linear-gradient(120deg, #ffffff 0%, #f4f7fb 60%, #eaf1f8 100%)" }}
-    >
+    <div className={PLATE} style={{ background: "linear-gradient(120deg, #ffffff 0%, #f4f7fb 60%, #eaf1f8 100%)" }}>
       <span className="absolute inset-x-0 top-0 h-px" style={{ background: "linear-gradient(90deg, #003d73, #00adef)" }} aria-hidden="true" />
-      <div
-        className="pointer-events-none absolute -right-16 -bottom-20 h-56 w-56 rounded-full"
-        style={{ background: "radial-gradient(closest-side, rgba(0,173,239,0.16), transparent)" }}
-        aria-hidden="true"
-      />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/partners/watts-commercial.svg" alt="Watts Commercial Finance" className="relative h-14 w-auto self-start" />
+      <Glow style={{ right: -64, bottom: -80, background: "radial-gradient(closest-side, rgba(0,173,239,0.16), transparent)" }} />
+      <div className={ROW}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/partners/watts-commercial.svg" alt="Watts Commercial Finance" className="h-10 w-auto" />
+      </div>
       <p className="annot relative mt-2 text-[#253e6e]/70">Independent advice on commercial finance</p>
     </div>
   ),
+  base: (
+    <div className={PLATE} style={{ background: "linear-gradient(120deg, #0c0b0a 0%, #131211 60%, #1b1917 100%)" }}>
+      <span className="absolute inset-x-0 top-0 h-px" style={{ background: "#fdd300", opacity: 0.75 }} aria-hidden="true" />
+      <div className={`${ROW} gap-3`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/partners/base-mark-light.png" alt="" className="h-8 w-auto" />
+        <p className="font-sans text-[0.95rem] font-semibold tracking-[0.14em] text-[#f5f1ea]">BASE FURNISHINGS</p>
+      </div>
+      <p className="annot relative mt-2 text-[#f5f1ea]/50">Complete furnishing solutions · <span style={{ color: "#fdd300", opacity: 0.85 }}>since 2010</span></p>
+    </div>
+  ),
+  summit: (
+    <div className={PLATE} style={{ background: "linear-gradient(120deg, #5f5946 0%, #736c57 60%, #847c66 100%)" }}>
+      <Glow style={{ left: -56, bottom: -96, background: "radial-gradient(closest-side, rgba(245,245,245,0.14), transparent)" }} />
+      <div className={ROW}>
+        <p className="display text-[1.4rem] tracking-[0.08em] text-[#f5f5f5]">SUMMIT</p>
+      </div>
+      <p className="annot relative mt-2 text-[#f5f5f5]/70">Property Group · Maria Di Fonzo</p>
+    </div>
+  ),
   samnharv: (
-    <div
-      className="relative flex min-h-[7rem] flex-col justify-center overflow-hidden px-6 py-6 md:px-7"
-      style={{ background: "linear-gradient(120deg, #141414 0%, #1a1a1a 60%, #232120 100%)" }}
-    >
-      <div
-        className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full"
-        style={{ background: "radial-gradient(closest-side, rgba(201,171,124,0.22), transparent)" }}
-        aria-hidden="true"
-      />
-      <div className="relative flex items-center gap-4">
-        <BenchmarkMark className="h-9 w-9 text-[var(--plaster)]" />
+    <div className={PLATE} style={{ background: "linear-gradient(120deg, #141414 0%, #1a1a1a 60%, #232120 100%)" }}>
+      <Glow style={{ right: -64, top: -80, background: "radial-gradient(closest-side, rgba(201,171,124,0.22), transparent)" }} />
+      <div className={`${ROW} gap-3`}>
+        <BenchmarkMark className="h-8 w-8 text-[var(--plaster)]" />
         <p className="display text-xl tracking-tight text-[var(--plaster)]">
           SAM <span className="display-it lowercase gold-text">n</span> HARV
         </p>
@@ -142,24 +135,12 @@ const PLATES: Record<string, ReactNode> = {
       <p className="annot relative mt-2 text-[var(--plaster)]/55">Character over commission</p>
     </div>
   ),
-  summit: (
-    <div
-      className="relative flex min-h-[7rem] flex-col justify-center overflow-hidden px-6 py-6 md:px-7"
-      style={{ background: "linear-gradient(120deg, #5f5946 0%, #736c57 60%, #847c66 100%)" }}
-    >
-      <div
-        className="pointer-events-none absolute -left-14 -bottom-24 h-56 w-56 rounded-full"
-        style={{ background: "radial-gradient(closest-side, rgba(245,245,245,0.14), transparent)" }}
-        aria-hidden="true"
-      />
-      <p className="display relative text-[1.35rem] tracking-[0.06em] text-[#f5f5f5]">SUMMIT</p>
-      <p className="annot relative mt-1 text-[#f5f5f5]/70">Property Group · Maria Di Fonzo</p>
-    </div>
-  ),
   quiet: (
-    <div className="relative flex min-h-[7rem] flex-col justify-center px-6 py-6 md:px-7" style={{ background: "var(--limestone)" }}>
-      <span className="block h-px w-10" style={{ background: "linear-gradient(90deg, #a98a52, #ead8ab, #a98a52)" }} aria-hidden="true" />
-      <p className="annot mt-3 muted">Introduced per deal</p>
+    <div className={PLATE} style={{ background: "var(--limestone)" }}>
+      <div className={ROW}>
+        <span className="block h-px w-10" style={{ background: "linear-gradient(90deg, #a98a52, #ead8ab, #a98a52)" }} aria-hidden="true" />
+      </div>
+      <p className="annot relative mt-2 muted">Introduced per deal</p>
     </div>
   ),
 };
@@ -212,8 +193,14 @@ export default function PowerTeamPage() {
                       {c.body}
                     </p>
                     {c.intro && (
-                      <p className="annot mt-4 text-bronze">
-                        Say Samuel Grant sent you — they&rsquo;ve agreed to look after you.
+                      <p className="annot mt-4 leading-relaxed text-bronze">
+                        We introduce you personally — mention Samuel Grant and they&rsquo;ll look after you.{" "}
+                        <a
+                          href={`mailto:contact@samnharv.com?subject=${encodeURIComponent(`Introduction to ${c.who}`)}`}
+                          className="text-ink hover:text-bronze"
+                        >
+                          Request an introduction →
+                        </a>
                       </p>
                     )}
                     {c.cta && (
