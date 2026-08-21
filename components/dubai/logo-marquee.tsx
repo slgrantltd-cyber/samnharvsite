@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Developer logos on a slow, seamless belt. Pure CSS motion (one transform
  * animation on a duplicated track) — no JS, pauses under the hand, logos
@@ -17,7 +19,22 @@ const LOGOS = [
 export default function LogoMarquee({ fade = "#2b2823" }: { fade?: string }) {
   const track = [...LOGOS, ...LOGOS];
   const Logo = ({ l, i }: { l: (typeof LOGOS)[number]; i: number }) => (
-    <a href={l.href} {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} aria-label={`${l.alt} — see their units`} className="block">
+    <a
+      href={l.href}
+      {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      aria-label={`${l.alt} — see their units`}
+      className="block"
+      onClick={(e) => {
+        if (l.external) return;
+        const id = l.href.split("#")[1];
+        const el = id && document.getElementById(id);
+        if (el && window.location.pathname === "/dubai") {
+          e.preventDefault();
+          const y = el.getBoundingClientRect().top + window.scrollY - 110;
+          if (window.__lenis) window.__lenis.scrollTo(y, { duration: 1.1 }); else window.scrollTo({ top: y, behavior: "smooth" });
+        }
+      }}
+    >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={l.src} alt={i < LOGOS.length ? l.alt : ""} className={`${l.h} w-auto opacity-70 transition duration-500 hover:opacity-100 hover:[filter:drop-shadow(0_0_10px_rgba(201,171,124,.55))]`} loading="lazy" />
     </a>
