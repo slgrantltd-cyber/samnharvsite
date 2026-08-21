@@ -83,7 +83,7 @@ export default function UnitsGallery() {
 function Section({ title, defaultOpen = true, children }: { title: string; defaultOpen?: boolean; children: React.ReactNode }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="mt-6 border-t hairline pt-5 md:mt-8 md:pt-8">
+    <div className="mt-8 border-t hairline pt-6 md:mt-12 md:pt-10">
       <button type="button" onClick={() => setOpen((v) => !v)} className="flex w-full items-center justify-between text-left md:pointer-events-none" aria-expanded={open}>
         <span className="annot text-bronze">{title}</span>
         <span className={`annot text-bronze transition-transform md:hidden ${open ? "rotate-45" : ""}`} aria-hidden="true">+</span>
@@ -123,10 +123,10 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
   return (
     <div className="fixed inset-0 z-[60] flex items-end justify-center md:items-center md:p-8" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
       <button type="button" aria-label="Close" onClick={onClose} className="absolute inset-0 bg-[#0d0a08]/70 backdrop-blur-[6px]" />
-      <div className="sheet-float relative flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-t-3xl bg-[var(--plaster)] md:max-h-[88vh] md:rounded-3xl" data-lenis-prevent>
+      <div className="sheet-float relative max-h-[94vh] w-full max-w-5xl overflow-y-auto overscroll-contain rounded-t-3xl bg-[var(--plaster)] [scrollbar-width:thin] md:max-h-[90vh] md:rounded-3xl" data-lenis-prevent>
         <span className="absolute left-1/2 top-2 z-10 h-1 w-10 -translate-x-1/2 rounded-full bg-[var(--plaster)]/70 md:hidden" aria-hidden="true" />
         {/* gallery */}
-        <div className="relative w-full shrink-0 overflow-hidden bg-[#0d0a08]" style={{ height: "min(54vh, 66.67vw)" }}>
+        <div className="relative w-full overflow-hidden bg-[#0d0a08]" style={{ height: "min(60vh, 66.67vw)" }}>
           {/* blurred echo of the render behind, so the full image shows uncropped */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img key={`bg-${gallery[idx]}`} src={gallery[idx]} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-60 blur-2xl" />
@@ -134,7 +134,7 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
           <img key={gallery[idx]} src={gallery[idx]} alt={`${unit.name} — render ${idx + 1}`} className="relative h-full w-full object-contain" />
           <button type="button" onClick={onClose} className="annot absolute right-4 top-4 rounded-full bg-black/45 px-3 py-1.5 text-[var(--plaster)] backdrop-blur-[2px]">Close</button>
         </div>
-        <div className="flex items-end justify-between gap-4 bg-[#0d0a08] px-5 pb-3 pt-4 text-[var(--plaster)] md:px-8">
+        <div className="flex items-end justify-between gap-4 bg-[#0d0a08] px-6 pb-4 pt-5 text-[var(--plaster)] md:px-12 md:pb-6 md:pt-7">
           <div>
             <p className="annot text-[var(--bronze-bright)]">{unit.brand ? `${unit.brand} · ${unit.developer}` : unit.developer} · {unit.area}, {unit.city}</p>
             <h3 id="sheet-title" className="display mt-1 text-2xl md:text-4xl">{unit.name}</h3>
@@ -149,7 +149,7 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
           )}
         </div>
         {gallery.length > 1 && (
-          <div className="flex items-center gap-2 overflow-x-auto bg-[#0d0a08] px-4 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex items-center gap-2 overflow-x-auto bg-[#0d0a08] px-6 pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:px-12">
             {gallery.map((g, i) => (
               <button key={g} type="button" onClick={() => setIdx(i)} className={`aspect-[3/2] h-14 shrink-0 overflow-hidden rounded-md border transition-opacity ${i === idx ? "border-[var(--bronze-bright)] opacity-100" : "border-[var(--plaster)]/15 opacity-55 hover:opacity-90"}`} aria-label={`Image ${i + 1}`}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -159,9 +159,9 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
           </div>
         )}
 
-        <div className="overflow-y-auto p-5 pb-8 md:p-10">
+        <div className="p-6 pb-10 md:p-12 md:pb-14">
           <p className="max-w-2xl text-[1.05rem] leading-relaxed md:text-lg">{unit.line}</p>
-          <dl className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 text-sm md:grid-cols-4">
+          <dl className="mt-7 grid grid-cols-2 gap-x-8 gap-y-5 text-sm md:mt-9 md:grid-cols-4">
             <div><dt className="annot muted">From</dt><dd className="mt-0.5 font-medium">{unit.priceFrom}{unit.priceNote && <span className="muted"> · {unit.priceNote}</span>}</dd></div>
             <div><dt className="annot muted">Handover</dt><dd className="mt-0.5 font-medium">{unit.handover}</dd></div>
             <div><dt className="annot muted">Payment plan</dt><dd className="mt-0.5">{unit.plan}</dd></div>
@@ -172,7 +172,7 @@ function UnitSheet({ unit, initialType, initialMode, onClose }: { unit: DubaiUni
           <Section title="Units & prices">
             <ul className="mt-3 border-t hairline">
               {unit.mix.map((m: MixRow) => (
-                <li key={m.type} className="grid grid-cols-[1fr_auto] items-center gap-3 border-b hairline py-3.5 md:grid-cols-[10rem_1fr_1fr_auto]">
+                <li key={m.type} className="grid grid-cols-[1fr_auto] items-center gap-3 border-b hairline py-4 md:grid-cols-[11rem_1fr_1fr_auto] md:py-5">
                   <span className="display text-lg md:text-xl">{m.type}</span>
                   <span className="hidden text-sm md:block">{m.from || <span className="muted">Price on enquiry</span>}</span>
                   <span className="hidden text-sm muted md:block">{m.size || m.note || ""}</span>
