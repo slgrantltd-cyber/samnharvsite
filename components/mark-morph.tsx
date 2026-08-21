@@ -121,8 +121,16 @@ export default function MarkMorph({ className }: { className?: string }) {
           </linearGradient>
         </defs>
         <path ref={ground} stroke="url(#sh-gold-morph)" strokeWidth="2.1" d="M4 7 L28 7" />
-        {/* the twinkle: a short bright glint that travels the line */}
-        <path ref={glint} className="mark-glint" stroke="#fff8e1" strokeWidth="1" strokeLinecap="round" d="M4 7 L28 7" pathLength="100" />
+        {/* the glisten: a soft band of light sweeping along the gold */}
+        <defs>
+          <linearGradient id="sh-glisten" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="16" y2="0">
+            <stop offset="0" stopColor="#fff8e1" stopOpacity="0" />
+            <stop offset="0.5" stopColor="#fffaf0" stopOpacity="0.95" />
+            <stop offset="1" stopColor="#fff8e1" stopOpacity="0" />
+            <animateTransform attributeName="gradientTransform" type="translate" from="-14 0" to="34 0" dur="4.6s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1" keyTimes="0;1" />
+          </linearGradient>
+        </defs>
+        <path ref={glint} className="mark-glint" stroke="url(#sh-glisten)" strokeWidth="2.1" d="M4 7 L28 7" />
         <path ref={wl} d="M16 7 L16 14" />
         <path ref={wr} d="M16 7 L16 14" />
         <path ref={arrow} d="M16 14 L7 27 M16 14 L25 27 M16 14 L16 27" />

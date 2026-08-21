@@ -525,10 +525,9 @@ button,
 .btn-gold.on-light { color: #8a6a35; background: transparent; }
 .btn-gold.on-light:hover { color: #1a1a1a; background: #ead8ab; }
 
-/* hero mark — a glint travelling the gold line, with a soft twinkle */
-@keyframes mark-glint { 0% { stroke-dashoffset: 100; opacity: 0 } 8% { opacity: .95 } 40% { opacity: .9 } 60% { stroke-dashoffset: -8; opacity: 0 } 100% { stroke-dashoffset: -8; opacity: 0 } }
-.mark-glint { stroke-dasharray: 6 100; stroke-dashoffset: 100; animation: mark-glint 5.5s cubic-bezier(.4,0,.2,1) infinite; filter: drop-shadow(0 0 2px rgba(255,240,200,.9)); }
-@media (prefers-reduced-motion: reduce) { .mark-glint { animation: none; opacity: 0 } }
+/* hero mark — the glisten rides the gradient above; CSS only softens it */
+.mark-glint { mix-blend-mode: screen; opacity: .85; filter: drop-shadow(0 0 1.5px rgba(255,245,215,.7)); }
+@media (prefers-reduced-motion: reduce) { .mark-glint { display: none } }
 
 /* the unit sheet — floats in, gold hairline, deep soft shadow */
 @keyframes sheet-in { from { opacity: 0; transform: translateY(28px) scale(.985) } to { opacity: 1; transform: none } }
