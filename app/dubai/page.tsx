@@ -15,7 +15,7 @@ import { INSIGHTS } from "@/lib/insights";
 export const metadata: Metadata = {
   title: "Dubai Property Investment for UK Investors — Developer-Direct",
   description:
-    "Developer-direct Dubai residences for UK investors — launch allocations from Binghatti, Danube, Sobha, Emaar, Damac and more, on developer payment plans, underwritten by a UK desk. No fee to you: the developer pays our commission.",
+    "Developer-direct UAE for UK investors — Bugatti, Jacob & Co and Mercedes-Benz residences with Binghatti, Aldar in Abu Dhabi, and launches across Damac, Sobha, Emaar, Danube and Ellington — at developer price, on developer payment plans. No fee to you: the developer pays our commission.",
   alternates: { canonical: "/dubai" },
   openGraph: {
     title: "Sam n Harv — Dubai",
@@ -68,10 +68,11 @@ export default function DubaiPage() {
             </Line>
           </Rise>
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-[var(--plaster)]/85 md:text-xl">
-            Launch allocations from Binghatti, Danube, Sobha, Emaar, Damac and
-            more — at developer price, on developer payment plans. We pick the
-            unit, run the numbers against the transaction record, and tell you
-            when not to buy.
+            Bugatti, Jacob &amp; Co and Mercedes-Benz residences with Binghatti.
+            Aldar on Saadiyat and Yas. Launches across Damac, Sobha, Emaar,
+            Danube and Ellington — all at developer price, on developer
+            payment plans. We pick the unit, run the numbers against the
+            transaction record, and tell you when not to buy.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
             <a href="https://wa.me/447444551241?text=Dubai%20%E2%80%94%20I%27d%20like%20to%20talk" className="btn-gold">
