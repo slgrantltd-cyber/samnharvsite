@@ -78,7 +78,7 @@ export default function Home() {
               ["Six figures", "Revenue a client credits to our deals", "In his words — below"],
               ["★★★★★", "On Google", "Reviews we can't edit"],
               ["3 markets", "UK · Dubai · Thailand", "One desk, three currencies of return"],
-              ["From £100k", "Entry capital", "Cash-flow, growth, or both"],
+              ["£100k +", "Entry capital, no ceiling", "Single units to whole assets"],
             ].map(([v, l, s]) => (
               <Lift key={l} className="bg-[var(--plaster)] p-6 md:p-8">
                 <p className="display text-4xl md:text-5xl">{v}</p>

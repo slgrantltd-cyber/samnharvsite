@@ -73,7 +73,8 @@ export default function AccessForm({ mandate = "" }: { mandate?: string }) {
           <option>£250k – £500k</option>
           <option>£500k – £1m</option>
           <option>£1m – £3m</option>
-          <option>£3m+</option>
+          <option>£3m – £10m</option>
+          <option>£10m+</option>
         </select>
       </label>
       <label className="block">
