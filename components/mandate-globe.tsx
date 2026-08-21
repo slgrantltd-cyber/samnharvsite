@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
@@ -113,6 +113,8 @@ export default function MandateGlobe() {
   const canvas = useRef<HTMLCanvasElement>(null);
   const pinRefs = useRef<(HTMLDivElement | null)[]>([]);
   const captionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const goRef = useRef<(i: number) => void>(() => {});
+  const [activeIdx, setActiveIdx] = useState(0);
   const dots = useMemo(() => buildDots(typeof window !== "undefined" && window.innerWidth < 768 ? 2.1 : 1.5), []);
   const initial = useMemo(() => ({ lam: MANDATES[0].lon, phi: MANDATES[0].lat - 12 }), []);
 
@@ -237,31 +239,49 @@ export default function MandateGlobe() {
     if (reduced) return () => { ro.disconnect(); io.disconnect(); window.removeEventListener("scroll", onSheen); };
 
     gsap.set(captionRefs.current.slice(1), { autoAlpha: 0, y: 24 });
-    const tl = gsap.timeline({
-      scrollTrigger: { trigger: sec, start: "top top", end: "+=260%", pin: true, scrub: 1.1 },
-      defaults: { ease: "power1.inOut" },
+    const mm = gsap.matchMedia();
+    let tl: gsap.core.Timeline | null = null;
+    mm.add("(min-width: 768px)", () => {
+      tl = gsap.timeline({
+        scrollTrigger: { trigger: sec, start: "top top", end: "+=260%", pin: true, scrub: 1.1 },
+        defaults: { ease: "power1.inOut" },
+      });
+      tl.to({}, { duration: 0.6 })
+        .to(state, { lam: MANDATES[1].lon, phi: MANDATES[1].lat - 12, duration: 1.2, onUpdate: request, onStart: realign, onReverseComplete: realign })
+        .to(captionRefs.current[0], { autoAlpha: 0, y: -24, duration: 0.4, ease: "none" }, "<0.2")
+        .to(captionRefs.current[1], { autoAlpha: 1, y: 0, duration: 0.4, ease: "none" }, "<0.25")
+        .to({}, { duration: 0.5 })
+        .to(state, { lam: MANDATES[2].lon, phi: MANDATES[2].lat - 6, duration: 1.2, onUpdate: request, onStart: realign, onReverseComplete: realign })
+        .to(captionRefs.current[1], { autoAlpha: 0, y: -24, duration: 0.4, ease: "none" }, "<0.2")
+        .to(captionRefs.current[2], { autoAlpha: 1, y: 0, duration: 0.4, ease: "none" }, "<0.25")
+        .to({}, { duration: 0.6 });
+      return () => { tl?.scrollTrigger?.kill(); tl?.kill(); tl = null; };
     });
-    tl.to({}, { duration: 0.6 })
-      .to(state, { lam: MANDATES[1].lon, phi: MANDATES[1].lat - 12, duration: 1.2, onUpdate: request, onStart: realign, onReverseComplete: realign })
-      .to(captionRefs.current[0], { autoAlpha: 0, y: -24, duration: 0.4, ease: "none" }, "<0.2")
-      .to(captionRefs.current[1], { autoAlpha: 1, y: 0, duration: 0.4, ease: "none" }, "<0.25")
-      .to({}, { duration: 0.5 })
-      .to(state, { lam: MANDATES[2].lon, phi: MANDATES[2].lat - 6, duration: 1.2, onUpdate: request, onStart: realign, onReverseComplete: realign })
-      .to(captionRefs.current[1], { autoAlpha: 0, y: -24, duration: 0.4, ease: "none" }, "<0.2")
-      .to(captionRefs.current[2], { autoAlpha: 1, y: 0, duration: 0.4, ease: "none" }, "<0.25")
-      .to({}, { duration: 0.6 });
+    // phones: no pin, no scrub — the tabs turn the globe
+    const go = (i: number) => {
+      const m = MANDATES[i];
+      gsap.to(state, { lam: m.lon, phi: m.lat - (i === 2 ? 6 : 12), duration: 1.4, ease: "power2.inOut", onUpdate: request });
+      captionRefs.current.forEach((el, j) => el && gsap.to(el, { autoAlpha: j === i ? 1 : 0, y: j === i ? 0 : -12, duration: 0.4 }));
+      setActiveIdx(i);
+    };
+    goRef.current = go;
 
     return () => {
       ro.disconnect(); io.disconnect(); window.removeEventListener("scroll", onSheen);
       cv.removeEventListener("pointerdown", pd); cv.removeEventListener("pointermove", pm);
       cv.removeEventListener("pointerup", pu); cv.removeEventListener("pointercancel", pu);
-      tl.scrollTrigger?.kill(); tl.kill();
+      mm.revert();
     };
   }, [initial, dots]);
 
   return (
-    <section ref={section} className="relative h-[100svh] overflow-hidden">
-      <div className="mx-auto flex h-full max-w-6xl flex-col items-center px-5 pb-14 pt-20 text-center md:px-10 md:pt-20">
+    <section ref={section} className="relative overflow-hidden md:h-[100svh]">
+      <div className="mx-auto flex h-full max-w-6xl flex-col items-center px-5 pb-10 pt-16 text-center md:px-10 md:pb-14 md:pt-20">
+        <div className="mb-5 flex gap-2 md:hidden" role="tablist" aria-label="Territories">
+          {MANDATES.map((m, i) => (
+            <button key={m.label} type="button" role="tab" aria-selected={activeIdx === i} onClick={() => goRef.current(i)} className={`annot rounded-full border px-3 py-1.5 transition-colors ${activeIdx === i ? "border-ink bg-ink text-[var(--plaster)]" : "border-[var(--line)] text-stone"}`}>{m.label.split(" ")[0] === "United" ? "UK" : m.label}</button>
+          ))}
+        </div>
         {/* caption — stacked captions crossfade in a fixed-height block above the globe */}
         <div className="relative z-10 h-44 w-full max-w-2xl md:h-40">
           {MANDATES.map((m, i) => (
@@ -281,7 +301,7 @@ export default function MandateGlobe() {
         </div>
 
         <div className="relative mt-4 flex min-h-0 w-full flex-1 justify-center md:mt-6">
-          <div className="relative aspect-square h-full max-h-[640px] max-w-full">
+          <div className="relative aspect-square w-[78vw] max-w-full md:h-full md:w-auto md:max-h-[640px]">
             <canvas ref={canvas} className="absolute inset-0 h-full w-full cursor-grab touch-pan-y active:cursor-grabbing" aria-label="A globe turning between the United Kingdom, Dubai and Thailand" />
             {MANDATES.map((m, i) => (
               <div key={m.label} ref={(el) => { pinRefs.current[i] = el; }} className="absolute left-0 top-0 will-change-transform" style={{ opacity: 0 }}>
@@ -296,7 +316,7 @@ export default function MandateGlobe() {
           </div>
         </div>
       </div>
-      <p className="annot muted absolute bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap">Scroll to turn · drag to explore</p>
+      <p className="annot muted mt-4 text-center md:absolute md:bottom-6 md:left-1/2 md:mt-0 md:-translate-x-1/2 md:whitespace-nowrap"><span className="md:hidden">Tap a territory · drag to explore</span><span className="hidden md:inline">Scroll to turn · drag to explore</span></p>
     </section>
   );
 }

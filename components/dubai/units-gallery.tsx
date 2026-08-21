@@ -31,7 +31,7 @@ export default function UnitsGallery() {
         <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#c9ab7c]" aria-hidden="true" /> Exclusive payment plans available
       </p>
       <p className="muted mb-2 max-w-2xl text-sm leading-relaxed">{PLANS_NOTE}</p>
-      {COLLECTIONS.map((c) => {
+      {(() => { const seen = new Set<string>(); return COLLECTIONS.map((c) => {
         const items = UNITS.filter((u) => u.collection === c.key);
         return (
           <section key={c.key} id={`collection-${c.key}`} className="mt-14 first:mt-0">
@@ -40,8 +40,8 @@ export default function UnitsGallery() {
             <p className="muted mt-2 max-w-2xl text-[0.9375rem] leading-relaxed">{c.body}</p>
             {/* phone: swipe rail · desktop: grid */}
             <div className={`-mx-5 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:snap-none md:gap-px md:overflow-visible md:border md:bg-[var(--line)] md:hairline md:px-0 md:pb-0 md:grid-cols-2 ${items.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}>
-              {items.map((u) => (
-                <article key={u.slug} className="group glow-gold z-0 flex w-[84vw] max-w-[22rem] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border hairline bg-[var(--plaster)] hover:z-10 md:w-auto md:max-w-none md:rounded-none md:border-0">
+              {items.map((u) => { const dev = u.developer.toLowerCase(); const anchor = seen.has(dev) ? undefined : (seen.add(dev), `dev-${dev}`); return (
+                <article key={u.slug} id={anchor} className="scroll-mt-28 group glow-gold z-0 flex w-[84vw] max-w-[22rem] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border hairline bg-[var(--plaster)] hover:z-10 md:w-auto md:max-w-none md:rounded-none md:border-0">
                   <button type="button" onClick={() => setActive({ unit: u, mode: "view" })} className="relative block aspect-[3/2] w-full overflow-hidden text-left" aria-label={`View ${u.name}`}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={u.image} alt={`${u.name} — developer render`} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]" />
@@ -66,11 +66,11 @@ export default function UnitsGallery() {
                     </div>
                   </div>
                 </article>
-              ))}
+              ); })}
             </div>
           </section>
         );
-      })}
+      }); })()}
       <p className="annot mt-8 max-w-3xl leading-relaxed muted">
         Prices, unit mix, sizes, payment plans and completion dates as published by each developer on 21 Aug 2026; sterling at the developer&rsquo;s own conversion where given. Launch pricing moves weekly — every enquiry gets the current sheet. Renders are the developers&rsquo;.
       </p>
