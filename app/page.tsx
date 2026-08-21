@@ -79,7 +79,7 @@ export default function Home() {
               ["£100k +", "Entry capital, no ceiling", "Single units to whole assets"],
             ].map(([v, l, s]) => (
               <Lift key={l} className="bg-[var(--plaster)] p-6 md:p-8">
-                <p className="display text-4xl md:text-5xl">{v}</p>
+                <p className={`display text-4xl md:text-5xl ${v.startsWith("★") ? "gold-text" : ""}`}>{v}</p>
                 <p className="annot mt-3 text-bronze">{l}</p>
                 <p className="muted mt-1 text-sm">{s}</p>
               </Lift>
@@ -146,9 +146,9 @@ export default function Home() {
               <Link
                 key={d.href}
                 href={d.href}
-                className="group bg-[var(--plaster)] p-6 transition-colors duration-300 hover:bg-[var(--limestone)] md:p-8"
+                className="group glow-gold z-0 bg-[var(--plaster)] p-6 hover:z-10 md:p-8"
               >
-                <span className="annot muted group-hover:text-[var(--bronze)]">
+                <span className="annot muted transition-colors group-hover:text-[var(--bronze)]">
                   {d.who}
                 </span>
                 <span className="mt-3 block text-[0.9375rem] leading-relaxed text-ink">
@@ -366,9 +366,9 @@ export default function Home() {
             <a
               href="https://wa.me/447444551241"
               rel="noopener"
-              className="group bg-plaster p-7 transition-colors hover:bg-smoked hover:text-plaster"
+              className="group glow-gold z-0 bg-plaster p-7 hover:z-10"
             >
-              <p className="annot muted group-hover:text-bronze-bright">Direct</p>
+              <p className="annot muted transition-colors group-hover:text-bronze">Direct</p>
               <p className="display mt-3 text-2xl">Speak to Samuel</p>
               <p className="muted mt-2 text-sm group-hover:text-stone-dark">
                 07444 551241 · WhatsApp or call
@@ -376,9 +376,9 @@ export default function Home() {
             </a>
             <Link
               href="/opportunities#access"
-              className="group bg-plaster p-7 transition-colors hover:bg-smoked hover:text-plaster"
+              className="group glow-gold z-0 bg-plaster p-7 hover:z-10"
             >
-              <p className="annot muted group-hover:text-bronze-bright">Opportunities</p>
+              <p className="annot muted transition-colors group-hover:text-bronze">Opportunities</p>
               <p className="display mt-3 text-2xl">Request access</p>
               <p className="muted mt-2 text-sm group-hover:text-stone-dark">
                 Identity and proof of funds, then the particulars
@@ -386,9 +386,9 @@ export default function Home() {
             </Link>
             <a
               href="mailto:contact@samnharv.com"
-              className="group bg-plaster p-7 transition-colors hover:bg-smoked hover:text-plaster"
+              className="group glow-gold z-0 bg-plaster p-7 hover:z-10"
             >
-              <p className="annot muted group-hover:text-bronze-bright">In writing</p>
+              <p className="annot muted transition-colors group-hover:text-bronze">In writing</p>
               <p className="display mt-3 text-2xl">Email the office</p>
               <p className="muted mt-2 text-sm group-hover:text-stone-dark">
                 contact@samnharv.com

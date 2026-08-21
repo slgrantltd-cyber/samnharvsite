@@ -48,7 +48,7 @@ export default function SiteHeader() {
               key={item.href}
               href={item.href}
               aria-current={pathname === item.href ? "page" : undefined}
-              className={`font-sans text-[0.9375rem] tracking-[0.01em] transition-colors hover:text-ink ${
+              className={`font-sans text-[0.9375rem] tracking-[0.01em] transition-colors hover:text-bronze ${
                 pathname === item.href ? "text-ink" : "text-stone"
               }`}
             >

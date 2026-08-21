@@ -479,3 +479,20 @@ button,
 @keyframes globe-pulse { 0% { transform: translate(-50%, -50%) scale(.4); opacity: .9 } 100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0 } }
 .globe-pulse { animation: globe-pulse 2.6s ease-out infinite; }
 @media (prefers-reduced-motion: reduce) { .globe-pulse { animation: none; opacity: .35 } }
+
+/* a card that warms to gold under the hand — for the doors */
+.glow-gold {
+  position: relative;
+  transition: box-shadow .5s cubic-bezier(.22,1,.36,1), background-color .5s cubic-bezier(.22,1,.36,1), transform .5s cubic-bezier(.22,1,.36,1);
+}
+.glow-gold::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+  background: radial-gradient(120% 80% at 50% 0%, rgba(243,227,180,.28), rgba(201,171,124,.06) 55%, transparent 75%);
+  transition: opacity .5s cubic-bezier(.22,1,.36,1);
+}
+.glow-gold:hover, .glow-gold:focus-visible {
+  box-shadow: 0 0 0 1px rgba(201,171,124,.55), 0 18px 48px -18px rgba(169,138,82,.45), inset 0 0 0 1px rgba(243,227,180,.25);
+  transform: translateY(-2px);
+}
+.glow-gold:hover::after, .glow-gold:focus-visible::after { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .glow-gold, .glow-gold::after { transition: none } .glow-gold:hover { transform: none } }
