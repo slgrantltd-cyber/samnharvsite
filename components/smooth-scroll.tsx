@@ -17,10 +17,22 @@ declare global {
 
 export default function SmoothScroll() {
   useEffect(() => {
+    // Always open at the top of the hero. Browsers restore the previous
+    // scroll position on reload, and the pinned globe's spacer can nudge
+    // the layout after hydration — both leave the page sitting a little
+    // way down. Take restoration into our own hands (hash links still work).
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    if (!window.location.hash) window.scrollTo(0, 0);
+
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const lenis = new Lenis({ lerp: 0.12 });
     window.__lenis = lenis;
+    if (!window.location.hash) {
+      lenis.scrollTo(0, { immediate: true });
+      // once fonts and pinned sections have settled, make sure we're still at the top
+      requestAnimationFrame(() => { if (window.scrollY !== 0) lenis.scrollTo(0, { immediate: true }); ScrollTrigger.refresh(); });
+    }
 
     lenis.on("scroll", ScrollTrigger.update);
     const raf = (time: number) => lenis.raf(time * 1000);
