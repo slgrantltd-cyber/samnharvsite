@@ -1,0 +1,460 @@
+<title>Sam n Harv Content Pack</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital@0;1&family=Fragment+Mono&family=Hanken+Grotesk:wght@300;400;500&display=swap">
+<style>
+  :root{
+    --ground:#e9e0cf; --panel:#f1eadb; --ink:#1a1a1a; --stone:#5c5952; --line:rgba(26,26,26,.16);
+    --gold:#8a6a35; --gold-bright:#c9ab7c; --gold-hi:#ead8ab; --dusk:#1c1612; --dusk-2:#2b1d16; --plaster:#f2efe8;
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+    --ground:#17110d; --panel:#211813; --ink:#f2efe8; --stone:#c7bfb1; --line:rgba(242,239,232,.14);
+    --gold:#c9ab7c; --gold-bright:#ead8ab; --gold-hi:#f3e3b4; --dusk:#0f0b09; --dusk-2:#1c1612; --plaster:#f2efe8; } }
+  :root[data-theme="dark"]{
+    --ground:#17110d; --panel:#211813; --ink:#f2efe8; --stone:#c7bfb1; --line:rgba(242,239,232,.14);
+    --gold:#c9ab7c; --gold-bright:#ead8ab; --gold-hi:#f3e3b4; --dusk:#0f0b09; --dusk-2:#1c1612; --plaster:#f2efe8; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:'Hanken Grotesk',system-ui,sans-serif;font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:62rem;margin:0 auto;padding:3rem 1.25rem 5rem}
+  .display{font-family:'Libre Caslon Display',Georgia,serif;font-weight:400;letter-spacing:-.01em;line-height:1.02;text-wrap:balance}
+  .it{font-family:'Libre Caslon Text',Georgia,serif;font-style:italic}
+  .annot{font-family:'Fragment Mono',ui-monospace,monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}
+  .muted{color:var(--stone)}
+  .gold{color:var(--gold)}
+  header.hero{padding:3rem 0 2.5rem;border-bottom:1px solid var(--line)}
+  header .mark{display:flex;align-items:center;gap:.8rem;margin-bottom:2rem}
+  header .mark svg{width:28px;height:28px}
+  h1{font-size:clamp(2.4rem,6vw,4.4rem);margin:.2rem 0 1rem}
+  .lede{max-width:36rem;font-size:1.125rem}
+  .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:2.5rem 0 0}
+  .rules div{background:var(--panel);padding:1.1rem 1.2rem}
+  .rules .display{font-size:1.15rem;margin:.35rem 0 .3rem}
+  .plan{margin:3rem 0 0}
+  .plan table{width:100%;border-collapse:collapse;font-size:.95rem}
+  .plan th{text-align:left;padding:.6rem .4rem;border-bottom:1px solid var(--line)}
+  .plan td{padding:.65rem .4rem;border-bottom:1px solid var(--line);vertical-align:top}
+  .plan td:first-child{font-family:'Fragment Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
+  .post{margin:4rem 0 0;padding-top:2.5rem;border-top:1px solid var(--line)}
+  .post .kicker{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem;margin-bottom:.8rem}
+  .chip{display:inline-block;padding:.3rem .65rem;border:1px solid var(--gold-bright);color:var(--gold);border-radius:999px}
+  .post h2{font-size:clamp(1.7rem,3.4vw,2.4rem);margin:0 0 .6rem}
+  .post .why{max-width:38rem;margin:0 0 1.6rem}
+  .grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
+  @media(min-width:760px){.grid{grid-template-columns:1.1fr .9fr}}
+  .block{background:var(--panel);border:1px solid var(--line);padding:1.2rem 1.3rem}
+  .block h3{font-family:'Fragment Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 .8rem;font-weight:400}
+  .block ol,.block ul{margin:0;padding-left:1.15rem}
+  .block li{margin:.35rem 0}
+  .block li b{font-weight:500}
+  .screen{font-family:'Libre Caslon Display',serif;font-size:1.05rem;line-height:1.25;padding:.55rem .7rem;border-left:2px solid var(--gold-bright);margin:.5rem 0}
+  .caption{white-space:pre-line;font-size:.95rem}
+  .dark{background:var(--dusk);color:var(--plaster);border-color:transparent}
+  .dark h3{color:var(--gold-bright)}
+  .dark .screen{border-color:var(--gold-bright)}
+  .nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:.6rem 0}
+  .nums div{background:var(--panel);padding:.8rem .9rem}
+  .nums .display{font-size:1.5rem;font-variant-numeric:tabular-nums}
+  .nums .annot{margin-top:.25rem;color:var(--stone)}
+  .src{font-size:.8rem;color:var(--stone);margin-top:.6rem}
+  footer{margin-top:4rem;padding-top:1.5rem;border-top:1px solid var(--line)}
+  a{color:var(--gold)}
+  @media (prefers-reduced-motion:no-preference){ .post{animation:rise .5s ease both} @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}} }
+</style>
+
+<div class="wrap">
+<header class="hero">
+  <div class="mark">
+    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="4" x2="28"><stop offset="0" stop-color="#b8965c"/><stop offset=".5" stop-color="#ead8ab"/><stop offset="1" stop-color="#a98a52"/></linearGradient></defs><line x1="4" y1="7" x2="28" y2="7" stroke="url(#g)"/><line x1="16" y1="7" x2="16" y2="14"/><path d="M16 14 L7 27 M16 14 L25 27 M16 14 L16 27"/></svg>
+    <span class="display" style="font-size:1.1rem">SAM <span class="it gold">n</span> HARV</span>
+    <span class="annot muted">Instagram · first nine posts</span>
+  </div>
+  <p class="annot gold">Content pack</p>
+  <h1 class="display">Nine posts that earn the right to advertise.</h1>
+  <p class="lede">Each one below is built to be shot on a phone in a morning: the hook, the shots or slides, the words on screen, the caption, and the numbers — taken from the site, your deals and the Land Department data, so nothing here has to be invented.</p>
+
+  <div class="rules">
+    <div><p class="annot gold">Voice</p><p class="display">Straight-talking. Expensive.</p><p class="muted" style="margin:0">Short sentences. No "guys". No exclamation marks. Say the number.</p></div>
+    <div><p class="annot gold">Truth</p><p class="display">Nothing we haven't done.</p><p class="muted" style="margin:0">No guaranteed returns, no "we own a portfolio", no developer we can't name yet. Say "underwritten", "sourced", "placed" — the words that are true.</p></div>
+    <div><p class="annot gold">Look</p><p class="display">Sandstone, ink, one line of gold.</p><p class="muted" style="margin:0">Caslon for the big words, mono caps for labels. Natural light. Phone footage is fine — stabilised, never zoomed.</p></div>
+    <div><p class="annot gold">Every post ends</p><p class="display">"WhatsApp's in the bio."</p><p class="muted" style="margin:0">Link in bio → samnharv.co.uk/call. One action, always the same one.</p></div>
+  </div>
+
+  <div class="plan">
+    <p class="annot gold" style="margin:0 0 .6rem">Cadence — three weeks, three posts a week</p>
+    <table>
+      <tr><th>Week</th><th>Mon — Reel</th><th>Wed — Carousel</th><th>Fri — Reel</th></tr>
+      <tr><td>1</td><td>01 · Why this page is changing</td><td>02 · What Sam n Harv actually does</td><td>03 · Real UK deal breakdown</td></tr>
+      <tr><td>2</td><td>04 · On site with Harvey</td><td>05 · £250k — where would we put it?</td><td>06 · Why we're looking at Dubai</td></tr>
+      <tr><td>3</td><td>07 · Deal / No Deal</td><td>08 · A genuine result</td><td>09 · What I'd avoid</td></tr>
+    </table>
+    <p class="src">Post 03 and 07 are repeatable formats — after week three, one of each a week is the engine. Carousels are your evergreen; reels are your reach.</p>
+  </div>
+</header>
+
+<!-- 01 -->
+<section class="post">
+  <div class="kicker"><span class="chip annot">01 · Reel · 35–45s</span><span class="annot muted">Talking to camera + three cutaways</span></div>
+  <h2 class="display">Why this page is changing.</h2>
+  <p class="why muted">The pivot post. People who followed a chef need one honest minute on why there are houses here now — and why the standard hasn't changed.</p>
+  <div class="grid">
+    <div class="block">
+      <h3>Shots</h3>
+      <ol>
+        <li><b>0–3s hook, to camera:</b> kitchen or pass behind you if you still have access; otherwise the car, early morning. "I spent years cooking for people with money. Now I find where they put it."</li>
+        <li><b>Cutaway:</b> 3s of plating / service footage you already have.</li>
+        <li><b>Cutaway:</b> 3s walking into a tired house, keys in hand.</li>
+        <li><b>To camera:</b> the bridge — what private dining taught you: standards, discretion, doing the unglamorous bit properly.</li>
+        <li><b>Cutaway:</b> the deal pack on a desk, the gold line of the mark visible.</li>
+        <li><b>Close, to camera:</b> "Same standard. Different table."</li>
+      </ol>
+      <h3 style="margin-top:1.2rem">On screen</h3>
+      <p class="screen">Cooked for them. Now I find where the money goes.</p>
+      <p class="screen">Same standard. Different table.</p>
+    </div>
+    <div class="block">
+      <h3>Caption</h3>
+      <p class="caption">Some of you followed this page for food. Fair warning — it's changing.
+
+For years I ran private dining for people who could eat anywhere. What that teaches you is standards: the unglamorous bits done properly, every time, and never promising what you can't deliver.
+
+My brother Harvey and I now do the same thing with property. UK houses bought below the street. Developer-direct Dubai. An operating resort in Thailand. Fewer opportunities, underwritten like we're buying them ourselves.
+
+Character over commission. That's the whole pitch.
+
+If that's interesting, stay. If you want the food, I understand. WhatsApp's in the bio.</p>
+      <h3 style="margin-top1rem">Do not</h3>
+      <ul><li>Apologise for the change.</li><li>Say "exciting news".</li><li>Use any footage of a property you don't control.</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="post">
+  <div class="kicker"><span class="chip annot">02 · Carousel · 7 slides</span><span class="annot muted">Sandstone slides, ink type, one gold line</span></div>
+  <h2 class="display">What Sam n Harv actually does.</h2>
+  <p class="why muted">The pinned post. Someone landing cold should understand the business in seven swipes and know exactly who it's for.</p>
+  <div class="grid">
+    <div class="block">
+      <h3>Slides</h3>
+      <ol>
+        <li><b>Cover:</b> the mark, then — <span class="it">"We find property for people who've already got money."</span></li>
+        <li><b>UK · cash-flowing:</b> "Houses bought below the street, refinanced at value, professionally managed. Income from month one."</li>
+        <li><b>Dubai · developer-direct:</b> "Launch allocations at developer price, on developer payment plans. The developer pays our fee — you pay nothing extra to buy through us."</li>
+        <li><b>Thailand · operating asset:</b> "A trading resort, off-market. Income and appreciation in one."</li>
+        <li><b>The complete package:</b> "Finance, architect, builder, furnishing, management — partners who already work alongside us. One conversation starts all of it."</li>
+        <li><b>Who it's for:</b> "From £100k, no ceiling. Individuals, companies, family offices. Identity and proof of funds before particulars — always."</li>
+        <li><b>Close:</b> "Character over commission." + samnharv.co.uk</li>
+      </ol>
+    </div>
+    <div class="block">
+      <h3>Caption</h3>
+      <p class="caption">Seven slides on what we do, because "property" covers a lot of nonsense.
+
+We don't sell courses. We don't send every Rightmove listing with a fee stapled to it. We hold a small number of opportunities — UK, Dubai, Thailand — and release them to a few qualified investors, underwritten the way we'd underwrite our own money.
+
+From £100k. No ceiling. Swipe.
+
+Straight answers: WhatsApp's in the bio.</p>
+      <h3 style="margin-top:1rem">Design note</h3>
+      <p class="muted" style="margin:0">Export the slides from the site's palette: ground #e9e0cf, type #1a1a1a, one gold rule #c9ab7c per slide. Slide 3 and 4 can carry a single developer render or the hatched resort image — nothing else.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="post">
+  <div class="kicker"><span class="chip annot">03 · Reel · 60s</span><span class="annot muted">Numbers on screen, you narrating — repeatable format</span></div>
+  <h2 class="display">A real UK deal, all the way through.</h2>
+  <p class="why muted">The post that proves you can count. Use a live deal when one completes; until then, this is the worked example from your own budget model — say so on screen, it reads as honesty, not weakness.</p>
+  <div class="grid">
+    <div class="block">
+      <h3>The numbers (3-bed, South West, cash then 75% refinance)</h3>
+      <div class="nums">
+        <div><p class="display">£170,000</p><p class="annot">Purchase, below the street</p></div>
+        <div><p class="display">£35,000</p><p class="annot">Refurb + 10% contingency</p></div>
+        <div><p class="display">£236,550</p><p class="annot">All-in cash — SDLT, legals, fee, furnishing</p></div>
+        <div><p class="display">£230,000</p><p class="annot">End value</p></div>
+        <div><p class="display">£172,500</p><p class="annot">75% refinance</p></div>
+        <div><p class="display">£64,050</p><p class="annot">Money left in</p></div>
+      </div>
+      <p class="src">From the site's BRR budget model: SDLT at additional-property rates, legals £1,750, sourcing fee £3,000, SA furnishing £9,000, holding five months. Swap in the live deal's figures when it completes — same layout.</p>
+      <h3 style="margin-top:1rem">Script beats</h3>
+      <ol>
+        <li><b>Hook:</b> "Everyone shows you the rent. Nobody shows you what's left in."</li>
+        <li>Purchase → why it was cheap (condition, speed, seller).</li>
+        <li>Refurb → "itemised, staged payments, contingency we expect to spend".</li>
+        <li>All-in → the line people skip: stamp duty, legals, our fee, furnishing.</li>
+        <li>Refinance → "a surveyor's opinion on a Tuesday morning — we underwrite it £10k lower than we hope."</li>
+        <li><b>Close:</b> "Seventy-three percent of the cash comes back out. The house stays. That's the machine."</li>
+      </ol>
+    </div>
+    <div class="block">
+      <h3>On screen</h3>
+      <p class="screen">Purchase £170,000</p>
+      <p class="screen">All-in £236,550</p>
+      <p class="screen">Left in: £64,050</p>
+      <h3 style="margin-top:1rem">Caption</h3>
+      <p class="caption">A 3-bed in the South West, bought for cash, refurbished, refinanced at 75%.
+
+Purchase £170k. Refurb £35k with contingency. All-in — stamp duty, legals, our fee, furnishing, five months of holding — £236,550. End value £230k. Refinance £172,500.
+
+Money left in: £64,050. The house stays, rents, and the other £172k goes round again.
+
+Two honest notes. The profit is made on the purchase, not the refurb. And the refinance valuation is an opinion, so we underwrite it lower than we hope.
+
+Worked example from our model; live deals on request. WhatsApp's in the bio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="post">
+  <div class="kicker"><span class="chip annot">04 · Reel · 20–30s</span><span class="annot muted">Handheld, natural sound, no music until the last 5s</span></div>
+  <h2 class="display">On site, with Harvey.</h2>
+  <p class="why muted">The trust post. Two brothers, one site, no production. Harvey's in Thailand — if he can't be on the same site, cut between the two of you on a call on site, which is more honest anyway.</p>
+  <div class="grid">
+    <div class="block">
+      <h3>Shots</h3>
+      <ol>
+        <li>Boots on the ground: walking a room, pointing at the one thing that matters (the damp, the layout, the view).</li>
+        <li>A 5s exchange that's actually about the deal — "what would you do with this wall?"</li>
+        <li>Harvey on the phone screen, held up in the room, saying one line.</li>
+        <li>The two names: "Sam — UK. Harv — Thailand." on screen.</li>
+        <li>Close on the mark drawn on the survey sheet, or the key on the worktop.</li>
+      </ol>
+      <h3 style="margin-top:1rem">On screen</h3>
+      <p class="screen">Two names on everything.</p>
+    </div>
+    <div class="block">
+      <h3>Caption</h3>
+      <p class="caption">No script. This is a Tuesday.
+
+Sam's in the South West, Harv's in Thailand, and every opportunity we bring you gets walked by one of us and argued over by both.
+
+Two names on everything. WhatsApp's in the bio.</p>
+      <h3 style="margin-top:1rem">Do not</h3>
+      <ul><li>Add captions that explain what you're looking at. Let it be a glimpse.</li><li>Show the address or anything a viewer could use to find the property.</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="post">
+  <div class="kicker"><span class="chip annot">05 · Carousel · 8 slides</span><span class="annot muted">The comparison people screenshot</span></div>
+  <h2 class="display">£250k. Where would we put it?</h2>
+  <p class="why muted">Three routes, same money, real figures. The point isn't to pick a winner — it's to show the trade-off honestly, which is the thing nobody else on Instagram does.</p>
+  <div class="grid">
+    <div class="block">
+      <h3>Slides</h3>
+      <ol>
+        <li><b>Cover:</b> "£250,000. Three ways we'd put it to work."</li>
+        <li><b>UK · cash-flow:</b> "One 3-bed, bought below the street. £236k all-in, refinanced to £172k. £64k stays in, the house rents, £172k goes again. Income from month one."</li>
+        <li><b>Dubai · growth:</b> "A 1-bed at Damac Lagoons from £277,839 on a 1% monthly plan — £250k covers the reservation and years of instalments. Handover Q2 2027. Growth over the build, yield at handover."</li>
+        <li><b>Development · the bigger swing:</b> "A terrace into three flats — subject to planning. Deposit, build, sell or hold. Highest return on paper, longest road, most that can go wrong."</li>
+        <li><b>The honest table:</b> Income / Growth / Effort / Risk — one word each, per route.</li>
+        <li><b>What we'd actually do:</b> "Depends entirely on what you need the money to do. Income now? UK. Dollar growth, hands off? Dubai. Appetite and patience? Development."</li>
+        <li><b>The rule:</b> "We model the worst case first. If it only works in the best case, it doesn't work."</li>
+        <li><b>Close:</b> "Tell us what the money's for. samnharv.co.uk"</li>
+      </ol>
+      <p class="src">UK figures from the site's budget model; Dubai figures from Damac's published price list (21 Aug 2026); development route uses the three-flat conversion in your own pack.</p>
+    </div>
+    <div class="block">
+      <h3>Caption</h3>
+      <p class="caption">Same £250k, three very different jobs.
+
+UK cash-flow: one house, refinanced, most of the money back out, income from month one.
+Dubai: a developer-direct 1-bed on a 1% monthly plan, dollar-pegged, growth through the build.
+Development: a terrace into three flats — the biggest number and the longest road.
+
+There's no right answer on a slide. There's a right answer for what you need the money to do. Swipe, then tell us.
+
+WhatsApp's in the bio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="post">
+  <div class="kicker"><span class="chip annot">06 · Reel · 45s</span><span class="annot muted">To camera, four numbers on screen — no drone footage, no skyline</span></div>
+  <h2 class="display">Why we're looking at Dubai. No hype.</h2>
+  <p class="why muted">Everyone else sells Dubai with a skyline and a yield. You sell it with the Land Department's own numbers and the bit nobody says: it's late in the cycle.</p>
+  <div class="grid">
+    <div class="block">
+      <h3>The four numbers</h3>
+      <div class="nums">
+        <div><p class="display">116,484</p><p class="annot">Sales in 2025 — 7× 2020</p></div>
+        <div><p class="display">73%</p><p class="annot">Off-plan share, 2026</p></div>
+        <div><p class="display">66% → 19%</p><p class="annot">Off-plan premium over ready, 2019 → now</p></div>
+        <div><p class="display">8.3% / 4.4%</p><p class="annot">Yields — Dubai South / Palm Jumeirah</p></div>
+      </div>
+      <p class="src">Source: DXB Interact (Dubai Land Department data), accessed 21 Aug 2026. Credit on screen — their terms require it.</p>
+      <h3 style="margin-top:1rem">Script beats</h3>
+      <ol>
+        <li><b>Hook:</b> "Here's why we're in Dubai — and the bit the brochures leave out."</li>
+        <li>Seven times the sales in five years. Three-quarters off-plan. That's the market.</li>
+        <li>The premium for buying off-plan has collapsed from 66% to 19% — so off-plan isn't a discount any more, it's a payment plan. Buy it for the plan and the developer, not the entry price.</li>
+        <li>Prices are up 84% from the floor but volumes in prime areas are falling. That's late-cycle. We underwrite the exit flat.</li>
+        <li>The developer pays our fee — you pay developer price.</li>
+        <li><b>Close:</b> "Bugatti, Jacob & Co, Mercedes-Benz, Aldar on Saadiyat. At developer price, underwritten by a UK desk."</li>
+      </ol>
+    </div>
+    <div class="block">
+      <h3>Caption</h3>
+      <p class="caption">Dubai, without the skyline.
+
+116,484 sales last year — seven times 2020. Three in four are off-plan. The premium for buying off-plan has fallen from 66% to 19%, which means off-plan is no longer a cheap entry; it's a financing structure. Buy it for the payment plan and the developer, not the price.
+
+Prices are up 84% from the 2020 floor and volumes in prime areas are falling. That's late in a cycle, so we underwrite every unit with a flat exit.
+
+What we bring: launch allocations — Binghatti's branded residences, Aldar on Saadiyat and Yas, Damac, Sobha, Emaar — at developer price, on developer plans. The developer pays our fee.
+
+Data: DXB Interact / Dubai Land Department. WhatsApp's in the bio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section class="post">
+  <div class="kicker"><span class="chip annot">07 · Reel · 60s</span><span class="annot muted">Screen recording of Rightmove + you — repeatable weekly</span></div>
+  <h2 class="display">Deal / No Deal.</h2>
+  <p class="why muted">Your analysis, live, on a listing anyone can see. The format that builds authority fastest, because the viewer can check your working.</p>
+  <div class="grid">
+    <div class="block">
+      <h3>The five questions — on screen, one per beat</h3>
+      <ol>
+        <li><b>Street price.</b> "What did the last three sell for, and what did they look like?"</li>
+        <li><b>Why is it cheap?</b> Condition, speed, or a problem you can't fix (train line, lease, flood).</li>
+        <li><b>Refurb, honestly.</b> Spray foam in the loft? Rewire? A number with a contingency.</li>
+        <li><b>The refinance.</b> "Would a surveyor give it £X on a Tuesday morning?"</li>
+        <li><b>The exit.</b> "If the refinance disappoints, does it still rent? If not — no deal."</li>
+      </ol>
+      <h3 style="margin-top:1rem">Verdict card</h3>
+      <p class="screen">DEAL — at £20k under asking. Not at asking.</p>
+      <p class="screen">NO DEAL — the comps are across a railway line.</p>
+      <p class="muted" style="margin:.6rem 0 0">Your rule from the ROI work — 50% return on money left in, worst case at 50% occupancy — is the bar. Say it on screen every time; it becomes the thing people associate with you.</p>
+    </div>
+    <div class="block">
+      <h3>Caption</h3>
+      <p class="caption">Deal or no deal. A live listing, five questions, one verdict.
+
+1. What's the street actually worth — last three sales, not the asking prices.
+2. Why is it cheap — and is it a reason we can fix?
+3. The refurb, with a contingency we expect to spend.
+4. Would a surveyor back the end value?
+5. If the refinance disappoints, does it still rent?
+
+Verdict's in the reel. Our bar is a 50% return on the money left in, worst case. If it only works in the best case, it doesn't work.
+
+Send us a listing and we'll run it. WhatsApp's in the bio.</p>
+      <h3 style="margin-top:1rem">Do not</h3>
+      <ul><li>Show the full address or agent's name.</li><li>Call a seller's price "stupid". Call it "not our number".</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- 08 -->
+<section class="post">
+  <div class="kicker"><span class="chip annot">08 · Carousel · 6 slides</span><span class="annot muted">A result in someone else's words</span></div>
+  <h2 class="display">A genuine result.</h2>
+  <p class="why muted">The only case study you can run today without stretching: the client who credits six figures of revenue to your deals, and the placements that have run for over a year. Both are verifiable on Google — say so.</p>
+  <div class="grid">
+    <div class="block">
+      <h3>Slides</h3>
+      <ol>
+        <li><b>Cover:</b> "A result. In the client's words, not ours."</li>
+        <li><b>The quote, large:</b> "Through his expertise, we've secured some fantastic deals that have directly contributed to the growth of our business, adding six figures in revenue." — Stephen McLaughlin, director, serviced accommodation company.</li>
+        <li><b>What we did:</b> "Sourced and underwrote the deals. Introduced the people. Stayed on the phone after completion."</li>
+        <li><b>The second proof:</b> "Over a year of local-authority placements, inspection-ready as standard — the operating discipline behind everything else."</li>
+        <li><b>Verify it:</b> "Both reviews are live on our Google profile. We can't edit them. Link in bio."</li>
+        <li><b>Close:</b> "Character over commission."</li>
+      </ol>
+      <p class="src">Nothing on these slides claims a purchase, a portfolio or a return. It claims what's true: deals sourced, a client's revenue, placements run.</p>
+    </div>
+    <div class="block">
+      <h3>Caption</h3>
+      <p class="caption">We'd rather you heard it from a client.
+
+"Through his expertise, we've secured some fantastic deals that have directly contributed to the growth of our business, adding six figures in revenue." — Stephen, director of a serviced accommodation company.
+
+Alongside that: over a year of local-authority placements, run inspection-ready, every week.
+
+Both reviews are on our Google profile, which we can't edit. Link in the bio if you'd like to check.
+
+Character over commission. WhatsApp's in the bio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 09 -->
+<section class="post">
+  <div class="kicker"><span class="chip annot">09 · Reel · 45s</span><span class="annot muted">Fast cuts, one line per cut, you to camera</span></div>
+  <h2 class="display">What I'd avoid when buying investment property.</h2>
+  <p class="why muted">The save-and-share post. Nine things, each one a sentence, each one something you'd actually say to a client. Ends on the rule.</p>
+  <div class="grid">
+    <div class="block">
+      <h3>The nine</h3>
+      <ol>
+        <li>Buying at asking because the rent "works". The profit is made on the purchase.</li>
+        <li>A refurb budget with no contingency. You will spend it.</li>
+        <li>Believing the end value you typed into the spreadsheet.</li>
+        <li>A deal with one exit. If the refinance disappoints, can it still rent?</li>
+        <li>Sourcing fees for a Rightmove link. You can Google.</li>
+        <li>Guaranteed returns. Anyone guaranteeing them is selling something.</li>
+        <li>Off-plan for the "discount". The premium's 19% now. Buy it for the plan and the developer.</li>
+        <li>Chasing the highest yield into the biggest supply pipeline.</li>
+        <li>Not asking who pays the broker. In Dubai, the developer should.</li>
+      </ol>
+      <h3 style="margin-top:1rem">On screen, last frame</h3>
+      <p class="screen">If it only works in the best case, it doesn't work.</p>
+    </div>
+    <div class="block">
+      <h3>Caption</h3>
+      <p class="caption">Nine things I'd avoid. Each one has cost somebody money.
+
+1. Paying asking because the rent "works".
+2. A refurb budget with no contingency.
+3. Believing your own spreadsheet's end value.
+4. One exit.
+5. Fees for a Rightmove link.
+6. Guaranteed returns.
+7. Off-plan for the "discount" — it's 19% now, buy it for the plan.
+8. The highest yield in the biggest supply pipeline.
+9. Not asking who pays the broker.
+
+If it only works in the best case, it doesn't work. Save this for the next viewing.
+
+WhatsApp's in the bio.</p>
+    </div>
+  </div>
+</section>
+
+<section class="post">
+  <div class="kicker"><span class="chip annot">Before you post anything</span></div>
+  <h2 class="display">The checks.</h2>
+  <div class="grid">
+    <div class="block dark">
+      <h3>Truth</h3>
+      <ul>
+        <li>No "we own", "we bought", "our portfolio" — say sourced, underwritten, placed, operated (your two units and the placements are real; the rest isn't yet).</li>
+        <li>No guaranteed return, occupancy or value. "Underwritten to" is the phrase.</li>
+        <li>No named Dubai developer as a "partner" until the brokerage is signed. "Launch allocations from" is true; "official partner of" isn't yet.</li>
+        <li>Thailand: "a resort, operating", 25+ keys, 5+ rai, guide on application. Never the name, the owner, the island, or an unhatched photo.</li>
+        <li>Any DXB Interact figure carries the credit on screen or in the caption.</li>
+      </ul>
+    </div>
+    <div class="block">
+      <h3>Profile set-up this week</h3>
+      <ul>
+        <li>Bio: <b>Sam n Harv Investment</b> · Property investment · UK · Dubai · Thailand · Character over commission.</li>
+        <li>Link: <b>samnharv.co.uk/call</b> — fifteen minutes, no pitch. One link, not a link tree.</li>
+        <li>Avatar: the mark on ink (in the brand folder, <i>samnharv-avatar-on-ink.png</i>).</li>
+        <li>Highlights: UK · Dubai · Thailand · Deal/No Deal · Results — use the sandstone mark tiles.</li>
+        <li>Pin post 02. Then 03. Then 08.</li>
+        <li>Hashtags, sparingly, in the first comment: #propertyinvestment #ukproperty #dubairealestate #offplan #brrr #servicedaccommodation — six, no more.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="annot muted">Sam n Harv Investment · S L Grants Ltd · Figures from samnharv.co.uk, the BRR budget model, developer price lists and DXB Interact (DLD), 21 Aug 2026. Property investment carries risk; none of this is financial advice.</p>
+</footer>
+</div>
