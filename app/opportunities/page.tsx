@@ -105,7 +105,7 @@ export default function PrivateOfficePage() {
                 <div className={`absolute inset-0 ${TONES[m.tone]} transition-transform duration-[1400ms] ease-out group-hover:scale-[1.03]`} aria-hidden="true" />
                 <div className={`absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t ${m.tone === "plaster" ? "from-[#2b2823]/85 via-[#2b2823]/45" : "from-black/75 via-black/35"} to-transparent`} aria-hidden="true" />
                 <div className="relative p-7 text-[var(--plaster)] md:p-9">
-                  <p className="annot text-[var(--bronze-bright)]">{m.ref} · {m.where}</p>
+                  <p className="annot text-[#ead8ab] [text-shadow:0_1px_10px_rgba(0,0,0,.75)]">{m.ref} · {m.where}</p>
                   <h2 className="display mt-3 text-3xl leading-tight md:text-4xl">{m.head}</h2>
                   <p className="mt-3 max-w-md text-[0.95rem] leading-relaxed text-white/85">{m.line}</p>
                   <div className="mt-6 flex flex-wrap items-center gap-4">
