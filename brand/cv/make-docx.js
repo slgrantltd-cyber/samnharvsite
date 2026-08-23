@@ -37,7 +37,8 @@ const doc=new Document({numbering:{config:[{reference:"b",levels:[{level:0,forma
   B("Supported adults with learning disabilities to live independently: care plans, risk assessments, finances, medication, community. Care Certificate and PBM trained. The grounding behind the supported-accommodation placements I now run for a local authority."),
   ...Role("Commis / Chef — Belmond Le Manoir aux Quat'Saisons","October 2019 — March 2020 · Oxfordshire"),
   B("Raymond Blanc's two-Michelin-star kitchen, a brigade of twenty. Where I learned what a standard actually is."),
-  ...Role("Chef — CSI International (agency) · Merchandiser — B&Q","2019"),
+  ...Role("Earlier — The Pony & Trap (Michelin-starred) · The Nut Tree · CSI International · B&Q","2018 — 2019"),
+  B("First professional kitchens at seventeen and eighteen, including garnish and sides at the Michelin-starred Pony & Trap and private events with its chef; retail sales and merchandising at B&Q in between."),
   H("How I work"),
   B("I put “character over commission” on my business cards and I mean it: I'd rather lose the fee than the client, and I tell people not to buy when the numbers say so.","Integrity first."),
   B("Nearly every pound I've earned has come from someone who already trusted me — a council officer, a landlord, a client's friend. I build slowly and keep people for years.","Relationships are the business."),
@@ -51,9 +52,10 @@ const doc=new Document({numbering:{config:[{reference:"b",levels:[{level:0,forma
   B("Public Liability and Professional Indemnity insurance in force · S L Grants Ltd, Companies House 16505504 · Professional standards published at samnharv.co.uk/standards","Insurance & company."),
   B("Propertymark Level 3 · Property Redress Scheme membership · Right to Rent · Consumer Protection · Legionella Awareness · RERA: ready to complete the DREI Certified Broker course and exam on arrival","Working towards."),
   H("Education"),
-  B(FILL+" (school / college, qualifications, years) · Care Certificate · PBM (positive behaviour management) · Food hygiene "+FILL+" (level)"),
+  B("Weston College — A-level first year, English and Applied Science (passed), before moving to an apprenticeship. Priory Community School, 2011–2016 — nine GCSEs including Maths (B) and English Language (B)."),
+  B("Care Certificate · PBM · Food Hygiene certificate · Full UK driving licence, clean."),
   H("Personal"),
-  B("British, born 2000. South West England; in London often. Full UK driving licence "+FILL+" (confirm clean)."),
+  B("British, born 2000. South West England; in London often. Outside work: mountain biking, marathons, swimming, cooking."),
   B("References: a serviced-accommodation company director and a landlord client, both on request; reviews public on Google. Chef references on request."),
  ]}]});
-Packer.toBuffer(doc).then(b=>{fs.writeFileSync('Samuel-Grant-CV-draft.docx',b);console.log('docx ok')});
+Packer.toBuffer(doc).then(b=>{fs.writeFileSync('Samuel-Grant-CV.docx',b);console.log('docx ok')});
