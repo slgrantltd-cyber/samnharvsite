@@ -38,7 +38,7 @@ const doc=new Document({numbering:{config:[{reference:"b",levels:[{level:0,forma
   ...Role("Commis / Chef — Belmond Le Manoir aux Quat'Saisons","October 2019 — March 2020 · Oxfordshire"),
   B("Raymond Blanc's two-Michelin-star kitchen, a brigade of twenty. Where I learned what a standard actually is."),
   ...Role("Earlier — The Pony & Trap (Michelin-starred) · The Nut Tree · CSI International · B&Q","2018 — 2019"),
-  B("First professional kitchens at seventeen and eighteen, including garnish and sides at the Michelin-starred Pony & Trap and private events with its chef; retail sales and merchandising at B&Q in between."),
+  B("First kitchens at seventeen and eighteen — including the Michelin-starred Pony & Trap and private events with its chef."),
   H("How I work"),
   B("I put “character over commission” on my business cards and I mean it: I'd rather lose the fee than the client, and I tell people not to buy when the numbers say so.","Integrity first."),
   B("Nearly every pound I've earned has come from someone who already trusted me — a council officer, a landlord, a client's friend. I build slowly and keep people for years.","Relationships are the business."),
