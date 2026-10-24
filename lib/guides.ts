@@ -22,8 +22,8 @@ export const GUIDES: PropertyGuide[] = [
     strap: "Weston-super-Mare",
     welcome:
       "Welcome — we're really glad you're here. This page has everything you need for your stay. If anything at all isn't right, message or call us and we'll sort it the same day. — Samuel & Harvey",
-    wifiName: "",
-    wifiPassword: "",
+    wifiName: "VM6066097",
+    wifiPassword: "6pepadJgwuxuttb2",
     sections: [
       {
         title: "The essentials",
