@@ -1,50 +1,59 @@
 import type { Metadata } from "next";
+import { Rise, Line } from "@/components/reveal";
+import DuskLight from "@/components/dubai/dusk-light";
+import GoldDust from "@/components/dubai/gold-dust";
+import MarkMorph from "@/components/mark-morph";
 import WhatsappLauncher from "@/components/whatsapp-launcher";
 
 export const metadata: Metadata = {
-  title: "Chat with Samuel — Dubai Property",
+  title: "Chat with Samuel — Dubai & Abu Dhabi Property",
   description:
-    "Came from a video? Tell me what you're after and it opens straight into a WhatsApp chat with me — Dubai property, developer-direct.",
+    "Came from a video? One tap and you're in a WhatsApp chat with me — Dubai and Abu Dhabi property, developer-direct.",
   robots: { index: false, follow: false },
 };
 
 export default function ChatPage() {
   return (
-    <main id="main" className="pt-24 md:pt-28">
-      <section className="px-5 py-14 md:px-10 md:py-20">
-        <div className="mx-auto max-w-xl">
-          <p className="annot muted">Samuel Grant · Dubai & Abu Dhabi</p>
-          <h1 className="display mt-3 text-4xl md:text-6xl">
-            Let&rsquo;s <span className="display-it">talk.</span>
-          </h1>
-          <p className="mt-6 text-lg leading-relaxed">
-            If you&rsquo;ve come from one of my videos — good to have you.
-            One tap below and you&rsquo;re in my WhatsApp. I read and answer
-            every message myself.
+    <main
+      id="main"
+      className="relative min-h-dvh overflow-hidden px-5 pb-16 pt-16 text-[var(--plaster)] md:pt-24 [contain:paint]"
+      style={{ background: "linear-gradient(160deg, #17110d 0%, #241811 40%, #3a2418 75%, #4a2f1d 100%)" }}
+      data-hero="dark"
+    >
+      <DuskLight />
+      <GoldDust />
+      <div className="relative mx-auto max-w-xl">
+        <MarkMorph className="h-16 w-16 text-[var(--plaster)] md:h-20 md:w-20" />
+
+        <p className="annot mt-8 text-[var(--bronze-bright)]">Samuel Grant · Dubai &amp; Abu Dhabi</p>
+
+        <Rise as="h1" className="display mt-4 text-6xl leading-[0.95] md:text-8xl">
+          <Line>Let&rsquo;s</Line>
+          <Line>
+            <span className="display-it gold-text">talk.</span>
+          </Line>
+        </Rise>
+
+        <p className="mt-8 max-w-md text-lg leading-relaxed text-[var(--plaster)]/85 md:text-xl">
+          You&rsquo;ve seen the videos. One tap below and you&rsquo;re in my
+          WhatsApp — me, not a call centre. I read and answer every message
+          myself.
+        </p>
+
+        <div className="mt-12">
+          <WhatsappLauncher />
+        </div>
+
+        <div className="mt-16 border-t border-[var(--line-light)] pt-6">
+          <p className="annot text-[var(--stone-dark)]">
+            Developer-direct — you pay developer price, the developer pays me.
+            Every number I give you is checked against the records.
           </p>
-
-          <div className="mt-10">
-            <WhatsappLauncher />
-          </div>
-
-          <div className="mt-10 grid grid-cols-1 gap-px border bg-[var(--line)] hairline md:grid-cols-3">
-            {[
-              ["Developer-direct", "You pay developer price. The developer pays me, not you."],
-              ["Numbers first", "Every project I talk about is checked against the records."],
-              ["Straight answers", "If something's not worth buying, I'll say so."],
-            ].map(([head, sub]) => (
-              <div key={head} className="bg-[var(--plaster)] p-5">
-                <p className="display text-xl">{head}</p>
-                <p className="annot muted mt-2">{sub}</p>
-              </div>
-            ))}
-          </div>
-
-          <p className="annot muted mt-10 text-center">
+          <p className="annot mt-3 text-[var(--stone-dark)]">
             Or message me directly: +971 58 557 0551
           </p>
         </div>
-      </section>
+      </div>
     </main>
   );
 }
