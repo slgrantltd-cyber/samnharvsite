@@ -1,0 +1,212 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;1,400&family=Fragment+Mono&family=Hanken+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* Instagram carousel — UK vs Dubai · 8 slides · 1080×1350 */
+html,body{margin:0;padding:0;background:#555}
+:root{--plaster:#efe8da;--ink:#1a1a1a;--bronze:#8c7b65;--bronze-bright:#c9ab7c;--stone:#5c5952;--line:rgba(26,26,26,.16)}
+.slide{position:relative;width:1080px;height:1350px;overflow:hidden;box-sizing:border-box;padding:90px 84px 110px}
+.plaster{background:var(--plaster);color:var(--ink)}
+.inkbg{background:var(--ink);color:var(--plaster)}
+.display{font-family:'Libre Caslon Display',serif;font-weight:400;letter-spacing:-.01em}
+.it{font-family:'Libre Caslon Text',serif;font-style:italic}
+.annot{font-family:'Fragment Mono',monospace;font-size:22px;letter-spacing:.14em;text-transform:uppercase}
+.sans{font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:31px;line-height:1.45}
+.gold{background:linear-gradient(100deg,#b8965c 0%,#f3e3b4 38%,#e2c389 58%,#a98a52 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.goldbar{height:5px;background:linear-gradient(90deg,#a98a52 0%,#c4a676 30%,#ead8ab 50%,#c4a676 70%,#a98a52 100%)}
+.hairi{height:2px;background:linear-gradient(90deg,#b8965c 0%,#f3e3b4 38%,#e2c389 58%,#a98a52 100%)}
+.mark{width:64px;height:64px;fill:none;stroke-linecap:square;stroke-width:1.7}
+.head{display:flex;justify-content:space-between;align-items:center}
+.pgnum{font-family:'Fragment Mono',monospace;font-size:22px;letter-spacing:.14em;color:var(--bronze)}
+.vs{display:flex;gap:56px;margin-top:70px}
+.vs>div{flex:1}
+.vs .lab{font-family:'Fragment Mono',monospace;font-size:22px;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze)}
+.vs .big{font-family:'Libre Caslon Display',serif;font-size:88px;line-height:1.05;margin-top:18px}
+.vs .sub{font-family:'Hanken Grotesk',sans-serif;font-size:29px;line-height:1.45;margin-top:22px}
+.footer{position:absolute;left:84px;right:84px;bottom:64px}
+.footrow{display:flex;justify-content:space-between;font-family:'Fragment Mono',monospace;font-size:20px;letter-spacing:.12em;text-transform:uppercase}
+svg.markp{stroke:#1a1a1a} svg.marki{stroke:#efe8da}
+</style>
+<defs></defs>
+</head><body>
+
+<!-- shared mark defs helper is inlined per slide -->
+
+<!-- ============ SLIDE 1 · COVER (photo · Belgravia street) ============ -->
+<div class="slide inkbg" style="padding:0">
+  <img src="photos/bg-uk-street.jpg" style="position:absolute;inset:0;width:1080px;height:1350px;object-fit:cover">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,26,26,.34) 0%,rgba(26,26,26,.12) 34%,rgba(26,26,26,.62) 66%,rgba(26,26,26,.94) 100%)"></div>
+  <div style="position:absolute;left:84px;right:84px;top:64px">
+    <div class="goldbar"></div>
+    <svg class="mark marki" viewBox="0 0 32 32" style="margin-top:52px"><defs><linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="4" y1="0" x2="28" y2="0"><stop offset="0" stop-color="#b8965c"/><stop offset=".38" stop-color="#f3e3b4"/><stop offset=".58" stop-color="#e2c389"/><stop offset="1" stop-color="#a98a52"/></linearGradient></defs><line x1="4" y1="7" x2="28" y2="7" stroke="url(#g1)" stroke-width="2.1"/><line x1="16" y1="7" x2="16" y2="14"/><path d="M16 14 L7 27 M16 14 L25 27 M16 14 L16 27"/></svg>
+  </div>
+  <div style="position:absolute;left:84px;right:84px;bottom:170px">
+    <div class="display" style="font-size:126px;line-height:1.02;color:var(--plaster);text-shadow:0 2px 24px rgba(0,0,0,.5)">UK <span class="it gold" style="font-size:104px">or</span> Dubai?</div>
+    <div class="it" style="font-size:50px;margin-top:38px;color:var(--plaster);text-shadow:0 2px 18px rgba(0,0,0,.55)">The honest comparison nobody posts.</div>
+  </div>
+  <div class="footer">
+    <div class="hairi" style="margin-bottom:26px;opacity:.85"></div>
+    <div class="footrow" style="color:var(--bronze-bright)"><span>Sam n Harv</span><span>Swipe &rarr;</span></div>
+  </div>
+</div>
+
+<!-- ============ SLIDE 2 · PURCHASE TAX (plaster) ============ -->
+<div class="slide plaster">
+  <div class="head"><span class="annot" style="color:var(--bronze)">Buying a &pound;250k rental</span><span class="pgnum">02 / 08</span></div>
+  <div class="display" style="font-size:76px;margin-top:56px">What it costs to buy in</div>
+  <div class="vs">
+    <div>
+      <div class="lab">UK</div>
+      <div class="big">&pound;15,000</div>
+      <div class="sub">Stamp duty with the 5% additional-property surcharge. Paid before you own a brick.</div>
+    </div>
+    <div style="border-left:2px solid var(--line);padding-left:56px">
+      <div class="lab">Dubai</div>
+      <div class="big gold">&pound;10,000</div>
+      <div class="sub">4% Dubai Land Department transfer fee, plus small admin charges. That&rsquo;s the lot.</div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="hairi" style="margin-bottom:26px"></div>
+    <div class="footrow" style="color:var(--stone)"><span>Sam n Harv</span><span>samnharv.co.uk</span></div>
+  </div>
+</div>
+
+<!-- ============ SLIDE 3 · TAX ON RENT (plaster) ============ -->
+<div class="slide plaster">
+  <div class="head"><span class="annot" style="color:var(--bronze)">Every month it earns</span><span class="pgnum">03 / 08</span></div>
+  <div class="display" style="font-size:76px;margin-top:56px">Tax on the rent</div>
+  <div class="vs">
+    <div>
+      <div class="lab">UK</div>
+      <div class="big">20&ndash;45%</div>
+      <div class="sub">Income tax on your rental profit, with mortgage interest relief restricted.</div>
+    </div>
+    <div style="border-left:2px solid var(--line);padding-left:56px">
+      <div class="lab">Dubai</div>
+      <div class="big gold">0%</div>
+      <div class="sub">No UAE income tax on rent.</div>
+    </div>
+  </div>
+  <div style="margin-top:66px;border-left:6px solid #c4a676;padding-left:36px">
+    <div class="sans" style="font-size:30px"><strong style="font-weight:500">The bit brokers skip:</strong> if you stay UK tax-resident, the UK taxes your worldwide rental income. The 0% is fully real only if your tax residence moves. We say it because it&rsquo;s true.</div>
+  </div>
+  <div class="footer">
+    <div class="hairi" style="margin-bottom:26px"></div>
+    <div class="footrow" style="color:var(--stone)"><span>Sam n Harv</span><span>Not tax advice &middot; take advice</span></div>
+  </div>
+</div>
+
+<!-- ============ SLIDE 4 · TAX ON SALE (plaster) ============ -->
+<div class="slide plaster">
+  <div class="head"><span class="annot" style="color:var(--bronze)">The day you sell</span><span class="pgnum">04 / 08</span></div>
+  <div class="display" style="font-size:76px;margin-top:56px">Tax on the gain</div>
+  <div class="vs">
+    <div>
+      <div class="lab">UK</div>
+      <div class="big">24%</div>
+      <div class="sub">Capital gains tax on residential property profits.</div>
+    </div>
+    <div style="border-left:2px solid var(--line);padding-left:56px">
+      <div class="lab">Dubai</div>
+      <div class="big gold">0%</div>
+      <div class="sub">No UAE capital gains tax. Same residence caveat as the rent &mdash; and the same honesty.</div>
+    </div>
+  </div>
+  <div style="margin-top:66px">
+    <div class="it" style="font-size:40px;color:var(--stone)">On a &pound;100k gain, that&rsquo;s &pound;24,000 kept or handed over.</div>
+  </div>
+  <div class="footer">
+    <div class="hairi" style="margin-bottom:26px"></div>
+    <div class="footrow" style="color:var(--stone)"><span>Sam n Harv</span><span>samnharv.co.uk</span></div>
+  </div>
+</div>
+
+<!-- ============ SLIDE 5 · YIELDS (photo · Binghatti showroom) ============ -->
+<div class="slide inkbg">
+  <img src="photos/bg-showroom.jpg" style="position:absolute;inset:0;width:1080px;height:1350px;object-fit:cover">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,26,26,.55) 0%,rgba(26,26,26,.72) 40%,rgba(26,26,26,.93) 100%)"></div>
+  <div class="head" style="position:relative"><span class="annot" style="color:var(--bronze-bright)">What it pays you</span><span class="pgnum" style="color:var(--bronze-bright)">05 / 08</span></div>
+  <div class="display" style="position:relative;font-size:76px;margin-top:520px;text-shadow:0 2px 20px rgba(0,0,0,.6)">Gross yields</div>
+  <div class="vs" style="position:relative;margin-top:44px">
+    <div>
+      <div class="lab" style="color:var(--bronze-bright)">UK</div>
+      <div class="big">5&ndash;8%</div>
+      <div class="sub">On the strategies we run &mdash; BRR, serviced accommodation, social housing. Engineered, not found.</div>
+    </div>
+    <div style="border-left:2px solid rgba(239,232,218,.25);padding-left:56px">
+      <div class="lab" style="color:var(--bronze-bright)">Dubai</div>
+      <div class="big gold">4.4&ndash;8.3%</div>
+      <div class="sub">By area &mdash; Dubai South 8.3%, Palm Jumeirah 4.4%. The postcard pays less; the growth corridors pay more.</div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="hairi" style="margin-bottom:26px;opacity:.85"></div>
+    <div class="footrow" style="color:var(--bronze-bright)"><span>Source: DXB Interact &middot; DLD data</span><span>06 &rarr;</span></div>
+  </div>
+</div>
+
+<!-- ============ SLIDE 6 · LEVERAGE (plaster) ============ -->
+<div class="slide plaster">
+  <div class="head"><span class="annot" style="color:var(--bronze)">How you fund it</span><span class="pgnum">06 / 08</span></div>
+  <div class="display" style="font-size:76px;margin-top:56px">Debt vs payment plans</div>
+  <div class="vs">
+    <div>
+      <div class="lab">UK</div>
+      <div class="big" style="font-size:64px">Mortgages</div>
+      <div class="sub">A deep lending market. Leverage is the UK&rsquo;s superpower &mdash; 75% LTV turns one pot into four doors.</div>
+    </div>
+    <div style="border-left:2px solid var(--line);padding-left:56px">
+      <div class="lab">Dubai</div>
+      <div class="big" style="font-size:64px"><span class="gold">Payment plans</span></div>
+      <div class="sub">Off-plan instalments &mdash; often 1% a month &mdash; spread the price over years with no lender involved. Staged capital instead of debt.</div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="hairi" style="margin-bottom:26px"></div>
+    <div class="footrow" style="color:var(--stone)"><span>Sam n Harv</span><span>samnharv.co.uk</span></div>
+  </div>
+</div>
+
+<!-- ============ SLIDE 7 · THE HONEST SUMMARY (plaster) ============ -->
+<div class="slide plaster">
+  <div class="head"><span class="annot" style="color:var(--bronze)">The honest summary</span><span class="pgnum">07 / 08</span></div>
+  <div class="vs" style="margin-top:80px">
+    <div>
+      <div class="lab">UK wins on</div>
+      <div class="sans" style="margin-top:26px;font-size:33px;line-height:1.6">Leverage.<br>Income you can engineer.<br>A legal system you know.<br><span class="it" style="color:var(--stone)">And it taxes you at every stage.</span></div>
+    </div>
+    <div style="border-left:2px solid var(--line);padding-left:56px">
+      <div class="lab">Dubai wins on</div>
+      <div class="sans" style="margin-top:26px;font-size:33px;line-height:1.6">Lighter costs to buy and hold.<br>Launch payment plans.<br>Residency routes.<br><span class="it" style="color:var(--stone)">And it punishes brochure-buying.</span></div>
+    </div>
+  </div>
+  <div style="margin-top:90px;border-top:2px solid var(--line);padding-top:46px">
+    <div class="it" style="font-size:44px">We invest in both. The real question is what you need the money to do &mdash; and when.</div>
+  </div>
+  <div class="footer">
+    <div class="hairi" style="margin-bottom:26px"></div>
+    <div class="footrow" style="color:var(--stone)"><span>Sam n Harv</span><span>Character over commission</span></div>
+  </div>
+</div>
+
+<!-- ============ SLIDE 8 · CTA (photo · showroom portrait) ============ -->
+<div class="slide inkbg">
+  <img src="photos/bg-portrait.jpg" style="position:absolute;inset:0;width:1080px;height:1350px;object-fit:cover">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,26,26,.30) 0%,rgba(26,26,26,.18) 36%,rgba(26,26,26,.68) 68%,rgba(26,26,26,.95) 100%)"></div>
+  <div style="position:relative;text-align:center;margin-top:150px;display:none">
+    <svg class="mark marki" viewBox="0 0 32 32" style="width:92px;height:92px"><defs><linearGradient id="g8" gradientUnits="userSpaceOnUse" x1="4" y1="0" x2="28" y2="0"><stop offset="0" stop-color="#b8965c"/><stop offset=".38" stop-color="#f3e3b4"/><stop offset=".58" stop-color="#e2c389"/><stop offset="1" stop-color="#a98a52"/></linearGradient></defs><line x1="4" y1="7" x2="28" y2="7" stroke="url(#g8)" stroke-width="2.1"/><line x1="16" y1="7" x2="16" y2="14"/><path d="M16 14 L7 27 M16 14 L25 27 M16 14 L16 27"/></svg>
+    <div class="display" style="font-size:72px;margin-top:56px">Sam <span class="gold it" style="font-size:64px">n</span> Harv</div>
+    <div class="annot" style="margin-top:20px;color:var(--bronze)">Investment &middot; UK &middot; Dubai &middot; Thailand</div>
+  </div>
+  <div style="position:absolute;left:84px;right:84px;bottom:190px;text-align:center">
+    <svg class="mark marki" viewBox="0 0 32 32" style="width:72px;height:72px"><defs><linearGradient id="g8b" gradientUnits="userSpaceOnUse" x1="4" y1="0" x2="28" y2="0"><stop offset="0" stop-color="#b8965c"/><stop offset=".38" stop-color="#f3e3b4"/><stop offset=".58" stop-color="#e2c389"/><stop offset="1" stop-color="#a98a52"/></linearGradient></defs><line x1="4" y1="7" x2="28" y2="7" stroke="url(#g8b)" stroke-width="2.1"/><line x1="16" y1="7" x2="16" y2="14"/><path d="M16 14 L7 27 M16 14 L25 27 M16 14 L16 27"/></svg>
+    <div class="display" style="font-size:58px;margin-top:30px;color:var(--plaster)">Sam <span class="gold it" style="font-size:52px">n</span> Harv</div>
+    <div class="it" style="font-size:52px;line-height:1.3;margin-top:40px;color:var(--plaster);text-shadow:0 2px 18px rgba(0,0,0,.55)">Fifteen minutes. No pitch.<br><span style="opacity:.8">We&rsquo;ll tell you which market fits.</span></div>
+  </div>
+  <div class="footer">
+    <div class="hairi" style="margin-bottom:30px;opacity:.85"></div>
+    <div class="footrow" style="color:var(--bronze-bright)"><span>WhatsApp in bio</span><span>samnharv.co.uk/call</span></div>
+  </div>
+</div>
+
+</body></html>

@@ -1,0 +1,140 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;1,400&family=Fragment+Mono&family=Hanken+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+@page { size: A4; margin: 0; }
+html,body{margin:0;padding:0}
+:root{--plaster:#efe8da;--ink:#1a1a1a;--bronze:#8c7b65;--stone:#5c5952;--line:rgba(26,26,26,.16)}
+.page{position:relative;width:210mm;height:297mm;box-sizing:border-box;background:var(--plaster);color:var(--ink);
+  padding:16mm 18mm 24mm;-webkit-print-color-adjust:exact;print-color-adjust:exact;page-break-after:always;
+  font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:9.8pt;line-height:1.5}
+.page:last-child{page-break-after:auto}
+.display{font-family:'Libre Caslon Display',serif;font-weight:400;letter-spacing:-.01em}
+.it{font-family:'Libre Caslon Text',serif;font-style:italic}
+.annot{font-family:'Fragment Mono',monospace;font-size:7.4pt;letter-spacing:.1em;text-transform:uppercase}
+.goldbar{height:.55mm;background:linear-gradient(90deg,#a98a52 0%,#c4a676 30%,#ead8ab 50%,#c4a676 70%,#a98a52 100%)}
+.hair{height:.25mm;background:linear-gradient(90deg,#b8965c 0%,#f3e3b4 38%,#e2c389 58%,#a98a52 100%)}
+.mark{width:9mm;height:9mm;stroke:var(--ink);fill:none;stroke-width:1.6;stroke-linecap:square}
+table{width:100%;border-collapse:collapse;font-size:9.2pt}
+td,th{padding:2.2mm 0;border-bottom:.25mm solid var(--line);text-align:right}
+td:first-child,th:first-child{text-align:left}
+th{font-family:'Fragment Mono',monospace;font-size:7pt;letter-spacing:.1em;text-transform:uppercase;font-weight:400;color:var(--stone)}
+.stat .n{font-family:'Libre Caslon Display',serif;font-size:23pt;line-height:1.05}
+.stat .l{font-family:'Fragment Mono',monospace;font-size:7pt;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze);margin-top:1.6mm}
+.foot{position:absolute;left:18mm;right:18mm;bottom:12mm}
+</style></head><body>
+
+<!-- ============ PAGE 1 ============ -->
+<div class="page">
+  <div class="goldbar" style="position:absolute;left:18mm;right:0;top:12mm"></div>
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:5mm">
+    <div>
+      <svg class="mark" viewBox="0 0 32 32"><defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="4" y1="0" x2="28" y2="0"><stop offset="0" stop-color="#b8965c"/><stop offset=".38" stop-color="#f3e3b4"/><stop offset=".58" stop-color="#e2c389"/><stop offset="1" stop-color="#a98a52"/></linearGradient></defs><line x1="4" y1="7" x2="28" y2="7" stroke="url(#g)" stroke-width="2.1"/><line x1="16" y1="7" x2="16" y2="14"/><path d="M16 14 L7 27 M16 14 L25 27 M16 14 L16 27"/></svg>
+      <div class="display" style="font-size:14pt;margin-top:3mm">Sam <span class="it" style="color:#a98a52">n</span> Harv</div>
+    </div>
+    <div style="text-align:right">
+      <div class="annot" style="color:var(--bronze)">Investor briefing</div>
+      <div class="display" style="font-size:26pt;line-height:1.1;margin-top:1mm">Dubai Market Report</div>
+      <div class="annot" style="margin-top:2mm;color:var(--stone)">September 2026 edition</div>
+    </div>
+  </div>
+
+  <p style="margin-top:9mm;max-width:150mm">The numbers below are Dubai Land Department transaction data, as compiled by
+  DXB Interact. Nothing here is a forecast and nothing is a promise &mdash; it is what has actually traded. Where we give a view,
+  it is marked as ours.</p>
+
+  <div class="hair" style="margin-top:5mm"></div>
+  <div style="display:flex;gap:10mm;margin-top:6mm">
+    <div class="stat" style="flex:1"><div class="n">116,484</div><div class="l">Residential sales, 2025</div></div>
+    <div class="stat" style="flex:1"><div class="n">AED 327bn</div><div class="l">Sales value, 2025 (&asymp;&pound;66bn)</div></div>
+    <div class="stat" style="flex:1"><div class="n">&times;6.9</div><div class="l">Transaction growth 2020&rarr;2025</div></div>
+  </div>
+  <div style="display:flex;gap:10mm;margin-top:7mm">
+    <div class="stat" style="flex:1"><div class="n">+84%</div><div class="l">Ready price/sq ft since 2020 floor</div></div>
+    <div class="stat" style="flex:1"><div class="n">73%</div><div class="l">Of 2026 sales are off-plan</div></div>
+    <div class="stat" style="flex:1"><div class="n">237,000</div><div class="l">Rental contracts, 2026 to date</div></div>
+  </div>
+  <div class="hair" style="margin-top:7mm"></div>
+
+  <div style="display:flex;gap:12mm;margin-top:7mm">
+    <div style="flex:1">
+      <div class="annot" style="color:var(--bronze)">Prices</div>
+      <p style="margin-top:2mm">Median ready stock trades at <strong style="font-weight:500">AED 1,484 per sq ft</strong> in 2026 to date
+      (2025: 1,385, up 5.6% on 2024). Off-plan trades at <strong style="font-weight:500">AED 1,762</strong> &mdash; a 19% premium to
+      ready, down from a 66% premium in 2019. New launches are no longer priced at a discount to the built city.</p>
+    </div>
+    <div style="flex:1">
+      <div class="annot" style="color:var(--bronze)">Volumes</div>
+      <p style="margin-top:2mm">2025 was the market&rsquo;s biggest year on record. 2026 to date is tracking close behind
+      (98,330 sales), but the mix keeps shifting to off-plan &mdash; 73% of all transactions &mdash; and several prime ready
+      districts are seeing volumes fall while prices still rise.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:7mm;border-left:.8mm solid #c4a676;padding-left:5mm">
+    <div class="annot" style="color:var(--bronze)">The desk&rsquo;s read</div>
+    <p style="margin-top:2mm;max-width:158mm">Momentum is real, but this is a market that now rewards selection over timing.
+    The easy 2021&ndash;2024 appreciation is behind us; the spread between areas (yields from 4.4% to 8.3%) and between developers
+    (12-month resale gains from 6% to 31%) is where returns will be made or lost. Underwrite the exit flat and let growth be the upside.</p>
+  </div>
+
+  <div class="foot">
+    <div class="hair" style="margin-bottom:2.4mm"></div>
+    <div class="annot" style="display:flex;justify-content:space-between;color:var(--stone)">
+      <span>Source: DXB Interact &middot; Dubai Land Department data &middot; accessed 21 Aug 2026 &middot; 2026 = year to date</span><span>Page 1 of 2</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 2 ============ -->
+<div class="page">
+  <div class="annot" style="color:var(--bronze)">Where the yield actually is &mdash; apartments, last 12 months</div>
+  <table style="margin-top:3mm">
+    <tr><th>Area</th><th>AED/sq ft</th><th>12m price</th><th>Gross yield</th></tr>
+    <tr><td>Dubai South</td><td>1,149</td><td>+18%</td><td><strong style="font-weight:500">8.3%</strong></td></tr>
+    <tr><td>Jumeirah Village Circle</td><td>1,341</td><td>+7%</td><td>7.3%</td></tr>
+    <tr><td>Business Bay</td><td>2,000</td><td>+4%</td><td>6.8%</td></tr>
+    <tr><td>Sobha Hartland</td><td>2,050</td><td>+4%</td><td>6.1%</td></tr>
+    <tr><td>Dubai Marina</td><td>1,931</td><td>+13%</td><td>5.9%</td></tr>
+    <tr><td>Dubai Hills Estate</td><td>2,377</td><td>+6%</td><td>5.7%</td></tr>
+    <tr><td>Dubai Creek Harbour</td><td>2,369</td><td>+6%</td><td>5.3%</td></tr>
+    <tr><td>Downtown Dubai</td><td>2,784</td><td>+4%</td><td>4.9%</td></tr>
+    <tr><td>Emaar Beachfront</td><td>3,567</td><td>&minus;1%</td><td>4.6%</td></tr>
+    <tr><td>Palm Jumeirah</td><td>2,806</td><td>+8%</td><td>4.4%</td></tr>
+  </table>
+  <p class="it" style="margin-top:3mm;color:var(--stone)">The pattern: the further from the postcard, the higher the yield. Prime is a capital-growth
+  play; the growth corridors are the income play. Which one is right depends on what you need the money to do.</p>
+
+  <div class="annot" style="color:var(--bronze);margin-top:8mm">Developer scorecard &mdash; 2026 sales &amp; 12-month resale gains</div>
+  <table style="margin-top:3mm">
+    <tr><th>Developer</th><th>2026 sales value</th><th>12m resale gain</th><th>Stock absorption</th></tr>
+    <tr><td>Emaar</td><td>AED 31.9bn</td><td>+28.6%</td><td>93%</td></tr>
+    <tr><td>Damac</td><td>AED 17.9bn</td><td>+11.9%</td><td>82%</td></tr>
+    <tr><td>Binghatti</td><td>AED 9.4bn</td><td>+20.0%</td><td>78%</td></tr>
+    <tr><td>Ellington</td><td>AED 8.6bn</td><td>+18.2%</td><td>79%</td></tr>
+    <tr><td>Sobha</td><td>AED 5.9bn</td><td>+5.9%</td><td>90%</td></tr>
+    <tr><td>Nakheel</td><td>AED 4.6bn</td><td>+31.2%</td><td>94%</td></tr>
+    <tr><td>Danube</td><td>AED 3.9bn</td><td>+11.5%</td><td>89%</td></tr>
+  </table>
+  <p class="it" style="margin-top:3mm;color:var(--stone)">Developer choice moved resale outcomes by 25 points in twelve months. This is why we track
+  launch allocations by developer, not by brochure.</p>
+
+  <div style="margin-top:9mm;border-top:.25mm solid var(--line);padding-top:5mm;display:flex;justify-content:space-between;align-items:center">
+    <div>
+      <div class="display" style="font-size:15pt">Want these numbers run against a specific unit?</div>
+      <div class="annot" style="margin-top:2mm;color:var(--bronze)">15 minutes, no pitch &middot; samnharv.co.uk/call</div>
+    </div>
+    <div style="text-align:right">
+      <div class="annot" style="color:var(--stone)">WhatsApp Samuel</div>
+      <div class="display" style="font-size:13pt">+44 7444 551241</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="hair" style="margin-bottom:2.4mm"></div>
+    <div class="annot" style="display:flex;justify-content:space-between;color:var(--stone)">
+      <span>Source: DXB Interact &middot; Dubai Land Department data &middot; accessed 21 Aug 2026. Past performance is not a guide to future returns.</span><span>Page 2 of 2</span>
+    </div>
+  </div>
+</div>
+
+</body></html>

@@ -1,0 +1,90 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;1,400&family=Fragment+Mono&family=Hanken+Grotesk:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* ============ Transparent overlay plates — 1920×1080 each ============
+   Drop over footage. All content sits inside the central 1080px column
+   so a straight 9:16 centre crop keeps every caption intact.
+   Gold gradient text = Sam n Harv brand identity (site/cards/signatures). */
+html,body{margin:0;padding:0;background:transparent}
+:root{--plaster:#efe8da;--bronze-bright:#c9ab7c}
+.page{position:relative;width:1920px;height:1080px;overflow:hidden}
+.display{font-family:'Libre Caslon Display',serif;font-weight:400;letter-spacing:-.01em}
+.it{font-family:'Libre Caslon Text',serif;font-style:italic}
+.annot{font-family:'Fragment Mono',monospace;letter-spacing:.16em;text-transform:uppercase}
+.gold{background:linear-gradient(100deg,#b8965c 0%,#f3e3b4 38%,#e2c389 58%,#a98a52 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 14px rgba(0,0,0,.55))}
+.hair{height:2px;background:linear-gradient(90deg,rgba(169,138,82,0) 0%,#c4a676 25%,#ead8ab 50%,#c4a676 75%,rgba(169,138,82,0) 100%)}
+.plate{position:absolute;left:50%;bottom:96px;transform:translateX(-50%);width:1000px;text-align:center}
+.shadow{text-shadow:0 2px 16px rgba(0,0,0,.6)}
+.lede{font-size:30px;color:var(--plaster)}
+.big{font-size:104px;line-height:1.02}
+.mark{stroke:#efe8da;fill:none;stroke-linecap:square}
+</style></head><body>
+
+<!-- 1 · TITLE PLATE -->
+<div class="page"><div class="plate">
+  <div class="display gold big">Marsa al Saadiyat</div>
+  <div class="hair" style="margin:26px auto 20px;width:620px"></div>
+  <div class="annot lede shadow">Aldar &middot; Saadiyat Island &middot; Abu Dhabi</div>
+</div></div>
+
+<!-- 2 · AED 100BN -->
+<div class="page"><div class="plate">
+  <div class="display gold big">AED 100 billion</div>
+  <div class="hair" style="margin:26px auto 20px;width:620px"></div>
+  <div class="annot lede shadow">&asymp; &pound;20bn &middot; gross development value</div>
+</div></div>
+
+<!-- 3 · MARINA -->
+<div class="page"><div class="plate">
+  <div class="display gold big">350+ berths</div>
+  <div class="hair" style="margin:26px auto 20px;width:620px"></div>
+  <div class="annot lede shadow">Abu Dhabi&rsquo;s largest marina &middot; 8km of coastline</div>
+</div></div>
+
+<!-- 4 · RESIDENTS -->
+<div class="page"><div class="plate">
+  <div class="display gold big">58,000 residents</div>
+  <div class="hair" style="margin:26px auto 20px;width:620px"></div>
+  <div class="annot lede shadow">Aldar launch figure &middot; not 18,000</div>
+</div></div>
+
+<!-- 5 · FIRST SALES -->
+<div class="page"><div class="plate">
+  <div class="display gold big">First sales: H2 2026</div>
+  <div class="hair" style="margin:26px auto 20px;width:620px"></div>
+  <div class="annot lede shadow">Launch date not yet fixed</div>
+</div></div>
+
+<!-- 6 · THE HOOK -->
+<div class="page"><div class="plate">
+  <div class="display gold" style="font-size:128px;line-height:1">Price: not announced.</div>
+  <div class="hair" style="margin:28px auto 20px;width:620px"></div>
+  <div class="annot lede shadow">Anyone quoting a number is guessing</div>
+</div></div>
+
+<!-- 7 · SOURCES -->
+<div class="page"><div class="plate" style="bottom:64px">
+  <div class="annot shadow" style="font-size:24px;color:var(--bronze-bright)">Figures: Aldar launch material &middot; July 2026 &middot; images courtesy of Aldar</div>
+</div></div>
+
+<!-- 8 · CORNER BUG — bottom right, small, for the whole video -->
+<div class="page">
+  <div style="position:absolute;right:72px;bottom:60px;display:flex;align-items:center;gap:16px;filter:drop-shadow(0 1px 8px rgba(0,0,0,.5))">
+    <svg class="mark" viewBox="0 0 32 32" style="width:44px;height:44px;stroke-width:1.7">
+      <defs><linearGradient id="bg1" gradientUnits="userSpaceOnUse" x1="4" y1="0" x2="28" y2="0"><stop offset="0" stop-color="#b8965c"/><stop offset=".38" stop-color="#f3e3b4"/><stop offset=".58" stop-color="#e2c389"/><stop offset="1" stop-color="#a98a52"/></linearGradient></defs>
+      <line x1="4" y1="7" x2="28" y2="7" stroke="url(#bg1)" stroke-width="2.1"/>
+      <line x1="16" y1="7" x2="16" y2="14"/><path d="M16 14 L7 27 M16 14 L25 27 M16 14 L16 27"/>
+    </svg>
+    <span class="annot" style="font-size:22px;color:var(--plaster);opacity:.9">Sam n Harv</span>
+  </div>
+</div>
+
+<!-- 9 · CTA PLATE -->
+<div class="page"><div class="plate">
+  <div class="it shadow" style="font-size:64px;color:var(--plaster)">Price sheet, the day it drops.</div>
+  <div class="hair" style="margin:26px auto 20px;width:620px"></div>
+  <div class="annot lede shadow">WhatsApp in the description &middot; samnharv.co.uk/call</div>
+</div></div>
+
+</body></html>

@@ -1,0 +1,122 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;1,400&family=Fragment+Mono&family=Hanken+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+@page { size: A4; margin: 0; }
+html,body{margin:0;padding:0}
+:root{--plaster:#efe8da;--ink:#1a1a1a;--bronze:#8c7b65;--stone:#5c5952;--line:rgba(26,26,26,.16)}
+.page{position:relative;width:210mm;height:297mm;box-sizing:border-box;background:var(--plaster);color:var(--ink);
+  padding:18mm 20mm;-webkit-print-color-adjust:exact;print-color-adjust:exact;
+  font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:10.5pt;line-height:1.5}
+.display{font-family:'Libre Caslon Display',serif;font-weight:400;letter-spacing:-.01em}
+.it{font-family:'Libre Caslon Text',serif;font-style:italic}
+.annot{font-family:'Fragment Mono',monospace;font-size:7.6pt;letter-spacing:.1em;text-transform:uppercase}
+.goldbar{height:.55mm;background:linear-gradient(90deg,#a98a52 0%,#c4a676 30%,#ead8ab 50%,#c4a676 70%,#a98a52 100%)}
+.hair{height:.25mm;background:linear-gradient(90deg,#b8965c 0%,#f3e3b4 38%,#e2c389 58%,#a98a52 100%)}
+.mark{width:11mm;height:11mm;stroke:var(--ink);fill:none;stroke-width:1.6;stroke-linecap:square}
+table{width:100%;border-collapse:collapse}
+</style></head><body>
+
+<div class="page">
+  <div class="goldbar" style="position:absolute;left:20mm;right:0;top:14mm"></div>
+
+  <!-- header -->
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:6mm">
+    <div>
+      <svg class="mark" viewBox="0 0 32 32"><defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="4" y1="0" x2="28" y2="0"><stop offset="0" stop-color="#b8965c"/><stop offset=".38" stop-color="#f3e3b4"/><stop offset=".58" stop-color="#e2c389"/><stop offset="1" stop-color="#a98a52"/></linearGradient></defs><line x1="4" y1="7" x2="28" y2="7" stroke="url(#g)" stroke-width="2.1"/><line x1="16" y1="7" x2="16" y2="14"/><path d="M16 14 L7 27 M16 14 L25 27 M16 14 L16 27"/></svg>
+      <div class="display" style="font-size:17pt;margin-top:4mm">S L Grants Ltd</div>
+      <div class="annot" style="color:var(--bronze);margin-top:1.5mm">Serviced accommodation &middot; Company No. 16505504</div>
+    </div>
+    <div style="text-align:right">
+      <div class="display" style="font-size:30pt;line-height:1">Invoice</div>
+      <div class="annot" style="margin-top:2mm;color:var(--stone)">No. 241</div>
+    </div>
+  </div>
+
+  <!-- parties -->
+  <div style="display:flex;gap:14mm;margin-top:11mm">
+    <div style="flex:1">
+      <div class="annot" style="color:var(--bronze)">From</div>
+      <div style="margin-top:2mm">
+        S L Grants Ltd<br>
+        66 Paul Street<br>
+        London, England, EC2A 4NA<br>
+        +44 7444 551241<br>
+        slgrantltd@gmail.com
+      </div>
+    </div>
+    <div style="flex:1">
+      <div class="annot" style="color:var(--bronze)">To</div>
+      <div style="margin-top:2mm">
+        Bespoke Guardians Ltd<br>
+        Delta 500, Delta Business Park<br>
+        Welton Rd, Westlea<br>
+        Swindon SN5 7XE<br>
+        07444 187696<br>
+        accounts@bespokeguardians.co.uk
+      </div>
+    </div>
+    <div style="flex:1">
+      <div class="annot" style="color:var(--bronze)">Details</div>
+      <div style="margin-top:2mm">
+        Invoice date: 09/09/2026<br>
+        Payment terms: 1 day<br>
+        Due date: 10/09/2026
+      </div>
+    </div>
+  </div>
+
+  <!-- line items -->
+  <div class="hair" style="margin-top:12mm"></div>
+  <table style="margin-top:0">
+    <tr class="annot" style="color:var(--stone)">
+      <td style="padding:4mm 0 2.5mm">Description</td>
+      <td style="text-align:right;padding:4mm 0 2.5mm">Nights</td>
+      <td style="text-align:right;padding:4mm 0 2.5mm">Rate</td>
+      <td style="text-align:right;padding:4mm 0 2.5mm">Amount</td>
+    </tr>
+    <tr style="border-top:.25mm solid var(--line)">
+      <td style="padding:4mm 6mm 4mm 0;width:55%">
+        Staff accommodation &mdash; short-term stay including utilities, Wi-Fi and cleaning.<br>
+        <span class="annot" style="color:var(--bronze)">10 &ndash; 20 September 2026</span>
+      </td>
+      <td style="text-align:right;vertical-align:top;padding-top:4mm">20</td>
+      <td style="text-align:right;vertical-align:top;padding-top:4mm">&pound;100.00</td>
+      <td style="text-align:right;vertical-align:top;padding-top:4mm">&pound;2,000.00</td>
+    </tr>
+  </table>
+  <div class="hair"></div>
+  <div style="display:flex;justify-content:flex-end;margin-top:5mm">
+    <div style="text-align:right">
+      <div class="annot" style="color:var(--bronze)">Total due</div>
+      <div class="display" style="font-size:24pt;margin-top:1.5mm">&pound;2,000.00</div>
+    </div>
+  </div>
+
+  <!-- payment -->
+  <div style="position:absolute;left:20mm;right:20mm;bottom:20mm">
+    <div style="display:flex;gap:14mm;margin-bottom:8mm">
+      <div style="flex:1">
+        <div class="annot" style="color:var(--bronze)">Bank details</div>
+        <div style="margin-top:2mm">
+          Tide Bank<br>
+          Name: S L Grants Ltd<br>
+          Account number: 27664441<br>
+          Sort code: 04-06-05
+        </div>
+      </div>
+      <div style="flex:1.4">
+        <div class="annot" style="color:var(--bronze)">Terms</div>
+        <div style="margin-top:2mm">
+          Payment is due within 1 day of the invoice date.<br>
+          Please reference the invoice number &mdash; <strong style="font-weight:500">241</strong> &mdash; when making payment.
+        </div>
+      </div>
+    </div>
+    <div class="hair" style="margin-bottom:2.6mm"></div>
+    <div class="annot" style="display:flex;justify-content:space-between;color:var(--stone)">
+      <span>S L Grants Ltd</span><span>+44 7444 551241</span><span>slgrantltd@gmail.com</span><span>66 Paul Street, London EC2A 4NA</span>
+    </div>
+  </div>
+</div>
+
+</body></html>

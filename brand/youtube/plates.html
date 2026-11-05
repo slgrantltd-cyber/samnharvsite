@@ -1,0 +1,84 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;1,400&family=Fragment+Mono&family=Hanken+Grotesk:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* ============ Sam n Harv — YouTube graphics masters ============
+   Opaque plates (thumbnail, end card) — screenshot then crop.
+   Overlay plates live in overlays.html (transparent). */
+html,body{margin:0;padding:0;background:#555}
+:root{--plaster:#efe8da;--ink:#1a1a1a;--bronze:#8c7b65;--bronze-bright:#c9ab7c;--stone:#5c5952}
+.page{position:relative;overflow:hidden;box-sizing:border-box}
+.ink{background:var(--ink);color:var(--plaster)}
+.ink::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' seed='5' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.94 0 0 0 0 0.91 0 0 0 0 0.85 0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23s)'/></svg>")}
+.display{font-family:'Libre Caslon Display',serif;font-weight:400;letter-spacing:-.01em}
+.it{font-family:'Libre Caslon Text',serif;font-style:italic}
+.annot{font-family:'Fragment Mono',monospace;letter-spacing:.14em;text-transform:uppercase}
+.gold{background:linear-gradient(100deg,#b8965c 0%,#f3e3b4 38%,#e2c389 58%,#a98a52 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hair{height:2px;background:linear-gradient(90deg,#a98a52 0%,#c4a676 30%,#ead8ab 50%,#c4a676 70%,#a98a52 100%)}
+.mark{stroke:currentColor;fill:none;stroke-linecap:square}
+</style></head><body>
+
+<!-- ============ 1 · THUMBNAIL — 1280×720 · ink ============
+     Left-weighted so Samuel's cut-out face sits on the right third. -->
+<div class="page ink" style="width:1280px;height:720px">
+  <div class="hair" style="position:absolute;left:64px;right:0;top:64px;height:6px"></div>
+  <svg class="mark" viewBox="0 0 32 32" style="position:absolute;left:64px;top:96px;width:76px;height:76px;stroke-width:1.7">
+    <defs><linearGradient id="tg" gradientUnits="userSpaceOnUse" x1="4" y1="0" x2="28" y2="0"><stop offset="0" stop-color="#b8965c"/><stop offset=".38" stop-color="#f3e3b4"/><stop offset=".58" stop-color="#e2c389"/><stop offset="1" stop-color="#a98a52"/></linearGradient></defs>
+    <line x1="4" y1="7" x2="28" y2="7" stroke="url(#tg)" stroke-width="2.1"/>
+    <line x1="16" y1="7" x2="16" y2="14"/><path d="M16 14 L7 27 M16 14 L25 27 M16 14 L16 27"/>
+  </svg>
+  <div style="position:absolute;left:64px;top:226px;width:820px">
+    <div class="display gold" style="font-size:150px;line-height:.94">No price.</div>
+    <div class="it" style="font-size:54px;line-height:1.15;margin-top:26px;color:var(--plaster)">Abu&nbsp;Dhabi&rsquo;s &pound;20bn launch</div>
+  </div>
+  <div style="position:absolute;left:64px;right:64px;bottom:56px">
+    <div class="hair" style="margin-bottom:20px;opacity:.85"></div>
+    <div class="annot" style="font-size:25px;display:flex;justify-content:space-between;color:var(--bronze-bright)">
+      <span>Marsa al Saadiyat</span><span>The honest version</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 2 · END CARD — 1920×1080 · ink ============ -->
+<div class="page ink" style="width:1920px;height:1080px">
+  <div style="position:absolute;left:50%;top:150px;transform:translateX(-50%);text-align:center">
+    <svg class="mark" viewBox="0 0 32 32" style="width:120px;height:120px;stroke-width:1.6">
+      <defs><linearGradient id="eg" gradientUnits="userSpaceOnUse" x1="4" y1="0" x2="28" y2="0"><stop offset="0" stop-color="#b8965c"/><stop offset=".38" stop-color="#f3e3b4"/><stop offset=".58" stop-color="#e2c389"/><stop offset="1" stop-color="#a98a52"/></linearGradient></defs>
+      <line x1="4" y1="7" x2="28" y2="7" stroke="url(#eg)" stroke-width="2.1"/>
+      <line x1="16" y1="7" x2="16" y2="14"/><path d="M16 14 L7 27 M16 14 L25 27 M16 14 L16 27"/>
+    </svg>
+    <div class="display" style="font-size:84px;margin-top:34px;letter-spacing:.01em">Sam <span class="gold it" style="font-size:78px">n</span> Harv</div>
+    <div class="annot" style="font-size:24px;margin-top:16px;color:var(--bronze)">Investment &middot; UK &middot; Dubai &middot; Thailand</div>
+  </div>
+  <div style="position:absolute;left:50%;bottom:210px;transform:translateX(-50%);text-align:center;width:1400px">
+    <div class="it" style="font-size:58px;color:var(--plaster)">WhatsApp&rsquo;s in the description. <span style="opacity:.75">No charge.</span></div>
+  </div>
+  <div style="position:absolute;left:260px;right:260px;bottom:120px">
+    <div class="hair" style="margin-bottom:26px"></div>
+    <div class="annot" style="font-size:26px;display:flex;justify-content:space-between;color:var(--bronze-bright)">
+      <span>07444 551241</span><span>samnharv.co.uk/call</span><span>contact@samnharv.com</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 3 · VERTICAL END CARD — 1080×1920 · ink (reels / shorts) ============ -->
+<div class="page ink" style="width:1080px;height:1920px">
+  <div style="position:absolute;left:50%;top:430px;transform:translateX(-50%);text-align:center">
+    <svg class="mark" viewBox="0 0 32 32" style="width:130px;height:130px;stroke-width:1.6">
+      <defs><linearGradient id="vg" gradientUnits="userSpaceOnUse" x1="4" y1="0" x2="28" y2="0"><stop offset="0" stop-color="#b8965c"/><stop offset=".38" stop-color="#f3e3b4"/><stop offset=".58" stop-color="#e2c389"/><stop offset="1" stop-color="#a98a52"/></linearGradient></defs>
+      <line x1="4" y1="7" x2="28" y2="7" stroke="url(#vg)" stroke-width="2.1"/>
+      <line x1="16" y1="7" x2="16" y2="14"/><path d="M16 14 L7 27 M16 14 L25 27 M16 14 L16 27"/>
+    </svg>
+    <div class="display" style="font-size:88px;margin-top:40px">Sam <span class="gold it" style="font-size:80px">n</span> Harv</div>
+    <div class="annot" style="font-size:24px;margin-top:18px;color:var(--bronze)">Investment &middot; UK &middot; Dubai &middot; Thailand</div>
+  </div>
+  <div style="position:absolute;left:50%;bottom:600px;transform:translateX(-50%);text-align:center;width:900px">
+    <div class="it" style="font-size:56px;color:var(--plaster)">WhatsApp&rsquo;s in the bio.</div>
+  </div>
+  <div style="position:absolute;left:110px;right:110px;bottom:430px">
+    <div class="hair" style="margin-bottom:26px"></div>
+    <div class="annot" style="font-size:26px;text-align:center;color:var(--bronze-bright)">samnharv.co.uk/call</div>
+  </div>
+</div>
+
+</body></html>
