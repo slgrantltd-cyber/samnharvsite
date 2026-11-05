@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { COLLECTIONS, PLANS_NOTE, UNITS, type DubaiUnit, type MixRow } from "@/lib/dubai-units";
 
 const TONE: Record<DubaiUnit["tone"], string> = { income: "Income-led", balanced: "Balanced", growth: "Growth-led", trophy: "Trophy asset" };
-const WA = (text: string) => `https://wa.me/447444551241?text=${encodeURIComponent(text)}`;
+const WA = (text: string) => `https://wa.me/971585570551?text=${encodeURIComponent(text)}`;
 const waEnquiry = (u: DubaiUnit, type?: string) =>
   WA(`Hi Samuel — ${u.name} (${u.developer}, ${u.area}, ${u.city})${type ? ` · ${type}` : ""}. Could you send me the current price sheet and payment plan? From ${u.priceFrom}, handover ${u.handover}.`);
 const AV_STYLE: Record<string, string> = { "Limited stock": "bg-[#1a1a1a] text-[#ead8ab]", "Selling fast": "bg-[#8a6a35] text-[var(--plaster)]", "Final units": "bg-[#6b1f1f] text-[var(--plaster)]", "New release": "bg-[var(--plaster)] text-ink" };
