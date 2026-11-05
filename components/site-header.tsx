@@ -154,7 +154,7 @@ export default function SiteHeader() {
           </div>
           <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3">
             <Link href="/" onClick={() => setOpen(false)} className="annot text-[var(--plaster)]/70 hover:text-[var(--bronze-bright)]">Home</Link>
-            <a href="https://wa.me/447444551241" className="annot text-[var(--plaster)]/70 hover:text-[var(--bronze-bright)]">WhatsApp Samuel</a>
+            <a href="https://wa.me/971585570551" className="annot text-[var(--plaster)]/70 hover:text-[var(--bronze-bright)]">WhatsApp Samuel</a>
             <a href="https://wa.me/447753600183" className="annot text-[var(--plaster)]/70 hover:text-[var(--bronze-bright)]">WhatsApp Harvey</a>
             <a href="mailto:contact@samnharv.com" className="annot text-[var(--plaster)]/70 hover:text-[var(--bronze-bright)]">contact@samnharv.com</a>
           </div>

@@ -43,7 +43,7 @@ export default function SiteFooter() {
             © {new Date().getFullYear()} S L Grants Ltd, trading as Sam n Harv
           </p>
           <p className="annot flex flex-wrap gap-x-6 muted">
-            <a href="https://wa.me/447444551241" className="hover:text-bronze-bright">WhatsApp Samuel</a>
+            <a href="https://wa.me/971585570551" className="hover:text-bronze-bright">WhatsApp Samuel</a>
             <a href="https://wa.me/447753600183" className="hover:text-bronze-bright">WhatsApp Harvey</a>
             <a href="mailto:contact@samnharv.com" className="hover:text-bronze-bright">contact@samnharv.com</a>
           </p>

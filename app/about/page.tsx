@@ -63,7 +63,7 @@ export default function AboutPage() {
                 name: "Samuel",
                 role: "Deals & investor relations",
                 body: "Finds and structures the deals, runs the numbers, and looks after the people whose money is at work. The first voice you'll hear, and the one who says no to most of what we see.",
-                wa: "https://wa.me/447444551241",
+                wa: "https://wa.me/971585570551",
                 tel: "07444 551241",
                 photo: photoPath("samuel.jpg"),
               },

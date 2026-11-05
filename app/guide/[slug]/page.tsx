@@ -101,7 +101,7 @@ export default async function GuidePage({
               >
                 Leave a Google review
               </a>
-              <a href="https://wa.me/447444551241" className="btn btn-ghost">
+              <a href="https://wa.me/971585570551" className="btn btn-ghost">
                 Or tell us what we could do better
               </a>
             </div>

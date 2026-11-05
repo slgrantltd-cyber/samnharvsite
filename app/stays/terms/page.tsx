@@ -91,7 +91,7 @@ export default function StayTermsPage() {
           <div className="mt-14 border-t hairline pt-8">
             <p className="muted leading-relaxed">
               Questions about any of this? Ask before you book —{" "}
-              <a href="https://wa.me/447444551241" className="text-bronze hover:text-ink">
+              <a href="https://wa.me/971585570551" className="text-bronze hover:text-ink">
                 WhatsApp Samuel
               </a>{" "}
               or email{" "}

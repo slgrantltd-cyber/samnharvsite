@@ -59,7 +59,7 @@ export default function CallPage() {
               )}
               <p className="annot mt-4 flex flex-wrap gap-x-6 gap-y-2 muted">
                 <span>Prefer to just talk?</span>
-                <a href="https://wa.me/447444551241" className="text-ink hover:text-bronze">WhatsApp Samuel ↗</a>
+                <a href="https://wa.me/971585570551" className="text-ink hover:text-bronze">WhatsApp Samuel ↗</a>
                 <a href="tel:+447444551241" className="text-ink hover:text-bronze">07444 551241</a>
               </p>
             </div>

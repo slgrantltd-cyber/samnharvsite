@@ -9,7 +9,7 @@ export default function WhatsAppButton() {
   const text = pathname === "/dubai" ? "Dubai — I'd like to talk" : "Hi Samuel — I'd like to talk";
   return (
     <a
-      href={`https://wa.me/447444551241?text=${encodeURIComponent(text)}`}
+      href={`https://wa.me/971585570551?text=${encodeURIComponent(text)}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="WhatsApp Samuel"

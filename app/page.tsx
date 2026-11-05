@@ -347,7 +347,7 @@ export default function Home() {
               {
                 name: "Samuel",
                 role: "Deals & investor relations",
-                wa: "https://wa.me/447444551241",
+                wa: "https://wa.me/971585570551",
                 tel: "07444 551241",
               },
               {
@@ -391,7 +391,7 @@ export default function Home() {
           </Rise>
           <div className="mt-12 grid gap-px bg-[var(--line)] md:grid-cols-3">
             <a
-              href="https://wa.me/447444551241"
+              href="https://wa.me/971585570551"
               rel="noopener"
               className="group glow-gold z-0 bg-plaster p-7 hover:z-10"
             >

@@ -57,7 +57,7 @@ export default function ContactPage() {
               <p className="display mt-3 text-4xl">Samuel</p>
               <p className="muted mt-2">Deals &amp; investor relations</p>
               <a
-                href="https://wa.me/447444551241"
+                href="https://wa.me/971585570551"
                 className="btn btn-ink mt-6"
                 rel="noopener"
               >

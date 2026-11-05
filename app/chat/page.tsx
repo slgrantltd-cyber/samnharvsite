@@ -19,7 +19,7 @@ export default function ChatPage() {
           </h1>
           <p className="mt-6 text-lg leading-relaxed">
             If you&rsquo;ve come from one of my videos — good to have you.
-            Two taps below and you&rsquo;re in my WhatsApp. I read and answer
+            One tap below and you&rsquo;re in my WhatsApp. I read and answer
             every message myself.
           </p>
 
