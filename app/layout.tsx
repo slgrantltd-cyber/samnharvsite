@@ -9,6 +9,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/smooth-scroll";
 import MaterialLight from "@/components/material-light";
 import SiteHeader from "@/components/site-header";
+import ChromeGate from "@/components/chrome-gate";
 import GoldSheen from "@/components/gold-sheen";
 import WhatsAppButton from "@/components/whatsapp-button";
 import ThemePreview from "@/components/theme-preview";
@@ -141,11 +142,11 @@ export default function RootLayout({
         <SmoothScroll />
         <MaterialLight />
         <GoldSheen />
-        <WhatsAppButton />
+        <ChromeGate><WhatsAppButton /></ChromeGate>
         <Suspense fallback={null}><ThemePreview /></Suspense>
-        <SiteHeader />
+        <ChromeGate><SiteHeader /></ChromeGate>
         {children}
-        <SiteFooter />
+        <ChromeGate><SiteFooter /></ChromeGate>
       </body>
     </html>
   );
