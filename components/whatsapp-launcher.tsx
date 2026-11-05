@@ -3,9 +3,10 @@
 import { useState } from "react";
 
 const TOPICS = [
-  ["invest", "I want to invest in Dubai"],
-  ["move", "I'm moving to Dubai"],
-  ["video", "Question about one of your videos"],
+  ["invest-dubai", "Investing in Dubai"],
+  ["invest-ad", "Investing in Abu Dhabi"],
+  ["move", "Moving to the UAE"],
+  ["video", "Question about a video"],
   ["browse", "Just looking for now"],
 ] as const;
 
@@ -24,7 +25,7 @@ export default function WhatsappLauncher() {
 
   const topicLabel = TOPICS.find(([k]) => k === topic)?.[1];
   const lines = [
-    `Hi Samuel — ${topicLabel ?? "I saw your YouTube video"}.`,
+    `Hi Samuel — ${topicLabel ? `I'm interested in: ${topicLabel.toLowerCase()}` : "I saw your YouTube video"}.`,
     budget ? `Budget: ${budget}.` : null,
     topic ? "(Came from YouTube)" : null,
   ].filter(Boolean);
@@ -48,18 +49,14 @@ export default function WhatsappLauncher() {
             type="button"
             onClick={() => setTopic(key)}
             aria-pressed={topic === key}
-            className={`hairline border px-4 py-2.5 text-sm transition-colors ${
-              topic === key
-                ? "border-[var(--bronze)] bg-[var(--bronze)]/10 text-[var(--ink)]"
-                : "border-[var(--line)] bg-white/40 hover:bg-white/70"
-            }`}
+            className={`btn ${topic === key ? "btn-ink" : "btn-ghost"}`}
           >
             {label}
           </button>
         ))}
       </div>
 
-      {(topic === "invest" || topic === "move") && (
+      {(topic === "invest-dubai" || topic === "invest-ad" || topic === "move") && (
         <div className="mt-6">
           <p className="annot muted mb-3">Rough budget — helps me reply with the right options</p>
           <div className="flex flex-wrap gap-2">
@@ -69,11 +66,7 @@ export default function WhatsappLauncher() {
                 type="button"
                 onClick={() => setBudget(value)}
                 aria-pressed={budget === value}
-                className={`hairline border px-4 py-2.5 text-sm transition-colors ${
-                  budget === value
-                    ? "border-[var(--bronze)] bg-[var(--bronze)]/10 text-[var(--ink)]"
-                    : "border-[var(--line)] bg-white/40 hover:bg-white/70"
-                }`}
+                className={`btn ${budget === value ? "btn-ink" : "btn-ghost"}`}
               >
                 {label}
               </button>

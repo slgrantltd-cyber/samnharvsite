@@ -13,7 +13,7 @@ export default function ChatPage() {
     <main id="main" className="pt-24 md:pt-28">
       <section className="px-5 py-14 md:px-10 md:py-20">
         <div className="mx-auto max-w-xl">
-          <p className="annot muted">Samuel Grant · Dubai</p>
+          <p className="annot muted">Samuel Grant · Dubai & Abu Dhabi</p>
           <h1 className="display mt-3 text-4xl md:text-6xl">
             Let&rsquo;s <span className="display-it">talk.</span>
           </h1>
